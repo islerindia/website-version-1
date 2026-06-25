@@ -1,0 +1,14 @@
+# Normalize text line endings in the repo; let Git handle working-copy EOL.
+* text=auto eol=lf
+
+# Treat binary assets as binary (no EOL conversion / diffing).
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.gif  binary
+*.ico  binary
+*.svg  binary
+*.mp4  binary
+*.woff binary
+*.woff2 binary

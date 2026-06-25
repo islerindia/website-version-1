@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elisa — Isler India</title>
+  <link rel="icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="assets/css/catalog.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body class="cat-page">
+  <nav class="isler-nav" aria-label="Primary navigation">
+    <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
+      <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India">
+    </a>
+    <div class="isler-nav__search" role="search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/>
+        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="search" placeholder="Search products…" aria-label="Search products">
+    </div>
+    <ul class="isler-nav__links">
+      <li class="isler-nav__item has-mega" id="isler-products-item">
+        <a href="#" class="isler-nav__trigger" id="isler-products-trigger"
+           aria-haspopup="true" aria-expanded="false" aria-controls="isler-mega">
+          Categories
+          <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+
+        <!-- Categories mega-menu: 3 grouped columns -->
+        <div class="isler-mega" id="isler-mega" role="dialog" aria-label="Categories navigation" aria-hidden="true">
+          <div class="isler-mega__inner">
+
+            <!-- Column 1 — Cooktops & Hobs (live links; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Cooktops &amp; Hobs</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link isler-mega__link--lead" href="built-in-hobs.html"><span class="isler-mega__thumb"><img src="assets/catalog/hobs/best/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Built-in Hobs</span></a></li>
+                <li><a class="isler-mega__link" href="gas-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/gas-cooktops/gas-cooktop-Domestic-3B.jpg" alt="" loading="lazy"></span><span>Gas Cooktops</span></a></li>
+                <li><a class="isler-mega__link" href="induction-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.png" alt="" loading="lazy"></span><span>Induction</span></a></li>
+                <li><a class="isler-mega__link" href="infrared-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/infrared/IS-AM1-Series-1001.png" alt="" loading="lazy"></span><span>Infrared</span></a></li>
+                <li><a class="isler-mega__link" href="hybrid-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/hybrid/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Hybrid</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 — Chimneys (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Chimneys</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_t-shape_60_blackmatte_b_01-400x310.png" alt="" loading="lazy"></span><span>T-Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_curve_60_black-greymatte_a_05-400x310.png" alt="" loading="lazy"></span><span>Curve Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.png" alt="" loading="lazy"></span><span>Inclined Shape</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3 — Ovens & Microwaves (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Ovens &amp; Microwaves</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/oven-gold-grande.jpg" alt="" loading="lazy"></span><span>Built-in Ovens</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/microwave-silver-core.jpg" alt="" loading="lazy"></span><span>Built-in Microwave</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 4 — Other Appliances (inert; real product photo) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Other Appliances</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/small-appliances-1.png" alt="" loading="lazy"></span><span>Small Appliances</span></a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+<main class="pd"><div class="cat-wrap">
+    <nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="built-in-hobs.html">Built-in Hobs</a><span>/</span>Elisa</nav>
+    <div class="pd__layout">
+      <div class="pd__gallery"><img id="pd-img" src="assets/catalog/hobs/best/IS-I-Series-1003.jpg" alt="Elisa"></div>
+      <div class="pd__info">
+        <p class="pd__eyebrow">Cooking · Built-in Hobs · Best</p>
+        <h1 class="pd__title">Elisa</h1>
+        <p class="pd__code" id="pd-code"></p>
+        <div class="pd__price" id="pd-price"></div>
+        <div class="pd__variants"><p class="pd__variants-label">Configuration</p><div class="pd__variant-btns"><button class="pd__variant">4 Burner · 90 cm</button></div></div>
+        <div class="pd__highlights" id="pd-highlights"></div>
+        <div class="pd__cta">
+          <a class="pd__btn pd__btn--primary" href="contact.html">Enquire</a>
+          <a class="pd__btn pd__btn--secondary" href="contact.html">Contact Us</a>
+        </div>
+        <p class="pd__b2b">Isler is a B2B manufacturer — no online checkout. Prices shown are indicative; burners, knobs, finishes and glass options are customizable on bulk orders. Reach out for a quotation.</p>
+      </div>
+    </div>
+  </div>
+  <section class="pd__specs"><div class="cat-wrap">
+    <h2 class="pd__specs-title">Specifications</h2>
+    <table class="pd__spec-table"><tbody id="pd-spec-rows"></tbody></table>
+  </div></section>
+  </main>
+  <script>window.PRODUCT = {"variants": [{"code": "IS I Series 1003", "label": "4 Burner · 90 cm", "img": "assets/catalog/hobs/best/IS-I-Series-1003.jpg", "price": "₹16,764", "specs": [["Number of Burners", "4"], ["Glass Length (cm)", "90"], ["Burner System", "Fully Sealed"], ["Flame Type", "Direct Flame"], ["Burner Material", "Full Brass Burners"], ["Burner Coated", "Yes"], ["Wok Burner", "2 x 3.5 kW"], ["Mini Triple Ring", "1 x 2.8 kW"], ["Dual Ring", "1 x 1.8 kW"], ["Flame Failure Device (FFD)", "Yes"], ["Ignition", "AC"], ["Pan Support Material", "Cast Iron Pan Support with Flame Guard"], ["Pan Support Shape", "Round"], ["Drip Tray Material", "Matte Enamel"], ["Drip Tray Shape", "Round"], ["Knob Material", "Premium Metal Knobs"], ["Glass Length (mm)", "900"], ["Glass Width (mm)", "520"], ["Glass Thickness (mm)", "8"], ["Glass Material", "Toughened Glass"], ["Glass Finish", "Black"], ["Cutout Length (mm)", "820"], ["Cutout Width (mm)", "475"], ["Pan Support Options", "Square"], ["Burner Customizable", "Yes"]], "highlights": [["Burner Material", "Full Brass Burners"], ["Ignition", "AC"], ["Flame Failure Device (FFD)", "Yes"], ["Glass Material", "Toughened Glass"]]}]};</script>
+  <!-- ═══ FOOTER (revamp2 4-column, reused) ═══ -->
+  <footer class="site-footer" id="site-footer-el">
+
+    <div class="footer__main">
+      <div class="footer__main-inner">
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Products
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="built-in-hobs.html">Built-in Hobs</a></li>
+            <li><a href="gas-cooktops.html">Gas Cooktops</a></li>
+            <li><a href="infrared-cooktops.html">Infrared Cooktops</a></li>
+            <li><a href="induction-cooktops.html">Induction Cooktops</a></li>
+            <li><a href="hybrid-cooktops.html">Hybrid Cooktops</a></li>
+            <li><a href="#">Kitchen Chimney <span style="display:block;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);opacity:0.6;margin-top:2px;">Coming soon</span></a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Company
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="about.html">About Isler</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">Blog <span style="display:block;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);opacity:0.6;margin-top:2px;">Coming soon</span></a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Resources
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="#">Brochures</a></li>
+            <li><a href="#">Certifications</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__col--contact">
+          <h3 class="footer__col-heading">Get in Touch</h3>
+          <div class="footer__contact-block">
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202</span>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+919717737964">+91 971 7737 964</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:info@islerindia.com">info@islerindia.com</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
+            </div>
+          </div>
+
+          <div class="footer__newsletter">
+            <p class="footer__newsletter-heading">Stay Updated</p>
+            <form class="footer__newsletter-form" novalidate>
+              <div class="footer__newsletter-row">
+                <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email for newsletter">
+                <button type="submit" aria-label="Subscribe">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner">
+
+        <a href="index.html" class="footer__bottom-logo" aria-label="Isler India — home">
+          <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India" height="32" loading="lazy" style="width:auto">
+        </a>
+
+        <div class="footer__bottom-copy">
+          <p>&copy; 2026 Isler India. All rights reserved.</p>
+          <p>Manufacturing excellence since 2018 &nbsp;&middot;&nbsp; ISO 9001:2015 | ISO 14001 Certified</p>
+        </div>
+
+        <div class="footer__bottom-right">
+          <nav class="footer__social-row" aria-label="Social media">
+            <a href="https://www.facebook.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://x.com/Islerindia" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCxhMrjS6Fd1-sOlMz3YUBiA" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </nav>
+          <span class="footer__made-in-india">🇮🇳 Made in India</span>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+  <script src="assets/js/catalog.js" defer></script>
+  <script src="assets/js/nav.js" defer></script>
+</body>
+</html>

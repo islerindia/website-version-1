@@ -1,0 +1,27 @@
+:root {
+  --navy:       #0B1A3D;
+  --yellow:     #F4B400;
+  --white:      #FFFFFF;
+  --off-white:  #FAFAF8;
+  --charcoal:   #1A1A1A;
+  --gray-light: #F0F0EE;
+  --gray-mid:   #8A8A8A;
+  --navy-deep:  #060F24;
+
+  --font: 'Supreme', 'Inter', sans-serif;
+
+  --space-xs:  8px;
+  --space-sm:  16px;
+  --space-md:  24px;
+  --space-lg:  48px;
+  --space-xl:  80px;
+  --space-2xl: 120px;
+  --space-3xl: 160px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.4, 0, 1, 1);
+}

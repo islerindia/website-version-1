@@ -1,0 +1,21 @@
+# ── Editor / OS junk ──
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# ── Local backups & scratch (do not publish) ──
+*.bak
+*.pre-merge.bak
+_nav_backup/
+_hobs_xlsx_fresh/
+*_backup/
+
+# ── Logs / temp ──
+*.log
+.tmp/
+tmp/
+
+# ── Dependency dirs (in case tooling is added later) ──
+node_modules/

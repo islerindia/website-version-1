@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Careers at Isler India — Join our team of innovators. Explore open positions in manufacturing, design, sourcing, and quality assurance.">
+  <meta name="theme-color" content="#0B1A3D">
+  <title>Career — Isler India</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <style>
+
+    /* ══════════════════════════════════════════════════════════════
+       NAVBAR  (copied verbatim from index.html)
+    ══════════════════════════════════════════════════════════════ */
+    .demo-nav {
+      position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+      z-index: 200; display: flex; align-items: center; padding: 20px 24px;
+      background: rgba(7, 17, 44, 0.25);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      min-width: min(1160px, calc(100vw - 40px)); gap: 27px;
+    }
+    .demo-nav__logo { display: flex; align-items: center; flex-shrink: 0; }
+    .demo-nav__logo img { height: 38px; width: auto; display: block; image-rendering: -webkit-optimize-contrast; }
+    .demo-nav__search {
+      display: flex; align-items: center; margin-left: 20px;
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 100px; padding: 0 14px 0 12px; gap: 7px;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .demo-nav__search:focus-within { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 255, 255, 0.22); }
+    .demo-nav__search svg { flex-shrink: 0; opacity: 0.45; }
+    .demo-nav__search input {
+      background: transparent; border: none; outline: none; color: rgba(255, 255, 255, 0.85);
+      font-size: 13px; font-family: inherit; width: 220px; padding: 8px 0; letter-spacing: 0.01em;
+    }
+    .demo-nav__search input::placeholder { color: rgba(255, 255, 255, 0.35); }
+    .demo-nav__links { display: flex; align-items: center; gap: 4px; margin-left: auto; list-style: none; }
+    .demo-nav__links a {
+      font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.68);
+      padding: 10px 32px; border-radius: 100px;
+      transition: color 150ms ease, background 150ms ease; letter-spacing: 0.02em;
+      white-space: nowrap; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    .demo-nav__links a:hover { color: #fff; background: rgba(255, 255, 255, 0.09); }
+    @media (max-width: 1023px) {
+      .demo-nav { padding: 10px 10px 10px 20px; min-width: min(660px, calc(100vw - 40px)); }
+      .demo-nav__logo img { height: 30px; }
+      .demo-nav__links a { font-size: 13px; padding: 8px 18px; }
+      .demo-nav__search { display: none; }
+    }
+    @media (max-width: 639px) {
+      .demo-nav { top: 10px; min-width: calc(100vw - 24px); padding: 8px 6px 8px 16px; }
+      .demo-nav__logo img { height: 26px; }
+      .demo-nav__links a { font-size: 12px; padding: 6px 12px; }
+    }
+
+    /* ── MEGA-MENU (copied verbatim from index.html) ── */
+    .demo-nav__item { position: static; }
+    .demo-nav__mega-trigger { display: inline-flex !important; align-items: center; gap: 5px; position: relative; }
+    .demo-nav__chevron { transition: transform 200ms ease; opacity: 0.7; }
+    .has-megamenu.is-open .demo-nav__chevron { transform: rotate(180deg); }
+    .has-megamenu.is-open .demo-nav__mega-trigger { color: #fff; background: rgba(255, 255, 255, 0.09); }
+    .has-megamenu.is-open .demo-nav__mega-trigger::after {
+      content: ''; position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%);
+      width: 22px; height: 2px; border-radius: 2px; background: var(--yellow);
+    }
+    .demo-megamenu {
+      position: absolute; top: calc(100% + 12px); left: 0; right: 0; margin: 0 auto;
+      transform: translateY(-8px); background: #ffffff; border: 1px solid rgba(11, 26, 61, 0.08);
+      border-radius: 20px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease, visibility 0ms 160ms; z-index: 199;
+    }
+    .demo-megamenu.is-open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; transition: opacity 160ms ease, transform 160ms ease; }
+    .demo-megamenu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+    .demo-megamenu__inner { padding: 28px 34px; }
+    .demo-mm__label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); margin: 22px 0 8px; }
+    .demo-mm__label:first-child { margin-top: 0; }
+    .demo-mm__row { display: grid; gap: 10px; }
+    .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
+    .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
+    .demo-mm__cell { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; text-decoration: none; transition: background-color 150ms ease; }
+    .demo-mm__cell:hover { background-color: rgba(244, 180, 0, 0.08); }
+    .demo-mm__thumb { flex-shrink: 0; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
+    .demo-mm__thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .demo-mm__cell:nth-child(1) .demo-mm__thumb img { object-fit: contain; padding: 6px; background: #fff; }
+    .demo-mm__text { flex: 1 1 auto; min-width: 0; }
+    .demo-mm__name { display: block; font-size: 13.5px; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 150ms ease; }
+    .demo-mm__cell:hover .demo-mm__name { color: var(--yellow); }
+    .demo-mm__tagline { display: block; font-size: 11px; color: var(--gray-mid); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .demo-mm__soon { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-mid); opacity: 0.65; margin-top: 3px; }
+    .demo-mm__arrow { flex-shrink: 0; font-size: 13px; color: var(--yellow); opacity: 0; transform: translateX(-4px); transition: opacity 150ms ease, transform 150ms ease; }
+    .demo-mm__cell:hover .demo-mm__arrow { opacity: 1; transform: translateX(0); }
+    @media (max-width: 1023px) {
+      .demo-megamenu { top: calc(100% + 10px); }
+      .demo-mm__row--5, .demo-mm__row--3 { grid-template-columns: repeat(2, 1fr); }
+      .demo-megamenu__inner { padding: 20px 18px; }
+    }
+    @media (max-width: 559px) {
+      .demo-mm__row--5, .demo-mm__row--3 { grid-template-columns: 1fr; }
+      .demo-mm__name { font-size: 13px; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       SHARED PAGE KIT
+    ══════════════════════════════════════════════════════════════ */
+    .ambient-circle { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding-inline: clamp(24px, 5vw, 96px); }
+    .page-section { position: relative; padding: clamp(56px, 8vw, 110px) 0; overflow: clip; }
+    .bg-white { background: var(--white); }
+    .bg-offwhite { background: var(--off-white); }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
+    .h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
+    .body-copy { font-size: 16px; color: #55606E; line-height: 1.7; margin-bottom: 18px; }
+    .section-head { text-align: center; max-width: 660px; margin: 0 auto clamp(40px, 5vw, 60px); position: relative; z-index: 1; }
+    .section-head .h2 { margin-top: 6px; }
+    .section-head p { color: #55606E; font-size: 16px; line-height: 1.7; margin-top: 14px; }
+
+    .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 64px; overflow: hidden; background: var(--navy); }
+    .page-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+    .page-hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,15,36,0.94) 0%, rgba(6,15,36,0.6) 55%, rgba(6,15,36,0.5) 100%); }
+    .page-hero__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .page-hero__breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+    .page-hero__breadcrumb a { color: rgba(255,255,255,0.65); transition: color .15s; }
+    .page-hero__breadcrumb a:hover { color: var(--yellow); }
+    .page-hero__breadcrumb-sep { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); display: inline-block; }
+    .page-hero__eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
+    .page-hero__title { font-size: clamp(30px, 5vw, 54px); font-weight: 700; color: #fff; line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
+    .page-hero__desc { font-size: clamp(15px, 1.5vw, 18px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
+
+    /* CTA strip */
+    /* ══════════════════════════════════════════════════════════════
+       CTA BOX SECTION
+    ══════════════════════════════════════════════════════════════ */
+
+    .cta-box-section {
+      background: var(--gray-light);
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      overflow: clip;
+    }
+
+    .cta-box {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      background: var(--navy);
+      border-radius: 24px;
+      padding: 64px 64px;
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.033) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.033) 1px, transparent 1px);
+      background-size: 44px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Vignette so grid pattern fades at edges */
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 26, 61, 0.6) 100%);
+      pointer-events: none;
+    }
+
+    .cta-box__content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box__eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .cta-box__heading {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.13;
+      margin-bottom: 16px;
+    }
+
+    .cta-box__sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.52);
+      line-height: 1.65;
+    }
+
+    .cta-box__actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cta-box__btn {
+      display: block;
+      width: 320px;
+      padding: 15px 36px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 100px;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 180ms ease, color 180ms ease;
+      cursor: pointer;
+    }
+
+    .cta-box__btn--primary {
+      background: var(--yellow);
+      color: var(--navy);
+      border: 2px solid var(--yellow);
+    }
+
+    .cta-box__btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
+    }
+
+    .cta-box__btn--secondary {
+      background: transparent;
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+    }
+
+    .cta-box__btn--secondary:hover {
+      background: var(--yellow);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 639px) {
+      .cta-box {
+        padding: 48px 28px;
+      }
+      .cta-box__btn {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+    /* ── CAREER-SPECIFIC ── */
+    .career-why { background: var(--navy); position: relative; overflow: hidden; }
+    .career-why__layout { display: grid; grid-template-columns: 1.05fr 0.95fr; align-items: stretch; }
+    .career-why__content { padding: clamp(56px, 7vw, 100px) clamp(24px, 5vw, 80px); }
+    .eyebrow--light { color: var(--yellow); }
+    .career-why__heading { font-size: clamp(28px, 3.4vw, 42px); font-weight: 700; color: #fff; margin-top: 6px; }
+    .career-why__intro { color: rgba(255,255,255,0.78); font-size: 16px; line-height: 1.7; margin-top: 18px; max-width: 52ch; }
+    .career-values__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+    .career-value { display: flex; align-items: center; gap: 14px; }
+    .career-value__icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(244,180,0,0.12); display: flex; align-items: center; justify-content: center; color: var(--yellow); flex-shrink: 0; }
+    .career-value__label { font-size: 15px; font-weight: 600; color: #fff; }
+    .career-values__divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 28px 0; }
+    .career-why__visual { position: relative; min-height: 340px; }
+    .career-why__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .jobs-list { display: flex; flex-direction: column; gap: 16px; max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .job-card { background: var(--white); border: 1px solid var(--gray-light); border-radius: 16px; padding: 28px 30px; transition: box-shadow .2s, border-color .2s; }
+    .job-card:hover { box-shadow: 0 12px 32px rgba(11,26,61,0.08); border-color: rgba(244,180,0,0.4); }
+    .job-card__title { font-size: 20px; font-weight: 700; color: var(--navy); }
+    .job-card__desc { color: #55606E; font-size: 15px; line-height: 1.6; margin-top: 8px; }
+    .job-card__details { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .35s ease, margin .35s ease; }
+    .job-card__details.is-visible { max-height: 1800px; opacity: 1; margin-top: 22px; }
+    .job-card__details-heading { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
+    .job-card__resp-list { padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: #55606E; font-size: 14.5px; line-height: 1.6; }
+    .job-card__resp-list strong { color: var(--navy); }
+    .job-card__resp-sublist { padding-left: 18px; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; list-style: disc; }
+    .job-card__apply { margin-top: 18px; font-size: 14.5px; color: var(--navy); font-weight: 600; }
+    .job-card__apply a { color: var(--yellow); }
+    .job-card__toggle { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); background: var(--gray-light); padding: 10px 20px; border-radius: 100px; transition: background .15s, color .15s; }
+    .job-card__toggle:hover { background: var(--yellow); }
+    .job-card__toggle-arrow { transition: transform .2s ease; }
+    .job-card__toggle[aria-expanded="true"] .job-card__toggle-arrow { transform: rotate(90deg); }
+
+    .career-apply__layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(36px, 5vw, 64px); align-items: start; position: relative; z-index: 1; }
+    .career-apply__heading { font-size: clamp(24px, 2.8vw, 34px); font-weight: 700; color: var(--navy); margin-top: 6px; line-height: 1.2; }
+    .career-apply__intro { color: #55606E; font-size: 16px; line-height: 1.7; margin-top: 16px; }
+    .career-apply__contacts { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+    .career-contact { display: flex; align-items: flex-start; gap: 14px; }
+    .career-contact__icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(244,180,0,0.12); display: flex; align-items: center; justify-content: center; color: var(--navy); flex-shrink: 0; }
+    .career-contact__label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-mid); }
+    .career-contact__value { font-size: 15px; font-weight: 600; color: var(--navy); }
+    .career-contact__value a { color: var(--navy); }
+    .career-form { background: var(--white); border: 1px solid var(--gray-light); border-radius: 20px; padding: clamp(24px, 3vw, 40px); box-shadow: 0 20px 50px rgba(11,26,61,0.06); }
+    .career-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .career-form input[type=text], .career-form input[type=email], .career-form input[type=tel] { width: 100%; padding: 14px 16px; border: 1px solid var(--gray-light); border-radius: 10px; font-family: inherit; font-size: 14.5px; color: var(--navy); background: var(--off-white); transition: border-color .15s, background .15s; }
+    .career-form input:focus { outline: none; border-color: var(--yellow); background: #fff; }
+    .career-form__upload { margin-bottom: 16px; }
+    .career-form__file { position: absolute; width: 1px; height: 1px; opacity: 0; }
+    .career-form__upload-label { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 28px; border: 2px dashed var(--gray-light); border-radius: 12px; cursor: pointer; text-align: center; transition: border-color .15s, background .15s; color: var(--yellow); }
+    .career-form__upload-label:hover { border-color: var(--yellow); background: var(--off-white); }
+    .career-form__upload-text { font-weight: 600; color: var(--navy); font-size: 14.5px; }
+    .career-form__upload-hint { font-size: 12px; color: var(--gray-mid); }
+    .career-form__submit { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: #fff; font-weight: 700; letter-spacing: 0.06em; font-size: 14px; padding: 15px 36px; border-radius: 100px; transition: transform .15s, box-shadow .15s; }
+    .career-form__submit:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(11,26,61,0.25); }
+    .career-form__msg { margin-top: 18px; font-size: 14.5px; font-weight: 600; color: #1A7F5A; background: rgba(26,127,90,0.08); border: 1px solid rgba(26,127,90,0.25); border-radius: 10px; padding: 14px 16px; display: none; }
+    .career-form__msg.is-visible { display: block; }
+
+    @media (max-width: 900px) {
+      .career-why__layout, .career-apply__layout { grid-template-columns: 1fr; }
+      .career-why__visual { min-height: 280px; }
+    }
+    @media (max-width: 560px) {
+      .career-values__grid, .career-form__row { grid-template-columns: 1fr; }
+      .page-hero { min-height: 54vh; padding-top: 130px; }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- ═══ NAVBAR (identical to index.html) ═══ -->
+  <nav class="isler-nav" aria-label="Primary navigation">
+    <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
+      <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India">
+    </a>
+    <div class="isler-nav__search" role="search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/>
+        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="search" placeholder="Search products…" aria-label="Search products">
+    </div>
+    <ul class="isler-nav__links">
+      <li class="isler-nav__item has-mega" id="isler-products-item">
+        <a href="#" class="isler-nav__trigger" id="isler-products-trigger"
+           aria-haspopup="true" aria-expanded="false" aria-controls="isler-mega">
+          Categories
+          <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+
+        <!-- Categories mega-menu: 3 grouped columns -->
+        <div class="isler-mega" id="isler-mega" role="dialog" aria-label="Categories navigation" aria-hidden="true">
+          <div class="isler-mega__inner">
+
+            <!-- Column 1 — Cooktops & Hobs (live links; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Cooktops &amp; Hobs</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link isler-mega__link--lead" href="built-in-hobs.html"><span class="isler-mega__thumb"><img src="assets/catalog/hobs/best/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Built-in Hobs</span></a></li>
+                <li><a class="isler-mega__link" href="gas-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/gas-cooktops/gas-cooktop-Domestic-3B.jpg" alt="" loading="lazy"></span><span>Gas Cooktops</span></a></li>
+                <li><a class="isler-mega__link" href="induction-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.png" alt="" loading="lazy"></span><span>Induction</span></a></li>
+                <li><a class="isler-mega__link" href="infrared-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/infrared/IS-AM1-Series-1001.png" alt="" loading="lazy"></span><span>Infrared</span></a></li>
+                <li><a class="isler-mega__link" href="hybrid-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/hybrid/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Hybrid</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 — Chimneys (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Chimneys</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_t-shape_60_blackmatte_b_01-400x310.png" alt="" loading="lazy"></span><span>T-Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_curve_60_black-greymatte_a_05-400x310.png" alt="" loading="lazy"></span><span>Curve Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.png" alt="" loading="lazy"></span><span>Inclined Shape</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3 — Ovens & Microwaves (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Ovens &amp; Microwaves</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/oven-gold-grande.jpg" alt="" loading="lazy"></span><span>Built-in Ovens</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/microwave-silver-core.jpg" alt="" loading="lazy"></span><span>Built-in Microwave</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 4 — Other Appliances (inert; real product photo) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Other Appliances</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/small-appliances-1.png" alt="" loading="lazy"></span><span>Small Appliances</span></a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+
+
+  <main id="main-content">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="page-hero__bg" style="background-image:url('assets/images/careers-hero.jpg');" aria-hidden="true"></div>
+      <div class="page-hero__inner">
+        <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="page-hero__breadcrumb-sep" aria-hidden="true"></span>
+          <span aria-current="page">Career</span>
+        </nav>
+        <span class="page-hero__eyebrow">Join Our Team</span>
+        <h1 class="page-hero__title" id="page-title">Empowering Innovation, Excellence, and Growth</h1>
+        <p class="page-hero__desc">Be part of India's first design-focused kitchen appliance manufacturing company. We're looking for passionate people to help us build the future.</p>
+      </div>
+    </section>
+
+    <!-- WHY JOIN US -->
+    <section class="career-why" aria-labelledby="why-heading">
+      <div class="career-why__layout">
+        <div class="career-why__content">
+          <span class="eyebrow eyebrow--light">ISLER</span>
+          <h2 class="career-why__heading" id="why-heading">Why Join Us</h2>
+          <p class="career-why__intro">Join Isler for a dynamic career where innovation, global exposure, and continuous growth are at the core. Be part of a team that values your contributions and fosters excellence across industries.</p>
+          <div class="career-values__grid">
+            <div class="career-value">
+              <span class="career-value__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></span>
+              <span class="career-value__label">Innovative Environment</span>
+            </div>
+            <div class="career-value">
+              <span class="career-value__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+              <span class="career-value__label">Diverse Opportunities</span>
+            </div>
+            <div class="career-value">
+              <span class="career-value__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+              <span class="career-value__label">Career Development</span>
+            </div>
+            <div class="career-value">
+              <span class="career-value__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <span class="career-value__label">Collaborative Culture</span>
+            </div>
+          </div>
+          <hr class="career-values__divider" aria-hidden="true">
+          <div class="career-value">
+            <span class="career-value__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+            <span class="career-value__label">Equal Opportunity Employment</span>
+          </div>
+        </div>
+        <div class="career-why__visual" aria-hidden="true">
+          <img src="assets/images/our_team_banner_r-2-1.jpg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRENT OPENINGS -->
+    <section class="page-section bg-offwhite" aria-labelledby="openings-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Current Openings</span>
+          <h2 class="h2" id="openings-heading">Open Positions</h2>
+          <p>We're growing fast. If you're passionate about design, manufacturing, and innovation — there's a place for you here.</p>
+        </div>
+
+        <div class="jobs-list">
+
+          <div class="job-card">
+            <p class="job-card__title">Plant Manager</p>
+            <p class="job-card__desc">Oversees daily plant operations, focusing on safety, efficiency, quality, staff management, and meeting production goals within budget.</p>
+            <div class="job-card__details" id="opening-1">
+              <h4 class="job-card__details-heading">Roles &amp; Responsibilities</h4>
+              <ol class="job-card__resp-list">
+                <li><strong>Oversee Daily Operations:</strong> Manage all aspects of plant operations, ensuring smooth production and efficiency.</li>
+                <li><strong>Ensure Safety Compliance:</strong> Enforce safety standards and procedures to maintain a safe working environment.</li>
+                <li><strong>Optimize Production:</strong> Streamline processes to improve productivity, reduce costs, and meet production targets.</li>
+                <li><strong>Staff Management:</strong> Supervise, train, and motivate plant staff to enhance performance and foster teamwork.</li>
+                <li><strong>Budget &amp; Resource Management:</strong> Monitor budget adherence, resource allocation, and cost control to achieve financial goals.</li>
+              </ol>
+              <p class="job-card__apply">Send your resume to <a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+            </div>
+            <button class="job-card__toggle" aria-expanded="false" aria-controls="opening-1">
+              <span class="job-card__toggle-label">Read More</span>
+              <span class="job-card__toggle-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <p class="job-card__title">Sourcing Manager</p>
+            <p class="job-card__desc">Oversees supplier management, negotiations, and procurement to secure the best products, prices, and quality for kitchen appliances.</p>
+            <div class="job-card__details" id="opening-2">
+              <h4 class="job-card__details-heading">Roles &amp; Responsibilities</h4>
+              <ol class="job-card__resp-list">
+                <li><strong>Supplier Management:</strong> Identify, evaluate, and maintain relationships with domestic and international suppliers for kitchen appliances.</li>
+                <li><strong>Negotiations:</strong> Secure the best prices, terms, and quality by negotiating contracts and terms with suppliers.</li>
+                <li><strong>Quality Assurance:</strong> Ensure all sourced products meet company standards for quality, design, and functionality.</li>
+                <li><strong>Market Analysis:</strong> Stay updated on industry trends, innovations, and competitor activities to make informed sourcing decisions.</li>
+                <li><strong>Cross-functional Collaboration:</strong> Work closely with the product development, manufacturing, and logistics teams to align sourcing strategies with business goals.</li>
+              </ol>
+              <p class="job-card__apply">Send your resume to <a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+            </div>
+            <button class="job-card__toggle" aria-expanded="false" aria-controls="opening-2">
+              <span class="job-card__toggle-label">Read More</span>
+              <span class="job-card__toggle-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <p class="job-card__title">Industrial Design Lead</p>
+            <p class="job-card__desc">Responsible for designing concepts and specs that enhance product function, value, and appearance for users and manufacturers.</p>
+            <div class="job-card__details" id="opening-3">
+              <h4 class="job-card__details-heading">Roles &amp; Responsibilities</h4>
+              <ol class="job-card__resp-list">
+                <li><strong>Concept Exploration &amp; Research:</strong> Understand user needs and create captivating designs.</li>
+                <li><strong>Bringing Ideas to Life:</strong> Prototype and refine concepts, turning creative ideas into practical solutions.</li>
+                <li><strong>Innovative Prototyping:</strong> Use unconventional materials and technologies to craft functional and fascinating prototypes.</li>
+                <li><strong>Collaborative Endeavors:</strong> Work with engineers, marketers, and colleagues to align designs with company goals.</li>
+                <li><strong>User-Focused Design:</strong> Blend ergonomics and usability for intuitive products that enhance user experiences.</li>
+              </ol>
+              <p class="job-card__apply">Send your resume to <a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+            </div>
+            <button class="job-card__toggle" aria-expanded="false" aria-controls="opening-3">
+              <span class="job-card__toggle-label">Read More</span>
+              <span class="job-card__toggle-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <p class="job-card__title">Design Engineer</p>
+            <p class="job-card__desc">The primary responsibility is to create and develop mechanical designs using various software tools according.</p>
+            <div class="job-card__details" id="opening-4">
+              <h4 class="job-card__details-heading">Roles &amp; Responsibilities</h4>
+              <ol class="job-card__resp-list">
+                <li><strong>Design Creation:</strong> Responsible for conceptualizing, designing, and developing mechanical components, systems, and products using CAD (Computer-Aided Design) software such as SolidWorks, AutoCAD, CATIA, or similar tools.</li>
+                <li><strong>Client Interaction:</strong> Understanding and interpreting client requirements and specifications are crucial aspects of the role which often liaise with clients to gather information, clarify requirements, and ensure that designs meet their needs and expectations.</li>
+                <li><strong>Technical Expertise:</strong> Need a deep understanding of mechanical engineering principles, materials science, and manufacturing processes to create designs that are functional, reliable, and cost-effective.</li>
+                <li><strong>Documentation:</strong> Creating detailed technical drawings, specifications, and documentation to communicate design intent to manufacturing teams, suppliers, and other stakeholders. Accurate documentation is essential for ensuring that designs are translated into physical products correctly.</li>
+              </ol>
+              <p class="job-card__apply">Send your resume to <a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+            </div>
+            <button class="job-card__toggle" aria-expanded="false" aria-controls="opening-4">
+              <span class="job-card__toggle-label">Read More</span>
+              <span class="job-card__toggle-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="job-card">
+            <p class="job-card__title">Quality Assurance Engineer</p>
+            <p class="job-card__desc">Ensuring product excellence by enforcing high standards and collaborating with production teams.</p>
+            <div class="job-card__details" id="opening-5">
+              <h4 class="job-card__details-heading">Roles &amp; Responsibilities</h4>
+              <ol class="job-card__resp-list">
+                <li><strong>Quality Control Procedures:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Develop, implement, and maintain metal-specific quality control procedures.</li>
+                    <li>Set quality standards for raw materials, components, and finished products.</li>
+                    <li>Establish inspection criteria and testing methods to ensure adherence to standards.</li>
+                  </ul>
+                </li>
+                <li><strong>Inspection and Testing:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Regularly inspect metal materials and products for quality and accuracy.</li>
+                    <li>Analyze test results and collaborate on corrective actions with production teams.</li>
+                  </ul>
+                </li>
+                <li><strong>Process Optimization:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Identify and implement process improvements for enhanced quality and efficiency.</li>
+                    <li>Collaborate with engineers to minimize defects and optimize production.</li>
+                  </ul>
+                </li>
+                <li><strong>Documentation and Reporting:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Maintain detailed records of quality control activities and results.</li>
+                    <li>Generate comprehensive reports on quality performance and areas for improvement.</li>
+                  </ul>
+                </li>
+                <li><strong>Supplier and Vendor Management:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Conduct supplier audits and maintain strong relationships to address quality issues.</li>
+                  </ul>
+                </li>
+                <li><strong>Regulatory Compliance:</strong>
+                  <ul class="job-card__resp-sublist">
+                    <li>Stay updated on industry regulations and ensure compliance.</li>
+                    <li>Participate in audits to demonstrate adherence to quality standards.</li>
+                  </ul>
+                </li>
+              </ol>
+              <p class="job-card__apply">Send your resume to <a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+            </div>
+            <button class="job-card__toggle" aria-expanded="false" aria-controls="opening-5">
+              <span class="job-card__toggle-label">Read More</span>
+              <span class="job-card__toggle-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLICATION FORM -->
+    <section class="page-section bg-white" aria-labelledby="apply-heading">
+      <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(244,180,0,0.14);bottom:-50px;left:-60px;"></div>
+      <div class="container">
+        <div class="career-apply__layout">
+          <div>
+            <span class="eyebrow">JOIN US</span>
+            <h2 class="career-apply__heading" id="apply-heading">Submit your resume and advance your career journey!</h2>
+            <p class="career-apply__intro">Join Isler and be part of a dynamic team dedicated to innovation and excellence in manufacturing!</p>
+            <div class="career-apply__contacts">
+              <div class="career-contact">
+                <span class="career-contact__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                <div>
+                  <p class="career-contact__label">Email</p>
+                  <p class="career-contact__value"><a href="mailto:career@islerindia.com">career@islerindia.com</a></p>
+                </div>
+              </div>
+              <div class="career-contact">
+                <span class="career-contact__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l.91-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17z"/></svg></span>
+                <div>
+                  <p class="career-contact__label">Phone</p>
+                  <p class="career-contact__value"><a href="tel:+919717737964">+91 9717737964</a></p>
+                </div>
+              </div>
+              <div class="career-contact">
+                <span class="career-contact__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                <div>
+                  <p class="career-contact__label">Address</p>
+                  <p class="career-contact__value">Plot no. 81, Ecotech 10,<br>Greater Noida, Uttar Pradesh, 203202</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <form id="career-form" class="career-form" novalidate>
+              <div class="career-form__row">
+                <input type="text" id="career-name" name="from_name" placeholder="Full Name" required aria-label="Full Name">
+                <input type="email" id="career-email" name="from_email" placeholder="Email" required aria-label="Email address">
+              </div>
+              <div class="career-form__row">
+                <input type="tel" id="career-phone" name="phone" placeholder="Phone number" aria-label="Phone number">
+                <input type="text" id="career-position" name="position" placeholder="Applying for" aria-label="Position applying for">
+              </div>
+              <div class="career-form__upload">
+                <input type="file" id="career-resume" name="resume" accept=".pdf,.doc,.docx" class="career-form__file" aria-label="Upload your resume">
+                <label for="career-resume" class="career-form__upload-label">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  <span class="career-form__upload-text">Upload your resume</span>
+                  <span class="career-form__upload-hint">.PDF, .DOC, .DOCX accepted</span>
+                </label>
+              </div>
+              <button type="submit" id="career-submit" class="career-form__submit">
+                SUBMIT <span aria-hidden="true">→</span>
+              </button>
+              <div id="career-form-msg" class="career-form__msg" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         CTA Box
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <section class="cta-box-section">
+      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(244,180,0,0.18);top:-60px;left:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(230,149,0,0.15);bottom:-50px;right:-50px;"></div>
+      <div class="cta-box">
+
+        <div class="cta-box__content">
+          <span class="cta-box__eyebrow">Get in Touch</span>
+          <h2 class="cta-box__heading">Ready to Transform<br>Your Kitchen?</h2>
+          <p class="cta-box__sub">Explore our product range or speak with our team.</p>
+        </div>
+
+        <div class="cta-box__actions">
+          <a href="#range" class="cta-box__btn cta-box__btn--primary">View Our Products</a>
+          <a href="mailto:info@islerindia.com" class="cta-box__btn cta-box__btn--secondary">Contact Us</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══ FOOTER (identical to index.html) ═══ -->
+  <footer class="site-footer" id="site-footer-el">
+    <div class="footer__main">
+      <div class="footer__main-inner">
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Products
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="built-in-hobs.html">Built-in Hobs</a></li>
+            <li><a href="gas-cooktops.html">Gas Cooktops</a></li>
+            <li><a href="induction-cooktops.html">Induction Cooktops</a></li>
+            <li><a href="infrared-cooktops.html">Infrared Cooktops</a></li>
+            <li><a href="hybrid-cooktops.html">Hybrid Cooktops</a></li>
+            <li><a href="index.html#range">View All</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Company
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="about.html">About Isler</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">Blog <span style="display:block;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);opacity:0.6;margin-top:2px;">Coming soon</span></a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Resources
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="#">Brochures</a></li>
+            <li><a href="#">Certifications</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__col--contact">
+          <h3 class="footer__col-heading">Get in Touch</h3>
+          <div class="footer__contact-block">
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202</span>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+919717737964">+91 971 7737 964</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:info@islerindia.com">info@islerindia.com</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
+            </div>
+          </div>
+          <div class="footer__newsletter">
+            <p class="footer__newsletter-heading">Stay Updated</p>
+            <form class="footer__newsletter-form" novalidate>
+              <div class="footer__newsletter-row">
+                <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email for newsletter">
+                <button type="submit" aria-label="Subscribe">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner">
+        <a href="index.html" class="footer__bottom-logo" aria-label="Isler India — home">
+          <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India" height="32" loading="lazy" style="width:auto">
+        </a>
+        <div class="footer__bottom-copy">
+          <p>&copy; 2026 Isler India. All rights reserved.</p>
+          <p>Manufacturing excellence since 2018 &nbsp;&middot;&nbsp; ISO 9001:2015 | ISO 14001 Certified</p>
+        </div>
+        <div class="footer__bottom-right">
+          <nav class="footer__social-row" aria-label="Social media">
+            <a href="https://www.facebook.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://x.com/Islerindia" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCxhMrjS6Fd1-sOlMz3YUBiA" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </nav>
+          <span class="footer__made-in-india">🇮🇳 Made in India</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Footer accordion (mobile) -->
+  <script>
+    (function () {
+      function initFooterAccordion() {
+        if (window.innerWidth > 767) return;
+        document.querySelectorAll('[data-footer-accordion]').forEach(function (col) {
+          var heading = col.querySelector('.footer__col-heading');
+          if (!heading) return;
+          heading.addEventListener('click', function () { col.classList.toggle('is-open'); });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initFooterAccordion); }
+      else { initFooterAccordion(); }
+    }());
+  </script>
+
+  <!-- Openings expand/collapse + placeholder application form -->
+  <script>
+    (function () {
+      function initOpenings() {
+        document.querySelectorAll('.job-card__toggle').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var expanded = btn.getAttribute('aria-expanded') === 'true';
+            var details  = document.getElementById(btn.getAttribute('aria-controls'));
+            var label    = btn.querySelector('.job-card__toggle-label');
+            if (!details) return;
+            if (expanded) {
+              btn.setAttribute('aria-expanded', 'false');
+              details.classList.remove('is-visible');
+              if (label) label.textContent = 'Read More';
+            } else {
+              btn.setAttribute('aria-expanded', 'true');
+              details.classList.add('is-visible');
+              if (label) label.textContent = 'Read Less';
+            }
+          });
+        });
+      }
+      function initCareerForm() {
+        var form = document.getElementById('career-form');
+        var msg  = document.getElementById('career-form-msg');
+        if (!form || !msg) return;
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();               /* placeholder — no live submission */
+          msg.textContent = 'Thank you — please email your resume to career@islerindia.com';
+          msg.classList.add('is-visible');
+          form.reset();
+        });
+      }
+      function init() { initOpenings(); initCareerForm(); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
+      else { init(); }
+    }());
+  </script>
+  <script src="assets/js/nav.js" defer></script>
+</body>
+</html>

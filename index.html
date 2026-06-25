@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Isler India — Premium Kitchen Appliances</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/footer.css">
+  <style>
+
+    /* ══════════════════════════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════════════════════════ */
+
+    .demo-nav {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      padding: 20px 24px;
+      background: rgba(7, 17, 44, 0.25);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      min-width: min(1160px, calc(100vw - 40px));
+      gap: 27px;
+    }
+
+    .demo-nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .demo-nav__logo img {
+      height: 38px;
+      width: auto;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+    }
+
+    .demo-nav__search {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 100px;
+      padding: 0 14px 0 12px;
+      gap: 7px;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+
+    .demo-nav__search:focus-within {
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .demo-nav__search svg {
+      flex-shrink: 0;
+      opacity: 0.45;
+    }
+
+    .demo-nav__search input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      font-family: inherit;
+      width: 220px;
+      padding: 8px 0;
+      letter-spacing: 0.01em;
+    }
+
+    .demo-nav__search input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .demo-nav__links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+      list-style: none;
+    }
+
+    .demo-nav__links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.68);
+      padding: 10px 32px;
+      border-radius: 100px;
+      transition: color 150ms ease, background 150ms ease;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .demo-nav__links a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    /* Tablet (768–1023px): revert to compact pill */
+    @media (max-width: 1023px) {
+      .demo-nav {
+        padding: 10px 10px 10px 20px;
+        min-width: min(660px, calc(100vw - 40px));
+      }
+      .demo-nav__logo img { height: 30px; }
+      .demo-nav__links a  { font-size: 13px; padding: 8px 18px; }
+      .demo-nav__search   { display: none; }
+    }
+
+    @media (max-width: 639px) {
+      .demo-nav {
+        top: 10px;
+        min-width: calc(100vw - 24px);
+        padding: 8px 6px 8px 16px;
+      }
+      .demo-nav__logo img { height: 26px; }
+      .demo-nav__links a  { font-size: 12px; padding: 6px 12px; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       OUR PRODUCTS MEGA-MENU
+       Adapted from Isler-India-Revamp (.navbar__megamenu) to drop
+       below the demo's glass pill. White panel, demo yellow accents.
+    ══════════════════════════════════════════════════════════════ */
+
+    .demo-nav__item { position: static; }
+
+    /* Trigger inherits .demo-nav__links a styling; add chevron alignment */
+    .demo-nav__mega-trigger {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .demo-nav__chevron {
+      transition: transform 200ms ease;
+      opacity: 0.7;
+    }
+
+    .has-megamenu.is-open .demo-nav__chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Active-state indicator on the trigger while the menu is open */
+    .has-megamenu.is-open .demo-nav__mega-trigger {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .has-megamenu.is-open .demo-nav__mega-trigger::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 2px;
+      transform: translateX(-50%);
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--yellow);
+    }
+    .demo-nav__mega-trigger { position: relative; }
+
+    /* ── Panel ──
+       Anchored to the pill container (.demo-nav is its containing block):
+       left:0 / right:0 makes the panel span the full pill width and inherit
+       the pill's centering, so it never overflows the viewport. */
+    .demo-megamenu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      transform: translateY(-8px);
+      /* Solid white — opaque so the hero behind never bleeds through and
+         hurts text legibility (was translucent frosted glass). */
+      background: #ffffff;
+      border: 1px solid rgba(11, 26, 61, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease, visibility 0ms 160ms;
+      z-index: 199;
+    }
+
+    .demo-megamenu.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    /* Invisible hover bridge spanning the gap between pill and panel */
+    .demo-megamenu::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 0;
+      right: 0;
+      height: 16px;
+    }
+
+    .demo-megamenu__inner {
+      padding: 28px 34px;
+    }
+
+    .demo-mm__label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin: 22px 0 8px;
+    }
+    .demo-mm__label:first-child { margin-top: 0; }
+
+    .demo-mm__row {
+      display: grid;
+      gap: 10px;
+    }
+    .demo-mm__row--4 { grid-template-columns: repeat(4, 1fr); }
+    .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
+    .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
+
+    .demo-mm__cell {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0; /* allow grid item to shrink to its track — prevents overflow */
+      padding: 10px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background-color 150ms ease;
+    }
+    .demo-mm__cell:hover {
+      background-color: rgba(244, 180, 0, 0.08);
+    }
+
+    .demo-mm__thumb {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .demo-mm__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Logo-style PNGs (transparent) sit better contained on white */
+    .demo-mm__cell:nth-child(1) .demo-mm__thumb img,
+    .demo-mm__row--4:last-of-type .demo-mm__cell:nth-child(2) .demo-mm__thumb img {
+      object-fit: contain;
+      padding: 6px;
+      background: #fff;
+    }
+
+    .demo-mm__text {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .demo-mm__name {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--navy);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: color 150ms ease;
+    }
+    .demo-mm__cell:hover .demo-mm__name { color: var(--yellow); }
+
+    .demo-mm__tagline {
+      display: block;
+      font-size: 11px;
+      color: var(--gray-mid);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Subtle "Coming soon" tag for not-yet-built category pages */
+    .demo-mm__soon {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      opacity: 0.65;
+      margin-top: 3px;
+    }
+
+    .demo-mm__arrow {
+      flex-shrink: 0;
+      font-size: 13px;
+      color: var(--yellow);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 150ms ease, transform 150ms ease;
+    }
+    .demo-mm__cell:hover .demo-mm__arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ── Tablet / mobile: tap-to-toggle dropdown, responsive grid ──
+       left:0/right:0 keeps the panel spanning the (smaller) pill; no fixed
+       width needed, so it can never exceed the pill or the viewport. */
+    @media (max-width: 1023px) {
+      .demo-megamenu {
+        top: calc(100% + 10px);
+      }
+      .demo-mm__row--4,
+      .demo-mm__row--5,
+      .demo-mm__row--3 { grid-template-columns: repeat(2, 1fr); }
+      .demo-megamenu__inner { padding: 20px 18px; }
+    }
+
+    @media (max-width: 559px) {
+      .demo-mm__row--4,
+      .demo-mm__row--5,
+      .demo-mm__row--3 { grid-template-columns: 1fr; }
+      .demo-mm__name { font-size: 13px; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       AMBIENT CIRCLE GLOWS
+    ══════════════════════════════════════════════════════════════ */
+
+    .ambient-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       RANGE SECTION — replicates main site's Key Products grid
+    ══════════════════════════════════════════════════════════════ */
+
+    .range-section {
+      background: var(--off-white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-heading {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .cat-grid-wrap {
+      max-width: 1680px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .cat-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      display: block;
+      background: #111;
+      text-decoration: none;
+      transition: box-shadow 280ms ease;
+    }
+
+    .cat-card--lg {
+      grid-column: span 2;
+      aspect-ratio: 5 / 3;
+    }
+
+    .cat-card--sm {
+      aspect-ratio: 4 / 3;
+    }
+
+    .cat-card:hover {
+      box-shadow: inset 0 0 0 2px var(--yellow);
+    }
+
+    .cat-card__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease-out);
+    }
+
+    .cat-card:hover .cat-card__img {
+      transform: scale(1.06);
+    }
+
+    .cat-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0) 58%);
+    }
+
+    .cat-card__content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .cat-card__name {
+      font-size: clamp(17px, 1.6vw, 23px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .cat-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 200ms ease, transform 200ms ease;
+      flex-shrink: 0;
+    }
+
+    .cat-card:hover .cat-card__cta {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 767px) {
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .cat-card--lg {
+        grid-column: span 2;
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+    @media (max-width: 479px) {
+      .cat-grid {
+        grid-template-columns: 1fr;
+      }
+      .cat-card--lg,
+      .cat-card--sm {
+        grid-column: span 1;
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       USP SECTION — What Sets Us Apart
+    ══════════════════════════════════════════════════════════════ */
+
+    .usp-section {
+      /* Lightened from var(--navy) #0B1A3D so the dark "Isler" wordmark in the
+         translucent navbar pill stays legible when it scrolls over this section. */
+      background: #475A82;
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+    }
+
+    .usp-section .section-header {
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .usp-section .section-eyebrow {
+      color: var(--yellow);
+    }
+
+    .usp-section .section-heading {
+      color: var(--white);
+    }
+
+    .usp-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1680px;
+      margin: 0 auto;
+      counter-reset: usp;
+      position: relative;
+      z-index: 1;
+    }
+
+    .usp-card {
+      counter-increment: usp;
+      padding: 40px 40px 52px;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      transition: background 280ms ease;
+    }
+
+    .usp-card:last-child {
+      border-right: none;
+    }
+
+    .usp-card:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .usp-card::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 32px;
+      bottom: 40px;
+      width: 3px;
+      background: var(--yellow);
+      border-radius: 2px;
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 280ms var(--ease-out);
+    }
+
+    .usp-card:hover::after {
+      transform: scaleY(1);
+    }
+
+    .usp-card__num {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--yellow);
+      margin-bottom: 22px;
+    }
+
+    .usp-card__num::before {
+      content: '0' counter(usp);
+    }
+
+    .usp-card__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      line-height: 1.22;
+    }
+
+    .usp-card__text {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.65;
+    }
+
+    @media (max-width: 1023px) {
+      .usp-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .usp-card {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .usp-card:nth-child(even) {
+        border-right: none;
+      }
+      .usp-card:nth-last-child(-n+2) {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 599px) {
+      .usp-grid {
+        grid-template-columns: 1fr;
+      }
+      .usp-card {
+        border-right: none;
+      }
+      .usp-card:last-child {
+        border-bottom: none;
+      }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       INSIGHTS / BLOG SECTION
+       Adapted from Isler-India-Revamp (teal accent → demo yellow/navy)
+    ══════════════════════════════════════════════════════════════ */
+
+    .blog-section {
+      background: var(--off-white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+    }
+
+    .section-sub {
+      margin-top: var(--space-sm);
+      font-size: 16px;
+      color: var(--gray-mid);
+      line-height: 1.6;
+    }
+
+    .blog-grid-wrap {
+      max-width: 1680px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border: 1px solid rgba(11, 26, 61, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: box-shadow 280ms var(--ease-out), transform 280ms var(--ease-out);
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 18px 40px rgba(11, 26, 61, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .blog-card__media-link {
+      display: block;
+      overflow: hidden;
+    }
+
+    .blog-card__media {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--gray-light);
+    }
+
+    .blog-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__media img {
+      transform: scale(1.06);
+    }
+
+    .blog-card__body {
+      padding: 24px 26px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-bottom: 14px;
+    }
+
+    .blog-card__category {
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .blog-card__title {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      flex: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .blog-card__title a {
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 150ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__title a {
+      color: var(--yellow);
+    }
+
+    .blog-card__excerpt {
+      font-size: 14px;
+      color: var(--gray-mid);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .blog-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      margin-top: auto;
+      transition: color 150ms var(--ease-out);
+    }
+
+    .blog-card__cta svg {
+      transition: transform 200ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__cta {
+      color: var(--yellow);
+    }
+
+    .blog-card:hover .blog-card__cta svg {
+      transform: translateX(4px);
+    }
+
+    .blog-actions {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .blog-view-all {
+      display: inline-block;
+      padding: 14px 40px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      border: 2px solid var(--navy);
+      border-radius: 100px;
+      transition: background 180ms ease, color 180ms ease, transform 150ms ease;
+    }
+
+    .blog-view-all:hover {
+      background: var(--navy);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 991px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 599px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+
+
+    /* ══════════════════════════════════════════════════════════════
+       CTA BOX SECTION
+    ══════════════════════════════════════════════════════════════ */
+
+    .cta-box-section {
+      background: var(--gray-light);
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      overflow: clip;
+    }
+
+    .cta-box {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      background: var(--navy);
+      border-radius: 24px;
+      padding: 64px 64px;
+      position: relative;
+      overflow: hidden;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.033) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.033) 1px, transparent 1px);
+      background-size: 44px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Vignette so grid pattern fades at edges */
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 26, 61, 0.6) 100%);
+      pointer-events: none;
+    }
+
+    .cta-box__content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-box__eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .cta-box__heading {
+      font-size: clamp(26px, 3vw, 42px);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      line-height: 1.13;
+      margin-bottom: 16px;
+    }
+
+    .cta-box__sub {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.52);
+      line-height: 1.65;
+    }
+
+    .cta-box__actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .cta-box__btn {
+      display: block;
+      width: 320px;
+      padding: 15px 36px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      border-radius: 100px;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 180ms ease, color 180ms ease;
+      cursor: pointer;
+    }
+
+    .cta-box__btn--primary {
+      background: var(--yellow);
+      color: var(--navy);
+      border: 2px solid var(--yellow);
+    }
+
+    .cta-box__btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
+    }
+
+    .cta-box__btn--secondary {
+      background: transparent;
+      color: var(--yellow);
+      border: 2px solid var(--yellow);
+    }
+
+    .cta-box__btn--secondary:hover {
+      background: var(--yellow);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 639px) {
+      .cta-box {
+        padding: 48px 28px;
+      }
+      .cta-box__btn {
+        width: 100%;
+        max-width: 320px;
+      }
+    }
+
+
+
+    /* ══════════════════════════════════════════════════════════════
+       MANUFACTURING EXCELLENCE — B2B section (added below scroll hero)
+       Namespaced `.mfg-*`; uses site tokens (navy/yellow). Inherits
+       the site font via var(--font). Self-contained — no hero overlap.
+    ══════════════════════════════════════════════════════════════ */
+
+    .mfg-section { position: relative; overflow: clip; }
+    .mfg-pad {
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+    }
+    .mfg-inner { max-width: 1680px; margin: 0 auto; position: relative; z-index: 2; }
+
+    .mfg-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+    .mfg-heading {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--navy);
+    }
+    .mfg-sub {
+      margin-top: var(--space-sm);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--gray-mid);
+      max-width: 62ch;
+    }
+
+    /* Scroll-reveal: hidden state applied by JS only (class on <body>).
+       Without JS / reduced-motion, content stays fully visible. */
+    .mfg-anim-on .mfg-reveal { opacity: 0; transform: translateY(40px); }
+
+    /* ── 1. SECTION OPENER — background video ── */
+    .mfg-opener {
+      min-height: clamp(460px, 78vh, 760px);
+      display: flex;
+      align-items: center;
+      background: var(--navy-deep);
+    }
+    .mfg-opener__video,
+    .mfg-opener__scrim {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .mfg-opener__video { object-fit: cover; z-index: 0; }
+    .mfg-opener__scrim {
+      z-index: 1;
+      /* Lighter overlay — gradient concentrated behind the text (left + bottom)
+         so the factory footage shows closer to its true colour on the right. */
+      background:
+        linear-gradient(90deg, rgba(6,15,36,0.68) 0%, rgba(6,15,36,0.28) 45%, rgba(6,15,36,0) 100%),
+        linear-gradient(0deg, rgba(6,15,36,0.5) 0%, rgba(6,15,36,0) 50%);
+    }
+    .mfg-opener .mfg-inner { max-width: 1280px; }
+    .mfg-opener__eyebrow { color: var(--yellow); }
+    .mfg-opener__title {
+      font-size: clamp(32px, 5vw, 68px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      color: var(--white);
+      max-width: 16ch;
+    }
+    .mfg-opener__copy {
+      margin-top: 22px;
+      font-size: clamp(15px, 1.5vw, 19px);
+      line-height: 1.6;
+      color: rgba(255,255,255,0.78);
+      max-width: 60ch;
+    }
+
+    /* ── 2. PRODUCTION CAPABILITIES ── */
+    .mfg-production { background: var(--off-white); }
+    .mfg-prod-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: center;
+    }
+    .mfg-media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #0c1326;
+      box-shadow: 0 28px 60px rgba(11,26,61,0.18);
+      aspect-ratio: 4 / 3;
+    }
+    .mfg-media video,
+    .mfg-media img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .mfg-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      margin-top: 36px;
+      border-top: 1px solid rgba(11,26,61,0.1);
+      border-left: 1px solid rgba(11,26,61,0.1);
+    }
+    .mfg-stat {
+      padding: 28px 24px 30px;
+      border-right: 1px solid rgba(11,26,61,0.1);
+      border-bottom: 1px solid rgba(11,26,61,0.1);
+    }
+    .mfg-stat__num {
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      font-variant-numeric: tabular-nums;
+    }
+    .mfg-stat__num .mfg-stat__suffix { color: var(--yellow); }
+    .mfg-stat__label {
+      margin-top: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .mfg-stats-note {
+      margin-top: 18px;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--gray-mid);
+      opacity: 0.8;
+    }
+
+    /* ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ──
+       Background + design matched to the "What Sets Us Apart" USP section
+       (solid #475A82 with low-opacity yellow/amber ambient circles). */
+    .mfg-vendors { background: #475A82; }
+    .mfg-vendors .mfg-heading { color: var(--white); }
+    .mfg-vendors .mfg-sub { color: rgba(255,255,255,0.7); }
+    .mfg-vendor-head { text-align: center; margin-bottom: 48px; }
+    .mfg-vendor-head .mfg-sub { margin-left: auto; margin-right: auto; }
+    /* Single row: 6 slots fill the width on desktop; on narrow screens the
+       row scrolls horizontally instead of wrapping. */
+    .mfg-vendor-grid {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(150px, 1fr);
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      padding-bottom: 4px;
+    }
+    .mfg-vendor-slot { scroll-snap-align: start; }
+    .mfg-vendor-slot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      aspect-ratio: 16 / 9;
+      border: 1px dashed rgba(255,255,255,0.22);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.5);
+      transition: border-color 200ms ease, background 200ms ease, color 200ms ease;
+    }
+    .mfg-vendor-slot:hover {
+      border-color: rgba(244,180,0,0.5);
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+    }
+    .mfg-vendor-slot svg { opacity: 0.55; }
+    .mfg-vendor-slot span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── 4. QUALITY LABS ── */
+    .mfg-labs { background: var(--white); }
+    .mfg-labs__banner {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 21 / 9;
+      background: #0c1326;
+      box-shadow: 0 28px 60px rgba(11,26,61,0.18);
+      margin-bottom: 56px;
+    }
+    .mfg-labs__banner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .mfg-labs__banner-tag {
+      position: absolute; left: 0; bottom: 0; z-index: 2;
+      padding: 26px 30px;
+      background: linear-gradient(0deg, rgba(6,15,36,0.8), transparent);
+      width: 100%;
+      color: #fff;
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .mfg-lab-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .mfg-lab-card {
+      padding: 32px 26px 34px;
+      border: 1px solid rgba(11,26,61,0.1);
+      border-radius: var(--radius-lg);
+      background: var(--off-white);
+      transition: box-shadow 280ms var(--ease-out), transform 280ms var(--ease-out), border-color 200ms ease;
+    }
+    .mfg-lab-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(11,26,61,0.12);
+      border-color: rgba(244,180,0,0.45);
+    }
+    .mfg-lab-card__icon {
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px;
+      background: rgba(244,180,0,0.12);
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .mfg-lab-card__icon svg { width: 26px; height: 26px; }
+    .mfg-lab-card__title {
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      letter-spacing: -0.01em; margin-bottom: 10px;
+    }
+    .mfg-lab-card__text { font-size: 14px; line-height: 1.6; color: var(--gray-mid); }
+
+    /* ── 5. CERTIFICATIONS ── */
+    .mfg-certs { background: var(--off-white); text-align: center; }
+    .mfg-certs__label {
+      display: block;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: var(--space-sm);
+    }
+    .mfg-certs__heading {
+      font-size: clamp(24px, 3vw, 40px); font-weight: 700;
+      color: var(--navy); letter-spacing: -0.02em; line-height: 1.1;
+      margin-bottom: 56px;
+    }
+    .mfg-cert-row {
+      display: flex; flex-wrap: wrap;
+      align-items: center; justify-content: center;
+      gap: clamp(28px, 5vw, 72px);
+    }
+    .mfg-cert {
+      flex: 0 0 auto;
+      height: 148px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 4px;
+    }
+    .mfg-cert img {
+      max-height: 120px;      /* larger, uniform — normalizes mismatched logo sizes */
+      max-width: 210px;
+      width: auto; height: auto;
+      object-fit: contain;
+      /* Full colour at all times (no greyscale). Subtle scale on hover only. */
+      transition: transform 280ms var(--ease-out);
+    }
+    .mfg-cert:hover img,
+    .mfg-cert:focus-within img {
+      transform: scale(1.05);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1023px) {
+      .mfg-prod-grid { grid-template-columns: 1fr; }
+      .mfg-lab-grid { grid-template-columns: repeat(2, 1fr); }
+      .mfg-labs__banner { aspect-ratio: 16 / 9; }
+    }
+    @media (max-width: 559px) {
+      .mfg-stats { grid-template-columns: 1fr; }
+      .mfg-lab-grid { grid-template-columns: 1fr; }
+      .mfg-media { aspect-ratio: 3 / 2; }
+    }
+
+    /* ── Reduced motion: never hide, never animate ── */
+    @media (prefers-reduced-motion: reduce) {
+      .mfg-anim-on .mfg-reveal { opacity: 1 !important; transform: none !important; }
+      .mfg-cert img { transition: none; }
+      .mfg-lab-card, .mfg-vendor-slot { transition: none; }
+    }
+
+  </style>
+
+  <!-- GSAP core + ScrollTrigger (deferred, execute in order after DOM parse) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="assets/js/hero-sequence.js" defer></script>
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NAVBAR — fixed pill, floats above the hero canvas
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <nav class="isler-nav" aria-label="Primary navigation">
+    <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
+      <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India">
+    </a>
+    <div class="isler-nav__search" role="search">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/>
+        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="search" placeholder="Search products…" aria-label="Search products">
+    </div>
+    <ul class="isler-nav__links">
+      <li class="isler-nav__item has-mega" id="isler-products-item">
+        <a href="#" class="isler-nav__trigger" id="isler-products-trigger"
+           aria-haspopup="true" aria-expanded="false" aria-controls="isler-mega">
+          Categories
+          <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
+
+        <!-- Categories mega-menu: 3 grouped columns -->
+        <div class="isler-mega" id="isler-mega" role="dialog" aria-label="Categories navigation" aria-hidden="true">
+          <div class="isler-mega__inner">
+
+            <!-- Column 1 — Cooktops & Hobs (live links; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Cooktops &amp; Hobs</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link isler-mega__link--lead" href="built-in-hobs.html"><span class="isler-mega__thumb"><img src="assets/catalog/hobs/best/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Built-in Hobs</span></a></li>
+                <li><a class="isler-mega__link" href="gas-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/gas-cooktops/gas-cooktop-Domestic-3B.jpg" alt="" loading="lazy"></span><span>Gas Cooktops</span></a></li>
+                <li><a class="isler-mega__link" href="induction-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.png" alt="" loading="lazy"></span><span>Induction</span></a></li>
+                <li><a class="isler-mega__link" href="infrared-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/infrared/IS-AM1-Series-1001.png" alt="" loading="lazy"></span><span>Infrared</span></a></li>
+                <li><a class="isler-mega__link" href="hybrid-cooktops.html"><span class="isler-mega__thumb"><img src="assets/catalog/non-gas-cooktops/hybrid/IS-H2-Series-1001.png" alt="" loading="lazy"></span><span>Hybrid</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 — Chimneys (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Chimneys</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_t-shape_60_blackmatte_b_01-400x310.png" alt="" loading="lazy"></span><span>T-Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_curve_60_black-greymatte_a_05-400x310.png" alt="" loading="lazy"></span><span>Curve Shape</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.png" alt="" loading="lazy"></span><span>Inclined Shape</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3 — Ovens & Microwaves (inert; real product photos) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Ovens &amp; Microwaves</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/oven-gold-grande.jpg" alt="" loading="lazy"></span><span>Built-in Ovens</span></a></li>
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/microwave-silver-core.jpg" alt="" loading="lazy"></span><span>Built-in Microwave</span></a></li>
+              </ul>
+            </div>
+
+            <!-- Column 4 — Other Appliances (inert; real product photo) -->
+            <div class="isler-mega__col">
+              <p class="isler-mega__label">Other Appliances</p>
+              <ul class="isler-mega__list">
+                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/small-appliances-1.png" alt="" loading="lazy"></span><span>Small Appliances</span></a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO — 500vh scroll-driven 5-scene cinematic crossfade
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="hero-section" class="hero-section">
+    <div class="hero-sticky">
+
+      <!-- ── Cinematic scene images: 5 layers crossfaded by scroll ─────────── -->
+
+      <!-- Scene 1 — 0–20%: Wide establishing shot -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-01-establishing.jpg"
+             alt="Premium moody kitchen establishing shot">
+      </div>
+
+      <!-- Scene 2 — 20–40%: Chimney hero with under-cabinet lighting -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-02-chimney-hero.jpg"
+             alt="Isler chimney with dramatic under-cabinet lighting">
+      </div>
+
+      <!-- Scene 3 — 40–60%: Blue flames with brass knobs on marble -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-03-hob-closeup.jpg"
+             alt="Blue gas flames with brass knobs on marble surface">
+      </div>
+
+      <!-- Scene 4 — 60–80%: Glowing LED indicators on brushed metal -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-04-isler.jpg"
+             alt="Isler appliance detail">
+      </div>
+
+      <!-- Scene 5 — 80–100%: Wide luxury kitchen pullback -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-05-finale-pullback.jpg"
+             alt="Wide luxury kitchen with Isler appliances">
+      </div>
+
+      <!-- Dark gradient overlay — left-heavy for text legibility -->
+      <div class="hero-text-overlay" aria-hidden="true"></div>
+
+      <!-- ── Text scenes: 5 scenes driven by GSAP scroll progress ─────────── -->
+      <div class="hero-text-layer" aria-live="polite">
+
+        <!-- Scene 1 — 0–20%: Establishing -->
+        <div class="hero-scene">
+          <p class="hero-eyebrow">Premium Kitchen Appliances</p>
+          <h1 class="hero-headline">Built for the<br>Heart of Your Home</h1>
+        </div>
+
+        <!-- Scene 2 — 20–40%: Chimney / silence -->
+        <div class="hero-scene">
+          <p class="hero-eyebrow">Engineered for Silence</p>
+          <p class="hero-headline">Whisper-Quiet<br>Operation</p>
+          <p class="hero-subhead">45 dB. The quietest in its class.</p>
+        </div>
+
+        <!-- Scene 3 — 40–60%: Hob / precision -->
+        <div class="hero-scene">
+          <p class="hero-eyebrow">Precision Cooking</p>
+          <p class="hero-headline">Full Brass.<br>Full Power.</p>
+          <p class="hero-subhead">Spill-proof burners engineered to last.</p>
+        </div>
+
+        <!-- Scene 4 — 60–80%: Control panel / IoT -->
+        <div class="hero-scene">
+          <p class="hero-eyebrow">Intelligent by Design</p>
+          <p class="hero-headline">IoT-Enabled<br>Smart Control</p>
+          <p class="hero-subhead">Adapts to your cooking. Automatically.</p>
+        </div>
+
+        <!-- Scene 5 — 80–100%: Finale with CTA -->
+        <div class="hero-scene scene-cta">
+          <p class="hero-eyebrow">The Complete Experience</p>
+          <p class="hero-headline">Crafted for the<br>Modern Kitchen</p>
+          <a href="#range" class="hero-cta-btn">Explore Products</a>
+        </div>
+
+      </div>
+
+      <!-- Scroll nudge -->
+      <div id="scroll-hint" class="scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-hint-chevron"></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MANUFACTURING EXCELLENCE — B2B credibility block
+       Added BELOW the scroll hero. Independent of the hero's GSAP logic.
+       Reveal/counter animation handled by the #mfg inline script near </body>.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div id="mfg">
+
+    <!-- ── 1. SECTION OPENER (background video) ─────────────────────────── -->
+    <section class="mfg-section mfg-opener mfg-pad" aria-label="Manufacturing excellence">
+      <!-- Compressed factory-exterior clip; muted+autoplay+loop+playsinline; poster avoids blank frame -->
+      <video class="mfg-opener__video" autoplay muted loop playsinline preload="metadata"
+             poster="assets/images/manufacturing/factory-floor.jpg" aria-hidden="true" tabindex="-1"
+             disablepictureinpicture>
+        <source src="assets/videos/factory-exterior.mp4" type="video/mp4">
+      </video>
+      <div class="mfg-opener__scrim" aria-hidden="true"></div>
+      <div class="mfg-inner">
+        <span class="mfg-eyebrow mfg-opener__eyebrow mfg-reveal">Manufacturing Excellence</span>
+        <h2 class="mfg-opener__title mfg-reveal">Built in India,<br>Engineered for the World</h2>
+        <p class="mfg-opener__copy mfg-reveal">A vertically-integrated manufacturing base producing precision kitchen appliances at scale — the production capacity, supply-chain depth and quality systems global OEMs, distributors and retailers rely on.</p>
+      </div>
+    </section>
+
+    <!-- ── 2. PRODUCTION CAPABILITIES ───────────────────────────────────── -->
+    <section class="mfg-section mfg-production mfg-pad" aria-labelledby="mfg-prod-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
+      <div class="mfg-inner mfg-prod-grid">
+        <div class="mfg-media mfg-reveal">
+          <!-- Assembly-line clip; muted autoplay loop; production.jpg as poster -->
+          <video autoplay muted loop playsinline preload="none"
+                 poster="assets/images/manufacturing/production.jpg" aria-hidden="true" tabindex="-1"
+                 disablepictureinpicture>
+            <source src="assets/videos/assembly-line.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div>
+          <span class="mfg-eyebrow mfg-reveal">Production Capabilities</span>
+          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h">Scale that ships<br>on schedule</h2>
+          <p class="mfg-sub mfg-reveal">High-throughput lines, automated assembly and in-house tooling — engineered for consistent quality across large export and domestic volumes.</p>
+
+          <!-- ════════════════════════════════════════════════════════════
+               PLACEHOLDER STATS — Isler to replace.
+               Edit ONLY the data-count value (final number) and the text in
+               <span class="mfg-stat__suffix"> / label below. The counter
+               animates from 0 → data-count. data-prefix optional.
+          ════════════════════════════════════════════════════════════ -->
+          <div class="mfg-stats mfg-reveal">
+            <div class="mfg-stat">
+              <div class="mfg-stat__num" data-count="50000"><span class="mfg-stat__value">0</span></div>
+              <div class="mfg-stat__label">Units / Year</div>
+            </div>
+            <div class="mfg-stat">
+              <div class="mfg-stat__num" data-count="250000"><span class="mfg-stat__value">0</span></div>
+              <div class="mfg-stat__label">sq.ft Facility</div>
+            </div>
+            <div class="mfg-stat">
+              <div class="mfg-stat__num" data-count="12"><span class="mfg-stat__value">0</span></div>
+              <div class="mfg-stat__label">Production Lines</div>
+            </div>
+            <div class="mfg-stat">
+              <div class="mfg-stat__num" data-count="15"><span class="mfg-stat__value">0</span><span class="mfg-stat__suffix">+</span></div>
+              <div class="mfg-stat__label">Years of Manufacturing</div>
+            </div>
+          </div>
+          <p class="mfg-stats-note mfg-reveal">Figures shown are placeholders — to be confirmed by Isler.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ───────────────────────────── -->
+    <section class="mfg-section mfg-vendors mfg-pad" aria-labelledby="mfg-vendor-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.07);top:40%;left:2%;"></div>
+      <div class="mfg-inner">
+        <div class="mfg-vendor-head">
+          <span class="mfg-eyebrow mfg-reveal">Supply Chain Strength</span>
+          <h2 class="mfg-heading mfg-reveal" id="mfg-vendor-h">Trusted Vendor Network</h2>
+          <p class="mfg-sub mfg-reveal">A resilient base of audited component and material partners — securing quality, capacity and continuity across every build.</p>
+        </div>
+        <!-- PLACEHOLDER vendor logo slots — Isler to populate with approved partner logos.
+             Do NOT add third-party brand logos without authorisation. -->
+        <!-- 6 slots = one clean row (scrolls horizontally on narrow screens). -->
+        <div class="mfg-vendor-grid mfg-reveal">
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Vendor Logo</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 4. QUALITY LABS ──────────────────────────────────────────────── -->
+    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="mfg-inner">
+        <div class="mfg-labs__banner mfg-reveal">
+          <!-- Lab-test clip; muted autoplay loop; poster for CLS -->
+          <video autoplay muted loop playsinline preload="none"
+                 poster="assets/images/manufacturing/factory-floor.jpg" aria-hidden="true" tabindex="-1"
+                 disablepictureinpicture>
+            <source src="assets/videos/lab-test.mp4" type="video/mp4">
+          </video>
+          <div class="mfg-labs__banner-tag">In-house testing under controlled conditions</div>
+        </div>
+
+        <span class="mfg-eyebrow mfg-reveal">Quality Labs</span>
+        <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:48px;">Every unit, validated</h2>
+
+        <div class="mfg-lab-grid">
+          <div class="mfg-lab-card mfg-reveal">
+            <div class="mfg-lab-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"/><path d="M12 7v5l3 2"/></svg></div>
+            <h3 class="mfg-lab-card__title">Endurance Testing</h3>
+            <p class="mfg-lab-card__text">Repeated ignition, knob and load cycles simulate years of real-world use before approval.</p>
+          </div>
+          <div class="mfg-lab-card mfg-reveal">
+            <div class="mfg-lab-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2s5 4 5 9a5 5 0 0 1-10 0c0-1.5.5-2.8 1-3.5C8.5 9 9 11 11 11c0-3 1-7 1-9z"/></svg></div>
+            <h3 class="mfg-lab-card__title">Flame Safety Testing</h3>
+            <p class="mfg-lab-card__text">Flame-failure response, burner stability and gas-safety thresholds verified to standard.</p>
+          </div>
+          <div class="mfg-lab-card mfg-reveal">
+            <div class="mfg-lab-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v5l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 17l-5-9V3"/></svg></div>
+            <h3 class="mfg-lab-card__title">Material Quality Control</h3>
+            <p class="mfg-lab-card__text">Incoming brass, glass and steel checked for grade, thickness and finish consistency.</p>
+          </div>
+          <div class="mfg-lab-card mfg-reveal">
+            <div class="mfg-lab-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h3 class="mfg-lab-card__title">Precision Calibration</h3>
+            <p class="mfg-lab-card__text">Gas-flow, dimensional and alignment calibration ensures repeatable, spec-true output.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. CERTIFICATIONS ────────────────────────────────────────────── -->
+    <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="mfg-inner">
+        <span class="mfg-certs__label mfg-reveal">Our Certifications</span>
+        <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Compliance</h2>
+        <!-- Only display certifications actually held by Isler. Logos normalized to a
+             uniform height; full colour at all times. -->
+        <div class="mfg-cert-row mfg-reveal">
+          <span class="mfg-cert"><img src="assets/images/certifications/isi-mark.png" alt="ISI Mark certification" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/iso-9001.png" alt="ISO 9001 certified" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/iso-14001.png" alt="ISO 14001 certified" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/bis.png" alt="BIS — Bureau of Indian Standards" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/peso.png" alt="PESO certification" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/made-in-india.png" alt="Proudly Made in India" loading="lazy"></span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 2 — The Range
+       Product images + structure sourced from Isler-India-Revamp
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="range" class="range-section">
+    <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
+    <div class="section-header">
+      <span class="section-eyebrow">Isler's Range</span>
+      <h2 class="section-heading">Key Products Range</h2>
+    </div>
+
+    <div class="cat-grid-wrap">
+      <div class="cat-grid">
+
+        <!-- Large tile: Kitchen Chimney -->
+        <a href="#" class="cat-card cat-card--lg" aria-label="Kitchen Chimney">
+          <img class="cat-card__img"
+               src="assets/images/keyproduct-new.webp"
+               alt="Kitchen Chimney" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Kitchen Chimney</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Large tile: Built-in Hobs -->
+        <a href="#" class="cat-card cat-card--lg" aria-label="Built-in Hobs">
+          <img class="cat-card__img"
+               src="assets/images/keyproduct-builtin-hobs.jpg"
+               alt="Built-in Hobs" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Built-in Hobs</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Small tile: Hobtops -->
+        <a href="#" class="cat-card cat-card--sm" aria-label="Hobtops">
+          <img class="cat-card__img"
+               src="assets/images/keyproduct-hobtops.jpg"
+               alt="Hobtops" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Hobtops</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Small tile: Built-in Ovens -->
+        <a href="#" class="cat-card cat-card--sm" aria-label="Built-in Ovens">
+          <img class="cat-card__img"
+               src="assets/images/oven-gold-grande.jpg"
+               alt="Built-in Ovens" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Built-in Ovens</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Small tile: Built-in Microwave -->
+        <a href="#" class="cat-card cat-card--sm" aria-label="Built-in Microwave">
+          <img class="cat-card__img"
+               src="assets/images/microwave-silver-core.jpg"
+               alt="Built-in Microwave" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Built-in Microwave</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+        <!-- Small tile: Small Appliances -->
+        <a href="#" class="cat-card cat-card--sm" aria-label="Small Appliances">
+          <img class="cat-card__img"
+               src="assets/images/small-appliances-1.png"
+               alt="Small Appliances" loading="lazy">
+          <div class="cat-card__overlay" aria-hidden="true"></div>
+          <div class="cat-card__content">
+            <span class="cat-card__name">Small Appliances</span>
+            <span class="cat-card__cta">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 3 — What Sets Us Apart (USP)
+       Content sourced verbatim from Isler-India-Revamp homepage
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="usp-section">
+    <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.07);top:40%;left:2%;"></div>
+    <div class="section-header">
+      <span class="section-eyebrow">Our USP</span>
+      <h2 class="section-heading">What Sets Us Apart?</h2>
+    </div>
+
+    <div class="usp-grid">
+
+      <article class="usp-card">
+        <span class="usp-card__num" aria-hidden="true"></span>
+        <h3 class="usp-card__title">Novel Design &amp; Innovations</h3>
+        <p class="usp-card__text">Our design team crafts innovative, user-centric kitchen appliances with a focus on aesthetics, material fusion, and sustainable, future-proof designs.</p>
+      </article>
+
+      <article class="usp-card">
+        <span class="usp-card__num" aria-hidden="true"></span>
+        <h3 class="usp-card__title">Accelerated NPD</h3>
+        <p class="usp-card__text">Our in-house advanced R&amp;D capabilities, combined with strategic partnerships with leading global companies, enable us to accelerate the development of innovative products for top kitchen appliance brands.</p>
+      </article>
+
+      <article class="usp-card">
+        <span class="usp-card__num" aria-hidden="true"></span>
+        <h3 class="usp-card__title">Advance Manufacturing Capabilities</h3>
+        <p class="usp-card__text">With a world-class manufacturing facility, we manufacture high-quality products, ensuring precision and reliability in every step of the process.</p>
+      </article>
+
+      <article class="usp-card">
+        <span class="usp-card__num" aria-hidden="true"></span>
+        <h3 class="usp-card__title">Technology-Led Operations</h3>
+        <p class="usp-card__text">Leveraging advanced technology for scalability, we ensure transparency and reliability for our customers through the Supply Network Control Tower (SNCT).</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 4 — Insights / Blog
+       Section + content sourced from Isler-India-Revamp homepage (BLOG SECTION).
+       Adapted to demo tokens: navy/yellow palette, demo section-header pattern,
+       Range-style card hover. Post links are # placeholders (post pages not in demo).
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="insights" class="blog-section">
+    <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+    <div class="section-header">
+      <span class="section-eyebrow">Insights</span>
+      <h2 class="section-heading">From the Isler Blog</h2>
+      <p class="section-sub">Industry perspectives and manufacturing innovations from our team</p>
+    </div>
+
+    <div class="blog-grid-wrap">
+      <div class="blog-grid">
+
+        <!-- Post 1 -->
+        <article class="blog-card">
+          <a href="#" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+            <div class="blog-card__media">
+              <img src="assets/images/blog-post-1-thumb.png"
+                   alt="Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions"
+                   loading="lazy" width="800" height="450">
+            </div>
+          </a>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Uncategorized</span>
+              <time class="blog-card__date" datetime="2024-10-09">October 9, 2024</time>
+            </div>
+            <h3 class="blog-card__title"><a href="#">Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions?</a></h3>
+            <p class="blog-card__excerpt">In recent years, India's kitchen appliance industry has experienced a major transformation driven by evolving consumer demands, rapid technological advancements, and disruptions in global supply chains.</p>
+            <a href="#" class="blog-card__cta" aria-label="Read more about localized manufacturing solutions">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="blog-card">
+          <a href="#" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+            <div class="blog-card__media">
+              <img src="assets/images/blog-post-2.png"
+                   alt="5 Reasons Why Isler India is Your Ideal Manufacturing Partner"
+                   loading="lazy" width="800" height="450">
+            </div>
+          </a>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">General</span>
+              <time class="blog-card__date" datetime="2024-09-14">September 14, 2024</time>
+            </div>
+            <h3 class="blog-card__title"><a href="#">5 Reasons Why Isler India is Your Ideal Manufacturing Partner</a></h3>
+            <p class="blog-card__excerpt">In today's competitive manufacturing landscape, staying compliant with BIS is not only a necessity but a mark of excellence. Here's why Isler India is your ideal partner.</p>
+            <a href="#" class="blog-card__cta" aria-label="Read more about Isler India as manufacturing partner">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="blog-card">
+          <a href="#" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+            <div class="blog-card__media">
+              <img src="assets/images/blog-post-3.png"
+                   alt="Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits"
+                   loading="lazy" width="800" height="450">
+            </div>
+          </a>
+          <div class="blog-card__body">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Smart Chimneys</span>
+              <time class="blog-card__date" datetime="2024-05-29">May 29, 2024</time>
+            </div>
+            <h3 class="blog-card__title"><a href="#">Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits</a></h3>
+            <p class="blog-card__excerpt">Isler India stands out as a beacon of innovation, offering state-of-the-art kitchen chimneys that blend functionality, aesthetics, and cutting-edge smart technology.</p>
+            <a href="#" class="blog-card__cta" aria-label="Read more about modern kitchen chimney innovations">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="blog-actions">
+        <a href="#" class="blog-view-all">View All Articles</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 5 — CTA Box
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section class="cta-box-section">
+    <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(244,180,0,0.18);top:-60px;left:-60px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(230,149,0,0.15);bottom:-50px;right:-50px;"></div>
+    <div class="cta-box">
+
+      <div class="cta-box__content">
+        <span class="cta-box__eyebrow">Get in Touch</span>
+        <h2 class="cta-box__heading">Ready to Transform<br>Your Kitchen?</h2>
+        <p class="cta-box__sub">Explore our product range or speak with our team.</p>
+      </div>
+
+      <div class="cta-box__actions">
+        <a href="#range" class="cta-box__btn cta-box__btn--primary">View Our Products</a>
+        <a href="mailto:info@islerindia.com" class="cta-box__btn cta-box__btn--secondary">Contact Us</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER — 4-column footer
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer" id="site-footer-el">
+
+    <!-- ── Tier 1: 4-column grid ── -->
+    <div class="footer__main">
+      <div class="footer__main-inner">
+
+        <!-- Col 1: Products -->
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Products
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="#range">Kitchen Chimney</a></li>
+            <li><a href="#range">Built-in Hobs</a></li>
+            <li><a href="#range">Hobtops</a></li>
+            <li><a href="#range">Built-in Ovens</a></li>
+            <li><a href="#range">Built-in Microwave</a></li>
+            <li><a href="#range">Small Appliances</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Company -->
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Company
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="about.html">About Isler</a></li>
+            <li><a href="career.html">Career</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="#">Blog <span style="display:block;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);opacity:0.6;margin-top:2px;">Coming soon</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Resources -->
+        <div class="footer__col" data-footer-accordion>
+          <h3 class="footer__col-heading">
+            Resources
+            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </h3>
+          <ul class="footer__col-links">
+            <li><a href="#">Brochures</a></li>
+            <li><a href="#">Certifications</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Get in Touch (no accordion) -->
+        <div class="footer__col footer__col--contact">
+          <h3 class="footer__col-heading">Get in Touch</h3>
+          <div class="footer__contact-block">
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202</span>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+919717737964">+91 971 7737 964</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:info@islerindia.com">info@islerindia.com</a>
+            </div>
+            <div class="footer__contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
+            </div>
+          </div>
+
+          <div class="footer__newsletter">
+            <p class="footer__newsletter-heading">Stay Updated</p>
+            <form class="footer__newsletter-form" novalidate>
+              <div class="footer__newsletter-row">
+                <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email for newsletter">
+                <button type="submit" aria-label="Subscribe">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Tier 2: Bottom bar ── -->
+    <div class="footer__bottom">
+      <div class="footer__bottom-inner">
+
+        <a href="#" class="footer__bottom-logo" aria-label="Isler India — home">
+          <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India" height="32" loading="lazy" style="width:auto">
+        </a>
+
+        <div class="footer__bottom-copy">
+          <p>&copy; 2026 Isler India. All rights reserved.</p>
+          <p>Manufacturing excellence since 2018 &nbsp;&middot;&nbsp; ISO 9001:2015 | ISO 14001 Certified</p>
+        </div>
+
+        <div class="footer__bottom-right">
+          <nav class="footer__social-row" aria-label="Social media">
+            <a href="https://www.facebook.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://x.com/Islerindia" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/channel/UCxhMrjS6Fd1-sOlMz3YUBiA" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+          </nav>
+          <span class="footer__made-in-india">🇮🇳 Made in India</span>
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <script>
+    (function () {
+      function initFooterAccordion() {
+        if (window.innerWidth > 767) return;
+        document.querySelectorAll('[data-footer-accordion]').forEach(function (col) {
+          var heading = col.querySelector('.footer__col-heading');
+          if (!heading) return;
+          heading.addEventListener('click', function () { col.classList.toggle('is-open'); });
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFooterAccordion);
+      } else {
+        initFooterAccordion();
+      }
+    }());
+  </script>
+
+  <!-- Manufacturing Excellence — scroll-reveal + stat counters.
+       Self-contained IIFE scoped to #mfg. Reuses the GSAP/ScrollTrigger already
+       loaded for the hero but registers its OWN triggers — it never touches the
+       hero's timeline. Degrades gracefully: no GSAP or reduced-motion → content
+       is fully visible and counters show their final values immediately. -->
+  <script id="mfg-scroll">
+    (function () {
+      var section = document.getElementById('mfg');
+      if (!section) return;
+
+      function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+
+      var counters = Array.prototype.slice.call(section.querySelectorAll('.mfg-stat__num'));
+      function setFinal() {
+        counters.forEach(function (c) {
+          var v = c.querySelector('.mfg-stat__value');
+          if (v) v.textContent = fmt(parseFloat(c.getAttribute('data-count')) || 0);
+        });
+      }
+
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGSAP = window.gsap && window.ScrollTrigger;
+
+      // No animation path: show everything, set final numbers, done.
+      if (!hasGSAP || reduce) { setFinal(); return; }
+
+      gsap.registerPlugin(ScrollTrigger);
+      document.body.classList.add('mfg-anim-on');   // enables CSS hidden-initial state
+
+      // Staggered scroll-reveal — scoped to #mfg, independent of the hero.
+      var reveals = Array.prototype.slice.call(section.querySelectorAll('.mfg-reveal'));
+      ScrollTrigger.batch(reveals, {
+        start: 'top 85%',
+        once: true,
+        onEnter: function (els) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.08, overwrite: true });
+        }
+      });
+
+      // Animated stat counters — each fires once on enter.
+      counters.forEach(function (c) {
+        var val = c.querySelector('.mfg-stat__value');
+        var target = parseFloat(c.getAttribute('data-count')) || 0;
+        var obj = { n: 0 };
+        ScrollTrigger.create({
+          trigger: c, start: 'top 88%', once: true,
+          onEnter: function () {
+            gsap.to(obj, { n: target, duration: 1.6, ease: 'power2.out',
+              onUpdate: function () { val.textContent = fmt(obj.n); } });
+          }
+        });
+      });
+
+      // Perf: pause section videos while offscreen, resume when visible.
+      if ('IntersectionObserver' in window) {
+        var vo = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            var v = e.target;
+            if (e.isIntersecting) { if (v.paused) v.play().catch(function () {}); }
+            else if (!v.paused) { v.pause(); }
+          });
+        }, { threshold: 0.1 });
+        Array.prototype.slice.call(section.querySelectorAll('video')).forEach(function (v) { vo.observe(v); });
+      }
+    }());
+  </script>
+  <script src="assets/js/nav.js" defer></script>
+</body>
+</html>

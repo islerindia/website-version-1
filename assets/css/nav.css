@@ -1,0 +1,238 @@
+/* ════════════════════════════════════════════════════════════════════════
+   ISLER UNIFIED NAVBAR  —  shared site-wide
+   Floating glassmorphism pill (kept from the homepage aesthetic) with a
+   Havells-style grouped 3-column "Products" mega-menu. Navy/yellow, Supreme.
+   Applied to every page so the navbar is identical across the site.
+   ════════════════════════════════════════════════════════════════════════ */
+
+.isler-nav {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 13px 14px 13px 16px;
+  background: rgba(7, 17, 44, 0.25);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  min-width: min(1160px, calc(100vw - 40px));
+  font-family: var(--font);
+}
+
+/* ── Logo: plain navy mark (no backing pill, no drop-shadow) ── */
+.isler-nav__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.isler-nav__logo img {
+  height: 34px;
+  width: auto;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ── Search ── */
+.isler-nav__search {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+  padding: 0 14px 0 12px;
+  gap: 7px;
+  transition: background 150ms ease, border-color 150ms ease;
+}
+.isler-nav__search:focus-within { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 255, 255, 0.22); }
+.isler-nav__search svg { flex-shrink: 0; opacity: 0.45; }
+.isler-nav__search input {
+  background: transparent; border: none; outline: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px; font-family: inherit; width: 190px; padding: 8px 0; letter-spacing: 0.01em;
+}
+.isler-nav__search input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+/* ── Top-level links ── */
+.isler-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  list-style: none;
+  margin-block: 0;
+  padding: 0;
+}
+.isler-nav__item { position: static; }   /* lets the mega span the full pill width */
+
+.isler-nav__links a,
+.isler-nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  padding: 10px 22px;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 150ms ease, background 150ms ease;
+}
+.isler-nav__links a:hover,
+.isler-nav__trigger:hover { color: #fff; background: rgba(255, 255, 255, 0.09); }
+.isler-nav__chev { transition: transform 200ms ease; opacity: 0.7; }
+.isler-nav__item.is-open .isler-nav__chev { transform: rotate(180deg); }
+.isler-nav__item.is-open .isler-nav__trigger { color: #fff; background: rgba(255, 255, 255, 0.09); }
+
+.isler-nav__burger { display: none; }
+
+/* ════════════════════════════════  MEGA-MENU  ════════════════════════════ */
+.isler-mega {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  width: min(1320px, calc(100vw - 40px));        /* wider than the pill, centered */
+  /* Translucent DARK navy glass — keeps light text readable on white pages too */
+  background: rgba(11, 26, 61, 0.9);
+  -webkit-backdrop-filter: blur(26px) saturate(180%);
+  backdrop-filter: blur(26px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease, visibility 0ms 160ms;
+  z-index: 199;
+}
+.isler-mega.is-open {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); pointer-events: auto;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+/* invisible hover bridge across the gap between pill and panel */
+.isler-mega::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+
+.isler-mega__inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;   /* 4 columns of [thumbnail + label] rows */
+  gap: 30px;
+  padding: 28px 32px 30px;
+}
+.isler-mega__col { min-width: 0; }
+.isler-mega__label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--yellow);
+  margin: 0 0 12px;
+}
+
+/* Each item = small thumbnail/icon + label in a row (uniform across all columns) */
+.isler-mega__list { list-style: none; margin: 0; padding: 0; }
+.isler-mega__link {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 500; line-height: 1.3;
+  color: #ffffff;                    /* fully opaque white — clearly legible, never faded */
+  text-decoration: none;
+  padding: 6px 10px;
+  margin: 0 -10px;                    /* hover bg bleeds a touch without shifting text */
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color 140ms ease, background 140ms ease;
+}
+.isler-mega__link:hover,
+.isler-mega__link:focus-visible {
+  color: var(--yellow);
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+.isler-mega__link--lead { font-weight: 700; }          /* "Built-in Hobs" lead */
+.isler-mega__gap { margin-top: 8px; }                  /* breathing room before Gas Cooktops */
+
+/* Uniform 44px thumbnail box — holds a product photo OR a line icon */
+.isler-mega__thumb {
+  flex: 0 0 44px;
+  width: 44px; height: 44px;
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: border-color 140ms ease;
+}
+.isler-mega__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.isler-mega__thumb svg {        /* line icons — light/white stroke, uniform size */
+  width: 24px; height: 24px;
+  stroke: #ffffff; fill: none; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.isler-mega__link:hover .isler-mega__thumb { border-color: rgba(244, 180, 0, 0.55); }
+
+/* ════════════════════════════  RESPONSIVE  ════════════════════════════ */
+@media (max-width: 1023px) {
+  .isler-nav { gap: 14px; padding: 10px 10px 10px 14px; min-width: min(740px, calc(100vw - 28px)); }
+  .isler-nav__search { display: none; }
+  .isler-nav__logo img { height: 28px; }
+  .isler-nav__links a, .isler-nav__trigger { font-size: 13px; padding: 9px 16px; }
+}
+
+/* Mobile: collapse links into a burger-toggled vertical panel; mega stacks. */
+@media (max-width: 860px) {
+  .isler-nav { min-width: calc(100vw - 24px); gap: 8px; padding: 8px 8px 8px 12px; top: 10px; }
+
+  .isler-nav__links {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    background: rgba(7, 17, 44, 0.95);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 10px;
+    margin-left: 0;
+    display: none;
+    max-height: 76vh;
+    overflow-y: auto;
+  }
+  .isler-nav.is-open .isler-nav__links { display: flex; }
+  .isler-nav__links > li { width: 100%; }
+  .isler-nav__links a, .isler-nav__trigger { width: 100%; justify-content: space-between; color: #fff; text-shadow: none; }
+
+  .isler-nav__burger {
+    display: inline-flex; flex-direction: column; gap: 4px;
+    margin-left: auto; padding: 8px; background: none; border: none; cursor: pointer;
+  }
+  .isler-nav__burger span { width: 22px; height: 2px; background: #fff; border-radius: 2px; display: block; }
+
+  /* Mega renders inline (static) within the dark links panel, expanded when open */
+  .isler-mega {
+    position: static; left: auto; right: auto; width: auto; transform: none;
+    opacity: 1; visibility: visible; pointer-events: auto;
+    background: transparent; border: none; box-shadow: none;
+    display: none; margin-top: 6px; transition: none;
+  }
+  .isler-nav__item.is-open .isler-mega { display: block; }
+  .isler-mega::before { display: none; }
+  .isler-mega__inner { grid-template-columns: 1fr; gap: 18px; padding: 6px 4px; }
+  .isler-mega__link { color: #fff; }
+  .isler-mega__link:hover, .isler-mega__link:focus-visible { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .isler-nav__chev, .isler-mega, .isler-mega__link { transition: none; }
+}

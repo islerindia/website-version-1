@@ -1,0 +1,201 @@
+/* ─── Hero Section ──────────────────────────────────────────────────────────── */
+
+.hero-section {
+  position: relative;
+  height: 500vh;
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #0b1a2e;
+}
+
+/* ─── Cinematic scene image layers ──────────────────────────────────────────── */
+
+.hero-scene-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  will-change: opacity, transform;
+  overflow: hidden;
+}
+
+.hero-scene-img:first-child {
+  opacity: 1;
+}
+
+.hero-scene-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+}
+
+/* ─── Dark overlay for text legibility ──────────────────────────────────────── */
+
+.hero-text-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7)  0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.1) 80%
+  );
+  pointer-events: none;
+}
+
+/* ─── Text Layer ─────────────────────────────────────────────────────────────── */
+
+.hero-text-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: max(64px, 8vw);
+  padding-right: 52vw;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+/* First scene is visible before GSAP fires; .is-active is a JS-controllable
+   override (defensive: makes the no-JS / partial-load state correct on its own). */
+.hero-scene.is-active,
+.hero-scene:first-of-type {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-scene.scene-cta {
+  pointer-events: auto;
+}
+
+/* ─── Scene typography ───────────────────────────────────────────────────────── */
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: var(--space-sm);
+}
+
+.hero-headline {
+  font-size: clamp(36px, 5.5vw, 76px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.08;
+  max-width: 600px;
+  letter-spacing: -0.02em;
+}
+
+.hero-subhead {
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: var(--space-sm);
+  letter-spacing: 0.01em;
+}
+
+.hero-cta-btn {
+  display: inline-block;
+  margin-top: var(--space-md);
+  padding: 14px 40px;
+  background: var(--yellow);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: opacity 120ms ease, transform 120ms ease;
+  cursor: pointer;
+}
+
+.hero-cta-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+/* ─── Scroll hint ─────────────────────────────────────────────────────────────── */
+
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.scroll-hint-chevron {
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid rgba(255, 255, 255, 0.35);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  transform: rotate(45deg);
+  animation: chevronBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes chevronBounce {
+  0%, 100% { transform: rotate(45deg) translateY(0);   opacity: 0.6; }
+  50%       { transform: rotate(45deg) translateY(5px); opacity: 1;   }
+}
+
+/* ─── Mobile (< 768px) ────────────────────────────────────────────────────────── */
+
+@media (max-width: 767px) {
+  .hero-scene {
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-bottom: 15vh;
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+
+  /* Flip overlay gradient to come from the bottom on mobile */
+  .hero-text-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.75)  0%,
+      rgba(0, 0, 0, 0.3)  60%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .hero-subhead {
+    font-size: clamp(14px, 3.5vw, 18px);
+  }
+}
