@@ -994,7 +994,7 @@
       min-height: clamp(460px, 78vh, 760px);
       display: flex;
       align-items: center;
-      background: var(--navy-deep);
+      background: #0B1A3D;   /* on-brand navy loading state behind the video */
     }
     .mfg-opener__video,
     .mfg-opener__scrim {
@@ -1003,7 +1003,7 @@
       width: 100%;
       height: 100%;
     }
-    .mfg-opener__video { object-fit: cover; z-index: 0; }
+    .mfg-opener__video { object-fit: cover; z-index: 0; background-color: #0B1A3D; }
     .mfg-opener__scrim {
       z-index: 1;
       /* Lighter overlay — gradient concentrated behind the text (left + bottom)
@@ -1042,7 +1042,7 @@
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #0c1326;
+      background: #0B1A3D;   /* on-brand navy loading state behind the video */
       box-shadow: 0 28px 60px rgba(11,26,61,0.18);
       aspect-ratio: 4 / 3;
     }
@@ -1143,7 +1143,7 @@
       border-radius: var(--radius-lg);
       overflow: hidden;
       aspect-ratio: 21 / 9;
-      background: #0c1326;
+      background: #0B1A3D;   /* on-brand navy loading state behind the video */
       box-shadow: 0 28px 60px rgba(11,26,61,0.18);
       margin-bottom: 56px;
     }
@@ -1434,9 +1434,9 @@
 
     <!-- ── 1. SECTION OPENER (background video) ─────────────────────────── -->
     <section class="mfg-section mfg-opener mfg-pad" aria-label="Manufacturing excellence">
-      <!-- Compressed factory-exterior clip; muted+autoplay+loop+playsinline; poster avoids blank frame -->
-      <video class="mfg-opener__video" autoplay muted loop playsinline preload="metadata"
-             poster="assets/images/manufacturing/factory-floor.jpg" aria-hidden="true" tabindex="-1"
+      <!-- Compressed factory-exterior clip; muted+autoplay+loop+playsinline; preload=auto to start ASAP -->
+      <video class="mfg-opener__video" autoplay muted loop playsinline preload="auto"
+             aria-hidden="true" tabindex="-1"
              disablepictureinpicture>
         <source src="assets/videos/factory-exterior.mp4" type="video/mp4">
       </video>
@@ -1455,9 +1455,9 @@
       <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
       <div class="mfg-inner mfg-prod-grid">
         <div class="mfg-media mfg-reveal">
-          <!-- Assembly-line clip; muted autoplay loop; production.jpg as poster -->
-          <video autoplay muted loop playsinline preload="none"
-                 poster="assets/images/manufacturing/production.jpg" aria-hidden="true" tabindex="-1"
+          <!-- Assembly-line clip; muted autoplay loop; preload=metadata (starts fast when scrolled to) -->
+          <video autoplay muted loop playsinline preload="metadata"
+                 aria-hidden="true" tabindex="-1"
                  disablepictureinpicture>
             <source src="assets/videos/assembly-line.mp4" type="video/mp4">
           </video>
@@ -1527,9 +1527,9 @@
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
       <div class="mfg-inner">
         <div class="mfg-labs__banner mfg-reveal">
-          <!-- Lab-test clip; muted autoplay loop; poster for CLS -->
-          <video autoplay muted loop playsinline preload="none"
-                 poster="assets/images/manufacturing/factory-floor.jpg" aria-hidden="true" tabindex="-1"
+          <!-- Lab-test clip; muted autoplay loop; preload=metadata (starts fast when scrolled to) -->
+          <video autoplay muted loop playsinline preload="metadata"
+                 aria-hidden="true" tabindex="-1"
                  disablepictureinpicture>
             <source src="assets/videos/lab-test.mp4" type="video/mp4">
           </video>
