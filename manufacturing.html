@@ -3,15 +3,106 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IS HM1 Series — Isler India</title>
-  <link rel="icon" href="assets/images/favicon.png">
+  <meta name="description" content="Isler India's state-of-the-art manufacturing facility in Greater Noida — process-led, digital and quality-first operations built for scale, speed and precision.">
+  <meta name="theme-color" content="#0B1A3D">
+  <title>Manufacturing — Isler India</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
-  <link rel="stylesheet" href="assets/css/catalog.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <style>
+    .ambient-circle { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+
+    /* ── Manufacturing sections (styles reused from the homepage) ── */
+    .mfg-section { position: relative; overflow: clip; }
+    .mfg-pad { padding: var(--space-3xl) clamp(24px, 5vw, 96px); }
+    .mfg-inner { max-width: 1680px; margin: 0 auto; position: relative; z-index: 2; }
+
+    .mfg-eyebrow {
+      display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: var(--space-sm);
+    }
+    .mfg-heading {
+      font-size: clamp(28px, 3.5vw, 48px); font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.1; color: var(--navy);
+    }
+    .mfg-sub { margin-top: var(--space-sm); font-size: 16px; line-height: 1.65; color: var(--gray-mid); max-width: 62ch; }
+
+    /* 1. Hero opener — background video */
+    .mfg-opener { min-height: clamp(460px, 78vh, 720px); display: flex; align-items: center; background: #0B1A3D; }
+    .mfg-opener__video, .mfg-opener__scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .mfg-opener__video { object-fit: cover; z-index: 0; background-color: #0B1A3D; }
+    .mfg-opener__scrim {
+      z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(6,15,36,0.68) 0%, rgba(6,15,36,0.28) 45%, rgba(6,15,36,0) 100%),
+        linear-gradient(0deg, rgba(6,15,36,0.5) 0%, rgba(6,15,36,0) 50%);
+    }
+    .mfg-opener .mfg-inner { max-width: 1280px; }
+    .mfg-opener__eyebrow { color: var(--yellow); }
+    .mfg-opener__title {
+      font-size: clamp(32px, 5vw, 68px); font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.05; color: var(--white); max-width: 16ch;
+    }
+    .mfg-opener__copy {
+      margin-top: 22px; font-size: clamp(15px, 1.5vw, 19px); line-height: 1.6;
+      color: rgba(255,255,255,0.78); max-width: 66ch;
+    }
+
+    /* 2. Infrastructure */
+    .mfg-production { background: var(--off-white); }
+    .infra-box {
+      display: grid; grid-template-columns: 1fr; background: var(--white);
+      border: 1px solid rgba(11,26,61,0.14); border-left: 4px solid var(--yellow);
+      border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 18px 40px rgba(11,26,61,0.08);
+    }
+    .infra-box__cell {
+      position: relative; padding: 18px 24px; display: flex; flex-direction: column;
+      align-items: flex-start; justify-content: center; text-align: left;
+      border-top: 1px solid rgba(11,26,61,0.10);
+    }
+    .infra-box__cell:first-child { border-top: none; padding-top: 22px; }
+    .infra-box__figure {
+      font-size: clamp(30px, 3.4vw, 44px); font-weight: 800; line-height: 1.0;
+      letter-spacing: -0.02em; color: var(--navy); font-variant-numeric: tabular-nums;
+    }
+    .infra-box__text { font-size: clamp(14px, 1.4vw, 16px); font-weight: 600; line-height: 1.5; color: rgba(11,26,61,0.72); }
+
+    .mfg-prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .mfg-media {
+      position: relative; border-radius: var(--radius-lg); overflow: hidden; background: #0B1A3D;
+      box-shadow: 0 28px 60px rgba(11,26,61,0.18); aspect-ratio: 4 / 3;
+    }
+    .mfg-media video, .mfg-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* 3. Process-Led operation cards */
+    .op-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-top: 44px; }
+    .op-card {
+      padding: 30px 28px; border: 1px solid rgba(11,26,61,0.1); border-top: 3px solid var(--yellow);
+      border-radius: var(--radius-lg); background: var(--off-white);
+      transition: box-shadow 280ms var(--ease-out), transform 280ms var(--ease-out), border-color 200ms ease;
+    }
+    .op-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(11,26,61,0.12); }
+    .op-card p { font-size: 15px; line-height: 1.65; color: var(--gray-mid); }
+    .op-card strong { color: var(--navy); font-weight: 700; }
+
+    /* 4. Scaling band */
+    .mfg-scale { background: #475A82; text-align: center; }
+    .mfg-scale .mfg-heading { color: var(--white); }
+    .mfg-scale__copy {
+      margin: 20px auto 0; max-width: 72ch; font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.7; color: rgba(255,255,255,0.78);
+    }
+    .mfg-tagline { margin-top: 34px; font-size: clamp(20px, 2.6vw, 30px); font-weight: 700; letter-spacing: -0.01em; color: var(--white); }
+    .mfg-tagline span { color: var(--yellow); }
+
+    @media (max-width: 1023px) { .mfg-prod-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 559px) { .mfg-media { aspect-ratio: 3 / 2; } }
+  </style>
 </head>
-<body class="cat-page">
+<body>
   <nav class="isler-nav" aria-label="Primary navigation">
     <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
       <img src="assets/images/newlogo-removebg-preview.png" alt="Isler India">
@@ -86,32 +177,71 @@
     </ul>
     <button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
-<main class="pd"><div class="cat-wrap">
-    <nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="hybrid-cooktops.html">Hybrid Cooktops</a><span>/</span>IS HM1 Series</nav>
-    <div class="pd__layout">
-      <div class="pd__gallery"><img id="pd-img" src="assets/catalog/non-gas-cooktops/hybrid/IS-HM1-Series-1001.png" alt="IS HM1 Series"></div>
-      <div class="pd__info">
-        <p class="pd__eyebrow">Cooking · Hybrid Cooktops</p>
-        <h1 class="pd__title">IS HM1 Series</h1>
-        <p style="margin:-6px 0 16px;font-size:13px;color:var(--gray-mid);line-height:1.5;">Working model confirmed in Isler’s range — marketing name to be finalised.</p>
-        <p class="pd__code" id="pd-code"></p>
-        <div class="pd__price" id="pd-price"></div>
-        <div class="pd__variants"><p class="pd__variants-label">Configuration</p><div class="pd__variant-btns"><button class="pd__variant">4 Burner · 90 cm</button><button class="pd__variant">3 Burner · 60 cm</button></div></div>
-        <div class="pd__highlights" id="pd-highlights"></div>
-        <div class="pd__cta">
-          <a class="pd__btn pd__btn--primary" href="contact.html">Enquire</a>
-          <a class="pd__btn pd__btn--secondary" href="contact.html">Contact Us</a>
+
+  <!-- ── 1. HERO ── -->
+  <section class="mfg-section mfg-opener mfg-pad" aria-label="Manufacturing">
+    <video class="mfg-opener__video" autoplay muted loop playsinline preload="auto"
+           aria-hidden="true" tabindex="-1" disablepictureinpicture>
+      <source src="assets/videos/factory-exterior.mp4" type="video/mp4">
+    </video>
+    <div class="mfg-opener__scrim" aria-hidden="true"></div>
+    <div class="mfg-inner">
+      <span class="mfg-eyebrow mfg-opener__eyebrow">Manufacturing</span>
+      <h1 class="mfg-opener__title">A State-of-the-Art Facility Built for Scale, Speed, and Precision</h1>
+      <p class="mfg-opener__copy">Isler&rsquo;s manufacturing facility in Greater Noida was inaugurated by Shri Sanjiv Singh, Joint Secretary, DPIIT, Ministry of Commerce and Industry &mdash; an event covered by more than 30 media channels. Isler was also featured by the Hon&rsquo;ble Union Minister of Commerce &amp; Industry, Mr. Piyush Goyal, in recognition of its contribution to India&rsquo;s manufacturing journey.</p>
+    </div>
+  </section>
+
+  <!-- ── 2. INFRASTRUCTURE AT A GLANCE ── -->
+  <section class="mfg-section mfg-production mfg-pad" aria-labelledby="mfg-infra-h" style="padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(72px,9vw,120px);">
+    <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+    <div class="mfg-inner">
+      <h2 class="mfg-heading" id="mfg-infra-h">Infrastructure at a Glance</h2>
+      <div class="mfg-prod-grid" style="margin-top:clamp(32px,4vw,48px);">
+        <div class="mfg-media">
+          <video autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+            <source src="assets/videos/assembly-line.mp4" type="video/mp4">
+          </video>
         </div>
-        <p class="pd__b2b">Isler is a B2B manufacturer — no online checkout. Prices shown are indicative; burners, knobs, finishes and glass options are customizable on bulk orders. Reach out for a quotation.</p>
+        <div>
+          <!-- Facility "at a glance" data box (client content, verbatim) -->
+          <div class="infra-box">
+            <div class="infra-box__cell"><span class="infra-box__figure">30,000 sq. ft.</span></div>
+            <div class="infra-box__cell"><span class="infra-box__text">Assembly, Warehousing, Quality Labs, NPD</span></div>
+            <div class="infra-box__cell"><span class="infra-box__text">Integrated Facility</span></div>
+          </div>
+          <p class="mfg-sub" style="max-width:none;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof &mdash; enabling faster iteration from design to dispatch.</p>
+        </div>
       </div>
     </div>
-  </div>
-  <section class="pd__specs"><div class="cat-wrap">
-    <h2 class="pd__specs-title">Specifications</h2>
-    <table class="pd__spec-table"><tbody id="pd-spec-rows"></tbody></table>
-  </div></section>
-  </main>
-  <script>window.PRODUCT = {"variants": [{"code": "IS HM1 Series 1001", "label": "4 Burner · 90 cm", "img": "assets/catalog/non-gas-cooktops/hybrid/IS-HM1-Series-1001.png", "price": null, "specs": [["Number of Burners", "4"], ["Glass Length (cm)", "90"], ["Burner System", "Fully Sealed"], ["Flame Type", "Direct Flame"], ["Burner Material", "Full Brass Burners"], ["Burner Coated", "Yes"], ["Wok Burner", "1 x 3 kW"], ["Mini Triple Ring", "1 x 1.8 kW"], ["Dual Ring", "1 x 1 kW"], ["Flame Failure Device (FFD)", "Yes"], ["Ignition", "AC"], ["Pan Support Material", "Cast Iron Pan Support with semi- Flame Guard"], ["Pan Support Shape", "Round"], ["Drip Tray Material", "Matte Enamel"], ["Drip Tray Shape", "Round"], ["Knob Material", "Premium Metal Knobs"], ["Glass Length (mm)", "874"], ["Glass Width (mm)", "510"], ["Glass Thickness (mm)", "8"], ["Glass Material", "Tempered Glass + ceramic glass plate"], ["Glass Finish", "Black"], ["Cutout Length (mm)", "840"], ["Cutout Width (mm)", "480"], ["Pan Support Options", "Square"], ["Burner Customizable", "Yes"]], "highlights": [["Burner Material", "Full Brass Burners"], ["Ignition", "AC"], ["Flame Failure Device (FFD)", "Yes"], ["Glass Material", "Tempered Glass + ceramic glass plate"]]}, {"code": "IS HM1 Series 1002", "label": "3 Burner · 60 cm", "img": "assets/catalog/non-gas-cooktops/hybrid/IS-HM1-Series-1002.png", "price": null, "specs": [["Number of Burners", "3"], ["Glass Length (cm)", "60"], ["Burner System", "Fully Sealed"], ["Flame Type", "Direct Flame"], ["Burner Material", "Full Brass Burners"], ["Burner Coated", "Yes"], ["Wok Burner", "1 x 3.4 kW"], ["Mini Triple Ring", "1 x 1.8 kW"], ["Dual Ring", "1 x 1 kW"], ["Flame Failure Device (FFD)", "Yes"], ["Ignition", "AC"], ["Pan Support Material", "Cast Iron Pan Support with semi- Flame Guard"], ["Pan Support Shape", "Round"], ["Drip Tray Material", "Matte Enamel"], ["Drip Tray Shape", "Round"], ["Knob Material", "Premium Metal Knobs"], ["Glass Length (mm)", "585"], ["Glass Width (mm)", "510"], ["Glass Thickness (mm)", "8"], ["Glass Material", "Tempered Glass + ceramic glass plate"], ["Glass Finish", "Black"], ["Cutout Length (mm)", "560"], ["Cutout Width (mm)", "480"], ["Pan Support Options", "Square"], ["Burner Customizable", "Yes"]], "highlights": [["Burner Material", "Full Brass Burners"], ["Ignition", "AC"], ["Flame Failure Device (FFD)", "Yes"], ["Glass Material", "Tempered Glass + ceramic glass plate"]]}]};</script>
+  </section>
+
+  <!-- ── 3. PROCESS-LED, DIGITAL & QUALITY-FIRST OPERATIONS ── -->
+  <section class="mfg-section mfg-pad" aria-labelledby="mfg-ops-h" style="background:var(--white);padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(72px,9vw,120px);">
+    <div class="mfg-inner">
+      <h2 class="mfg-heading" id="mfg-ops-h">Process-Led, Digital &amp; Quality-First Operations</h2>
+      <div class="op-grid">
+        <div class="op-card"><p><strong>World-Class Manufacturing Organization</strong> &mdash; a structured, role-driven organization with KPI-led digital manufacturing, built to global standards.</p></div>
+        <div class="op-card"><p><strong>Process Excellence</strong> &mdash; QMS-led operations, ISO 9001:2015 and ISO 14001:2015 compliant, with standardized workflows across 13+ processes, 25+ sub-processes, and 130+ templates.</p></div>
+        <div class="op-card"><p><strong>ERP &amp; Data Backbone</strong> &mdash; end-to-end operations on Odoo ERP, covering everything from BOM definition and purchase orders to quality checks, dispatch, and invoicing, with real-time data capture and visibility.</p></div>
+        <div class="op-card"><p><strong>Supply Network Control Tower (SNCT)</strong> &mdash; a trigger-based system for real-time exception detection, root cause analysis, and corrective action tracking across the supply chain &mdash; giving our partners full visibility from plan to delivery.</p></div>
+        <div class="op-card"><p><strong>Digital Shopfloor</strong> &mdash; a live shopfloor control tower tracking manpower, work-in-progress, and dispatch status in real time, supported by standardized digital work instructions for consistent, skill-independent execution.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. SCALING FOR THE FUTURE ── -->
+  <section class="mfg-section mfg-scale mfg-pad" aria-labelledby="mfg-scale-h" style="padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(72px,9vw,120px);">
+    <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
+    <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
+    <div class="mfg-inner">
+      <h2 class="mfg-heading" id="mfg-scale-h">Scaling for the Future</h2>
+      <p class="mfg-scale__copy">We are continuing to expand our backward integration capabilities and manufacturing capacity to meet growing global demand &mdash; building toward a long-term ambition of 1 million units per year, with planned investment in additional facilities and deeper localization of components across our product range.</p>
+      <p class="mfg-tagline">Innovation. Speed. Trust. <span>That&rsquo;s Isler.</span></p>
+    </div>
+  </section>
+
   <!-- ═══ FOOTER (revamp2 4-column, reused) ═══ -->
   <footer class="site-footer" id="site-footer-el">
 
@@ -177,7 +307,7 @@
             </div>
             <div class="footer__contact-item">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
+              <span>Mon&ndash;Sat, 9:00 AM &ndash; 6:00 PM</span>
             </div>
           </div>
 
@@ -234,7 +364,6 @@
     </div>
 
   </footer>
-  <script src="assets/js/catalog.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
 </body>
 </html>
