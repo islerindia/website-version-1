@@ -127,7 +127,7 @@
 
 .isler-mega__inner {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;   /* 4 columns of [thumbnail + label] rows */
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;   /* 5 columns of [thumbnail + label] rows */
   gap: 30px;
   padding: 28px 32px 30px;
 }
@@ -160,18 +160,25 @@
 .isler-mega__link--lead { font-weight: 700; }          /* "Built-in Hobs" lead */
 .isler-mega__gap { margin-top: 8px; }                  /* breathing room before Gas Cooktops */
 
-/* Uniform 44px thumbnail box — holds a product photo OR a line icon */
+/* Uniform 44px thumbnail box — holds a product photo OR a line icon.
+   Every tile is the SAME size + SAME light background so white-bg and
+   transparent-bg thumbnails read consistently on the navy panel. */
 .isler-mega__thumb {
   flex: 0 0 44px;
   width: 44px; height: 44px;
-  border-radius: 9px;
+  border-radius: 8px;
   overflow: hidden;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #eef0f2;                       /* uniform light tile for all thumbs */
+  border: 1px solid rgba(255, 255, 255, 0.16);
   transition: border-color 140ms ease;
 }
-.isler-mega__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.isler-mega__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;                          /* fill the tile, no stretch */
+  object-position: center;                    /* centered crop */
+  display: block;
+}
 .isler-mega__thumb svg {        /* line icons — light/white stroke, uniform size */
   width: 24px; height: 24px;
   stroke: #ffffff; fill: none; stroke-width: 1.6;
