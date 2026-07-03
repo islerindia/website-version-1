@@ -116,12 +116,15 @@
     .page-section { position: relative; padding: clamp(56px, 8vw, 110px) 0; overflow: clip; }
     .bg-white { background: var(--white); }
     .bg-offwhite { background: var(--off-white); }
-    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
-    .h2 { font-size: clamp(26px, 3.2vw, 40px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
-    .body-copy { font-size: 16px; color: #55606E; line-height: 1.7; margin-bottom: 18px; }
+    /* Navy treatment matching the homepage USP / vendors sections (#475A82). */
+    .bg-navy { background: #475A82; }
+    .bg-navy .body-copy { color: rgba(255,255,255,0.82); }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
+    .h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
+    .body-copy { font-size: 17.5px; color: #55606E; line-height: 1.7; margin-bottom: 20px; }
     .section-head { text-align: center; max-width: 660px; margin: 0 auto clamp(40px, 5vw, 60px); position: relative; z-index: 1; }
     .section-head .h2 { margin-top: 6px; }
-    .section-head p { color: #55606E; font-size: 16px; line-height: 1.7; margin-top: 14px; }
+    .section-head p { color: #55606E; font-size: 17px; line-height: 1.7; margin-top: 14px; }
 
     /* Page hero */
     .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 64px; overflow: hidden; background: var(--navy); }
@@ -134,20 +137,20 @@
     .page-hero__breadcrumb-sep { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); display: inline-block; }
     .page-hero__eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
     .page-hero__title { font-size: clamp(30px, 5vw, 54px); font-weight: 700; color: #fff; line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
-    .page-hero__desc { font-size: clamp(15px, 1.5vw, 18px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
+    .page-hero__desc { font-size: clamp(16px, 1.6vw, 19px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
 
     /* About */
-    .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: center; position: relative; z-index: 1; }
+    .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: start; position: relative; z-index: 1; }
     .about-img { border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(11,26,61,0.16); }
     .about-img img { width: 100%; height: 100%; object-fit: cover; }
     .about-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin-top: 28px; }
     .about-bullet { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--navy); font-size: 14.5px; }
     .about-bullet::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); flex-shrink: 0; }
-    .vm-card { background: var(--off-white); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 22px; margin-top: 24px; }
+    .vm-card { background: var(--off-white); border-radius: 20px; padding: clamp(28px, 3vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; margin-top: clamp(36px, 5vw, 56px); }
     .vm-item { border-left: 3px solid var(--yellow); padding-left: 20px; }
     .vm-item--mission { border-left-color: #2BB3A3; }
-    .vm-item__label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2BB3A3; margin-bottom: 8px; }
-    .vm-item__text { font-size: 16px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2BB3A3; margin-bottom: 8px; }
+    .vm-item__text { font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.45; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .stat { background: var(--off-white); border-radius: 18px; padding: 36px 28px; text-align: center; }
     .stat__num { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--yellow); line-height: 1; }
@@ -290,6 +293,7 @@
 
     @media (max-width: 900px) {
       .about-split { grid-template-columns: 1fr; }
+      .vm-card { grid-template-columns: 1fr; }
     }
     @media (max-width: 560px) {
       .about-bullets { grid-template-columns: 1fr; }
@@ -343,9 +347,9 @@
             <div class="isler-mega__col">
               <p class="isler-mega__label">Chimneys</p>
               <ul class="isler-mega__list">
-                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_t-shape_60_blackmatte_b_01-400x310.png" alt="" loading="lazy"></span><span>T-Shape</span></a></li>
-                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_curve_60_black-greymatte_a_05-400x310.png" alt="" loading="lazy"></span><span>Curve Shape</span></a></li>
-                <li><a class="isler-mega__link" href="#"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.png" alt="" loading="lazy"></span><span>Inclined Shape</span></a></li>
+                <li><a class="isler-mega__link" href="kitchen-chimney-t-shape.html"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_t-shape_60_blackmatte_b_01-400x310.png" alt="" loading="lazy"></span><span>T-Shape</span></a></li>
+                <li><a class="isler-mega__link" href="kitchen-chimney-curve.html"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_curve_60_black-greymatte_a_05-400x310.png" alt="" loading="lazy"></span><span>Curve Shape</span></a></li>
+                <li><a class="isler-mega__link" href="kitchen-chimney-inclined.html"><span class="isler-mega__thumb"><img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.png" alt="" loading="lazy"></span><span>Inclined Shape</span></a></li>
               </ul>
             </div>
 
@@ -388,88 +392,64 @@
           <span class="page-hero__breadcrumb-sep" aria-hidden="true"></span>
           <span aria-current="page">About Us</span>
         </nav>
-        <span class="page-hero__eyebrow">About Isler India</span>
-        <h1 class="page-hero__title" id="page-title">Empowering Brand Innovation</h1>
-        <p class="page-hero__desc">India's first design-focused solutions company specializing in kitchen appliance manufacturing for various brands.</p>
+        <span class="page-hero__eyebrow">About Us</span>
+        <h1 class="page-hero__title" id="page-title">India’s Design-Led Manufacturing Partner for Global Appliance Brands</h1>
+        <p class="page-hero__desc">Empowering Brand Innovation is at the heart of everything we do at Isler. We break the mould in the appliance industry by putting bold design and cutting-edge innovation first — building the products that help leading kitchen appliance brands win in the market.</p>
       </div>
     </section>
 
     <!-- WHO WE ARE -->
-    <section class="page-section bg-white" aria-labelledby="about-heading">
+    <section class="page-section bg-white" aria-label="Who We Are">
       <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(244,180,0,0.16);top:-40px;right:-60px;"></div>
       <div class="container">
         <div class="about-split">
           <div>
             <span class="eyebrow">Who We Are</span>
-            <h2 class="h2" id="about-heading">Your Comprehensive Design to Deliver Manufacturing Partner</h2>
-            <p class="body-copy" style="margin-top:24px;">We challenge the status quo in the kitchen appliance industry by prioritizing design and innovation for leading brands.</p>
-            <p class="body-copy">Isler is the country's first design-focused solutions company specializing in kitchen appliance manufacturing for various brands. Our diverse product portfolio includes kitchen chimneys, built-in hobs, cooktops, as well as tablets, OTGs, microwaves, and dishwashers.</p>
-            <p class="body-copy">Equipped with in-house design, R&amp;D team, state-of-the-art-factory, and strong global partnerships, we expedite new product development. We focus on localizing essential components to foster innovation and streamline the development process, utilizing our expertise in forging, casting, machining, rolling, extrusion, and fabrication. By leveraging our advanced technology, we provide transparency and reliability to our clients through Supply Network Control Tower (SNCT) platform.</p>
-            <div class="about-bullets">
-              <div class="about-bullet">Accelerated NPD</div>
-              <div class="about-bullet">End-to-end Transparency</div>
-              <div class="about-bullet">Localized Manufacturing</div>
-              <div class="about-bullet">On-time Delivery</div>
-            </div>
+            <p class="body-copy" style="margin-top:24px;">Isler is India’s pioneering design-focused solutions company for kitchen and home appliances. We design and develop a comprehensive range of large and small domestic appliances in one consistent design language — chimneys, built-in hobs, cooktops, ovens, microwaves, dishwashers, air fryers, coffee machines, toasters, air purifiers, vacuum cleaners and more — tailored for the world’s top brands.</p>
+            <p class="body-copy">We are also the only manufacturing company in India to offer a Quatro series of kitchen appliances — Chimney, Built-in Hob, Microwave and Oven — each thoughtfully designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
           </div>
-          <div>
-            <div class="about-img">
-              <img src="assets/images/about-who-we-are.jpg" alt="Isler India team at work" loading="lazy" width="800" height="600">
-            </div>
-            <div class="vm-card">
-              <div class="vm-item">
-                <p class="vm-item__label">Our Vision</p>
-                <p class="vm-item__text">To become India's biggest kitchen appliances manufacturer, developing products for India and the world.</p>
-              </div>
-              <div class="vm-item vm-item--mission">
-                <p class="vm-item__label">Our Mission</p>
-                <p class="vm-item__text">A design-led, accelerated new product development company with technology-driven operations.</p>
-              </div>
-            </div>
+          <div class="about-img">
+            <img src="assets/images/about-who-we-are.jpg" alt="Isler India team at work" loading="lazy" width="800" height="600">
+          </div>
+        </div>
+        <div class="vm-card">
+          <div class="vm-item">
+            <p class="vm-item__label">Our Vision</p>
+            <p class="vm-item__text">To become India’s best Electronics and Electrical appliances manufacturer, developing products for both the domestic and global market — with an ambition to produce 1 million units per year by 2030.</p>
+          </div>
+          <div class="vm-item vm-item--mission">
+            <p class="vm-item__label">Our Mission</p>
+            <p class="vm-item__text">A design-led, accelerated new product development company with technology-driven operations — innovating for excellence, and delivering elegant, reliable appliances.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- NEXT-GEN -->
-    <section class="page-section bg-offwhite" aria-labelledby="smart-heading">
-      <div class="container">
-        <div class="about-split">
-          <div>
-            <span class="eyebrow">Next-Gen</span>
-            <h2 class="h2" id="smart-heading">Elevating Brands with Next-Gen Smart Kitchen Appliances</h2>
-            <p class="body-copy" style="margin-top:24px;">At Isler, we are dedicated to transforming the kitchen appliance landscape by providing brands with next-generation smart solutions.</p>
-            <p class="body-copy" style="margin-bottom:0;">Our smart kitchen appliances come equipped with features like smart displays, voice control, heat, smoke, and AQI sensors, ensuring an exceptional user experience. By prioritizing energy efficiency and noise cancellation, we help brands align with modern consumer demands for sustainability and comfort.</p>
-          </div>
-          <div class="stats-grid">
-            <div class="stat">
-              <div class="stat__num">50+</div>
-              <div class="stat__label">Designs</div>
-            </div>
-            <div class="stat">
-              <div class="stat__num">99%</div>
-              <div class="stat__label">Client Satisfaction</div>
-            </div>
-          </div>
-        </div>
+    <!-- HOW WE WORK -->
+    <section class="page-section bg-navy" aria-label="How We Work">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.12);top:40%;right:6%;"></div>
+      <div class="container" style="position:relative;z-index:1;">
+        <span class="eyebrow">How We Work</span>
+        <p class="body-copy" style="margin-top:24px;max-width:74ch;">Our powerhouse of in-house designers, R&amp;D experts, and a world-class manufacturing facility team up with strong global partners to fast-track every product launch. Through our smart Supply Network Control Tower (SNCT) platform, our partners get complete transparency, reliability, and on-time delivery, every time — from first sketch to final shipment.</p>
+        <p class="body-copy" style="max-width:74ch;">We are also driving the future of Indian manufacturing by localizing key components and mastering forging, casting, machining, rolling, extrusion, and fabrication in-house — reducing cost and strengthening “Make in India” capability that global brands can depend on.</p>
       </div>
     </section>
 
-    <!-- MOTTO -->
-    <section class="page-section motto" aria-labelledby="motto-heading">
+    <!-- WHY BRANDS CHOOSE ISLER -->
+    <section class="page-section bg-white" aria-label="Why Brands Choose Isler">
       <div class="ambient-circle" aria-hidden="true" style="width:260px;height:260px;background:rgba(244,180,0,0.14);top:-70px;left:-70px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(244,180,0,0.10);bottom:-60px;right:-50px;"></div>
       <div class="container">
-        <span class="eyebrow" style="color:var(--yellow);">Our Motto</span>
-        <h2 class="motto__heading" id="motto-heading">Innovate. Elevate. Succeed.</h2>
-        <p class="motto__text">At Isler, we pride ourselves on manufacturing premium kitchen appliances for leading brands, combining innovative technology with exceptional quality to meet modern household needs.</p>
-        <div class="motto__ceo">
-          <img src="assets/images/pravesh.png" alt="Pravesh Kumar, Founder &amp; CEO">
-          <div style="text-align:left;">
-            <p class="motto__ceo-role">Founder &amp; CEO</p>
-            <p class="motto__ceo-name">Pravesh Kumar</p>
-          </div>
-        </div>
+        <span class="eyebrow">Why Brands Choose Isler</span>
+        <ul class="wbc-list" style="margin:24px 0 0;padding-left:22px;display:grid;gap:18px;max-width:900px;">
+          <li class="body-copy" style="margin:0;">Novel Design &amp; Innovation — end-to-end ODM capability, a unified design language across appliance categories, and premium aesthetics aligned with global brand standards.</li>
+          <li class="body-copy" style="margin:0;">Advanced R&amp;D Capabilities — a strong in-house R&amp;D team paired with global partnerships across China and Europe for faster product development and localization.</li>
+          <li class="body-copy" style="margin:0;">Technology-Led Manufacturing — a world-class, process- and data-driven manufacturing setup with ERP-enabled scalability and real-time visibility from purchase order to delivery.</li>
+          <li class="body-copy" style="margin:0;">Quality is Our DNA — a zero-defect philosophy backed by a robust Quality Management System, advanced testing labs, and consistent, reliable product performance.</li>
+        </ul>
+        <p class="body-copy" style="margin-top:28px;font-weight:600;color:var(--navy);">Innovation.  Speed.  Trust.  That’s Isler.</p>
       </div>
     </section>
 
