@@ -15,12 +15,13 @@
   align-items: center;
   gap: 22px;
   padding: 13px 14px 13px 16px;
-  background: rgba(7, 17, 44, 0.25);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  /* Soft warm-grey frosted pill so the navy Isler logo + navy links stay legible */
+  background: rgba(233, 231, 226, 0.94);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(90, 88, 82, 0.24);
+  box-shadow: 0 8px 30px rgba(30, 28, 24, 0.16);
   min-width: min(1160px, calc(100vw - 40px));
   font-family: var(--font);
 }
@@ -42,21 +43,24 @@
 .isler-nav__search {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(11, 26, 61, 0.05);
+  border: 1px solid rgba(11, 26, 61, 0.12);
   border-radius: 100px;
   padding: 0 14px 0 12px;
   gap: 7px;
   transition: background 150ms ease, border-color 150ms ease;
 }
-.isler-nav__search:focus-within { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 255, 255, 0.22); }
-.isler-nav__search svg { flex-shrink: 0; opacity: 0.45; }
+.isler-nav__search:focus-within { background: rgba(11, 26, 61, 0.08); border-color: rgba(11, 26, 61, 0.22); }
+.isler-nav__search svg { flex-shrink: 0; opacity: 0.55; }
+/* icon uses inline stroke="white" in the markup — override to navy on the light bar */
+.isler-nav__search svg circle,
+.isler-nav__search svg line { stroke: var(--navy); }
 .isler-nav__search input {
   background: transparent; border: none; outline: none;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(11, 26, 61, 0.9);
   font-size: 13px; font-family: inherit; width: 190px; padding: 8px 0; letter-spacing: 0.01em;
 }
-.isler-nav__search input::placeholder { color: rgba(255, 255, 255, 0.4); }
+.isler-nav__search input::placeholder { color: rgba(11, 26, 61, 0.45); }
 
 /* ── Top-level links ── */
 .isler-nav__links {
@@ -77,12 +81,12 @@
   gap: 5px;
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(11, 26, 61, 0.85);
   padding: 10px 22px;
   border-radius: 100px;
   letter-spacing: 0.02em;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  text-shadow: none;
   text-decoration: none;
   background: none;
   border: none;
@@ -91,10 +95,10 @@
   transition: color 150ms ease, background 150ms ease;
 }
 .isler-nav__links a:hover,
-.isler-nav__trigger:hover { color: #fff; background: rgba(255, 255, 255, 0.09); }
+.isler-nav__trigger:hover { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
 .isler-nav__chev { transition: transform 200ms ease; opacity: 0.7; }
 .isler-nav__item.is-open .isler-nav__chev { transform: rotate(180deg); }
-.isler-nav__item.is-open .isler-nav__trigger { color: #fff; background: rgba(255, 255, 255, 0.09); }
+.isler-nav__item.is-open .isler-nav__trigger { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
 
 .isler-nav__burger { display: none; }
 
@@ -104,7 +108,7 @@
   top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  width: min(1320px, calc(100vw - 40px));        /* wider than the pill, centered */
+  width: min(1400px, calc(100vw - 40px));        /* wider than the pill, centered */
   /* Translucent DARK navy glass — keeps light text readable on white pages too */
   background: rgba(11, 26, 61, 0.9);
   -webkit-backdrop-filter: blur(26px) saturate(180%);
@@ -127,8 +131,8 @@
 
 .isler-mega__inner {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;   /* 5 columns of [thumbnail + label] rows */
-  gap: 30px;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr;   /* 7 columns of [thumbnail + label] rows */
+  gap: 20px;
   padding: 28px 32px 30px;
 }
 .isler-mega__col { min-width: 0; }
@@ -224,7 +228,7 @@
     display: inline-flex; flex-direction: column; gap: 4px;
     margin-left: auto; padding: 8px; background: none; border: none; cursor: pointer;
   }
-  .isler-nav__burger span { width: 22px; height: 2px; background: #fff; border-radius: 2px; display: block; }
+  .isler-nav__burger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; display: block; }
 
   /* Mega renders inline (static) within the dark links panel, expanded when open */
   .isler-mega {
