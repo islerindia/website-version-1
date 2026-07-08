@@ -58,9 +58,32 @@
 .isler-nav__search input {
   background: transparent; border: none; outline: none;
   color: rgba(11, 26, 61, 0.9);
-  font-size: 13px; font-family: inherit; width: 190px; padding: 8px 0; letter-spacing: 0.01em;
+  font-size: 14px; font-family: inherit; width: 190px; padding: 8px 0; letter-spacing: 0.01em;
 }
 .isler-nav__search input::placeholder { color: rgba(11, 26, 61, 0.45); }
+
+/* Product search results dropdown */
+.isler-nav__search { position: relative; }
+.isler-search__results {
+  position: absolute; top: calc(100% + 12px); left: 0;
+  width: 340px; max-width: calc(100vw - 40px);
+  max-height: 62vh; overflow-y: auto;
+  background: rgba(233, 231, 226, 0.98);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(90, 88, 82, 0.24);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(30, 28, 24, 0.22);
+  padding: 6px;
+  display: none;
+  z-index: 210;
+}
+.isler-search__results.is-open { display: block; }
+.isler-search__item { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 10px 12px; border-radius: 9px; text-decoration: none; }
+.isler-search__item:hover { background: rgba(11, 26, 61, 0.06); }
+.isler-search__item-name { font-size: 13.5px; font-weight: 600; color: var(--navy); line-height: 1.3; }
+.isler-search__item-cat { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-mid); white-space: nowrap; flex-shrink: 0; }
+.isler-search__empty { padding: 14px 12px; font-size: 13px; color: var(--gray-mid); }
 
 /* ── Top-level links ── */
 .isler-nav__links {
@@ -74,12 +97,17 @@
 }
 .isler-nav__item { position: static; }   /* lets the mega span the full pill width */
 
-.isler-nav__links a,
+/* Scoped to DIRECT-child links only (top-level pill items + the Categories
+   trigger). Must NOT reach the nested .isler-mega__link anchors — those live
+   deeper (.isler-nav__links > li > .isler-mega … > li > a) and keep their own
+   white color. A bare `.isler-nav__links a` here would outrank .isler-mega__link
+   by specificity and paint the mega labels navy-on-navy (invisible). */
+.isler-nav__links > li > a,
 .isler-nav__trigger {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: rgba(11, 26, 61, 0.85);
   padding: 10px 22px;
@@ -94,13 +122,14 @@
   cursor: pointer;
   transition: color 150ms ease, background 150ms ease;
 }
-.isler-nav__links a:hover,
+.isler-nav__links > li > a:hover,
 .isler-nav__trigger:hover { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
 .isler-nav__chev { transition: transform 200ms ease; opacity: 0.7; }
 .isler-nav__item.is-open .isler-nav__chev { transform: rotate(180deg); }
 .isler-nav__item.is-open .isler-nav__trigger { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
 
 .isler-nav__burger { display: none; }
+.isler-nav__search-toggle { display: none; }
 
 /* ════════════════════════════════  MEGA-MENU  ════════════════════════════ */
 .isler-mega {
@@ -108,14 +137,15 @@
   top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  width: min(1400px, calc(100vw - 40px));        /* wider than the pill, centered */
-  /* Translucent DARK navy glass — keeps light text readable on white pages too */
-  background: rgba(11, 26, 61, 0.9);
-  -webkit-backdrop-filter: blur(26px) saturate(180%);
-  backdrop-filter: blur(26px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: min(1120px, calc(100vw - 40px));        /* wider than the pill, centered */
+  /* Same warm-grey frosted glass as the navbar pill (matched colour + opacity),
+     so the dropdown reads as one surface with the bar. Text/icons are navy. */
+  background: rgba(233, 231, 226, 0.94);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(90, 88, 82, 0.24);
   border-radius: 20px;
-  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 60px rgba(30, 28, 24, 0.22);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -131,14 +161,14 @@
 
 .isler-mega__inner {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr;   /* 7 columns of [thumbnail + label] rows */
-  gap: 20px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));   /* 5 columns of [icon + label] rows */
+  gap: 22px;
   padding: 28px 32px 30px;
 }
 .isler-mega__col { min-width: 0; }
 .isler-mega__label {
   font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--yellow);
+  color: var(--navy);
   margin: 0 0 12px;
 }
 
@@ -147,7 +177,7 @@
 .isler-mega__link {
   display: flex; align-items: center; gap: 12px;
   font-size: 14px; font-weight: 500; line-height: 1.3;
-  color: #ffffff;                    /* fully opaque white — clearly legible, never faded */
+  color: rgba(11, 26, 61, 0.85);     /* navy — legible on the warm-grey panel */
   text-decoration: none;
   padding: 6px 10px;
   margin: 0 -10px;                    /* hover bg bleeds a touch without shifting text */
@@ -157,45 +187,96 @@
 }
 .isler-mega__link:hover,
 .isler-mega__link:focus-visible {
-  color: var(--yellow);
-  background: rgba(255, 255, 255, 0.08);
+  color: var(--navy);
+  background: rgba(11, 26, 61, 0.06);
   outline: none;
 }
 .isler-mega__link--lead { font-weight: 700; }          /* "Built-in Hobs" lead */
 .isler-mega__gap { margin-top: 8px; }                  /* breathing room before Gas Cooktops */
 
-/* Uniform 44px thumbnail box — holds a product photo OR a line icon.
-   Every tile is the SAME size + SAME light background so white-bg and
-   transparent-bg thumbnails read consistently on the navy panel. */
+/* Uniform 42px icon tile — clean line icons (no product photos).
+   Subtle translucent tile on the navy panel; the icon reads in soft white
+   and shifts to yellow on hover, matching the label. */
 .isler-mega__thumb {
-  flex: 0 0 44px;
-  width: 44px; height: 44px;
-  border-radius: 8px;
-  overflow: hidden;
+  flex: 0 0 42px;
+  width: 42px; height: 42px;
+  border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  background: #eef0f2;                       /* uniform light tile for all thumbs */
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  transition: border-color 140ms ease;
+  background: rgba(11, 26, 61, 0.05);
+  border: 1px solid rgba(11, 26, 61, 0.12);
+  transition: border-color 140ms ease, background 140ms ease;
 }
-.isler-mega__thumb img {
-  width: 100%; height: 100%;
-  object-fit: cover;                          /* fill the tile, no stretch */
-  object-position: center;                    /* centered crop */
-  display: block;
-}
-.isler-mega__thumb svg {        /* line icons — light/white stroke, uniform size */
-  width: 24px; height: 24px;
-  stroke: #ffffff; fill: none; stroke-width: 1.6;
+.isler-mega__thumb svg {        /* line icons — navy stroke on the warm-grey tile */
+  width: 22px; height: 22px;
+  stroke: rgba(11, 26, 61, 0.78); fill: none; stroke-width: 1.6;
   stroke-linecap: round; stroke-linejoin: round;
+  transition: stroke 140ms ease;
 }
-.isler-mega__link:hover .isler-mega__thumb { border-color: rgba(244, 180, 0, 0.55); }
+.isler-mega__link:hover .isler-mega__thumb {
+  border-color: rgba(244, 180, 0, 0.6);
+  background: rgba(244, 180, 0, 0.12);
+}
+.isler-mega__link:hover .isler-mega__thumb svg { stroke: var(--navy); }
+
+/* ════════════════════════════  SIMPLE DROPDOWN (About)  ════════════════════════════ */
+.isler-nav__drop { position: relative; }
+.isler-nav__submenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 190px;
+  list-style: none; margin: 0; padding: 8px;
+  background: rgba(233, 231, 226, 0.94);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(90, 88, 82, 0.24);
+  border-radius: 14px;
+  box-shadow: 0 24px 60px rgba(30, 28, 24, 0.22);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease, visibility 0ms 160ms;
+  z-index: 199;
+}
+.isler-nav__submenu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
+.isler-nav__drop:hover .isler-nav__submenu,
+.isler-nav__drop:focus-within .isler-nav__submenu {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.isler-nav__drop:hover .isler-nav__chev,
+.isler-nav__drop:focus-within .isler-nav__chev { transform: rotate(180deg); }
+.isler-nav__submenu a {
+  display: block; padding: 9px 14px; border-radius: 9px;
+  font-size: 13.5px; font-weight: 500; color: rgba(11, 26, 61, 0.85);
+  white-space: nowrap; text-decoration: none;
+  transition: color 140ms ease, background 140ms ease;
+}
+.isler-nav__submenu a:hover, .isler-nav__submenu a:focus-visible {
+  color: var(--navy); background: rgba(11, 26, 61, 0.06); outline: none;
+}
 
 /* ════════════════════════════  RESPONSIVE  ════════════════════════════ */
 @media (max-width: 1023px) {
   .isler-nav { gap: 14px; padding: 10px 10px 10px 14px; min-width: min(740px, calc(100vw - 28px)); }
   .isler-nav__search { display: none; }
   .isler-nav__logo img { height: 28px; }
-  .isler-nav__links a, .isler-nav__trigger { font-size: 13px; padding: 9px 16px; }
+  .isler-nav__links > li > a, .isler-nav__trigger { font-size: 14px; padding: 9px 16px; }
+
+  /* Mobile search entry point: a magnifier icon reveals a full-width search field below the pill */
+  .isler-nav__search-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: var(--navy); }
+  .isler-nav__search-toggle svg { display: block; }
+  .isler-nav.is-search-open .isler-nav__search-toggle { color: var(--navy); background: rgba(11, 26, 61, 0.08); border-radius: 100px; }
+  .isler-nav.is-search-open .isler-nav__search {
+    display: flex; position: absolute; top: calc(100% + 10px); left: 0; right: 0; margin: 0;
+    background: rgba(7, 17, 44, 0.96);
+    -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 4px 14px;
+  }
+  .isler-nav.is-search-open .isler-nav__search input { width: 100%; color: #fff; }
+  .isler-nav.is-search-open .isler-nav__search input::placeholder { color: rgba(255, 255, 255, 0.5); }
+  .isler-nav.is-search-open .isler-nav__search svg circle,
+  .isler-nav.is-search-open .isler-nav__search svg line { stroke: rgba(255, 255, 255, 0.7); }
+  .isler-nav__search .isler-search__results { left: 0; right: 0; width: auto; }
 }
 
 /* Mobile: collapse links into a burger-toggled vertical panel; mega stacks. */
@@ -222,7 +303,7 @@
   }
   .isler-nav.is-open .isler-nav__links { display: flex; }
   .isler-nav__links > li { width: 100%; }
-  .isler-nav__links a, .isler-nav__trigger { width: 100%; justify-content: space-between; color: #fff; text-shadow: none; }
+  .isler-nav__links > li > a, .isler-nav__trigger { width: 100%; justify-content: space-between; color: #fff; text-shadow: none; }
 
   .isler-nav__burger {
     display: inline-flex; flex-direction: column; gap: 4px;
@@ -240,8 +321,27 @@
   .isler-nav__item.is-open .isler-mega { display: block; }
   .isler-mega::before { display: none; }
   .isler-mega__inner { grid-template-columns: 1fr; gap: 18px; padding: 6px 4px; }
+  /* Mobile mega sits on the DARK links panel — keep label/links/icons light */
+  .isler-mega__label { color: var(--yellow); }
   .isler-mega__link { color: #fff; }
   .isler-mega__link:hover, .isler-mega__link:focus-visible { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
+  .isler-mega__thumb { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); }
+  .isler-mega__thumb svg { stroke: rgba(255, 255, 255, 0.9); }
+  .isler-mega__link:hover .isler-mega__thumb svg { stroke: var(--yellow); }
+}
+
+/* About dropdown renders inline (always open) within the mobile links panel */
+@media (max-width: 860px) {
+  .isler-nav__submenu {
+    position: static; transform: none; min-width: 0;
+    opacity: 1; visibility: visible; pointer-events: auto;
+    background: transparent; border: none; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+    padding: 2px 0 4px 12px; margin: 2px 0 0; transition: none;
+  }
+  .isler-nav__submenu::before { display: none; }
+  .isler-nav__submenu a { color: rgba(255, 255, 255, 0.85); padding: 10px 14px; }
+  .isler-nav__submenu a:hover, .isler-nav__submenu a:focus-visible { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
 }
 
 @media (prefers-reduced-motion: reduce) {

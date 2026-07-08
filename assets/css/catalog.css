@@ -15,6 +15,9 @@
   font-family: 'Montserrat', 'Supreme', system-ui, sans-serif;
 }
 .cat-wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 64px); }
+/* Listing/category pages get a wider — but still bounded & centered — container so wide
+   desktops aren't mostly empty margin. Detail (.pd) pages keep the 1200px cap above. */
+.cat-section .cat-wrap { max-width: 1480px; }
 
 /* ─────────────────────────────  NAVBAR (pill, 5 category boxes)  ───────────────────────────── */
 .cat-nav {
@@ -151,7 +154,7 @@
   background: linear-gradient(180deg, rgba(6,15,36,0.55) 0%, rgba(11,26,61,0.85) 100%);
   pointer-events: none;
 }
-.cat-hero__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+.cat-hero__inner { position: relative; z-index: 1; max-width: 1480px; margin: 0 auto; }
 .cat-breadcrumb { font-size: 12.5px; color: rgba(255,255,255,0.6); margin-bottom: 18px; letter-spacing: 0.02em; }
 .cat-breadcrumb a { color: rgba(255,255,255,0.78); }
 .cat-breadcrumb a:hover { color: var(--yellow); }
@@ -172,10 +175,79 @@
 .cat-tier-head__title { font-size: clamp(22px, 3vw, 32px); font-weight: 800; color: var(--navy); margin-top: 6px; letter-spacing: -0.01em; }
 .cat-tier-head__sub { color: var(--gray-mid); margin-top: 8px; font-size: 14.5px; max-width: 640px; line-height: 1.6; }
 
+/* Responsive product grid: columns reflow to the grid's OWN available width (which
+   already excludes the filter sidebar), so it fills the space instead of stretching cards.
+   min 320px → 1 col (mobile) · 2 cols (tablet/laptop) · 3 cols (large desktop ~1418px+).
+   The 1480px container cap keeps it at a max of 3 columns (never 4 / full-bleed). */
 .cat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 26px;
+}
+
+/* ─────────────────────────  REUSABLE CATEGORY FILTER  ─────────────────────────
+   Sidebar on desktop, collapsible on mobile. Inherits the page font (Montserrat),
+   navy/yellow palette. Markup is category-agnostic; assets/js/filter.js fills the
+   groups from each card's data-* attributes. */
+.cat-filter-layout {
+  display: grid;
+  grid-template-columns: 246px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.cat-filter {
+  position: sticky; top: 100px;
+  background: #fff;
+  border: 1px solid rgba(11, 26, 61, 0.08);
+  border-radius: 16px;
+  padding: 20px 20px 10px;
+}
+.cat-filter__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.cat-filter__title { font-size: 12.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); }
+.cat-filter__clear { font-size: 12px; font-weight: 600; color: var(--gray-mid); background: none; border: none; cursor: pointer; padding: 4px 2px; }
+.cat-filter__clear:hover { color: var(--navy); text-decoration: underline; }
+.cat-filter__group { padding: 16px 0; border-top: 1px solid rgba(11, 26, 61, 0.07); }
+.cat-filter__group:first-child { border-top: none; }
+.cat-filter__group-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-mid); margin: 0 0 12px; }
+.cat-filter__options { display: flex; flex-direction: column; gap: 11px; }
+.cat-filter__option { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--navy); user-select: none; }
+.cat-filter__option input { position: absolute; opacity: 0; width: 0; height: 0; }
+.cat-filter__box {
+  width: 18px; height: 18px; flex-shrink: 0;
+  border: 1.5px solid rgba(11, 26, 61, 0.28); border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.cat-filter__option:hover .cat-filter__box { border-color: var(--navy); }
+.cat-filter__option input:checked + .cat-filter__box { background: var(--yellow); border-color: var(--yellow); }
+.cat-filter__option input:checked + .cat-filter__box::after {
+  content: ''; width: 5px; height: 9px; margin-top: -2px;
+  border: solid var(--navy); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.cat-filter__option input:focus-visible + .cat-filter__box { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+.cat-results__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; min-height: 30px; }
+.cat-results__count { font-size: 14px; font-weight: 700; color: var(--navy); }
+
+.cat-empty { text-align: center; padding: 64px 20px; color: var(--gray-mid); font-size: 15px; }
+.cat-empty__clear { margin-left: 4px; background: none; border: none; color: var(--navy); font-weight: 700; text-decoration: underline; cursor: pointer; font-size: 15px; font-family: inherit; }
+
+/* Mobile toggle — hidden on desktop */
+.cat-filter-toggle { display: none; }
+
+/* Stack the filter (collapsible) below ~1080px, so the sidebar only takes the left
+   column when there's still room for ≥2 product columns beside it. */
+@media (max-width: 1080px) {
+  .cat-filter-layout { grid-template-columns: 1fr; gap: 0; }
+  .cat-filter-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-bottom: 18px; padding: 11px 20px;
+    background: var(--navy); color: #fff; border: none; border-radius: 100px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; font-family: inherit;
+  }
+  .cat-filter-toggle__count { color: var(--yellow); font-weight: 700; }
+  .cat-filter { display: none; position: static; margin-bottom: 24px; }
+  .cat-filter.is-open { display: block; }
 }
 .cat-card {
   display: flex; flex-direction: column;
@@ -188,12 +260,15 @@
 .cat-card:hover { transform: translateY(-5px); box-shadow: 0 18px 42px rgba(11, 26, 61, 0.13); border-color: rgba(244,180,0,0.5); }
 .cat-card__media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  height: 230px;               /* FIXED, uniform image area on every card — not aspect-ratio,
+                                  which let tall images stretch the box to uneven heights */
+  flex: 0 0 auto;              /* never grow or shrink within the card's flex column */
   background: var(--gray-light);
   display: flex; align-items: center; justify-content: center;
   padding: 22px;
 }
-.cat-card__media img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+/* Whole product stays visible, scaled DOWN to fit the fixed box, centered — never cropped/stretched */
+.cat-card__media img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; mix-blend-mode: multiply; }
 .cat-card__tier {
   position: absolute; top: 12px; left: 12px;
   font-size: 9.5px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
@@ -201,7 +276,9 @@
   padding: 4px 10px; border-radius: 100px;
 }
 .cat-card__body { padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1; }
-.cat-card__name { font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+/* min-height reserves 2 lines so 1-line vs 2-line titles keep the spec/price rows aligned */
+.cat-card__name { font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; line-height: 1.25; min-height: 2.5em; }
+/* flex:1 pushes the foot (price + View) to the bottom, so it aligns across cards regardless of spec length */
 .cat-card__spec { margin-top: 6px; font-size: 13px; color: var(--gray-mid); line-height: 1.5; flex: 1; }
 .cat-card__foot { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .cat-card__price { font-size: 17px; font-weight: 800; color: var(--navy); }
@@ -313,7 +390,7 @@
 }
 @media (max-width: 560px) {
   .cat-hero { padding-top: 140px; }
-  .cat-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cat-grid { grid-template-columns: 1fr; gap: 16px; }
   .cat-card__body { padding: 14px; }
   .cat-card__name { font-size: 15px; }
 }
