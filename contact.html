@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <style>
 
     /* ══════════════════════════════════════════════════════════════
@@ -168,6 +169,10 @@
     .office-card__region { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--yellow); margin-top: 6px; }
     .office-card__address { color: #55606E; font-size: 14.5px; line-height: 1.6; margin-top: 14px; }
 
+    /* Map container */
+    .presence-map { height: 420px; width: 100%; border-radius: 14px; border: 1px solid var(--gray-light); overflow: hidden; }
+    .leaflet-container { font-family: var(--font); }
+
     @media (max-width: 900px) {
       .contact-layout { grid-template-columns: 1fr; }
       .offices-grid { grid-template-columns: 1fr; }
@@ -175,6 +180,7 @@
     @media (max-width: 560px) {
       .form-row { grid-template-columns: 1fr; }
       .page-hero { min-height: 54vh; padding-top: 130px; }
+      .presence-map { height: 340px; }
     }
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
@@ -396,6 +402,7 @@
           <h2 class="h2" id="presence-heading">Our Global Presence</h2>
           <p>From design to delivery, we operate across India, the United States, and Europe to serve our clients globally.</p>
         </div>
+        <div id="presence-map" class="presence-map" role="region" aria-label="World map showing office locations"></div>
         <div class="offices-grid">
           <div class="office-card">
             <div class="office-card__accent"></div>
@@ -566,6 +573,31 @@
         form.reset();
       });
     }());
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kGStbGdKX9C01KzBbtYwLxG7sC1FQqZ4MxAQ0=" crossorigin=""></script>
+  <script>
+    (function(){
+      var el = document.getElementById('presence-map');
+      if (!el || typeof L === 'undefined') return;
+      var offices = [
+        { name: 'Delhi / NCR', region: 'India — Headquarters', addr: 'Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202', lat: 28.4744, lng: 77.5030 },
+        { name: 'Newark', region: 'USA — Delaware', addr: '131 Continental Drive, Suite 301, Newark, New Castle, 19713-4323', lat: 39.6775, lng: -75.6526 },
+        { name: 'Vienna', region: 'Europe — Austria', addr: 'Forststrasse 21, 4181 Oberneukirchen, Austria', lat: 48.5000, lng: 14.1800 }
+      ];
+      var map = L.map('presence-map', { scrollWheelZoom: false, worldCopyJump: true });
+      map.setView([20, 0], 2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+      var markers = offices.map(function (o) {
+        return L.marker([o.lat, o.lng]).addTo(map)
+          .bindPopup('<strong>' + o.name + '</strong><br/>' + o.region + '<br/>' + o.addr);
+      });
+      if (markers.length) {
+        var group = L.featureGroup(markers);
+        map.fitBounds(group.getBounds().pad(0.5));
+      }
+    })();
   </script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/search.js" defer></script>
