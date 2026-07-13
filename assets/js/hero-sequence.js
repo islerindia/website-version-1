@@ -11,11 +11,11 @@
 
   // Preload all 5 cinematic scene images
   var SCENE_SRCS = [
-    'assets/images/scenes/scene-01-establishing.jpg',
-    'assets/images/scenes/scene-02-chimney-hero.jpg',
-    'assets/images/scenes/scene-03-hob-closeup.jpg',
-    'assets/images/scenes/scene-04-isler.jpg',
-    'assets/images/scenes/scene-05-finale-pullback.jpg'
+    'assets/images/scenes/scene-01-establishing.webp',
+    'assets/images/scenes/scene-02-chimney-hero.webp',
+    'assets/images/scenes/scene-03-hob-closeup.webp',
+    'assets/images/scenes/scene-04-isler.webp',
+    'assets/images/scenes/scene-05-finale-pullback.webp'
   ];
 
   SCENE_SRCS.forEach(function (src) { (new Image()).src = src; });
