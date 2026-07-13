@@ -170,6 +170,7 @@
   font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--navy);
   margin: 0 0 12px;
+  white-space: nowrap;
 }
 
 /* Each item = small thumbnail/icon + label in a row (uniform across all columns) */
