@@ -161,7 +161,7 @@
 
 .isler-mega__inner {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));   /* 6 columns of [icon + label] rows */
+  grid-template-columns: repeat(5, minmax(0, 1fr));   /* 6 columns of [icon + label] rows */
   gap: 22px;
   padding: 28px 32px 30px;
 }

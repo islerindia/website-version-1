@@ -78,8 +78,8 @@
     },
     airfryer: {
       groups: [
-        { key: 'capacity', label: 'Capacity', multi: false, format: function (v) { return v + 'L'; }, sort: 'num' },
-        { key: 'wattage',  label: 'Power',    multi: false, format: function (v) { return v + 'W'; }, sort: 'num' }
+        { key: 'type',     label: 'Type',     multi: false, format: function (v) { return v; },      sort: 'alpha' },
+        { key: 'capacity', label: 'Capacity', multi: false, format: function (v) { return v + 'L'; }, sort: 'num' }
       ]
     },
     mixer: {
