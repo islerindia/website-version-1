@@ -574,31 +574,61 @@
       });
     }());
   </script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kGStbGdKX9C01KzBbtYwLxG7sC1FQqZ4MxAQ0=" crossorigin=""></script>
   <script>
     (function(){
-      var el = document.getElementById('presence-map');
-      if (!el || typeof L === 'undefined') return;
-      var offices = [
-        { name: 'Delhi / NCR', region: 'India — Headquarters', addr: 'Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202', lat: 28.4744, lng: 77.5030 },
-        { name: 'Newark', region: 'USA — Delaware', addr: '131 Continental Drive, Suite 301, Newark, New Castle, 19713-4323', lat: 39.6775, lng: -75.6526 },
-        { name: 'Vienna', region: 'Europe — Austria', addr: 'Forststrasse 21, 4181 Oberneukirchen, Austria', lat: 48.5000, lng: 14.1800 }
-      ];
-      var map = L.map('presence-map', { scrollWheelZoom: false, worldCopyJump: true });
-      map.setView([20, 0], 2);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-      var markers = offices.map(function (o) {
-        return L.marker([o.lat, o.lng]).addTo(map)
-          .bindPopup('<strong>' + o.name + '</strong><br/>' + o.region + '<br/>' + o.addr);
-      });
-      if (markers.length) {
-        var group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds().pad(0.5));
+      var MAX_ATTEMPTS = 20; // ~5s total at 250ms
+      var RETRY_DELAY = 250;
+
+      function scheduleRetry(reason){
+        if (typeof window.__presenceMapAttempts !== 'number') window.__presenceMapAttempts = 0;
+        if (window.__presenceMapAttempts >= MAX_ATTEMPTS) {
+          if (console && console.warn) console.warn('Leaflet map not initialized:', reason);
+          return;
+        }
+        window.__presenceMapAttempts++;
+        setTimeout(function(){ window.initPresenceMap(); }, RETRY_DELAY);
+      }
+
+      window.initPresenceMap = function initPresenceMap(){
+        if (window.__presenceMapInitialized) return;
+
+        var el = document.getElementById('presence-map');
+        if (!el) { scheduleRetry('map element not found'); return; }
+        if (typeof window.L === 'undefined' || !window.L || !window.L.map) { scheduleRetry('Leaflet not available'); return; }
+
+        // Guard before constructing to avoid races when called twice close together
+        window.__presenceMapInitialized = true;
+
+        var offices = [
+          { name: 'Delhi / NCR', region: 'India — Headquarters', addr: 'Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202', lat: 28.4744, lng: 77.5030 },
+          { name: 'Newark', region: 'USA — Delaware', addr: '131 Continental Drive, Suite 301, Newark, New Castle, 19713-4323', lat: 39.6775, lng: -75.6526 },
+          { name: 'Vienna', region: 'Europe — Austria', addr: 'Forststrasse 21, 4181 Oberneukirchen, Austria', lat: 48.5000, lng: 14.1800 }
+        ];
+
+        var map = L.map('presence-map', { scrollWheelZoom: false, worldCopyJump: true });
+        map.setView([20, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        var markers = offices.map(function (o) {
+          return L.marker([o.lat, o.lng]).addTo(map)
+            .bindPopup('<strong>' + o.name + '</strong><br/>' + o.region + '<br/>' + o.addr);
+        });
+        if (markers.length) {
+          var group = L.featureGroup(markers);
+          map.fitBounds(group.getBounds().pad(0.5));
+        }
+      };
+
+      // Try on DOM readiness as well
+      if (document.readyState === 'interactive' || document.readyState === 'complete') {
+        setTimeout(window.initPresenceMap, 0);
+      } else {
+        document.addEventListener('DOMContentLoaded', function(){ window.initPresenceMap(); }, { once: true });
       }
     })();
   </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kGStbGdKX9C01KzBbtYwLxG7sC1FQqZ4MxAQ0=" crossorigin="" onload="window.initPresenceMap && window.initPresenceMap()"></script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/search.js" defer></script>
 </body>
