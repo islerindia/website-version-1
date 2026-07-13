@@ -21,6 +21,48 @@
   // format      → how a raw value is shown as a checkbox label.
   // sort        → 'num' (numeric) or 'alpha'.
   var CONFIGS = {
+    vacuum: {
+      groups: [
+        { key: 'type', label: 'Type', multi: false, format: function (v) { return v; }, sort: 'alpha' }
+      ]
+    },
+    kettle: {
+      groups: [
+        { key: 'capacity', label: 'Capacity', multi: false, format: function (v) { return v + 'L'; },     sort: 'num' },
+        { key: 'material', label: 'Body',     multi: false, format: function (v) { return v; },            sort: 'alpha' }
+      ]
+    },
+    toaster: {
+      groups: [
+        { key: 'capacity', label: 'Capacity', multi: false, format: function (v) { return v + ' Slice'; }, sort: 'num' },
+        { key: 'material', label: 'Body',     multi: false, format: function (v) { return v; },             sort: 'alpha' }
+      ]
+    },
+    induction: {
+      groups: [
+        { key: 'power', label: 'Power', multi: false, format: function (v) { return v + 'W'; }, sort: 'num' }
+      ]
+    },
+    infrared: {
+      groups: [
+        { key: 'power', label: 'Power', multi: false, format: function (v) { return v + 'W'; }, sort: 'num' }
+      ]
+    },
+    hybrid: {
+      groups: [
+        { key: 'size', label: 'Size', multi: false, format: function (v) { return v + ' cm'; }, sort: 'num' }
+      ]
+    },
+    juicer: {
+      groups: [
+        { key: 'color', label: 'Colour', multi: false, format: function (v) { return v; }, sort: 'alpha' }
+      ]
+    },
+    doughmaker: {
+      groups: [
+        { key: 'controls', label: 'Controls', multi: false, format: function (v) { return v; }, sort: 'alpha' }
+      ]
+    },
     chimney: {
       groups: [
         { key: 'size',    label: 'Size',          multi: true,  format: function (v) { return v + ' cm'; },    sort: 'num' },
