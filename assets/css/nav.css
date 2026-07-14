@@ -137,7 +137,7 @@
   top: calc(100% + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(-8px);
-  width: min(1120px, calc(100vw - 40px));        /* wider than the pill, centered */
+  width: min(1240px, calc(100vw - 40px));        /* wider than the pill, centered */
   /* Same warm-grey frosted glass as the navbar pill (matched colour + opacity),
      so the dropdown reads as one surface with the bar. Text/icons are navy. */
   background: rgba(233, 231, 226, 0.98);
