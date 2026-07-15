@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isler Gas Cooktop — Prima IS-LK 1001 — Isler India</title>
+  <title>Coffee Machines – Isler India</title>
   <link rel="icon" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/catalog.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <style>
+    /* Stand-mixer photos are lifestyle shots (soft studio backgrounds) - disable multiply blend */
+    .cat-card__media { background:#eef0f2; }
+    .cat-card__media img { mix-blend-mode:normal; object-fit:contain; max-width:100%; max-height:100%; }
+    .pd__gallery { background:#eef0f2; }
+    .pd__gallery img { mix-blend-mode:normal; }
+  </style>
 </head>
 <body class="cat-page">
 <nav class="isler-nav" aria-label="Primary navigation">
@@ -102,29 +109,8 @@
     </ul>
     <button class="isler-nav__search-toggle" type="button" aria-label="Search products" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
-<main class="pd"><div class="cat-wrap">
-    <nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="gas-cooktops.html">Gas Cooktops</a><span>/</span>Prima IS-LK 1001</nav>
-    <div class="pd__layout">
-      <div class="pd__gallery"><img id="pd-img" src="assets/catalog/gas-cooktops/is-lk-1001.webp" alt="Isler Gas Cooktop — Prima IS-LK 1001"></div>
-      <div class="pd__info">
-        <p class="pd__eyebrow">Cooking · Gas Cooktops</p>
-        <h1 class="pd__title">Isler Gas Cooktop — Prima IS-LK 1001</h1>
-        <p class="pd__code" id="pd-code"></p>
-        <div class="pd__price" id="pd-price"></div>
-        <div class="pd__highlights" id="pd-highlights"></div>
-        <div class="pd__cta">
-          <a class="pd__btn pd__btn--primary" href="contact.html">Enquire</a>
-        </div>
-        <p class="pd__b2b">Isler is a B2B manufacturer — no online checkout. Control panels, handles, glass colours, telescopic rails and accessory bundles are customizable on bulk orders. Reach out for a quotation.</p>
-      </div>
-    </div>
-  </div>
-  <section class="pd__specs"><div class="cat-wrap">
-    <h2 class="pd__specs-title">Specifications</h2>
-    <table class="pd__spec-table"><tbody id="pd-spec-rows"></tbody></table>
-  </div></section>
-  </main>
-  <script>window.PRODUCT = {"variants": [{"code": "IS LK 1001", "label": "Isler Gas Cooktop — Prima IS-LK 1001", "img": "assets/catalog/gas-cooktops/is-lk-1001.webp", "price": null, "specs": [["Series", "Prima"], ["No. of Burners", "3 Burners"], ["Length", "70cm"], ["Finish", "Black Finish with 6 mm Toughened Glass Panel"], ["Design", "3 Burners, Triangle Formation Type"], ["Ignition", "Manual Ignition"], ["Pan Support", "Wire Frame support with Powder Coating"], ["Knobs", "Premium Metal Knobs"], ["Burner Material", "cast burner"], ["Burner Design", "OD / ID Type"], ["Jumbo Burner", "92 mm x 1"], ["Big Burner", "79 mm x 1"], ["Small Burner", "69 mm x 1"], ["Product Dimensions", "690 x 405 x 105 mm"], ["Glass Size", "690 x 405 mm"], ["Nozzle", "360 degree revolving Brass"], ["Drip Tray Shape", "Round"], ["Drip Tray Material", "SS Buffed"], ["Tandoor Pan Support", "Yes"]], "highlights": [["Series", "Prima"], ["Burners", "3"], ["Ignition", "Manual"], ["Length", "70cm"]]}]};</script>
+<header class="cat-hero"><div class="cat-hero__inner"><nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span>Coffee Machines</nav><span class="cat-hero__eyebrow">Small Appliances · Coffee Machines</span><h1 class="cat-hero__title">Coffee Machines</h1><p class="cat-hero__intro">Espresso, drip and capsule coffee machines for global brands – precise temperature control, adjustable brewing and easy-clean, food-safe components. Fully customizable for bulk and private-label orders.</p></div></header>
+<section class="cat-section"><div class="cat-wrap"><div style="text-align:center;padding:clamp(48px,8vw,96px) 20px;"><p style="font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-mid);margin:0 0 12px;">Coming soon</p><h2 style="font-size:clamp(22px,2.6vw,32px);font-weight:700;color:var(--navy);letter-spacing:-0.01em;margin:0 0 14px;">Our Coffee Machines range is on its way</h2><p style="max-width:560px;margin:0 auto 28px;color:var(--gray-mid);line-height:1.6;">We are finalising this range for bulk and private-label production. Talk to us about specifications, volumes and customisation.</p><a href="contact.html" class="pd__btn pd__btn--primary">Enquire about Coffee Machines</a></div></div></section>
 <footer class="site-footer" id="site-footer-el">
 
     <div class="footer__main">
@@ -247,6 +233,7 @@
   </footer>
   <script src="assets/js/catalog.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/filter.js" defer></script>
   <script src="assets/js/search.js" defer></script>
 </body>
 </html>
