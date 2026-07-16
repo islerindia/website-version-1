@@ -129,7 +129,6 @@
     },
     coffee: {
       groups: [
-        { key: 'tier',     label: 'Range',         multi: false, format: function (v) { return v; },        sort: 'alpha' },
         { key: 'control',  label: 'Control',       multi: false, format: function (v) { return v; },        sort: 'alpha' },
         { key: 'pressure', label: 'Pump Pressure', multi: true,  format: function (v) { return v + ' Bar'; }, sort: 'num' },
         { key: 'milk',     label: 'Milk System',   multi: false, format: function (v) { return v; },        sort: 'alpha' },
