@@ -129,7 +129,7 @@
     },
     coffee: {
       groups: [
-        { key: 'control',  label: 'Control',       multi: false, format: function (v) { return v; },        sort: 'alpha' },
+        { key: 'control',  label: 'Range',         multi: false, order: ['Manual', 'Touch', 'Display'], format: function (v) { return v === 'Display' ? 'Colour Display' : v; }, sort: 'alpha' },
         { key: 'pressure', label: 'Pump Pressure', multi: true,  format: function (v) { return v + ' Bar'; }, sort: 'num' },
         { key: 'milk',     label: 'Milk System',   multi: false, format: function (v) { return v; },        sort: 'alpha' },
         { key: 'power',    label: 'Power',         multi: false, format: function (v) { return v + 'W'; },   sort: 'num' }
@@ -144,7 +144,13 @@
     return raw.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
   }
 
-  function sortValues(values, mode) {
+  function sortValues(values, mode, order) {
+    if (order) {
+      return values.slice().sort(function (a, b) {
+        var ia = order.indexOf(a), ib = order.indexOf(b);
+        return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+      });
+    }
     return values.sort(function (a, b) {
       return mode === 'num' ? parseFloat(a) - parseFloat(b) : a.localeCompare(b);
     });
@@ -175,7 +181,7 @@
       cards.forEach(function (c) {
         cardValues(c, group.key).forEach(function (v) { present[v] = true; });
       });
-      var values = sortValues(Object.keys(present), group.sort);
+      var values = sortValues(Object.keys(present), group.sort, group.order);
       if (values.length === 0) return; // group has no data on this page → skip
 
       var section = document.createElement('div');
