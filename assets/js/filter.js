@@ -126,6 +126,15 @@
       groups: [
         { key: 'capacity', label: 'Total Capacity', multi: false, format: function (v) { return v + 'L'; }, sort: 'num' }
       ]
+    },
+    coffee: {
+      groups: [
+        { key: 'tier',     label: 'Range',         multi: false, format: function (v) { return v; },        sort: 'alpha' },
+        { key: 'control',  label: 'Control',       multi: false, format: function (v) { return v; },        sort: 'alpha' },
+        { key: 'pressure', label: 'Pump Pressure', multi: true,  format: function (v) { return v + ' Bar'; }, sort: 'num' },
+        { key: 'milk',     label: 'Milk System',   multi: false, format: function (v) { return v; },        sort: 'alpha' },
+        { key: 'power',    label: 'Power',         multi: false, format: function (v) { return v + 'W'; },   sort: 'num' }
+      ]
     }
     // Future categories: add an entry here, tag the cards, wrap the grid. No new JS.
   };
