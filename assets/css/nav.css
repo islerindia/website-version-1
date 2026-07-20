@@ -192,7 +192,7 @@
   background: rgba(11, 26, 61, 0.06);
   outline: none;
 }
-.isler-mega__link--lead { font-weight: 700; }          /* "Built-in Hobs" lead */
+.isler-mega__link--lead { font-weight: 500; }          /* "Built-in Hobs" — match other items (was 700) */
 .isler-mega__gap { margin-top: 8px; }                  /* breathing room before Gas Cooktops */
 
 /* Uniform 42px icon tile — clean line icons (no product photos).
