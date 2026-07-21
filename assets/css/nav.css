@@ -160,21 +160,63 @@
 .isler-mega::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
 
 .isler-mega__inner {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));   /* 6 columns of [icon + label] rows */
-  gap: 22px;
-  padding: 28px 32px 30px;
-}
-.isler-mega__col { min-width: 0; }
-.isler-mega__label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--navy);
-  margin: 0 0 12px;
-  white-space: nowrap;
+  padding: 14px 32px 18px;
 }
 
-/* Each item = small thumbnail/icon + label in a row (uniform across all columns) */
-.isler-mega__list { list-style: none; margin: 0; padding: 0; }
+/* ── "cat2" layout: 4 super-category headers side by side; the one you click
+      drops its sub-categories down underneath. Only one open at a time.
+      ("cat1" was the earlier variant — headers stacked vertically, each panel
+      opening under its own header.) ─────────────────────────────────────── */
+.isler-mega__tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  border-bottom: 1px solid rgba(11, 26, 61, 0.10);
+}
+
+.isler-mega__tab {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 10px;
+  background: none; border: none; cursor: pointer;
+  font-family: inherit;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(11, 26, 61, 0.72);
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  transition: color 140ms ease, background 140ms ease;
+}
+.isler-mega__tab:hover { color: var(--navy); background: rgba(11, 26, 61, 0.04); }
+.isler-mega__tab:focus-visible { outline: 2px solid var(--yellow); outline-offset: -2px; }
+
+/* Yellow underline marks the open header, sitting on the strip's divider */
+.isler-mega__tab::after {
+  content: ''; position: absolute; left: 12px; right: 12px; bottom: -1px;
+  height: 2px; background: var(--yellow);
+  transform: scaleX(0);
+  transition: transform 200ms ease;
+}
+.isler-mega__tab.is-open { color: var(--navy); }
+.isler-mega__tab.is-open::after { transform: scaleX(1); }
+
+/* No +/- badge — the yellow underline alone marks the open header */
+.isler-mega__tab-icon { display: none; }
+
+/* The panel area below the strip — grows downward for whichever header is open */
+.isler-mega__panel {
+  overflow: hidden;
+  height: 0;
+  transition: height 300ms ease;
+}
+.isler-mega__panel-inner { padding: 16px 0 6px; }
+
+/* Each item = small thumbnail/icon + label in a row; items flow into columns */
+.isler-mega__list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 2px 18px;
+}
 .isler-mega__link {
   display: flex; align-items: center; gap: 12px;
   font-size: 14px; font-weight: 500; line-height: 1.3;
@@ -321,9 +363,20 @@
   }
   .isler-nav__item.is-open .isler-mega { display: block; }
   .isler-mega::before { display: none; }
-  .isler-mega__inner { grid-template-columns: 1fr; gap: 18px; padding: 6px 4px; }
-  /* Mobile mega sits on the DARK links panel — keep label/links/icons light */
-  .isler-mega__label { color: var(--yellow); }
+  .isler-mega__inner { padding: 2px 4px 6px; }
+  /* Mobile mega sits on the DARK links panel — keep labels/links/icons light.
+     Not enough width for 4 headers abreast, so the strip stacks. */
+  .isler-mega__tabs { grid-template-columns: 1fr; gap: 0; border-bottom: none; }
+  .isler-mega__tab {
+    justify-content: space-between; text-align: left;
+    color: var(--yellow); padding: 14px 10px; border-radius: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+  .isler-mega__tab:hover { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
+  .isler-mega__tab::after { display: none; }
+  /* No underline on the dark panel, so the open header gets a tinted row instead */
+  .isler-mega__tab.is-open { background: rgba(244, 180, 0, 0.14); }
+  .isler-mega__list { grid-template-columns: 1fr; gap: 0; }
   .isler-mega__link { color: #fff; }
   .isler-mega__link:hover, .isler-mega__link:focus-visible { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
   .isler-mega__thumb { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); }

@@ -344,50 +344,61 @@
         <div class="isler-mega" id="isler-mega" role="dialog" aria-label="Categories navigation" aria-hidden="true">
           <div class="isler-mega__inner">
 
-            <!-- Column 1 — Cooktops & Hobs -->
-            <div class="isler-mega__col">
-              <p class="isler-mega__label">Cooktops &amp; Hobs</p>
-              <ul class="isler-mega__list">
+            <div class="isler-mega__tabs" role="group" aria-label="Product categories">
+              <button class="isler-mega__tab" type="button" id="mega-t1" aria-expanded="false" aria-controls="mega-p1">
+                <span class="isler-mega__tab-title">Cooktops &amp; Hobs</span>
+                <span class="isler-mega__tab-icon" aria-hidden="true"></span>
+              </button>
+              <button class="isler-mega__tab" type="button" id="mega-t2" aria-expanded="false" aria-controls="mega-p2">
+                <span class="isler-mega__tab-title">Chimneys</span>
+                <span class="isler-mega__tab-icon" aria-hidden="true"></span>
+              </button>
+              <button class="isler-mega__tab" type="button" id="mega-t3" aria-expanded="false" aria-controls="mega-p3">
+                <span class="isler-mega__tab-title">Ovens &amp; Microwaves</span>
+                <span class="isler-mega__tab-icon" aria-hidden="true"></span>
+              </button>
+              <button class="isler-mega__tab" type="button" id="mega-t4" aria-expanded="false" aria-controls="mega-p4">
+                <span class="isler-mega__tab-title">Small Domestic Appliances</span>
+                <span class="isler-mega__tab-icon" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <div class="isler-mega__panels">
+              <div class="isler-mega__panel" id="mega-p1" role="region" aria-labelledby="mega-t1">
+                <div class="isler-mega__panel-inner">
+                  <ul class="isler-mega__list">
                 <li><a class="isler-mega__link isler-mega__link--lead" href="built-in-hobs.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8" cy="8" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/></svg></span><span>Built-in Hobs</span></a></li><li><a class="isler-mega__link" href="tablet-hobs.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="8" cy="12" r="1.8"/><circle cx="16" cy="12" r="1.8"/></svg></span><span>Tablet Hobs</span></a></li>
                 <li><a class="isler-mega__link" href="gas-cooktops.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span>Gas Cooktops</span></a></li>
                 <li><a class="isler-mega__link" href="induction-cooktops.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="12" cy="12" r="5"/><path d="M12 9a3 3 0 0 1 0 6"/></svg></span><span>Induction Cooktops</span></a></li><li><a class="isler-mega__link" href="infrared-cooktops.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><line x1="8" y1="8" x2="8" y2="16"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="16" y1="8" x2="16" y2="16"/></svg></span><span>Infrared Cooktops</span></a></li><li><a class="isler-mega__link" href="hybrid-cooktops.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8" cy="12" r="2.4"/><path d="M15 9c-1.1 1.2-1.1 2.6 0 3.8"/><path d="M15 9c1.1 1.2 1.1 2.6 0 3.8"/></svg></span><span>Hybrid Cooktops</span></a></li>
-              </ul>
-            </div>
-
-            <!-- Column 2 — Chimneys -->
-            <div class="isler-mega__col">
-              <p class="isler-mega__label">Chimneys</p>
-              <ul class="isler-mega__list">
+                  </ul>
+                </div>
+              </div>
+              <div class="isler-mega__panel" id="mega-p2" role="region" aria-labelledby="mega-t2">
+                <div class="isler-mega__panel-inner">
+                  <ul class="isler-mega__list">
                 <li><a class="isler-mega__link" href="kitchen-chimney-t-shape.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 3h4v6h-4z"/><path d="M4 9h16"/><path d="M6 9l1.4 6h9.2L18 9"/></svg></span><span>T-Shape</span></a></li>
                 <li><a class="isler-mega__link" href="kitchen-chimney-curve.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 3h2v3h-2z"/><path d="M4 15c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M4 15h16"/></svg></span><span>Curve Shape</span></a></li>
                 <li><a class="isler-mega__link" href="kitchen-chimney-inclined.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v3.5"/><path d="M3.5 16l14-8.5 3 3.2-14 8.5z"/><path d="M6.5 17.5v2"/></svg></span><span>Inclined Shape</span></a></li><li><a class="isler-mega__link" href="kitchen-chimney-other.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="5" width="12" height="5" rx="1"/><path d="M8 10l1.6 5h4.8L16 10"/><path d="M3 7.5h3M18 7.5h3"/></svg></span><span>Other Shapes</span></a></li>
-              </ul>
-            </div>
-
-            <!-- Column 3 — Ovens & Microwaves -->
-            <div class="isler-mega__col">
-              <p class="isler-mega__label">Ovens &amp; Microwaves</p>
-              <ul class="isler-mega__list">
+                  </ul>
+                </div>
+              </div>
+              <div class="isler-mega__panel" id="mega-p3" role="region" aria-labelledby="mega-t3">
+                <div class="isler-mega__panel-inner">
+                  <ul class="isler-mega__list">
                 <li><a class="isler-mega__link" href="built-in-ovens.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9.5 6.5h.01"/><rect x="6" y="12" width="12" height="5" rx="1"/></svg></span><span>Built-in Ovens</span></a></li>
                 <li><a class="isler-mega__link" href="built-in-microwaves.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><rect x="5" y="8" width="9" height="8" rx="1"/><path d="M18 8v8"/><path d="M18 11h.01"/></svg></span><span>Built-in Microwave</span></a></li>
-              </ul>
-            </div>
-
-            <!-- Column 5 — Small Domestic Appliances -->
-            <div class="isler-mega__col">
-              <p class="isler-mega__label">Small Domestic Appliances</p>
-              <ul class="isler-mega__list">
+                  </ul>
+                </div>
+              </div>
+              <div class="isler-mega__panel" id="mega-p4" role="region" aria-labelledby="mega-t4">
+                <div class="isler-mega__panel-inner">
+                  <ul class="isler-mega__list">
                 <li><a class="isler-mega__link" href="air-purifiers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 8c2 1 4 1 6 0"/><path d="M9 11.5c2 1 4 1 6 0"/><path d="M10 16h4"/></svg></span><span>Air Purifiers</span></a></li>
                 <li><a class="isler-mega__link" href="stand-mixers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h8a4 4 0 0 1 4 4v2h-3"/><path d="M4 5v4"/><path d="M7 13h11l-1.4 5a2 2 0 0 1-1.9 1.5h-4.4a2 2 0 0 1-1.9-1.5z"/></svg></span><span>Stand Mixers</span></a></li><li><a class="isler-mega__link" href="dough-makers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span>Dough Makers</span></a></li><li><a class="isler-mega__link" href="juicers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3h10l-1 4H8z"/><path d="M8 7l1.2 12.5a1.5 1.5 0 0 0 1.5 1.5h2.6a1.5 1.5 0 0 0 1.5-1.5L16 7"/><path d="M8.7 12h6.6"/></svg></span><span>Juicers</span></a></li><li><a class="isler-mega__link" href="vacuum-cleaners.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="15" cy="15" r="5"/><circle cx="15" cy="15" r="1.5"/><path d="M10.6 11.6 8 6a2 2 0 0 0-2-1.5H4"/><path d="M4 19.5h4.5"/></svg></span><span>Vacuum Cleaners</span></a></li><li><a class="isler-mega__link" href="coffee-machines.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h13v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/><path d="M17 10h1.6a2.4 2.4 0 0 1 0 4.8H17"/><path d="M8 3.5v2M11.5 3.5v2"/><line x1="4.5" y1="20.5" x2="16.5" y2="20.5"/></svg></span><span>Coffee Machines</span></a></li>
-              </ul>
-            </div>
-
-            <!-- Column 6 — Small Domestic Appliances (continued) -->
-            <div class="isler-mega__col">
-              <p class="isler-mega__label" aria-hidden="true">&nbsp;</p>
-              <ul class="isler-mega__list">
-                <li><a class="isler-mega__link" href="air-fryers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span>Air Fryers</span></a></li><li><a class="isler-mega__link" href="kettles.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span>Kettles</span></a></li><li><a class="isler-mega__link" href="toasters.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span>Toasters</span></a></li><li><a class="isler-mega__link" href="nutri-blenders.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3h8l-1 5H9z"/><path d="M9 8h6l-.7 10.4a2 2 0 0 1-2 1.9h-.6a2 2 0 0 1-2-1.9z"/><path d="M9.6 13h4.8"/></svg></span><span>Nutri Blenders</span></a></li><li><a class="isler-mega__link" href="choppers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h16"/><path d="M5.6 10l1 8a2 2 0 0 0 2 1.8h6.8a2 2 0 0 0 2-1.8l1-8"/><path d="M9 5.6l3 2.6 3-2.6"/></svg></span><span>Choppers</span></a></li><li><a class="isler-mega__link" href="dishwashers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M7 5.5h.01"/><path d="M10 5.5h.01"/><circle cx="12" cy="14.5" r="3.4"/></svg></span><span>Dishwashers</span></a></li>
-              </ul>
+<li><a class="isler-mega__link" href="air-fryers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span>Air Fryers</span></a></li><li><a class="isler-mega__link" href="kettles.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span>Kettles</span></a></li><li><a class="isler-mega__link" href="toasters.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span>Toasters</span></a></li><li><a class="isler-mega__link" href="nutri-blenders.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 3h8l-1 5H9z"/><path d="M9 8h6l-.7 10.4a2 2 0 0 1-2 1.9h-.6a2 2 0 0 1-2-1.9z"/><path d="M9.6 13h4.8"/></svg></span><span>Nutri Blenders</span></a></li><li><a class="isler-mega__link" href="choppers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h16"/><path d="M5.6 10l1 8a2 2 0 0 0 2 1.8h6.8a2 2 0 0 0 2-1.8l1-8"/><path d="M9 5.6l3 2.6 3-2.6"/></svg></span><span>Choppers</span></a></li><li><a class="isler-mega__link" href="dishwashers.html"><span class="isler-mega__thumb"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M7 5.5h.01"/><path d="M10 5.5h.01"/><circle cx="12" cy="14.5" r="3.4"/></svg></span><span>Dishwashers</span></a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
 
           </div>

@@ -30,6 +30,51 @@
       if (trigger) trigger.setAttribute('aria-expanded', 'false');
     }
     function scheduleClose() { clearTimeout(closeTimer); closeTimer = setTimeout(closeMega, HOVER_DELAY); }
+
+    /* ── Mega category strip: 4 headers across the top; clicking one drops its
+       sub-categories down underneath and collapses whichever was open.
+       Header and panel are separate elements, paired by aria-controls.
+       Heights animate from px, then release to `auto` so a resize never
+       leaves the open panel clipped. */
+    var megaOpenTab = null;
+    if (mega) {
+      var tabs = Array.prototype.slice.call(mega.querySelectorAll('.isler-mega__tab'));
+
+      var panelOf = function (tab) { return document.getElementById(tab.getAttribute('aria-controls')); };
+
+      var collapseTab = function (tab) {
+        var panel = panelOf(tab);
+        panel.style.height = panel.scrollHeight + 'px';   // pin auto -> px so it can animate
+        void panel.offsetHeight;                          // force reflow
+        tab.classList.remove('is-open');
+        tab.setAttribute('aria-expanded', 'false');
+        panel.style.height = '0px';
+      };
+      var expandTab = function (tab) {
+        var panel = panelOf(tab);
+        tab.classList.add('is-open');
+        tab.setAttribute('aria-expanded', 'true');
+        panel.style.height = panel.scrollHeight + 'px';
+      };
+
+      mega.addEventListener('transitionend', function (e) {
+        if (e.propertyName !== 'height') return;
+        if (megaOpenTab && panelOf(megaOpenTab) === e.target) e.target.style.height = 'auto';
+      });
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function (e) {
+          e.preventDefault();
+          var wasOpen = tab === megaOpenTab;
+          if (megaOpenTab) { collapseTab(megaOpenTab); megaOpenTab = null; }
+          if (!wasOpen) { expandTab(tab); megaOpenTab = tab; }
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (megaOpenTab) panelOf(megaOpenTab).style.height = 'auto';
+      });
+    }
     function closeBurger() { nav.classList.remove('is-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); }
 
     if (item) {
