@@ -101,6 +101,29 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { closeMega(); closeBurger(); }
     });
+
+    /* ── Auto-hide sticky bar ──
+       Sticks to the top edge; slides up out of view on scroll-down (once past
+       the bar), slides back in on any upward scroll or near the top. Never
+       hides while a menu (mega or mobile) is open. rAF-throttled. */
+    var lastY = window.pageYOffset || 0, ticking = false;
+    function onScroll() {
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var menuOpen = nav.classList.contains('is-open') ||
+                     (item && item.classList.contains('is-open'));
+      if (y <= 4 || menuOpen) {
+        nav.classList.remove('isler-nav--hidden');            // at top / menu open
+      } else if (y > lastY + 2 && y > 80) {
+        nav.classList.add('isler-nav--hidden');               // scrolling down, past the bar
+      } else if (y < lastY - 8) {
+        nav.classList.remove('isler-nav--hidden');            // scrolling up
+      }
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
   }
 
   function init() { document.querySelectorAll('.isler-nav').forEach(initNav); }
