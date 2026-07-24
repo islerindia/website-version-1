@@ -540,133 +540,6 @@
 
 
     /* ══════════════════════════════════════════════════════════════
-       USP SECTION — What Sets Us Apart
-    ══════════════════════════════════════════════════════════════ */
-
-    .usp-section {
-      /* Lightened from var(--navy) #0B1A3D so the dark "Isler" wordmark in the
-         translucent navbar pill stays legible when it scrolls over this section. */
-      background: #475A82;
-      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
-      position: relative;
-      overflow: clip;
-    }
-
-    .usp-section .section-header {
-      margin-bottom: 56px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .usp-section .section-eyebrow {
-      color: var(--yellow);
-    }
-
-    .usp-section .section-heading {
-      color: var(--white);
-    }
-
-    .usp-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      max-width: 1680px;
-      margin: 0 auto;
-      counter-reset: usp;
-      position: relative;
-      z-index: 1;
-    }
-
-    .usp-card {
-      counter-increment: usp;
-      padding: 40px 40px 52px;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      transition: background 280ms ease;
-    }
-
-    .usp-card:last-child {
-      border-right: none;
-    }
-
-    .usp-card:hover {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .usp-card::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 32px;
-      bottom: 40px;
-      width: 3px;
-      background: var(--yellow);
-      border-radius: 2px;
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 280ms var(--ease-out);
-    }
-
-    .usp-card:hover::after {
-      transform: scaleY(1);
-    }
-
-    .usp-card__num {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      color: var(--yellow);
-      margin-bottom: 22px;
-    }
-
-    .usp-card__num::before {
-      content: '0' counter(usp);
-    }
-
-    .usp-card__title {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-      line-height: 1.22;
-    }
-
-    .usp-card__text {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.72);
-      line-height: 1.65;
-    }
-
-    @media (max-width: 1023px) {
-      .usp-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .usp-card {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .usp-card:nth-child(even) {
-        border-right: none;
-      }
-      .usp-card:nth-last-child(-n+2) {
-        border-bottom: none;
-      }
-    }
-
-    @media (max-width: 599px) {
-      .usp-grid {
-        grid-template-columns: 1fr;
-      }
-      .usp-card {
-        border-right: none;
-      }
-      .usp-card:last-child {
-        border-bottom: none;
-      }
-    }
-
-
-    /* ══════════════════════════════════════════════════════════════
        INSIGHTS / BLOG SECTION
        Adapted from Isler-India-Revamp (teal accent → demo yellow/navy)
     ══════════════════════════════════════════════════════════════ */
@@ -1461,75 +1334,60 @@
   <section id="hero-section" class="hero-section">
     <div class="hero-sticky">
 
-      <!-- ── Cinematic scene images: 5 layers crossfaded by scroll ─────────── -->
+      <!-- ── Cinematic scene layers: 4 layers crossfaded by scroll ─────────── -->
 
-      <!-- Scene 1 — 0–20%: Wide establishing shot -->
-      <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/scene-01-establishing.webp"
-             alt="Premium moody kitchen establishing shot">
-      </div>
-
-      <!-- Scene 2 — 20–40%: Chimney hero with under-cabinet lighting -->
-      <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/scene-02-chimney-hero.webp"
-             alt="Isler chimney with dramatic under-cabinet lighting">
-      </div>
-
-      <!-- Scene 3 — 40–60%: Blue flames with brass knobs on marble -->
-      <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/factory_floor.webp"
-             alt="Blue gas flames with brass knobs on marble surface">
-      </div>
-
-      <!-- Scene 4 — 60–80%: Glowing LED indicators on brushed metal -->
-      <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/production.webp"
-             alt="Isler appliance detail">
-      </div>
-
-      <!-- Scene 5 — 80–100%: Wide luxury kitchen pullback -->
+      <!-- Scene 1 — Designed to Belong Together — BG: product-series image (STAND-IN placeholder, Isler to supply final product-series shot) -->
       <div class="hero-scene-img" aria-hidden="true">
         <img src="assets/images/scenes/scene-05-finale-pullback.webp"
-             alt="Wide luxury kitchen with Isler appliances">
+             alt="Isler kitchen appliances designed to belong together">
+      </div>
+
+      <!-- Scene 2 — Built on a Supply Chain You Can Trust — BG: manufacturing / supply chain -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/factory_floor.webp"
+             alt="Isler manufacturing floor and supply chain">
+      </div>
+
+      <!-- Scene 3 — Every Kitchen. Every Style. Every Need. — BG: products-showcase VIDEO (STAND-IN placeholder, Isler to supply final product-range video) -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <video src="assets/videos/assembly-line.mp4" autoplay muted loop playsinline
+               aria-label="Isler product range showcase"></video>
+      </div>
+
+      <!-- Scene 4 — Innovation That Works for You — BG: appliance / innovation -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-04-isler.webp"
+             alt="Isler appliance innovation detail">
       </div>
 
       <!-- Dark gradient overlay — left-heavy for text legibility -->
       <div class="hero-text-overlay" aria-hidden="true"></div>
 
-      <!-- ── Text scenes: 5 scenes driven by GSAP scroll progress ─────────── -->
+      <!-- ── Text scenes: 4 scenes driven by GSAP scroll progress ─────────── -->
       <div class="hero-text-layer" aria-live="polite">
 
-        <!-- Scene 1 — 0–20%: Establishing -->
+        <!-- Scene 1 -->
         <div class="hero-scene">
-          <p class="hero-eyebrow">Premium Kitchen Appliances</p>
-          <h1 class="hero-headline">Built for the<br>Heart of Your Home</h1>
+          <h1 class="hero-headline">Designed to Belong Together</h1>
+          <p class="hero-subhead">Perfectly matched hobs chimneys and appliances that create one seamless kitchen experience.</p>
         </div>
 
-        <!-- Scene 2 — 20–40%: Chimney / silence -->
+        <!-- Scene 2 -->
         <div class="hero-scene">
-          <p class="hero-eyebrow">Engineered for Silence</p>
-          <p class="hero-headline">Whisper-Quiet<br>Operation</p>
-          <p class="hero-subhead">45 dB. The quietest in its class.</p>
+          <p class="hero-headline">Built on a Supply Chain You Can Trust</p>
+          <p class="hero-subhead">From manufacturing to delivery our robust supply network ensures every product reaches you with speed precision and uncompromising quality.</p>
         </div>
 
-        <!-- Scene 3 — 40–60%: Hob / precision -->
+        <!-- Scene 3 -->
         <div class="hero-scene">
-          <p class="hero-eyebrow">Precision Cooking</p>
-          <p class="hero-headline">Full Brass.<br>Full Power.</p>
-          <p class="hero-subhead">Spill-proof burners engineered to last.</p>
+          <p class="hero-headline">Every Kitchen Every Style Every Need</p>
+          <p class="hero-subhead">From modern essentials to premium innovations our extensive collection offers the perfect solution for every kitchen.</p>
         </div>
 
-        <!-- Scene 4 — 60–80%: Control panel / IoT -->
-        <div class="hero-scene">
-          <p class="hero-eyebrow">Intelligent by Design</p>
-          <p class="hero-headline">IoT-Enabled<br>Smart Control</p>
-          <p class="hero-subhead">Adapts to your cooking. Automatically.</p>
-        </div>
-
-        <!-- Scene 5 — 80–100%: Finale with CTA -->
+        <!-- Scene 4 — Finale with CTA -->
         <div class="hero-scene scene-cta">
-          <p class="hero-eyebrow">The Complete Experience</p>
-          <p class="hero-headline">Crafted for the<br>Modern Kitchen</p>
+          <p class="hero-headline">Innovation That Works for You</p>
+          <p class="hero-subhead">Smart technologies engineered to deliver superior performance greater efficiency and effortless everyday cooking.</p>
           <a href="#range" class="hero-cta-btn">Explore Products</a>
         </div>
 
@@ -1804,49 +1662,6 @@
     play();
   })();
   </script>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 3 — What Sets Us Apart (USP)
-       Content sourced verbatim from Isler-India-Revamp homepage
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section class="usp-section">
-    <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.07);top:40%;left:2%;"></div>
-    <div class="section-header">
-      <span class="section-eyebrow">Our USP</span>
-      <h2 class="section-heading">What Sets Us Apart?</h2>
-    </div>
-
-    <div class="usp-grid">
-
-      <article class="usp-card">
-        <span class="usp-card__num" aria-hidden="true"></span>
-        <h3 class="usp-card__title">Designed to Belong Together.</h3>
-        <p class="usp-card__text">Perfectly matched hobs, chimneys, and appliances that create one seamless kitchen experience.</p>
-      </article>
-
-      <article class="usp-card">
-        <span class="usp-card__num" aria-hidden="true"></span>
-        <h3 class="usp-card__title">Built on a Supply Chain You Can Trust.</h3>
-        <p class="usp-card__text">From manufacturing to delivery, our robust supply network ensures every product reaches you with speed, precision, and uncompromising quality.</p>
-      </article>
-
-      <article class="usp-card">
-        <span class="usp-card__num" aria-hidden="true"></span>
-        <h3 class="usp-card__title">Every Kitchen. Every Style. Every Need.</h3>
-        <p class="usp-card__text">From modern essentials to premium innovations, our extensive collection offers the perfect solution for every kitchen.</p>
-      </article>
-
-      <article class="usp-card">
-        <span class="usp-card__num" aria-hidden="true"></span>
-        <h3 class="usp-card__title">Innovation That Works for You.</h3>
-        <p class="usp-card__text">Smart technologies engineered to deliver superior performance, greater efficiency, and effortless everyday cooking.</p>
-      </article>
-
-    </div>
-  </section>
 
 
   <!-- ═══════════════════════════════════════════════════════════════════════

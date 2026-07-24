@@ -9,13 +9,11 @@
   // Fix 2: Force scroll to top before anything else runs.
   window.scrollTo(0, 0);
 
-  // Preload all 5 cinematic scene images
+  // Preload the cinematic scene images (scene 3 is a <video>, not preloaded here)
   var SCENE_SRCS = [
-    'assets/images/scenes/scene-01-establishing.webp',
-    'assets/images/scenes/scene-02-chimney-hero.webp',
-    'assets/images/scenes/scene-03-hob-closeup.webp',
-    'assets/images/scenes/scene-04-isler.webp',
-    'assets/images/scenes/scene-05-finale-pullback.webp'
+    'assets/images/scenes/scene-05-finale-pullback.webp',
+    'assets/images/scenes/factory_floor.webp',
+    'assets/images/scenes/scene-04-isler.webp'
   ];
 
   SCENE_SRCS.forEach(function (src) { (new Image()).src = src; });
@@ -35,8 +33,8 @@
     var textScenes = Array.prototype.slice.call(document.querySelectorAll('.hero-scene'));
     var scrollHint = document.getElementById('scroll-hint');
 
-    var TOTAL = imgLayers.length; // 5
-    var STEP  = 1 / TOTAL;        // 0.2 per scene
+    var TOTAL = imgLayers.length; // 4
+    var STEP  = 1 / TOTAL;        // 0.25 per scene
     var FADE  = 0.025;            // half of 5% crossfade window
 
     // Fix 4: Explicit initial states — gsap.set() is the single source of truth
