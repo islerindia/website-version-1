@@ -1206,6 +1206,87 @@
       .mfg-media { aspect-ratio: 3 / 2; }
     }
 
+    /* ── Manufacturing Excellence — numbered step flow ─────────────────── */
+    .mfg-flow { background: var(--off-white); }
+    .mfg-flow__intro { text-align: center; max-width: 780px; margin: 0 auto clamp(36px, 5vw, 60px); }
+    .mfg-flow__intro .mfg-sub { margin-left: auto; margin-right: auto; }
+    .mfg-flow__steps { position: relative; max-width: 1520px; margin: 0 auto; }
+    /* vertical connector running through the number badges */
+    .mfg-flow__steps::before {
+      content: ""; position: absolute; top: 34px; bottom: 34px; left: 27px; width: 2px;
+      background: linear-gradient(180deg, var(--yellow), rgba(11,26,61,0.14));
+    }
+    .mfg-flow__step {
+      position: relative;
+      display: grid;
+      grid-template-columns: 56px minmax(0,1fr) minmax(0,1.5fr);
+      grid-template-areas: "num body media";
+      gap: clamp(24px, 3.5vw, 64px);
+      align-items: center;
+      padding: clamp(30px, 4.5vw, 64px) 0;
+    }
+    /* Zig-zag: even steps put the media on the left, copy on the right */
+    .mfg-flow__step:nth-child(even) {
+      grid-template-columns: 56px minmax(0,1.5fr) minmax(0,1fr);
+      grid-template-areas: "num media body";
+    }
+    .mfg-flow__num {
+      grid-area: num;
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--navy); color: #fff; font-weight: 800; font-size: 20px;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 0 0 6px var(--off-white), 0 8px 22px rgba(11,26,61,0.22);
+      z-index: 1;
+    }
+    .mfg-flow__body { grid-area: body; }
+    .mfg-flow__step-title { font-size: clamp(22px, 2.6vw, 34px); font-weight: 700; letter-spacing: -0.01em; color: var(--navy); line-height: 1.18; }
+    .mfg-flow__step-copy { margin-top: 12px; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.65; color: var(--gray-mid); max-width: 52ch; }
+    .mfg-flow__media {
+      grid-area: media; position: relative;
+      border-radius: var(--radius-lg); overflow: hidden;
+      aspect-ratio: 3 / 2; min-height: clamp(300px, 34vw, 460px); background: #0B1A3D;
+      box-shadow: 0 24px 56px rgba(11,26,61,0.18);
+    }
+    .mfg-flow__media > video,
+    .mfg-flow__media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* Light media panel — for logos / placeholders */
+    .mfg-flow__media--light {
+      background: linear-gradient(135deg, #ffffff 0%, var(--off-white) 100%);
+      border: 1px solid rgba(11,26,61,0.10); box-shadow: 0 16px 40px rgba(11,26,61,0.10);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .mfg-flow__certs { display: flex; flex-wrap: wrap; gap: clamp(20px,3vw,48px); align-items: center; justify-content: center; padding: clamp(24px,3vw,44px); }
+    .mfg-flow__certs img { height: clamp(78px, 10vw, 130px); width: auto; object-fit: contain; }
+    .mfg-flow__partners { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px,1.4vw,18px); padding: clamp(22px,3vw,40px); width: 100%; height: 100%; align-content: center; }
+    .mfg-flow__partner {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      padding: clamp(18px,2.4vw,30px) 8px; border: 1px dashed rgba(11,26,61,0.22); border-radius: 12px;
+      background: rgba(255,255,255,0.6);
+      color: rgba(11,26,61,0.5); font-size: 12px; font-weight: 600; text-align: center;
+    }
+    .mfg-flow__partner svg { width: 30px; height: 30px; color: rgba(11,26,61,0.4); }
+    .mfg-flow__ph { flex-direction: column; gap: 18px; color: var(--navy); text-align: center; padding: 24px; }
+    .mfg-flow__ph svg {
+      width: 60px; height: 60px; padding: 26px; box-sizing: content-box;
+      border-radius: 50%; background: rgba(11,26,61,0.05); color: rgba(11,26,61,0.55);
+    }
+    .mfg-flow__ph-badge {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(244,180,0,0.92); color: var(--navy); padding: 7px 16px; border-radius: 999px;
+    }
+    @media (max-width: 900px) {
+      .mfg-flow__step,
+      .mfg-flow__step:nth-child(even) {
+        grid-template-columns: 44px minmax(0,1fr);
+        grid-template-areas: "num body" "media media";
+        row-gap: 18px;
+      }
+      .mfg-flow__num { width: 44px; height: 44px; font-size: 17px; box-shadow: 0 0 0 5px var(--off-white), 0 6px 16px rgba(11,26,61,0.22); }
+      .mfg-flow__steps::before { left: 21px; }
+      .mfg-flow__step-copy { max-width: none; }
+    }
+
     /* ── Reduced motion: never hide, never animate ── */
     @media (prefers-reduced-motion: reduce) {
       .mfg-anim-on .mfg-reveal { opacity: 1 !important; transform: none !important; }
@@ -1343,7 +1424,8 @@
           <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
         <ul class="isler-nav__submenu">
-          <li><a href="team.html">Our Team</a></li>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="team.html">Our Leaders</a></li>
         </ul>
       </li>
       <li><a href="career.html">Career</a></li>
@@ -1450,100 +1532,97 @@
       </div>
     </section>
 
-    <!-- ── 2. INFRASTRUCTURE AT A GLANCE ────────────────────────────────── -->
-    <section class="mfg-section mfg-production mfg-pad" aria-labelledby="mfg-prod-h" style="padding-top:72px;padding-bottom:72px;">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
+    <!-- ── Manufacturing Excellence: 9-step flow (factory → dispatch) ──── -->
+    <section class="mfg-section mfg-flow mfg-pad" aria-labelledby="mfg-flow-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.16);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;right:-60px;"></div>
       <div class="mfg-inner">
-        <!-- Heading + intro (top-left, above the data box) -->
-        <div>
-          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h" style="font-size:clamp(28px,3vw,40px);">Infrastructure at a Glance</h2>
-          <p class="mfg-sub mfg-reveal" style="margin-top:14px;max-width:none;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof — enabling faster iteration from design to dispatch.</p>
+        <div class="mfg-flow__intro mfg-reveal">
+          <span class="mfg-eyebrow">Manufacturing Excellence</span>
+          <h2 class="mfg-heading" id="mfg-flow-h">From Factory Floor to Finished Product</h2>
+          <p class="mfg-sub">Every Isler appliance moves through one connected, quality-first flow — nine stages, all under one roof.</p>
         </div>
-        <!-- Video (left) + Process-Led operations w/ facility stat box (right) -->
-        <div class="mfg-prod-grid" style="align-items:center;margin-top:clamp(32px,4vw,48px);">
-          <div class="mfg-media mfg-reveal">
-            <video autoplay muted loop playsinline preload="metadata"
-                   aria-hidden="true" tabindex="-1"
-                   disablepictureinpicture>
-              <source src="assets/videos/assembly-line.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div>
-            <h3 class="mfg-heading mfg-reveal" id="mfg-vendor-h" style="font-size:clamp(22px,2.4vw,32px);margin-bottom:22px;">Process-Led, Digital &amp; Quality-First Operations</h3>
-            <ul class="mfg-feature-list mfg-reveal" style="margin-bottom:28px;">
-              <li class="mfg-feature">World-Class Manufacturing Organization</li>
-              <li class="mfg-feature">Process Excellence</li>
-              <li class="mfg-feature">ERP &amp; Data Backbone</li>
-              <li class="mfg-feature">Supply Network Control Tower (SNCT)</li>
-              <li class="mfg-feature">Digital Shopfloor</li>
-            </ul>
-            <!-- Facility "at a glance" data box (client content, verbatim) -->
-            <div class="infra-box mfg-reveal">
-              <div class="infra-box__cell"><span class="infra-box__figure">30,000 sq. ft.</span></div>
-              <div class="infra-box__cell"><span class="infra-box__text">Assembly, Warehousing, Quality Labs, NPD</span></div>
-              <div class="infra-box__cell"><span class="infra-box__text">Integrated Facility</span></div>
+        <div class="mfg-flow__steps">
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">1</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Whole Factory</h3>
+              <p class="mfg-flow__step-copy">A 30,000 sq. ft. integrated facility in Greater Noida that brings assembly, warehousing, quality labs and NPD together under one roof.</p>
             </div>
+            <div class="mfg-flow__media"><img src="assets/images/manufacturing/production.webp" alt="Isler manufacturing facility" loading="lazy"></div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ───────────────────────────── -->
-    <section class="mfg-section mfg-vendors mfg-pad" aria-labelledby="mfg-supply-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.07);top:40%;left:2%;"></div>
-      <div class="mfg-inner">
-        <div class="mfg-vendor-head">
-          <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Supply Chain Strength</span>
-          <h2 class="mfg-heading mfg-reveal" id="mfg-supply-h">Trusted Partner Network</h2>
-          <p class="mfg-sub mfg-reveal">A resilient base of audited component and material partners — securing quality, capacity and continuity across every build.</p>
-        </div>
-        <!-- PLACEHOLDER vendor logo slots — Isler to populate with approved partner logos.
-             Do NOT add third-party brand logos without authorisation. -->
-        <!-- 6 slots = one clean row (scrolls horizontally on narrow screens). -->
-        <div class="mfg-vendor-grid mfg-reveal">
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-        </div>
-      </div>
-    </section>
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">2</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Assembly Lines + Warehouse</h3>
+              <p class="mfg-flow__step-copy">Dedicated product assembly lines feed an on-site warehouse, keeping the flow from build to dispatch fast and fully traceable.</p>
+            </div>
+            <div class="mfg-flow__media"><video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture><source src="assets/videos/assembly-line.mp4" type="video/mp4"></video></div>
+          </div>
 
-    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
-    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
-      <div class="mfg-inner">
-        <div class="mfg-labs__banner mfg-reveal">
-          <video autoplay muted loop playsinline preload="metadata"
-                 aria-hidden="true" tabindex="-1"
-                 disablepictureinpicture>
-            <source src="assets/videos/lab-test.mp4" type="video/mp4">
-          </video>
-        </div>
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">3</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Digital Manufacturing</h3>
+              <p class="mfg-flow__step-copy">A connected digital shopfloor with real-time line monitoring and a Supply Network Control Tower (SNCT) for end-to-end visibility.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light mfg-flow__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg><span class="mfg-flow__ph-badge">Placeholder · visual to come</span></div>
+          </div>
 
-        <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
-        <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our DNA - Engineered, Tested, and Certified to Global Standards</h2>
-        <p class="mfg-sub mfg-reveal" style="max-width:80ch;margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
-      </div>
-    </section>
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">4</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">NPD Capability</h3>
+              <p class="mfg-flow__step-copy">In-house New Product Development — concept, prototyping and pilot runs — for faster, lower-risk time-to-market.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light mfg-flow__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg><span class="mfg-flow__ph-badge">Placeholder · visual to come</span></div>
+          </div>
 
-    <!-- ── 5. CERTIFICATIONS (ISO + BIS) ────────────────────────────────── -->
-    <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="mfg-inner">
-        <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Our Certifications</h2>
-        <div class="mfg-cert-row mfg-reveal">
-          <span class="mfg-cert"><img src="assets/images/certifications/iso-9001.webp" alt="ISO 9001 certified" loading="lazy"></span>
-          <span class="mfg-cert"><img src="assets/images/certifications/iso-14001.webp" alt="ISO 14001 certified" loading="lazy"></span>
-          <span class="mfg-cert"><img src="assets/images/certifications/bis.webp" alt="BIS — Bureau of Indian Standards" loading="lazy"></span>
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">5</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Quality Lab</h3>
+              <p class="mfg-flow__step-copy">Advanced in-house testing labs enforce a zero-defect philosophy, backed by our Quality Management System (QMS).</p>
+            </div>
+            <div class="mfg-flow__media"><video autoplay muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture><source src="assets/videos/lab-test.mp4" type="video/mp4"></video></div>
+          </div>
+
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">6</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">IQC, OQC</h3>
+              <p class="mfg-flow__step-copy">Incoming Quality Control on every component and Outgoing Quality Control on every shipment — quality gated at both ends.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light mfg-flow__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg><span class="mfg-flow__ph-badge">Placeholder · visual to come</span></div>
+          </div>
+
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">7</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Certifications</h3>
+              <p class="mfg-flow__step-copy">ISO 9001, ISO 14001 and BIS certified — engineered, tested and certified to global standards.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light"><div class="mfg-flow__certs"><img src="assets/images/certifications/iso-9001.webp" alt="ISO 9001 certified" loading="lazy"><img src="assets/images/certifications/iso-14001.webp" alt="ISO 14001 certified" loading="lazy"><img src="assets/images/certifications/bis.webp" alt="BIS — Bureau of Indian Standards" loading="lazy"></div></div>
+          </div>
+
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">8</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">Partner Network</h3>
+              <p class="mfg-flow__step-copy">A resilient base of audited component and material partners — securing quality, capacity and continuity across every build.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light"><div class="mfg-flow__partners"><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div><div class="mfg-flow__partner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div></div></div>
+          </div>
+
+          <div class="mfg-flow__step mfg-reveal">
+            <div class="mfg-flow__num">9</div>
+            <div class="mfg-flow__body">
+              <h3 class="mfg-flow__step-title">ERP & Data Management</h3>
+              <p class="mfg-flow__step-copy">An ERP and data backbone connects planning, production and dispatch on a single source of truth.</p>
+            </div>
+            <div class="mfg-flow__media mfg-flow__media--light mfg-flow__ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span class="mfg-flow__ph-badge">Placeholder · visual to come</span></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1825,7 +1904,7 @@
           </h3>
           <ul class="footer__col-links">
             <li><a href="about.html">About Isler</a></li>
-            <li><a href="team.html">Our Team</a></li>
+            <li><a href="team.html">Our Leaders</a></li>
             <li><a href="career.html">Career</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="blog.html">Blog</a></li>
