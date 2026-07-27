@@ -1219,8 +1219,32 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/hero-sequence.js" defer></script>
   <link rel="stylesheet" href="assets/css/nav.css">
+
+  <!-- Homepage-only navbar override: edge-to-edge rectangular bar, a touch
+       shorter, and pinned to the top (no auto-hide) while scrolling. -->
+  <style>
+    body.home-edgenav .isler-nav {
+      left: 0;
+      right: 0;
+      transform: none;
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+      box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
+      padding-top: 9px;                 /* thinner bar (was 13px) */
+      padding-bottom: 9px;
+      padding-left: max(28px, 3.2vw);
+      padding-right: max(28px, 3.2vw);
+    }
+    /* Stay fixed on top while scrolling — neutralise the auto-hide slide-up */
+    body.home-edgenav .isler-nav.isler-nav--hidden { transform: none; }
+  </style>
 </head>
-<body>
+<body class="home-edgenav">
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        NAVBAR — fixed pill, floats above the hero canvas
