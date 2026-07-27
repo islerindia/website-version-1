@@ -77,14 +77,20 @@
     }
     function closeBurger() { nav.classList.remove('is-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); }
 
-    if (item) {
-      item.addEventListener('mouseenter', function () { if (window.innerWidth >= DESKTOP) openMega(); });
-      item.addEventListener('mouseleave', function () { if (window.innerWidth >= DESKTOP) scheduleClose(); });
-    }
+    // "Categories" no longer opens a dropdown — it takes the user to the Key
+    // Products Range section (which now stands in for the categories). Hover is
+    // intentionally NOT wired to openMega any more.
     if (trigger) {
       trigger.addEventListener('click', function (e) {
-        e.preventDefault();
-        (item && item.classList.contains('is-open')) ? closeMega() : openMega();
+        // Smooth-scroll when already on the homepage; otherwise let the href
+        // navigate to index.html#range.
+        var range = document.getElementById('range');
+        if (range) {
+          e.preventDefault();
+          closeMega();
+          range.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (history.replaceState) history.replaceState(null, '', '#range');
+        }
       });
     }
     if (burger) {
