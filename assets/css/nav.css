@@ -407,3 +407,30 @@
 @media (prefers-reduced-motion: reduce) {
   .isler-nav__chev, .isler-mega, .isler-mega__link { transition: none; }
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Edge-to-edge navbar, SITE-WIDE — makes every page's navbar match the
+   homepage: full-width rectangular bar (no floating pill), a touch shorter,
+   pinned to the top with no auto-hide. Placed last so it overrides both the
+   centred-pill base and the responsive min-width rules above by source order.
+   (The homepage's own body.home-edgenav override already matches this.)
+   ════════════════════════════════════════════════════════════════════════ */
+.isler-nav {
+  left: 0;
+  right: 0;
+  transform: none;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  border-radius: 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: max(28px, 3.2vw);
+  padding-right: max(28px, 3.2vw);
+}
+/* Stay fixed while scrolling — neutralise the auto-hide slide-up on all pages */
+.isler-nav--hidden { transform: none; }
