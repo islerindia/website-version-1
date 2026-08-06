@@ -1792,6 +1792,297 @@
     }
 
   </style>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2b / "ISLER AT A GLANCE" — ONE-FRAME FIT
+       Client 2026-08-06: the section has to be readable as a single frame —
+       when the visitor is looking at it, the heading, the media/copy band AND
+       the Capacity at a Glance numbers are all on screen at once. Before this
+       it ran 1161px against a 900px viewport (1109 vs 768 on a laptop), so the
+       numbers only appeared once the heading had scrolled off the top.
+       Method: everything in this section is sized off viewport HEIGHT (vh)
+       rather than width, so the frame self-fits from ~700px-tall laptops up to
+       1080p without one media query per screen size. The band keeps its
+       media-LEFT / copy-RIGHT shape and the same column widths as the other
+       Rev-2 bands — only its height is capped, because the 4/3 aspect-ratio
+       was what pushed the section past the fold.
+       Scoped to (min-width: 901px) and (min-height: 580px). Below 901px wide
+       the band is stacked one-column anyway; below 580px tall the type would
+       have to drop under its readable floor to fit (measured: 573px of content
+       against a 560px screen), so the section just scrolls normally there.
+       NAV CLEARANCE: the frame does NOT centre with equal slack any more. The
+       nav is a 59px fixed pill that re-appears on scroll-up, so the top pad is
+       max(76px, …) — a hard 76px floor keeps the heading clear of it however
+       short the window is. Centring alone gave (100vh - content) / 2, which on
+       a real laptop (768px screen = ~610px of page area after browser chrome
+       and the taskbar) dropped under the pill — that was the whole reason the
+       first cut of this only worked down to 680px and looked unchanged on a
+       normal laptop.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <style id="hp-glance-frame">
+
+    /* base padding — the inline 72px was removed from the section so this
+       cascades; without it .mfg-pad falls back to --space-3xl (160px). */
+    .mfg-production { padding-top: clamp(48px, 5vw, 72px); padding-bottom: clamp(48px, 5vw, 72px); }
+
+    @media (min-width: 901px) and (min-height: 580px) {
+
+      /* ── the frame: AT MOST one screen, never padded out to exactly one.
+         Applied to the four Rev-2 story blocks — Isler at a Glance, Fast NPD,
+         Supply Chain Excellence, and the Certifications & Quality pair.
+
+         This deliberately does NOT set min-height:100svh. The first version
+         did, and forcing every block to a full screen left the thin ones
+         mostly empty — measured at 1600x900 the fill was 79% for Isler at a
+         Glance but 57% for Quality, 52% for NPD and only 34% for Supply
+         Chain, i.e. ~590px of dead space in one section. The client's ask was
+         that a block and its data be readable TOGETHER, which the vh type
+         scale below already guarantees; making each block exactly 100vh was
+         never part of it and only produced the gaps. So each block is now as
+         tall as its own content plus padding, and the clamps keep it inside
+         one screen. */
+      /* Symmetric padding. The earlier max(76px, …) top existed only to keep
+         the heading out from under the fixed nav pill while every block was a
+         full screen and therefore parked at the screen top. Blocks are their
+         own height now, so they no longer line up with the viewport and that
+         allowance just made the top gap 76px against a 22px bottom. */
+      /* Each block owns its screen — min-height is back, because without it a
+         short block leaves room for its neighbour and the visitor sees two at
+         once (the client hit this looking at Fast NPD and finding "Capacity at
+         a Glance" still on screen above it).
+         The first attempt at this looked empty; the fix is NOT to drop the
+         full-screen box but to size each block's MEDIA PANEL to its own frame,
+         which is what the per-section heights below do. Fill went from
+         79/52/34/57% to roughly 80/64/60/75%. */
+      .hp-frame {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: clamp(36px, 5.5vh, 80px);
+        padding-bottom: clamp(36px, 5.5vh, 80px);
+      }
+
+      /* Supply Chain ("Proof, Not Promises") is the thinnest block on the page
+         — a band and nothing else — so with the standard top padding the tail
+         of the previous section was still on screen behind it. Client
+         2026-08-06: push it further down. This is a deliberate one-off, not a
+         value to copy to the other frames. */
+      /* ── PER-BLOCK MEDIA HEIGHT.
+         The four blocks carry very different amounts of other content — Isler
+         at a Glance has a 9-cell capacity grid, Fast NPD a 9-step flow strip,
+         Quality a certifications strip, and Supply Chain has nothing but its
+         band. One shared panel height therefore left the thin blocks empty, so
+         each block's panel is sized to fill its own frame instead.
+         This does break the doc's "same panel size in every band" rule — that
+         rule and full-screen blocks cannot both hold, and the client chose
+         full-screen blocks with no dead space. */
+      /* NOTE: the per-block panel heights live further down, AFTER the generic
+         `.hp-frame .rev2-band__media` rule. Putting them here silently did
+         nothing for the pair frame — same specificity (0,2,0), and the generic
+         rule comes later, so it won. Only #npd / #proof worked, because an id
+         outranks it. */
+
+      /* ── Supply Chain / "Proof, Not Promises" carries NO overrides at all.
+         It briefly had a bigger type scale and a taller panel to help it fill a
+         full-screen frame; the client asked for all of it back to how it was,
+         so the block now renders on the base Rev-2 styles — 4/3 panel, 16px
+         copy, its own natural height. Everything that used to target #proof
+         here was deleted rather than left inert. The only #proof rule left in
+         this stylesheet is the media/copy order flip further down, which is
+         the doc's alternating band format, not part of the frame work. */
+      .hp-frame > .mfg-inner,
+      .hp-frame > .npd-inner,
+      .hp-frame > .proof-inner { width: 100%; }
+
+      /* The pair frame is a bare wrapper around two real sections, so the
+         padding lives on the sections, not on it. The gap between the quality
+         band and the certifications strip is deliberately tighter than the
+         frame's outer padding — that is what makes them read as one block. */
+      .hp-frame--pair { padding: 0; }
+      /* The gap between the quality band's panel and the "Our Certifications"
+         strip is these two paddings added together. Client 2026-08-06 asked
+         for it to open up — it was ~52px at 1600x900, which read as cramped
+         and left the frame looking under-filled. Now ~104px, which also lifts
+         the frame's fill without touching type or panel sizes. Still tighter
+         than the frame's own outer padding, so the two keep reading as one
+         block rather than as two stacked sections. */
+      .hp-frame--pair > .mfg-labs { padding-top: clamp(30px, 5vh, 76px); padding-bottom: clamp(28px, 5vh, 80px); }
+      .hp-frame--pair > .mfg-certs { padding-top: clamp(36px, 6.5vh, 96px); padding-bottom: clamp(36px, 6.5vh, 96px); }
+      /* the navy strip is full-bleed, so giving it more height is the cheapest
+         way to make this frame read as full — it anchors the bottom instead of
+         leaving white space under it */
+      .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(20px, 3.6vh, 56px); }
+      .hp-frame--pair .mfg-cert img { height: clamp(52px, 8.5vh, 104px); }
+
+      /* TYPE SCALE — sized to USE the frame, not to survive it.
+         The first cut clamped so hard that on a laptop every value sat on its
+         floor and ~60px of the frame went unused; on a 900px screen ~190px did.
+         The floors below are the readable minimum at 580px tall, and the vh
+         slopes are steep enough that the content grows into whatever room the
+         screen actually has instead of leaving it empty.
+         Two class families carry the same copy: .mfg-eyebrow/.mfg-heading/
+         .mfg-sub in the manufacturing sections, .section-eyebrow/
+         .section-heading/.section-sub (+ .rev2-band__body) in NPD and Proof —
+         both are listed on every rule so the four bands stay identical. */
+
+      /* "Isler at a Glance" only — the heading + intro that sit above its band.
+         Sizes left at their base values too, per the same client note; only the
+         gap between them is tuned. */
+      .mfg-production #mfg-prod-h + .mfg-sub {
+        margin-top: clamp(5px, 1.4vh, 16px) !important;
+      }
+
+      /* the band — height-capped instead of aspect-ratio-driven. Identical in
+         all four frames, so the panels stay the same size band to band. */
+      .hp-frame .rev2-band { margin-top: clamp(13px, 2.4vh, 48px) !important; }
+      .hp-frame .rev2-band:first-child { margin-top: 0 !important; }
+      .hp-frame .rev2-band__media {
+        aspect-ratio: auto;
+        height: clamp(165px, 35vh, 500px);
+      }
+      /* ── PER-BLOCK PANEL HEIGHT (must stay AFTER the rule above).
+         Fast NPD runs a little taller because its copy column is short.
+         Supply Chain is back on the shared height: at 52vh it measured
+         684x468 = 1.46:1 against 2.17:1 everywhere else, and the client read
+         it as square rather than as a rectangle like the rest. Matching the
+         others costs fill on that block — see the note on #proof below. */
+      #npd .rev2-band__media { height: clamp(190px, 40vh, 540px); }
+      .hp-frame--pair .rev2-band__media { height: clamp(190px, 40vh, 540px); }
+      /* ── TYPE: base sizes, exactly like Supply Chain.
+         Client 2026-08-06: "jaise supply chain wale frame mein text aur heading
+         rakhe hain, waise hi saare frames mein — bas text". Supply Chain is
+         outside the frame system, so it renders on the plain Rev-2 styles: 48px
+         heading, 16px lead and body, 11px eyebrow. Every font-size override in
+         here was therefore DELETED so the other blocks match it.
+         Only the vertical rhythm is still tuned to the frame — margins, not
+         sizes — because those are what keep a block inside one screen. */
+      .hp-frame .rev2-band__copy .mfg-eyebrow,
+      .hp-frame .rev2-band__copy .section-eyebrow {
+        margin-bottom: clamp(3px, 0.9vh, 12px) !important;
+      }
+      .hp-frame .rev2-band__copy .mfg-heading,
+      .hp-frame .rev2-band__copy .section-heading {
+        margin-bottom: clamp(7px, 1.5vh, 18px) !important;
+      }
+      .hp-frame .rev2-band__copy .mfg-sub,
+      .hp-frame .rev2-band__copy .section-sub {
+        margin-bottom: clamp(7px, 1.4vh, 16px);
+      }
+      .hp-frame .rev2-band__copy .mfg-sub:last-child { margin-bottom: 0; }
+      .hp-frame .rev2-band__body {
+        margin-top: clamp(7px, 1.4vh, 18px);
+        margin-bottom: 0;
+      }
+
+      /* ── SHORT-SCREEN SAFETY, "Isler at a Glance" only.
+         Base type is what the client asked for, but this block carries the most
+         of it — heading, intro, band copy AND nine capacity cells — so at base
+         sizes it stops fitting one screen on a laptop: measured 745px of
+         content against a 580px screen, 796 against 760. That would push the
+         capacity numbers back out of frame, which is the exact thing the
+         one-frame work was for. So the type scales down HERE ONLY, and only
+         once the screen is short enough to need it — above 860px tall this
+         block renders at the same base sizes as every other block. */
+      @media (max-height: 860px) {
+        .mfg-production #mfg-prod-h { font-size: clamp(21px, 3.6vh, 40px) !important; }
+        .mfg-production #mfg-prod-h + .mfg-sub { font-size: clamp(12.5px, 2.1vh, 18px); line-height: 1.45; }
+        .mfg-production .rev2-band__copy .mfg-eyebrow { font-size: clamp(11.5px, 1.95vh, 22px) !important; }
+        .mfg-production .rev2-band__copy .mfg-heading { font-size: clamp(17px, 2.95vh, 34px) !important; }
+        .mfg-production .rev2-band__copy .mfg-sub { font-size: clamp(12px, 2.1vh, 18px); line-height: 1.5; }
+      }
+
+      /* ── FAST NEW PRODUCT DEVELOPMENT — the "brief to first shipment" strip.
+         Nine steps sit in one row above 1200px; the base stylesheet drops them
+         to 3 columns (3 rows) below that, which is too tall for a frame, so in
+         here 901–1199px gets 5 columns (2 rows) instead. */
+      /* client 2026-08-06: drop "From brief to first shipment" (and the flow
+         strip under it) a little lower, away from the band above */
+      .npd-section .rev2-band + .npd-lead { margin-top: clamp(30px, 6vh, 96px) !important; }
+      .npd-section .npd-lead {
+        margin-bottom: clamp(8px, 1.5vh, 22px);
+        font-size: clamp(10px, 1.4vh, 12px);
+      }
+      .npd-section .npd-flow { gap: clamp(6px, 1vh, 10px); }
+      .npd-section .npd-step { padding: clamp(8px, 1.7vh, 20px) 10px clamp(7px, 1.5vh, 18px); }
+      .npd-section .npd-step__no { font-size: clamp(9px, 1.3vh, 11px); }
+      .npd-section .npd-step__name {
+        margin-top: clamp(3px, 0.9vh, 8px);
+        font-size: clamp(11px, 1.8vh, 14px);
+      }
+      .npd-section .npd-note { margin-top: clamp(10px, 1.9vh, 24px); }
+      @media (max-width: 1199px) {
+        .npd-section .npd-flow { grid-template-columns: repeat(5, 1fr); }
+      }
+
+      /* "Capacity at a Glance" label + the 3 x 3 numbers grid.
+         The gap above the label is deliberately the biggest in the section —
+         it is what separates the two halves of the frame, and the client asked
+         for the numbers to sit lower rather than tucked under the band. */
+      .mfg-production .cap-label { margin-top: clamp(14px, 3vh, 52px) !important; }
+      .mfg-production .cap-label .mfg-eyebrow {
+        font-size: clamp(10.5px, 1.6vh, 19px) !important;
+        margin-bottom: 0;
+      }
+      .mfg-production .cap-grid { margin-top: clamp(8px, 1.5vh, 18px) !important; }
+      .mfg-production .cap-cell { padding: clamp(7px, 1.35vh, 24px) clamp(10px, 1vw, 16px); }
+      .mfg-production .cap-cell__value { font-size: clamp(15.5px, 2.5vh, 32px); }
+      .mfg-production .cap-cell__label {
+        margin-top: clamp(2px, 0.75vh, 9px);
+        font-size: clamp(9px, 1.45vh, 12px);
+        letter-spacing: 0.08em;
+      }
+
+      /* ── OUR CERTIFICATIONS, as the strip under the Quality band. Its 56px
+         heading margin and full-size logos were sized for a standalone
+         section; inside the shared frame they scale with the screen like
+         everything else. */
+      .hp-frame--pair .mfg-certs__heading {
+        font-size: clamp(18px, 2.85vh, 34px);
+        margin-bottom: clamp(12px, 2.4vh, 40px);
+      }
+      .hp-frame--pair .mfg-cert-row { gap: clamp(20px, 4vw, 56px); }
+      .hp-frame--pair .mfg-cert img { height: clamp(44px, 7vh, 88px); width: auto; }
+
+      /* ── BAND SIDES — the doc alternates media/copy down the page. Moving
+         Certifications & Quality below Supply Chain left two media-left bands
+         and then two copy-left bands in a row, so NPD and Supply Chain are
+         flipped here to restore the zig-zag. Order only — the DOM, and so the
+         reading order and the mobile stacking, are untouched. */
+      #npd .rev2-band__media { order: 2; }
+      #npd .rev2-band__copy { order: 1; }
+      #proof .rev2-band__copy { order: 2; }
+      #proof .rev2-band__media { order: 1; }
+    }
+
+    /* ── HERO SCENE 4 — two CTAs side by side.
+       .hero-scene is a flex COLUMN, so without this row the second button
+       would stack under the first. Both buttons carry a transparent border so
+       the ghost one's outline does not make it taller than the yellow one. */
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(10px, 1.2vw, 18px);
+      margin-top: var(--space-md);
+    }
+    .hero-cta-row .hero-cta-btn { margin-top: 0; border: 1.5px solid transparent; }
+    /* NOTE: these two selectors must stay two-class. The rule above is (0,2,0),
+       so a plain .hero-cta-btn--ghost (0,1,0) loses to it and the outline comes
+       out transparent — the ghost button then reads as bare text on the photo. */
+    .hero-cta-row .hero-cta-btn--ghost {
+      background: transparent;
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.62);
+    }
+    .hero-cta-row .hero-cta-btn--ghost:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.14);
+      border-color: #FFFFFF;
+    }
+
+  </style>
 </head>
 <body class="home-edgenav">
 
@@ -1962,7 +2253,14 @@
         <div class="hero-scene scene-cta">
           <p class="hero-headline">Innovation That Works for You</p>
           <p class="hero-subhead">Smart technologies engineered to deliver superior performance greater efficiency and effortless everyday cooking.</p>
-          <a href="contact.html" class="hero-cta-btn">Start an RFQ</a>
+          <!-- Two actions, client 2026-08-06: the yellow RFQ button keeps the
+               primary slot, with Explore Products beside it as the ghost
+               secondary. Products live on business.html — the homepage #range
+               section was removed in the Rev-2 build. -->
+          <div class="hero-cta-row">
+            <a href="contact.html" class="hero-cta-btn">Start an RFQ</a>
+            <a href="business.html" class="hero-cta-btn hero-cta-btn--ghost">Explore Products</a>
+          </div>
         </div>
 
       </div>
@@ -2074,7 +2372,10 @@
     </section>
 
     <!-- ── 2. INFRASTRUCTURE AT A GLANCE ────────────────────────────────── -->
-    <section class="mfg-section mfg-production mfg-pad" aria-labelledby="mfg-prod-h" style="padding-top:72px;padding-bottom:72px;">
+    <!-- One-frame section: heading + band + capacity numbers all on screen at
+         once. Padding now comes from the hp-glance-frame stylesheet in head,
+         not from an inline style. -->
+    <section class="mfg-section mfg-production mfg-pad hp-frame" aria-labelledby="mfg-prod-h">
       <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
@@ -2105,7 +2406,7 @@
         <!-- CAPACITY NUMBERS — requested by the client; values still to be
              supplied by Isler. Replace the em-dashes and drop the
              cap-cell__value--empty class + the chip below once filled. -->
-        <div style="margin-top:clamp(28px,3.5vw,44px);">
+        <div class="cap-label" style="margin-top:clamp(28px,3.5vw,44px);">
           <span class="mfg-eyebrow" style="margin-bottom:10px;">Capacity at a Glance <span class="hp-ph">Numbers to be supplied</span></span>
         </div>
         <div class="cap-grid mfg-reveal" style="margin-top:12px;">
@@ -2149,31 +2450,12 @@
       </div>
     </section>
 
-    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
-    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
-      <div class="mfg-inner">
-        <!-- Doc format: copy LEFT / media RIGHT (mirror of "Isler at a
-             Glance"), then the certifications strip full width below. -->
-        <div class="rev2-band">
-          <div class="rev2-band__copy">
-            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
-            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our First Priority</h2>
-            <p class="mfg-sub mfg-reveal">Engineered, tested and certified to global standards — in-house labs, incoming and outgoing inspection, and a QMS your auditors can walk line by line.</p>
-            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
-          </div>
-          <div class="rev2-band__media mfg-reveal">
-            <video autoplay muted loop playsinline preload="metadata"
-                   aria-hidden="true" tabindex="-1"
-                   disablepictureinpicture>
-              <source src="assets/videos/lab-test.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <!-- NOTE (Rev-2b, client 2026-08-06): "Certifications & Quality" USED TO
+         SIT HERE, directly after Isler at a Glance. The client asked for it to
+         move BELOW Supply Chain so that the "Our Certifications" logo strip —
+         which already sat under Supply Chain — reads as part of the quality
+         block rather than as an orphan band. It is now the pair immediately
+         after #proof; search for "mfg-labs" to find it. -->
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        REV-2 / 6 — FAST NEW PRODUCT DEVELOPMENT
@@ -2184,7 +2466,7 @@
        are cut). Highlighted below; move it after Tooling if Isler means
        production validation instead.
   ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="npd" class="npd-section" aria-labelledby="npd-h">
+  <section id="npd" class="npd-section hp-frame" aria-labelledby="npd-h">
     <div class="npd-inner">
 
       <!-- Doc format: media LEFT / copy RIGHT, then the flow strip full width
@@ -2240,6 +2522,13 @@
        and the process-governance numbers below are REAL; every item carrying a
        "TO BE SUPPLIED" chip is waiting on content from Isler.
   ═══════════════════════════════════════════════════════════════════════════ -->
+  <!-- NOT a .hp-frame. Client 2026-08-06: forcing this block to a full screen
+       left it "kuch jyada hi gappy" — it is the only block with a band and no
+       strip under it, so a screen-tall box is ~60% empty whatever the panel
+       does (a panel big enough to fill it stops reading as a rectangle). It is
+       back to its own natural height, the way it was before the one-frame
+       work. Trade-off, deliberately accepted: the block below it can share a
+       screen with it. -->
   <section id="proof" class="proof-section" aria-labelledby="proof-h">
     <div class="proof-inner">
       <!-- Doc format: copy LEFT / media RIGHT, then the certifications
@@ -2262,7 +2551,45 @@
     </div>
   </section>
 
-    <!-- ── 5. CERTIFICATIONS (ISO + BIS) ────────────────────────────────── -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2b / 4 — CERTIFICATIONS & QUALITY  +  OUR CERTIFICATIONS
+       Client 2026-08-06: move "Certifications & Quality" below Supply Chain so
+       that the "Our Certifications" logo strip reads as part of it instead of
+       standing alone. The two are wrapped in ONE .hp-frame so they share a
+       single screen — quality band on top, the ISO/BIS logos as its strip
+       underneath — which is the same band-plus-strip format the client doc
+       uses for every other block. Both sections keep their own backgrounds, so
+       the navy certs band still runs straight into Trusted Partner Network
+       below it and the two navy blocks still read as one.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="hp-frame hp-frame--pair">
+
+    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
+    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="mfg-inner">
+        <!-- Doc format: copy LEFT / media RIGHT, then the certifications strip
+             full width below. -->
+        <div class="rev2-band">
+          <div class="rev2-band__copy">
+            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
+            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our First Priority</h2>
+            <p class="mfg-sub mfg-reveal">Engineered, tested and certified to global standards — in-house labs, incoming and outgoing inspection, and a QMS your auditors can walk line by line.</p>
+            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
+          </div>
+          <div class="rev2-band__media mfg-reveal">
+            <video autoplay muted loop playsinline preload="metadata"
+                   aria-hidden="true" tabindex="-1"
+                   disablepictureinpicture>
+              <source src="assets/videos/lab-test.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5. CERTIFICATIONS (ISO + BIS) — the strip under the band above ── -->
     <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
       <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
@@ -2275,30 +2602,16 @@
         </div>
       </div>
     </section>
-    <!-- ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ───────────────────────────── -->
-    <section class="mfg-section mfg-vendors mfg-pad" aria-labelledby="mfg-supply-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(230,149,0,0.08);bottom:-70px;left:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.07);top:40%;left:2%;"></div>
-      <div class="mfg-inner">
-        <div class="mfg-vendor-head">
-          <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Supply Chain Strength</span>
-          <h2 class="mfg-heading mfg-reveal" id="mfg-supply-h">Trusted Partner Network</h2>
-          <p class="mfg-sub mfg-reveal">A resilient base of audited component and material partners — securing quality, capacity and continuity across every build.</p>
-        </div>
-        <!-- PLACEHOLDER vendor logo slots — Isler to populate with approved partner logos.
-             Do NOT add third-party brand logos without authorisation. -->
-        <!-- 6 slots = one clean row (scrolls horizontally on narrow screens). -->
-        <div class="mfg-vendor-grid mfg-reveal">
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-          <div class="mfg-vendor-slot"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner Logo</span></div>
-        </div>
-      </div>
-    </section>
+
+  </div>
+
+    <!-- NOTE (Rev-2b, client 2026-08-06): the "Trusted Partner Network"
+         section (Supply Chain Strength eyebrow + 6 placeholder partner-logo
+         slots) was REMOVED here on the client's instruction. It was never in
+         the Rev-2 doc and had been kept pending a decision; the decision is
+         to drop it. Its .mfg-vendors / .mfg-vendor-* CSS is left in place —
+         it is shared with nothing else, but removing it is a separate,
+         reversible step if the section is wanted back. -->
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 6 — BRANDS STRIP
@@ -2497,7 +2810,14 @@
 
 
   <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 4 — RFQ (build to order)
+       SECTION 4 — RFQ (build to order)  ·  closing call to action
+       Client 2026-08-06: the separate "Get in Touch / Ready to Transform Your
+       Kitchen?" box that used to follow this section is GONE — they wanted one
+       closing block, not two. Its two buttons were folded into the actions row
+       below, so this section now carries the whole close: the pitch, Start an
+       RFQ, View Our Products, and the products download.
+       Note the primary button was pointed at contact.html, not the old
+       "#rfq" — inside this section that link would have scrolled to itself.
        PENDING: the products PDF (assets/docs/isler-products.pdf) does not exist
        yet — the download button is wired and flagged until Isler supplies it.
   ═══════════════════════════════════════════════════════════════════════════ -->
@@ -2508,6 +2828,8 @@
       <p class="rfq__sub">Bring us a specification, a design brief, or a benchmark unit. Our new product development team takes it from concept through tooling, certification and full-scale production — under your brand.</p>
 
       <div class="rfq__actions">
+        <a href="contact.html" class="rfq-btn rfq-btn--primary">Start an RFQ</a>
+        <a href="business.html" class="rfq-btn rfq-btn--ghost">View Our Products</a>
         <a href="assets/docs/isler-products.pdf" class="rfq-btn rfq-btn--ghost" download>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Products PDF
@@ -2516,29 +2838,6 @@
       </div>
 
       <p class="rfq__note">Typical response within 2 working days. MOQ and lead times shared with the quotation.</p>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 5 — CTA Box
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section class="cta-box-section">
-    <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(244,180,0,0.18);top:-60px;left:-60px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(230,149,0,0.15);bottom:-50px;right:-50px;"></div>
-    <div class="cta-box">
-
-      <div class="cta-box__content">
-        <span class="cta-box__eyebrow">Get in Touch</span>
-        <h2 class="cta-box__heading">Ready to Transform<br>Your Kitchen?</h2>
-        <p class="cta-box__sub">Explore our product range or speak with our team.</p>
-      </div>
-
-      <div class="cta-box__actions">
-        <a href="#rfq" class="cta-box__btn cta-box__btn--primary">Start an RFQ</a>
-        <a href="business.html" class="cta-box__btn cta-box__btn--secondary">View Our Products</a>
-      </div>
-
     </div>
   </section>
 

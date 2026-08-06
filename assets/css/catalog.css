@@ -241,28 +241,39 @@
 }
 .catnav__item--current > .catnav__group { border-left-color: var(--yellow); }
 
-/* the flyout */
+/* the sub-list
+   Client 2026-08-06: this used to fly OUT TO THE SIDE of the rail as a
+   floating panel (position:absolute; left:calc(100% + 8px)). It now opens
+   INLINE, directly under the group it belongs to, so the rail reads as one
+   column that expands in place — the same shape the narrow-screen layout at
+   the bottom of this file already used.
+   Collapsed with max-height rather than display:none so it animates open and
+   keeps its place in the DOM/accessibility order. 640px clears the longest
+   group (Small Domestic Appliances, 12 children); it is a ceiling for the
+   transition, not a visible cap. */
 .catnav__flyout {
-  list-style: none; margin: 0; padding: 8px;
-  position: absolute; top: -8px; left: calc(100% + 8px); z-index: 40;
-  min-width: 232px;
-  background: #fff;
-  border: 1px solid rgba(11, 26, 61, 0.10);
-  border-radius: 14px;
-  box-shadow: 0 18px 44px rgba(11, 26, 61, 0.18);
-  /* Small Domestic Appliances has 12 children — cap it and scroll rather
-     than letting the flyout run off the bottom of the viewport. */
-  max-height: 68vh; overflow-y: auto;
-  opacity: 0; visibility: hidden; transform: translateX(-6px);
-  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+  list-style: none; margin: 0;
+  padding: 0 8px 0 30px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 260ms ease, opacity 160ms ease, padding 260ms ease;
 }
 .catnav__item:hover > .catnav__flyout,
 .catnav__item:focus-within > .catnav__flyout {
-  opacity: 1; visibility: visible; transform: none;
+  max-height: 640px;
+  opacity: 1;
+  padding-top: 2px;
+  padding-bottom: 8px;
 }
+/* the chevron points right while closed and turns down as the list opens */
+.catnav__group svg { transition: transform 200ms ease; }
+.catnav__item:hover > .catnav__group svg,
+.catnav__item:focus-within > .catnav__group svg { transform: rotate(90deg); }
+
 .catnav__sub {
-  display: block; padding: 9px 14px; border-radius: 9px;
-  font-size: 14px; font-weight: 500; color: var(--navy); text-decoration: none;
+  display: block; padding: 7px 12px; border-radius: 9px;
+  font-size: 13.5px; font-weight: 500; color: var(--navy); text-decoration: none;
   transition: background 140ms ease, color 140ms ease;
 }
 .catnav__sub:hover { background: rgba(11, 26, 61, 0.06); }
