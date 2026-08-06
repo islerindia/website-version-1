@@ -1,0 +1,177 @@
+/* ════════════════════════════════════════════════════════════════════════
+   CATEGORY SWITCHER CAROUSEL
+   The product-category carousel from the homepage's "Variety, Quality and
+   Quantity" section, made reusable so every category page can carry it.
+
+   NAMESPACED .pcx-* ON PURPOSE. The homepage markup uses .cat-card /
+   .cat-card__name, but catalog.css ALREADY defines .cat-card for the
+   category pages' own product grid — a different component built from
+   .cat-card__media / __body / __spec / __foot. Reusing those class names
+   here would break every category page's grid. Do not rename them back.
+
+   index.html keeps its own inline copy of the .cat-* version; this file is
+   what the category pages load. Change the look in both places.
+   Paired with assets/js/category-carousel.js.
+════════════════════════════════════════════════════════════════════════ */
+
+.pcx-section {
+  background: var(--off-white, #F7F7F5);
+  padding: clamp(48px, 5vw, 72px) clamp(24px, 5vw, 96px);
+  position: relative;
+  overflow: clip;
+}
+.pcx-head { max-width: 1680px; margin: 0 auto clamp(24px, 3vw, 40px); }
+.pcx-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--yellow, #F4B400);
+  margin-bottom: 10px;
+}
+.pcx-title {
+  margin: 0;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--navy, #0B1A3D);
+}
+
+/* the card for the page you are already on — still clickable, just marked */
+.pcx-card[aria-current="page"] { outline: 3px solid var(--yellow, #F4B400); outline-offset: 3px; }
+
+.pcx-wrap {
+  max-width: 1780px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── One-row auto-sliding carousel (stepped autoplay, like the clients carousel):
+   shows a few bigger cards, advances one every 5s with a 500ms slide, loops
+   forever, pauses on hover/focus, with prev/next arrows. Driven by inline JS. ── */
+/* Flex row: arrows sit OUTSIDE the cards, flanking the clipped viewport */
+.pcx-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.pcx-viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; padding: 6px 2px 12px; }   /* room for hover-lift shadow */
+
+.pcx-track {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+}
+
+.pcx-card {
+  position: relative;
+  display: block;
+  /* exactly --vis cards per view (set responsively by the script) */
+  flex: 0 0 calc((100% - (var(--vis, 4) - 1) * 24px) / var(--vis, 4));
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(11, 26, 61, 0.10);
+  transition: transform 300ms var(--ease-out), box-shadow 300ms ease;
+}
+
+.pcx-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(11, 26, 61, 0.22);
+}
+
+.pcx-card:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+/* Uniform image treatment: fill + crop identically, no distortion */
+.pcx-card__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  object-fit: contain;
+  object-position: center;
+  padding: 14px 16px 42px;
+  transition: transform 600ms var(--ease-out);
+}
+
+.pcx-card:hover .pcx-card__img { transform: scale(1.05); }
+
+/* Navy gradient keeps the white label legible over any image */
+.pcx-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(11, 26, 61, 0.94) 0%,
+    rgba(11, 26, 61, 0.74) 16%,
+    rgba(11, 26, 61, 0.28) 42%,
+    rgba(11, 26, 61, 0.08) 68%,
+    rgba(11, 26, 61, 0.10) 100%);
+  transition: opacity 300ms ease;
+}
+
+.pcx-card:hover .pcx-card__overlay { opacity: 0.86; }
+
+.pcx-card__content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 24px;
+  z-index: 2;
+}
+
+.pcx-card__name {
+  display: block;
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
+}
+
+/* Prev / next arrows — sit OUTSIDE the cards, flanking the viewport */
+.pcx-nav {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(11, 26, 61, 0.68);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(11, 26, 61, 0.28);
+  transition: background 160ms ease, color 160ms ease;
+}
+.pcx-nav:hover { background: var(--yellow); color: var(--navy); }
+.pcx-nav:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.pcx-nav svg { width: 21px; height: 21px; }
+
+@media (max-width: 560px) {
+  .pcx-carousel { gap: 10px; }
+  .pcx-nav { width: 38px; height: 38px; }
+  .pcx-nav svg { width: 18px; height: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcx-card,
+  .pcx-card__img { transition: none; }
+  .pcx-card:hover { transform: none; }
+  .pcx-card:hover .pcx-card__img { transform: none; }
+}
+

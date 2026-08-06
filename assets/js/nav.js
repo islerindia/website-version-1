@@ -77,22 +77,11 @@
     }
     function closeBurger() { nav.classList.remove('is-open'); if (burger) burger.setAttribute('aria-expanded', 'false'); }
 
-    // "Categories" no longer opens a dropdown — it takes the user to the Key
-    // Products Range section (which now stands in for the categories). Hover is
-    // intentionally NOT wired to openMega any more.
-    if (trigger) {
-      trigger.addEventListener('click', function (e) {
-        // Smooth-scroll when already on the homepage; otherwise let the href
-        // navigate to index.html#range.
-        var range = document.getElementById('range');
-        if (range) {
-          e.preventDefault();
-          closeMega();
-          range.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          if (history.replaceState) history.replaceState(null, '', '#range');
-        }
-      });
-    }
+    // "Business" is a plain link to business.html, where category selection
+    // now lives. It used to be hijacked here to smooth-scroll to the
+    // homepage's #range section; that handler called preventDefault() whenever
+    // #range existed, which would stop the new link from ever navigating.
+    // Hover is intentionally NOT wired to openMega.
     if (burger) {
       burger.addEventListener('click', function () {
         var open = nav.classList.toggle('is-open');

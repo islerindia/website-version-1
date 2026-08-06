@@ -191,10 +191,83 @@
    groups from each card's data-* attributes. */
 .cat-filter-layout {
   display: grid;
-  grid-template-columns: 246px minmax(0, 1fr);
+  /* categories | products | filters  (client 2026-08-06: the filter moved to
+     the right, and the column it used to occupy now holds the category nav so
+     you can jump categories without leaving the product view) */
+  grid-template-columns: 232px minmax(0, 1fr) 246px;
   gap: 32px;
   align-items: start;
 }
+.cat-filter-layout > .catnav      { grid-column: 1; grid-row: 1; }
+.cat-filter-layout > .cat-results { grid-column: 2; grid-row: 1; }
+.cat-filter-layout > .cat-filter  { grid-column: 3; grid-row: 1; }
+
+/* ── Category rail (left) ─────────────────────────────────────────────
+   Flat list of the four groups; hovering or keyboard-focusing one opens a
+   flyout with its sub-categories. Structure mirrors the header mega-menu,
+   which is the site's source of truth for the category tree. */
+.catnav {
+  position: sticky; top: 100px;
+  /* sticky makes this a stacking context, so the flyout's own z-index is
+     scoped inside it — the rail itself has to outrank the product grid or the
+     cards paint over the flyout. */
+  z-index: 30;
+  background: #fff;
+  border: 1px solid rgba(11, 26, 61, 0.08);
+  border-radius: 16px;
+  padding: 20px 0 12px;
+}
+.catnav__title {
+  display: block; padding: 0 20px 14px;
+  font-size: 12.5px; font-weight: 800; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--navy);
+}
+.catnav__list { list-style: none; margin: 0; padding: 0; }
+.catnav__item { position: relative; }
+.catnav__group {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; padding: 11px 20px;
+  background: none; border: none; cursor: default;
+  font: inherit; font-size: 14px; font-weight: 600; text-align: left;
+  color: var(--navy);
+  border-left: 3px solid transparent;
+  transition: background 140ms ease, border-color 140ms ease;
+}
+.catnav__group svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.5; }
+.catnav__item:hover > .catnav__group,
+.catnav__item:focus-within > .catnav__group {
+  background: rgba(244, 180, 0, 0.10);
+  border-left-color: var(--yellow);
+}
+.catnav__item--current > .catnav__group { border-left-color: var(--yellow); }
+
+/* the flyout */
+.catnav__flyout {
+  list-style: none; margin: 0; padding: 8px;
+  position: absolute; top: -8px; left: calc(100% + 8px); z-index: 40;
+  min-width: 232px;
+  background: #fff;
+  border: 1px solid rgba(11, 26, 61, 0.10);
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(11, 26, 61, 0.18);
+  /* Small Domestic Appliances has 12 children — cap it and scroll rather
+     than letting the flyout run off the bottom of the viewport. */
+  max-height: 68vh; overflow-y: auto;
+  opacity: 0; visibility: hidden; transform: translateX(-6px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms;
+}
+.catnav__item:hover > .catnav__flyout,
+.catnav__item:focus-within > .catnav__flyout {
+  opacity: 1; visibility: visible; transform: none;
+}
+.catnav__sub {
+  display: block; padding: 9px 14px; border-radius: 9px;
+  font-size: 14px; font-weight: 500; color: var(--navy); text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+.catnav__sub:hover { background: rgba(11, 26, 61, 0.06); }
+.catnav__sub[aria-current="page"] { background: rgba(244, 180, 0, 0.18); font-weight: 700; }
+
 .cat-filter {
   position: sticky; top: 100px;
   background: #fff;
@@ -239,6 +312,20 @@
    column when there's still room for ≥2 product columns beside it. */
 @media (max-width: 1080px) {
   .cat-filter-layout { grid-template-columns: 1fr; gap: 0; }
+  /* single column: products first, then filters, then the category rail */
+  .cat-filter-layout > .catnav      { grid-column: 1; grid-row: auto; order: 3; margin-top: 28px; }
+  .cat-filter-layout > .cat-results { grid-column: 1; grid-row: auto; order: 2; }
+  .cat-filter-layout > .cat-filter  { grid-column: 1; grid-row: auto; order: 1; }
+  /* no hover on touch — show every sub-list inline instead of as a flyout */
+  .catnav { position: static; }
+  .catnav__group { cursor: default; }
+  .catnav__group svg { display: none; }
+  .catnav__flyout {
+    position: static; opacity: 1; visibility: visible; transform: none;
+    min-width: 0; border: none; box-shadow: none; border-radius: 0;
+    max-height: none; overflow: visible;
+    padding: 0 0 6px 20px;
+  }
   .cat-filter-toggle {
     display: inline-flex; align-items: center; gap: 8px;
     margin-bottom: 18px; padding: 11px 20px;

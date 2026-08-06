@@ -3,15 +3,123 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isler Air Fryer Oven IS-R 1002 — Isler India</title>
-  <link rel="icon" href="assets/images/favicon.png">
+  <meta name="description" content="Isler India for business — OEM, ODM and private-label manufacturing of kitchen and home appliances from an ISO-certified Greater Noida facility. Choose a category, or send us a brief.">
+  <meta name="theme-color" content="#0B1A3D">
+  <title>Our Business — OEM, ODM &amp; Private Label | Isler India</title>
+  <link rel="icon" href="assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
-  <link rel="stylesheet" href="assets/css/catalog.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/category-carousel.css">
+  <style>
+    .biz-hero {
+      background: var(--navy);
+      color: #fff;
+      padding: clamp(56px, 7vw, 104px) clamp(24px, 5vw, 96px) clamp(48px, 6vw, 88px);
+    }
+    .biz-hero__inner { max-width: 1680px; margin: 0 auto; }
+    .biz-crumb { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 22px; }
+    .biz-crumb a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .biz-crumb a:hover { color: var(--yellow); }
+    .biz-crumb span { margin: 0 8px; }
+    .biz-hero__eyebrow {
+      display: block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 12px;
+    }
+    .biz-hero__title {
+      margin: 0 0 18px;
+      font-size: clamp(32px, 4.6vw, 60px);
+      font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
+    }
+    .biz-hero__intro {
+      margin: 0; max-width: 68ch;
+      font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .biz-section { padding: clamp(48px, 5vw, 72px) clamp(24px, 5vw, 96px); position: relative; }
+    .biz-inner { max-width: 1680px; margin: 0 auto; }
+    .biz-section--alt { background: var(--off-white); }
+    .biz-eyebrow {
+      display: block; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 10px;
+    }
+    .biz-title {
+      margin: 0 0 14px;
+      font-size: clamp(24px, 2.6vw, 36px);
+      font-weight: 700; letter-spacing: -0.02em; color: var(--navy);
+    }
+    .biz-lead { margin: 0 0 32px; max-width: 74ch; font-size: 16px; line-height: 1.7; color: var(--gray-mid); }
+
+    .biz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .biz-card {
+      background: var(--white);
+      border: 1px solid rgba(11,26,61,0.08);
+      border-top: 3px solid var(--yellow);
+      border-radius: var(--radius-lg);
+      padding: 30px 28px 32px;
+    }
+    .biz-card__name { display: block; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+    .biz-card__text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gray-mid); }
+    @media (max-width: 900px) { .biz-grid { grid-template-columns: 1fr; } }
+
+    .biz-facts {
+      display: flex; flex-wrap: wrap; gap: 1px;
+      background: rgba(11,26,61,0.10);
+      border: 1px solid rgba(11,26,61,0.10);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .biz-fact { flex: 1 1 170px; background: var(--white); padding: 24px 16px; text-align: center; }
+    .biz-fact__value {
+      display: block; font-size: clamp(16px, 1.7vw, 22px); font-weight: 700;
+      line-height: 1.25; letter-spacing: -0.015em; color: var(--navy);
+    }
+    .biz-fact__value--empty { color: rgba(11,26,61,0.30); }
+    .biz-fact__label {
+      display: block; margin-top: 8px; font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid);
+    }
+
+    .biz-flow { display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; }
+    .biz-step {
+      background: var(--white); border: 1px solid rgba(11,26,61,0.10);
+      border-radius: var(--radius-md); padding: 18px 10px 16px; text-align: center;
+    }
+    .biz-step__no { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--yellow); }
+    .biz-step__name { display: block; margin-top: 8px; font-size: 14px; font-weight: 700; line-height: 1.3; color: var(--navy); }
+    @media (max-width: 1200px) { .biz-flow { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 560px)  { .biz-flow { grid-template-columns: repeat(2, 1fr); } }
+
+    .biz-cta { background: var(--navy); color: #fff; text-align: center; }
+    .biz-cta .biz-title { color: #fff; }
+    .biz-cta .biz-lead { color: rgba(255,255,255,0.78); margin-left: auto; margin-right: auto; }
+    .biz-cta__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .biz-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 15px 30px; border-radius: 999px;
+      font-size: 15px; font-weight: 700; letter-spacing: 0.02em;
+      text-decoration: none; transition: transform 200ms ease, background 200ms ease;
+    }
+    .biz-btn:hover { transform: translateY(-2px); }
+    .biz-btn--primary { background: var(--yellow); color: var(--navy); }
+    .biz-btn--ghost { border: 2px solid rgba(255,255,255,0.55); color: #fff; }
+    .biz-btn--ghost:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    .biz-ph {
+      display: inline-block; vertical-align: middle;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #8A6A00; background: rgba(244,180,0,0.18);
+      border: 1px dashed rgba(244,180,0,0.75); border-radius: 999px;
+      padding: 3px 10px; margin-left: 6px;
+    }
+  </style>
 </head>
-<body class="cat-page">
+<body>
 <nav class="isler-nav" aria-label="Primary navigation">
     <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
       <img src="assets/images/newlogo-removebg-preview.webp" alt="Isler India">
@@ -114,29 +222,94 @@
     </ul>
     <button class="isler-nav__search-toggle" type="button" aria-label="Search products" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
-<main class="pd"><div class="cat-wrap">
-    <nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="air-fryers.html">Air Fryers</a><span>/</span>Isler Air Fryer Oven IS-R 1002</nav>
-    <div class="pd__layout">
-      <div class="pd__gallery"><img id="pd-img" src="assets/catalog/air-fryers/isr1002.webp" alt="Isler Air Fryer Oven IS-R 1002"></div>
-      <div class="pd__info">
-        <p class="pd__eyebrow">Air Fryers · Air Fryer Oven</p>
-        <h1 class="pd__title">Isler Air Fryer Oven IS-R 1002</h1>
-        <p class="pd__code" id="pd-code"></p>
-        <div class="pd__price" id="pd-price"></div>
-        <div class="pd__highlights" id="pd-highlights"></div>
-        <div class="pd__cta">
-          <a class="pd__btn pd__btn--primary" href="contact.html">Enquire</a>
+
+<header class="biz-hero">
+  <div class="biz-hero__inner">
+    <nav class="biz-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Our Business</nav>
+    <span class="biz-hero__eyebrow">Our Business</span>
+    <h1 class="biz-hero__title">Built to Manufacture at Your Brand's Standard</h1>
+    <p class="biz-hero__intro">Isler is a design-led OEM, ODM and private-label manufacturer of kitchen and home appliances, working out of an ISO-certified facility in Greater Noida. Pick the category you are sourcing, or send us a brief and we will come back with feasibility, MOQ and a timeline.</p>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CATEGORY SELECTION — this is what the "Business" nav item now opens.
+     Same .pcx-* switcher the category pages carry.
+═══════════════════════════════════════════════════════════════════ -->
+<section class="pcx-section" aria-labelledby="pcx-h">
+  <div class="pcx-head">
+    <span class="pcx-eyebrow">Product Portfolio</span>
+    <h2 class="pcx-title" id="pcx-h">Choose a Category</h2>
+  </div>
+  <div class="pcx-wrap">
+    <div class="pcx-carousel" aria-label="Product categories" role="group" aria-roledescription="carousel">
+      <button class="pcx-nav pcx-nav--prev" type="button" aria-label="Previous categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="pcx-viewport">
+        <div class="pcx-track">
+
+          <a href="hobs.html" class="pcx-card" aria-label="Hobs">
+            <img class="pcx-card__img" src="assets/catalog/hobs/fw/neo-cook-card.webp" alt="Hobs" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Hobs</span></div>
+          </a>
+
+          <a href="cooktops.html" class="pcx-card" aria-label="Cooktops">
+            <img class="pcx-card__img" src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.webp" alt="Cooktops" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Cooktops</span></div>
+          </a>
+
+          <a href="kitchen-chimneys.html" class="pcx-card" aria-label="Chimneys">
+            <img class="pcx-card__img" src="assets/catalog/chimneys/best-t-isl1001-card.webp" alt="Chimneys" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Chimneys</span></div>
+          </a>
+
+          <a href="built-in-ovens.html" class="pcx-card" aria-label="Ovens">
+            <img class="pcx-card__img" src="assets/catalog/built-in-ovens/is-ch-1001.webp" alt="Ovens" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Ovens</span></div>
+          </a>
+
+          <a href="built-in-microwaves.html" class="pcx-card" aria-label="Microwaves">
+            <img class="pcx-card__img" src="assets/catalog/microwaves/silver-edge.webp" alt="Microwaves" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Microwaves</span></div>
+          </a>
+
+          <a href="small-appliances.html" class="pcx-card" aria-label="Small Domestic Appliances">
+            <img class="pcx-card__img" src="assets/catalog/air-purifiers/jh22.webp" alt="Small Domestic Appliances" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Small Domestic Appliances</span></div>
+          </a>
+        
         </div>
-        <p class="pd__b2b">Isler is a B2B manufacturer — no online checkout. Colours, control panels, preset menus, coatings and basket configurations are customizable on bulk orders. Reach out for a quotation.</p>
       </div>
+      <button class="pcx-nav pcx-nav--next" type="button" aria-label="Next categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
     </div>
   </div>
-  <section class="pd__specs"><div class="cat-wrap">
-    <h2 class="pd__specs-title">Specifications</h2>
-    <table class="pd__spec-table"><tbody id="pd-spec-rows"></tbody></table>
-  </div></section>
-  </main>
-  <script>window.PRODUCT = {"variants": [{"code": "IS R 1002", "label": "Isler Air Fryer Oven IS-R 1002", "img": "assets/catalog/air-fryers/isr1002.webp", "price": null, "specs": [["Type", "Air Fryer Oven"], ["Finish / Color", "Black and Chrome (Black-Silver or Black-Gold)"], ["Useful Volume", "12L"], ["Rated Power (W)", "1800W"], ["Control Panel", "Digital (Indian Dishes Icons)"], ["Timer", "90 min"], ["Preset Menu Programs", "10 Preset Menu"], ["Temperature Control", "80–200 °C"], ["Basket / Pot", "Non-stick detachable dishwasher-safe accessories"], ["Handle", "VDE Plug included"], ["Viewing Window", "Yes"], ["Display Type", "Digital Control with Indian Dishes Icons"], ["Dual Basket", "No"], ["Basket Type", "Oven Basket"], ["Coating", "Standard"], ["Breathing Light", "No"], ["Grill Function", "No"], ["Safety Features", "Overheat protection, auto shut-off, ready signal"], ["Overheat Protection", "Yes"], ["Dishwasher Safe", "Yes (all accessories)"], ["Accessories", "2× Crisper Tray, 1× Drip Tray, 1× Air Fry Basket, 1× Handle, 1× Rotisserie Fork"]], "highlights": [["Volume", "12L"], ["Power", "1800W"], ["Menu", "10 Preset Menu"], ["Control", "Digital (Indian Dishes Icons)"]]}]};</script>
+</section>
+
+<!-- Client 2026-08-06: this page is the category picker plus the RFQ close,
+     nothing else. Three Ways to Build, Production Quantities, the NPD flow,
+     Quality and Brands We Build For were all built here from workstream 3 of
+     the Aug-5 brief and then explicitly cut. Do not reinstate them unless the
+     client asks. -->
+
+<!-- Product deck + "See our catalogue" CTA — client brief items -->
+<section class="biz-section biz-cta">
+  <div class="biz-inner">
+    <h2 class="biz-title">Ready to Build with Us?</h2>
+    <p class="biz-lead">Send a brief — category, volume, launch window. Feasibility, MOQ and timeline within two business days.</p>
+    <div class="biz-cta__actions">
+      <a class="biz-btn biz-btn--primary" href="contact.html">Start an RFQ</a>
+      <a class="biz-btn biz-btn--ghost" href="#pcx-h">See Our Catalogue</a>
+      <a class="biz-btn biz-btn--ghost" href="assets/docs/isler-products.pdf" download>Download Products PDF</a>
+      <span class="biz-ph">PDF to be supplied</span>
+    </div>
+  </div>
+</section>
+
 <footer class="site-footer" id="site-footer-el">
 
     <div class="footer__main">
@@ -257,8 +430,8 @@
     </div>
 
   </footer>
-  <script src="assets/js/catalog.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/search.js" defer></script>
+  <script src="assets/js/category-carousel.js" defer></script>
 </body>
 </html>

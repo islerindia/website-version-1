@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Isler India — Premium Kitchen Appliances</title>
+  <title>Kitchen Appliance OEM &amp; ODM Manufacturer in India | Isler India</title>
+  <meta name="description" content="India’s design-led ODM for kitchen and home appliances. Chimneys, hobs, cooktops, ovens, microwaves and small domestic appliances built to your brand’s standard at an ISO-certified Greater Noida facility.">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/images/favicon.png">
   <link rel="stylesheet" href="assets/css/tokens.css">
@@ -405,139 +406,6 @@
       line-height: 1.1;
     }
 
-    .cat-grid-wrap {
-      max-width: 1780px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ── One-row auto-sliding carousel (stepped autoplay, like the clients carousel):
-       shows a few bigger cards, advances one every 5s with a 500ms slide, loops
-       forever, pauses on hover/focus, with prev/next arrows. Driven by inline JS. ── */
-    /* Flex row: arrows sit OUTSIDE the cards, flanking the clipped viewport */
-    .cat-carousel {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .cat-viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; padding: 6px 2px 12px; }   /* room for hover-lift shadow */
-
-    .cat-track {
-      display: flex;
-      gap: 24px;
-      will-change: transform;
-    }
-
-    .cat-card {
-      position: relative;
-      display: block;
-      /* exactly --vis cards per view (set responsively by the script) */
-      flex: 0 0 calc((100% - (var(--vis, 4) - 1) * 24px) / var(--vis, 4));
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border-radius: 18px;
-      background: #fff;
-      text-decoration: none;
-      box-shadow: 0 10px 30px rgba(11, 26, 61, 0.10);
-      transition: transform 300ms var(--ease-out), box-shadow 300ms ease;
-    }
-
-    .cat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 50px rgba(11, 26, 61, 0.22);
-    }
-
-    .cat-card:focus-visible {
-      outline: 3px solid var(--yellow);
-      outline-offset: 3px;
-    }
-
-    /* Uniform image treatment: fill + crop identically, no distortion */
-    .cat-card__img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      object-fit: contain;
-      object-position: center;
-      padding: 14px 16px 42px;
-      transition: transform 600ms var(--ease-out);
-    }
-
-    .cat-card:hover .cat-card__img { transform: scale(1.05); }
-
-    /* Navy gradient keeps the white label legible over any image */
-    .cat-card__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top,
-        rgba(11, 26, 61, 0.94) 0%,
-        rgba(11, 26, 61, 0.74) 16%,
-        rgba(11, 26, 61, 0.28) 42%,
-        rgba(11, 26, 61, 0.08) 68%,
-        rgba(11, 26, 61, 0.10) 100%);
-      transition: opacity 300ms ease;
-    }
-
-    .cat-card:hover .cat-card__overlay { opacity: 0.86; }
-
-    .cat-card__content {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 22px 24px;
-      z-index: 2;
-    }
-
-    .cat-card__name {
-      display: block;
-      font-size: clamp(18px, 1.5vw, 22px);
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-      text-shadow: 0 1px 14px rgba(0, 0, 0, 0.35);
-    }
-
-    /* Prev / next arrows — sit OUTSIDE the cards, flanking the viewport */
-    .cat-nav {
-      flex: 0 0 auto;
-      width: 50px;
-      height: 50px;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      background: rgba(11, 26, 61, 0.68);
-      -webkit-backdrop-filter: blur(4px);
-      backdrop-filter: blur(4px);
-      box-shadow: 0 6px 18px rgba(11, 26, 61, 0.28);
-      transition: background 160ms ease, color 160ms ease;
-    }
-    .cat-nav:hover { background: var(--yellow); color: var(--navy); }
-    .cat-nav:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-    .cat-nav svg { width: 21px; height: 21px; }
-
-    @media (max-width: 560px) {
-      .cat-carousel { gap: 10px; }
-      .cat-nav { width: 38px; height: 38px; }
-      .cat-nav svg { width: 18px; height: 18px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .cat-card,
-      .cat-card__img { transition: none; }
-      .cat-card:hover { transform: none; }
-      .cat-card:hover .cat-card__img { transform: none; }
-    }
 
 
     /* ══════════════════════════════════════════════════════════════
@@ -1244,6 +1112,686 @@
     /* Stay fixed on top while scrolling — neutralise the auto-hide slide-up */
     body.home-edgenav .isler-nav.isler-nav--hidden { transform: none; }
   </style>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       B2B HOMEPAGE REBUILD (2026-08) — styles for the new section order:
+       Hero → Range(+stats) → Proof → RFQ → Quatro → Brands strip.
+       Kept in its own block so it can be lifted out cleanly if reverted.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <style id="hp-b2b">
+
+    /* Scroll-reveal for the new sections (class added to <body> by JS only,
+       so without JS / reduced-motion everything stays visible). */
+    body.hp-anim-on .hp-reveal { opacity: 0; transform: translateY(28px); }
+    .hp-reveal { transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+    body.hp-anim-on .hp-reveal.is-in { opacity: 1; transform: none; }
+
+    /* "content still to be supplied" chip — flags every placeholder on the page */
+    .hp-ph {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8A6A00;
+      background: rgba(244, 180, 0, 0.18);
+      border: 1px dashed rgba(244, 180, 0, 0.75);
+      border-radius: 999px;
+      padding: 3px 10px;
+      white-space: nowrap;
+    }
+    .hp-ph--dark { color: var(--yellow); background: rgba(244, 180, 0, 0.14); }
+
+    /* ══════════════════════════════════════════════════════════════
+       RANGE — hard-numbers stat bar
+    ══════════════════════════════════════════════════════════════ */
+    .hp-stats {
+      max-width: 1180px;
+      margin: 0 auto 56px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(11, 26, 61, 0.10);
+      border: 1px solid rgba(11, 26, 61, 0.10);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .hp-stat {
+      background: var(--white);
+      padding: 30px 20px;
+      text-align: center;
+    }
+    .hp-stat__value {
+      display: block;
+      font-size: clamp(32px, 4.4vw, 56px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+    }
+    .hp-stat__value::after {
+      content: attr(data-suffix);
+      color: var(--yellow);
+    }
+    .hp-stat__label {
+      display: block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      line-height: 1.45;
+    }
+    @media (max-width: 860px) {
+      .hp-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       PROOF — supply-chain / audit proof points
+    ══════════════════════════════════════════════════════════════ */
+    .proof-section {
+      background: var(--white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+      scroll-margin-top: 90px;
+    }
+    .proof-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* Capacity numbers grid (used inside the Manufacturing block) */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(11, 26, 61, 0.10);
+      border: 1px solid rgba(11, 26, 61, 0.10);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-top: clamp(28px, 3.5vw, 44px);
+    }
+    .cap-cell { background: var(--white); padding: 20px 16px; text-align: center; }
+    .cap-cell__value {
+      display: block;
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+    .cap-cell__value--empty { color: rgba(11, 26, 61, 0.28); }
+    .cap-cell__label {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      line-height: 1.4;
+    }
+    @media (max-width: 1100px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ══════════════════════════════════════════════════════════════
+       RFQ — build-to-order call to action
+    ══════════════════════════════════════════════════════════════ */
+    .rfq-section {
+      background: var(--navy);
+      padding: var(--space-2xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.033) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.033) 1px, transparent 1px);
+      background-size: 44px 44px;
+      scroll-margin-top: 90px;
+    }
+    .rfq-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(6, 15, 36, 0.75) 100%);
+      pointer-events: none;
+    }
+    .rfq-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    .rfq__eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+    .rfq__heading {
+      font-size: clamp(26px, 3.4vw, 46px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+    .rfq__sub {
+      margin: 18px auto 0;
+      max-width: 68ch;
+      font-size: 16px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.72);
+    }
+    .rfq__actions {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+    .rfq-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 34px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      transition: transform 240ms var(--ease-out), background 240ms ease, color 240ms ease;
+    }
+    .rfq-btn--primary { background: var(--yellow); color: var(--navy); }
+    .rfq-btn--primary:hover { transform: translateY(-2px); background: #ffc426; }
+    .rfq-btn--ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+    }
+    .rfq-btn--ghost:hover { transform: translateY(-2px); border-color: var(--yellow); color: var(--yellow); }
+    .rfq__note { margin-top: 18px; font-size: 13px; color: rgba(255, 255, 255, 0.55); }
+
+    /* ══════════════════════════════════════════════════════════════
+       QUATRO SERIES
+    ══════════════════════════════════════════════════════════════ */
+    .quatro-section {
+      background: var(--off-white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+      scroll-margin-top: 90px;
+    }
+    .quatro-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+    .quatro-lead {
+      max-width: 78ch;
+      margin: 0 auto 52px;
+      text-align: center;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--gray-mid);
+    }
+    .quatro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .quatro-card {
+      background: var(--white);
+      border: 1px solid rgba(11, 26, 61, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+    }
+    .quatro-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(11, 26, 61, 0.13); }
+    .quatro-card__media {
+      aspect-ratio: 4 / 3;
+      background: var(--gray-light);
+      overflow: hidden;
+    }
+    .quatro-card__media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 520ms var(--ease-out);
+    }
+    .quatro-card:hover .quatro-card__media img { transform: scale(1.05); }
+    .quatro-card__body { padding: 22px 24px 26px; }
+    .quatro-card__step {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+    .quatro-card__name {
+      display: block;
+      margin-top: 8px;
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    @media (max-width: 1100px) { .quatro-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px)  { .quatro-grid { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      .quatro-card, .quatro-card:hover { transform: none; }
+      .quatro-card:hover .quatro-card__media img { transform: none; }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       BRANDS STRIP — infinite marquee of client logos
+       (design reference: vestelinternational.com homepage logo strip)
+    ══════════════════════════════════════════════════════════════ */
+    .brands-section {
+      background: var(--white);
+      padding: var(--space-xl) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .brands-head { text-align: center; padding: 0 clamp(24px, 5vw, 96px); margin-bottom: 44px; }
+    .brands-marquee {
+      position: relative;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .brands-track {
+      display: flex;
+      width: max-content;
+      gap: 28px;
+      animation: brands-scroll 46s linear infinite;
+    }
+    .brands-marquee:hover .brands-track,
+    .brands-marquee:focus-within .brands-track { animation-play-state: paused; }
+    @keyframes brands-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(calc(-50% - 14px)); }   /* half the track + half the gap */
+    }
+    .brand-slot {
+      flex: 0 0 auto;
+      width: 190px;
+      height: 96px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px dashed rgba(11, 26, 61, 0.16);
+      border-radius: var(--radius-md);
+      background: var(--off-white);
+      color: rgba(11, 26, 61, 0.4);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      filter: grayscale(1);
+      opacity: 0.85;
+      transition: filter 260ms ease, opacity 260ms ease;
+    }
+    .brand-slot:hover { filter: grayscale(0); opacity: 1; }
+    /* Real logos, once supplied, drop straight in as <img> inside .brand-slot */
+    .brand-slot img { max-width: 72%; max-height: 56px; object-fit: contain; }
+    .brands-note { text-align: center; margin-top: 28px; padding: 0 24px; }
+    @media (prefers-reduced-motion: reduce) {
+      .brands-track { animation: none; }
+      .brands-marquee { overflow-x: auto; }
+    }
+
+  </style>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HOMEPAGE REV-2 (client doc "WEBSITE - Rev – 2", 2026-08-05)
+       Adds styles for the two NEW blocks the Rev-2 running order introduces:
+         · "Three ways to build with Isler"  (capability bar + OEM/ODM/PL)
+         · "Fast New Product Development"    (brief → first shipment flow)
+       Every other Rev-2 block reuses sections that already exist on the page —
+       they are only re-ordered and re-titled, so they need no new CSS.
+       Kept in its own block so it lifts out cleanly if reverted.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <style id="hp-rev2">
+
+    /* ══════════════════════════════════════════════════════════════
+       THREE WAYS TO BUILD — capability bar + OEM / ODM / Private Label
+       Client doc: "ODM, OEM AND Private label will be symbolic".
+    ══════════════════════════════════════════════════════════════ */
+    .ways-section {
+      background: var(--white);
+      padding: clamp(48px, 5.5vw, 80px) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+      scroll-margin-top: 90px;
+    }
+    .ways-inner { max-width: 1400px; margin: 0 auto; }
+
+    /* The capability bar (Units/yr - Production lines - Engineers -
+       Categories - Certifications) used to live here, under the hero. Client
+       2026-08-06: removed from the page; the range stat box moved up into
+       its place instead, so .cap-bar / .range-capbar styles are gone too.
+       The 30,000 sq. ft. figure it once carried lives in the "Isler at a
+       Glance" capacity grid. */
+
+    /* The range stat box sits at the top of this section now — full width,
+       flush with the OEM/ODM/Private Label cards, and .ways-head's own top
+       margin provides the gap below it. */
+    .ways-inner > .hp-stats { max-width: none; margin: 0; }
+
+    .ways-head { margin: clamp(44px, 5vw, 68px) 0 26px; }
+    .ways-head__title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      margin: 0;
+    }
+    .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ways-card {
+      background: var(--off-white);
+      border: 1px solid rgba(11, 26, 61, 0.08);
+      border-top: 3px solid var(--yellow);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .ways-card__icon {
+      width: 46px; height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius-md);
+      background: rgba(244, 180, 0, 0.16);
+      color: var(--navy);
+    }
+    .ways-card__icon svg { width: 24px; height: 24px; }
+    .ways-card__name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+    .ways-card__text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gray-mid); }
+    @media (max-width: 900px) { .ways-grid { grid-template-columns: 1fr; } }
+
+    /* ── The three cards open one after another ────────────────────────────
+       Same machinery as the NPD flow: .is-running is toggled on the grid by
+       #hp-rev2-npd when it scrolls in and off when it leaves, so the sequence
+       replays every time you come back to it. Each card carries --i (0-2,
+       inline in the markup) and its contents follow a beat behind the card
+       itself, so a card reads as opening rather than just fading. All scoped
+       to body.hp-anim-on, which is only set when JS is on and reduced-motion
+       is off — otherwise the cards simply sit there. Full pass ~1.4s.      */
+    @keyframes waysOpen {
+      from { opacity: 0; transform: translateY(22px) scale(0.97); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes waysIcon {
+      from { opacity: 0; transform: scale(0.6) rotate(-8deg); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes waysText {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
+    body.hp-anim-on .ways-card,
+    body.hp-anim-on .ways-card__icon,
+    body.hp-anim-on .ways-card__name,
+    body.hp-anim-on .ways-card__text { opacity: 0; }
+
+    body.hp-anim-on .ways-grid.is-running .ways-card {
+      animation: waysOpen 700ms var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 300ms);
+    }
+    body.hp-anim-on .ways-grid.is-running .ways-card__icon {
+      animation: waysIcon 500ms var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 300ms + 220ms);
+    }
+    body.hp-anim-on .ways-grid.is-running .ways-card__name {
+      animation: waysText 450ms var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 300ms + 300ms);
+    }
+    body.hp-anim-on .ways-grid.is-running .ways-card__text {
+      animation: waysText 450ms var(--ease-out) both;
+      animation-delay: calc(var(--i, 0) * 300ms + 380ms);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       FAST NEW PRODUCT DEVELOPMENT — "from brief to first shipment"
+    ══════════════════════════════════════════════════════════════ */
+    .npd-section {
+      background: var(--off-white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+      scroll-margin-top: 90px;
+    }
+    .npd-inner { max-width: 1400px; margin: 0 auto; }
+    .npd-lead {
+      margin: 0 0 26px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .npd-flow {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+    .npd-step {
+      position: relative;
+      background: var(--white);
+      border: 1px solid rgba(11, 26, 61, 0.10);
+      border-radius: var(--radius-md);
+      padding: 20px 10px 18px;
+      text-align: center;
+    }
+    /* connector between steps */
+    .npd-step::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: rgba(11, 26, 61, 0.22);
+    }
+    .npd-step:last-child::after { display: none; }
+    .npd-step__no {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--yellow);
+    }
+    .npd-step__name {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--navy);
+    }
+    /* ── Flow animation: the process runs left to right, RFQ -> Dispatch ───
+       Driven by .is-running on the container, which #hp-rev2-npd adds when
+       the flow scrolls into view and removes when it leaves — so the sweep
+       REPLAYS every time you come back down to it, not just once.
+       Everything is scoped to body.hp-anim-on, the class the page's own
+       script only adds when JS is on and prefers-reduced-motion is off; with
+       either of those, none of this applies and the steps simply sit there
+       visible with their connectors drawn. Each step carries its own --i
+       index (0-8 inline in the markup) and the delays turn that into the
+       sweep. Full pass ~3.4s.                                              */
+    @keyframes npdIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+    /* the card lights up as the sweep passes through it */
+    @keyframes npdPulse {
+      0%   { border-color: rgba(11, 26, 61, 0.10); background: var(--white); box-shadow: none; }
+      40%  { border-color: rgba(244, 180, 0, 0.90); background: rgba(244, 180, 0, 0.12);
+             box-shadow: 0 10px 26px rgba(244, 180, 0, 0.25); }
+      100% { border-color: rgba(11, 26, 61, 0.10); background: var(--white); box-shadow: none; }
+    }
+    /* the connector draws in yellow behind the sweep, then settles to hairline */
+    @keyframes npdLine {
+      0%   { width: 0;    background: var(--yellow); }
+      55%  { width: 10px; background: var(--yellow); }
+      100% { width: 10px; background: rgba(11, 26, 61, 0.22); }
+    }
+    body.hp-anim-on .npd-step { opacity: 0; }
+    body.hp-anim-on .npd-step::after { width: 0; }
+    body.hp-anim-on .npd-flow.is-running .npd-step {
+      animation: npdIn 800ms var(--ease-out) both,
+                 npdPulse 1500ms ease both;
+      animation-delay: calc(var(--i, 0) * 200ms),
+                       calc(var(--i, 0) * 200ms + 400ms);
+    }
+    body.hp-anim-on .npd-flow.is-running .npd-step::after {
+      animation: npdLine 1000ms ease both;
+      animation-delay: calc(var(--i, 0) * 200ms + 500ms);
+    }
+
+    .npd-note { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+    @media (max-width: 1200px) {
+      .npd-flow { grid-template-columns: repeat(3, 1fr); }
+      .npd-step::after { display: none; }
+    }
+    @media (max-width: 560px) { .npd-flow { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ══════════════════════════════════════════════════════════════
+       SECTION RHYTHM
+       --space-3xl resolves to 160px and is applied top AND bottom, so
+       every boundary in the Rev-2 run was leaving 320px of empty space
+       between one section's content and the next (.mfg-certs was 464px
+       tall for 144px of actual content). Client 2026-08-06: too much from
+       "Isler at a Glance" down. That section already used 72px, so the
+       rest of the run is brought to the same value and the gap between
+       any two sections settles at a consistent 144px. Horizontal padding
+       is untouched — only the top/bottom is overridden.
+    ══════════════════════════════════════════════════════════════ */
+    .mfg-labs,
+    .mfg-certs,
+    .mfg-vendors,
+    .npd-section,
+    .proof-section,
+    .range-section,
+    .quatro-section,
+    .blog-section,
+    .rfq-section {
+      padding-top: clamp(48px, 5vw, 72px);
+      padding-bottom: clamp(48px, 5vw, 72px);
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       REV-2 TWO-UP BANDS
+       Every block the client doc shows after "Isler at a Glance" is laid
+       out the same way: one media panel beside one copy block, the two
+       the same size in every band, sides alternating down the page —
+         Isler at a Glance ....... media LEFT  / copy RIGHT
+         Quality Is Our ......... copy  LEFT  / media RIGHT
+         Fast NPD ............... media LEFT  / copy RIGHT
+         Supply Chain ........... copy  LEFT  / media RIGHT
+       and each band's full-width strip (certifications / process flow /
+       brands) sits underneath it.
+       Geometry is copied from .mfg-prod-grid + .mfg-media, which already
+       render the "Isler at a Glance" band, so all four bands match.
+    ══════════════════════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════════════════
+       ONE CONTENT COLUMN FOR THE WHOLE RUN
+       The inners disagreed: .mfg-inner 1680px, .ways-/.npd-/.proof-inner
+       1400px, .range-section on 56px side padding with no cap at all. So the
+       manufacturing bands hung 13px further left AND 12px further right than
+       the NPD / Supply Chain ones (media 677x507 vs 664x498), and the product
+       carousel ran wider than everything above it.
+       Everything is unified on 1680px here — the widest of them, so no
+       section ends up inset next to its neighbour — and the side padding is
+       matched so every section's content starts and ends on the same two
+       vertical lines. Deliberate exceptions kept: .mfg-opener (1280px),
+       .rfq-inner (1080px centred text), #brands (full-bleed marquee).
+    ══════════════════════════════════════════════════════════════ */
+    .ways-inner,
+    .npd-inner,
+    .proof-inner,
+    .quatro-inner,
+    .mfg-production .mfg-inner,
+    .mfg-labs .mfg-inner,
+    .mfg-certs .mfg-inner,
+    .mfg-vendors .mfg-inner { max-width: 1680px; }
+
+    .range-section {
+      padding-left: clamp(24px, 5vw, 96px);
+      padding-right: clamp(24px, 5vw, 96px);
+    }
+
+    .rev2-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: center;
+    }
+    .rev2-band__media {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #0B1A3D;   /* on-brand navy behind the media */
+      box-shadow: 0 28px 60px rgba(11, 26, 61, 0.18);
+      aspect-ratio: 4 / 3;   /* same panel as "Isler at a Glance" */
+    }
+    .rev2-band__media > video,
+    .rev2-band__media > img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    /* stand-in photography — client owes 12 photos/videos (doc, final note).
+       Sits on top of an image, so it needs an opaque backing of its own. */
+    .rev2-band__ph {
+      position: absolute; left: 16px; bottom: 16px; z-index: 2;
+      background: #FFF6DC;
+      border-style: solid;
+      border-color: rgba(138, 106, 0, 0.55);
+      box-shadow: 0 4px 14px rgba(11, 26, 61, 0.28);
+    }
+
+    /* the copy half reads left-aligned inside a band, not centred */
+    .rev2-band__copy .section-header { text-align: left; margin-bottom: 0; }
+    .rev2-band__copy .section-sub { max-width: 56ch; }
+    .rev2-band__copy .mfg-sub { max-width: 56ch; }
+    /* the body paragraph under the lead — every band carries one, the way
+       "Quality Is Our First Priority" does */
+    .rev2-band__body {
+      margin: 18px 0 0;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--gray-mid);
+      max-width: 56ch;
+    }
+
+    /* The capacity grid now carries 9 cells — the 30,000 sq. ft. facility
+       figure moved into it out of the "Isler at a Glance" copy panel — so it
+       runs 3 x 3 flush instead of 4 + 4 + 1. (This block loads after the
+       #hp-b2b one, so it also supersedes that block's 1100px 2-column rule.) */
+    .cap-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 760px) { .cap-grid { grid-template-columns: 1fr; } }
+
+    /* the full-width strip that follows a band */
+    .rev2-band + .npd-lead { margin-top: clamp(40px, 5vw, 64px); }
+
+    @media (max-width: 900px) {
+      .rev2-band { grid-template-columns: 1fr; gap: 32px; }
+      .rev2-band__media { order: 2; aspect-ratio: 3 / 2; }  /* copy leads on mobile */
+    }
+
+  </style>
 </head>
 <body class="home-edgenav">
 
@@ -1264,7 +1812,7 @@
     <ul class="isler-nav__links">
       <li><a href="index.html">Home</a></li>
       <li class="isler-nav__item has-mega" id="isler-products-item">
-        <a href="index.html#range" class="isler-nav__trigger" id="isler-products-trigger"
+        <a href="business.html" class="isler-nav__trigger" id="isler-products-trigger"
            aria-haspopup="true" aria-expanded="false" aria-controls="isler-mega">
           Business
           <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none"
@@ -1414,7 +1962,7 @@
         <div class="hero-scene scene-cta">
           <p class="hero-headline">Innovation That Works for You</p>
           <p class="hero-subhead">Smart technologies engineered to deliver superior performance greater efficiency and effortless everyday cooking.</p>
-          <a href="#range" class="hero-cta-btn">Explore Products</a>
+          <a href="contact.html" class="hero-cta-btn">Start an RFQ</a>
         </div>
 
       </div>
@@ -1429,15 +1977,89 @@
   </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       MANUFACTURING EXCELLENCE — B2B credibility block
-       Added BELOW the scroll hero. Independent of the hero's GSAP logic.
-       Reveal/counter animation handled by the #mfg inline script near </body>.
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <div id="mfg">
 
+  <!-- ════════════════════════════════════════════════════════════════════════
+       HOMEPAGE REV-2 RUNNING ORDER — client doc "WEBSITE - Rev – 2".
+       Hero → Three ways to build → Manufacturing → Isler at a Glance →
+       Quality → NPD → Supply Chain → Partners → Brands → Products → RFQ.
+  ══════════════════════════════════════════════════════════════════════════ -->
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2 / 2 — THREE WAYS TO BUILD WITH ISLER
+       Client doc, page 1: the capability bar + OEM / ODM / Private Label sit
+       directly under the scroll hero. "ODM, OEM AND Private label will be
+       symbolic" — hence the icon marks rather than photography.
+       Values in brackets on the client's wireframe are still owed by Isler and
+       are rendered as em-dashes behind a "to be supplied" chip.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="ways" class="ways-section" aria-labelledby="ways-h">
+    <div class="ways-inner">
+
+      <!-- Hard numbers, per client brief: total SKUs + number of categories.
+           Counts are generated from assets/js/search.js + the product pages;
+           re-check them after any catalogue update. -->
+      <div class="hp-stats">
+        <div class="hp-stat hp-reveal">
+          <span class="hp-stat__value hp-count" data-count="183">183</span>
+          <span class="hp-stat__label">SKUs in the catalogue</span>
+        </div>
+        <div class="hp-stat hp-reveal">
+          <span class="hp-stat__value hp-count" data-count="22">22</span>
+          <span class="hp-stat__label">Product categories</span>
+        </div>
+        <div class="hp-stat hp-reveal">
+          <span class="hp-stat__value hp-count" data-count="4">4</span>
+          <span class="hp-stat__label">Product divisions</span>
+        </div>
+        <div class="hp-stat hp-reveal">
+          <span class="hp-stat__value hp-count" data-count="1">1</span>
+          <span class="hp-stat__label">Shared design language</span>
+        </div>
+      </div>
+
+      <!-- ── Three ways to build ────────────────────────────────────────── -->
+      <div class="ways-head">
+        <h2 class="ways-head__title" id="ways-h">Three ways to build with Isler</h2>
+      </div>
+
+      <!-- The cards open one after another when the grid scrolls into
+           view; --i is each card's place in the sequence. They do NOT
+           carry .hp-reveal — that system writes the same opacity and
+           transform and the two would fight. -->
+      <div class="ways-grid">
+
+        <div class="ways-card" style="--i:0">
+          <span class="ways-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4 6 4v12"/><path d="M15 21V13h6v8"/><path d="M3 21h18"/><path d="M7 13h2"/><path d="M7 17h2"/></svg>
+          </span>
+          <span class="ways-card__name">OEM</span>
+          <p class="ways-card__text">You bring the specification. We manufacture it at scale, to your drawings and your quality plan.</p>
+        </div>
+
+        <div class="ways-card" style="--i:1">
+          <span class="ways-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l2.1 2.1"/><path d="M16.3 16.3l2.1 2.1"/><path d="M18.4 5.6l-2.1 2.1"/><path d="M7.7 16.3l-2.1 2.1"/></svg>
+          </span>
+          <span class="ways-card__name">ODM</span>
+          <p class="ways-card__text">We design and build the product for you &mdash; concept, tooling, certification and production under one roof.</p>
+        </div>
+
+        <div class="ways-card" style="--i:2">
+          <span class="ways-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22l-9-9V4a1 1 0 0 1 1-1h9l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
+          </span>
+          <span class="ways-card__name">Private Label</span>
+          <p class="ways-card__text">Your brand on our existing platforms &mdash; proven products, your identity, your packaging, our production.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MANUFACTURING EXCELLENCE — opener + capability blocks -->
     <!-- ── 1. SECTION OPENER (background video) ─────────────────────────── -->
-    <section class="mfg-section mfg-opener mfg-pad" aria-label="Manufacturing">
+    <section id="mfg" class="mfg-section mfg-opener mfg-pad" aria-label="Manufacturing">
       <video class="mfg-opener__video" autoplay muted loop playsinline preload="none"
              aria-hidden="true" tabindex="-1"
              disablepictureinpicture>
@@ -1459,38 +2081,200 @@
       <div class="mfg-inner">
         <!-- Heading + intro (top-left, above the data box) -->
         <div>
-          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h" style="font-size:clamp(28px,3vw,40px);">Infrastructure at a Glance</h2>
+          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h" style="font-size:clamp(28px,3vw,40px);">Isler at a Glance</h2>
           <p class="mfg-sub mfg-reveal" style="margin-top:14px;max-width:none;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof — enabling faster iteration from design to dispatch.</p>
         </div>
-        <!-- Video (left) + Process-Led operations w/ facility stat box (right) -->
-        <div class="mfg-prod-grid" style="align-items:center;margin-top:clamp(32px,4vw,48px);">
-          <div class="mfg-media mfg-reveal">
+        <!-- Doc format: media LEFT / copy RIGHT, copy laid out exactly like
+             "Quality Is Our First Priority" — eyebrow, heading, lead, body. -->
+        <div class="rev2-band" style="margin-top:clamp(32px,4vw,48px);">
+          <div class="rev2-band__media mfg-reveal">
             <video autoplay muted loop playsinline preload="metadata"
                    aria-hidden="true" tabindex="-1"
                    disablepictureinpicture>
               <source src="assets/videos/assembly-line.mp4" type="video/mp4">
             </video>
           </div>
-          <div>
-            <h3 class="mfg-heading mfg-reveal" id="mfg-vendor-h" style="font-size:clamp(22px,2.4vw,32px);margin-bottom:22px;">Process-Led, Digital &amp; Quality-First Operations</h3>
-            <ul class="mfg-feature-list mfg-reveal" style="margin-bottom:28px;">
-              <li class="mfg-feature">World-Class Manufacturing Organization</li>
-              <li class="mfg-feature">Process Excellence</li>
-              <li class="mfg-feature">ERP &amp; Data Backbone</li>
-              <li class="mfg-feature">Supply Network Control Tower (SNCT)</li>
-              <li class="mfg-feature">Digital Shopfloor</li>
-            </ul>
-            <!-- Facility "at a glance" data box (client content, verbatim) -->
-            <div class="infra-box mfg-reveal">
-              <div class="infra-box__cell"><span class="infra-box__figure">30,000 sq. ft.</span></div>
-              <div class="infra-box__cell"><span class="infra-box__text">Assembly, Warehousing, Quality Labs, NPD</span></div>
-              <div class="infra-box__cell"><span class="infra-box__text">Integrated Facility</span></div>
-            </div>
+          <div class="rev2-band__copy">
+            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Manufacturing Operations</span>
+            <h3 class="mfg-heading mfg-reveal" id="mfg-vendor-h" style="font-size:clamp(22px,2.4vw,32px);margin-bottom:18px;">Process-Led, Digital &amp; Quality-First Operations</h3>
+            <p class="mfg-sub mfg-reveal">A world-class manufacturing organisation run on documented process — 13+ processes, 25+ sub-processes and 130+ templates covering every stage of the build.</p>
+            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, the shop floor and the system are one. An ERP and data backbone carries every order end to end, a Supply Network Control Tower (SNCT) watches material and capacity across the partner base, and a digital shopfloor records what actually happened on the line — so the status a buyer is given is the status the plant is working to.</p>
+          </div>
+        </div>
+
+        <!-- CAPACITY NUMBERS — requested by the client; values still to be
+             supplied by Isler. Replace the em-dashes and drop the
+             cap-cell__value--empty class + the chip below once filled. -->
+        <div style="margin-top:clamp(28px,3.5vw,44px);">
+          <span class="mfg-eyebrow" style="margin-bottom:10px;">Capacity at a Glance <span class="hp-ph">Numbers to be supplied</span></span>
+        </div>
+        <div class="cap-grid mfg-reveal" style="margin-top:12px;">
+          <div class="cap-cell">
+            <span class="cap-cell__value">30,000 sq. ft.</span>
+            <span class="cap-cell__label">Integrated facility</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Units per year</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Production lines</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Shifts per day</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Headcount</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Engineers</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">OEE %</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">On-time delivery %</span>
+          </div>
+          <div class="cap-cell">
+            <span class="cap-cell__value cap-cell__value--empty">—</span>
+            <span class="cap-cell__label">Defect rate (PPM)</span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
+    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="mfg-inner">
+        <!-- Doc format: copy LEFT / media RIGHT (mirror of "Isler at a
+             Glance"), then the certifications strip full width below. -->
+        <div class="rev2-band">
+          <div class="rev2-band__copy">
+            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
+            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our First Priority</h2>
+            <p class="mfg-sub mfg-reveal">Engineered, tested and certified to global standards — in-house labs, incoming and outgoing inspection, and a QMS your auditors can walk line by line.</p>
+            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
+          </div>
+          <div class="rev2-band__media mfg-reveal">
+            <video autoplay muted loop playsinline preload="metadata"
+                   aria-hidden="true" tabindex="-1"
+                   disablepictureinpicture>
+              <source src="assets/videos/lab-test.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2 / 6 — FAST NEW PRODUCT DEVELOPMENT
+       Client wireframe: "From brief to first shipment" — RFQ, Feasibility,
+       Design, Sampling, Tooling, Production, QC, Dispatch (8 steps).
+       Client note on the same page: "ADD VALIDATION IN THIS PROCESS" — added
+       as step 5, between Sampling and Tooling (design validation before tools
+       are cut). Highlighted below; move it after Tooling if Isler means
+       production validation instead.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="npd" class="npd-section" aria-labelledby="npd-h">
+    <div class="npd-inner">
+
+      <!-- Doc format: media LEFT / copy RIGHT, then the flow strip full width
+           underneath. Same band geometry as "Isler at a Glance". -->
+      <div class="rev2-band">
+        <div class="rev2-band__media hp-reveal">
+          <img src="assets/images/manufacturing/production.webp"
+               alt="New product development on the Isler production line" loading="lazy">
+          <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
+        </div>
+        <div class="rev2-band__copy">
+          <div class="section-header">
+            <span class="section-eyebrow">New Product Development</span>
+            <h2 class="section-heading" id="npd-h">Fast New Product Development</h2>
+            <p class="section-sub">An in-house NPD team takes a brief from first conversation to first shipment &mdash; design, validation, tooling and certification handled on the same site as production.</p>
+          </div>
+          <p class="rev2-band__body">At Isler, new product development is not a hand-off &mdash; industrial design, engineering, tooling and certification sit beside the line that will build the product. Every stage is documented, reviewed and signed off before the next one starts, so a brief becomes a validated sample and a sample becomes a shipment in one continuous process.</p>
+        </div>
+      </div>
+
+      <p class="npd-lead">From brief to first shipment</p>
+
+      <!-- --i is the step's position in the sweep. The steps deliberately do
+           NOT carry .hp-reveal — the flow runs its own animation off
+           .is-running (added/removed by #hp-rev2-npd), and two systems
+           writing the same opacity/transform would fight. -->
+      <div class="npd-flow">
+        <div class="npd-step" style="--i:0"><span class="npd-step__no">01</span><span class="npd-step__name">RFQ</span></div>
+        <div class="npd-step" style="--i:1"><span class="npd-step__no">02</span><span class="npd-step__name">Feasibility</span></div>
+        <div class="npd-step" style="--i:2"><span class="npd-step__no">03</span><span class="npd-step__name">Design</span></div>
+        <div class="npd-step" style="--i:3"><span class="npd-step__no">04</span><span class="npd-step__name">Sampling</span></div>
+        <!-- Validation is the step the client asked us to add. It was picked
+             out in yellow while it was new; client 2026-08-06: don't highlight
+             it — it reads as a normal stage now. -->
+        <div class="npd-step" style="--i:4"><span class="npd-step__no">05</span><span class="npd-step__name">Validation</span></div>
+        <div class="npd-step" style="--i:5"><span class="npd-step__no">06</span><span class="npd-step__name">Tooling</span></div>
+        <div class="npd-step" style="--i:6"><span class="npd-step__no">07</span><span class="npd-step__name">Production</span></div>
+        <div class="npd-step" style="--i:7"><span class="npd-step__no">08</span><span class="npd-step__name">QC</span></div>
+        <div class="npd-step" style="--i:8"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
+      </div>
+
+      <p class="npd-note">
+        <span class="hp-ph">Validation step added &mdash; position to be confirmed</span>
+        <span class="hp-ph">Stage timelines to be supplied</span>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 3 — PROOF (supply-chain / audit proof points)
+       Client brief: "need few proof supplies chain" — the certification block
+       and the process-governance numbers below are REAL; every item carrying a
+       "TO BE SUPPLIED" chip is waiting on content from Isler.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="proof" class="proof-section" aria-labelledby="proof-h">
+    <div class="proof-inner">
+      <!-- Doc format: copy LEFT / media RIGHT, then the certifications
+           and brands strips full width below. -->
+      <div class="rev2-band">
+        <div class="rev2-band__copy">
+          <div class="section-header">
+            <span class="section-eyebrow">Proof, Not Promises</span>
+            <h2 class="section-heading" id="proof-h">Supply Chain Excellence</h2>
+            <p class="section-sub">Certifications, an audited partner base, and a process system your quality team can inspect line by line.</p>
+          </div>
+          <p class="rev2-band__body">At Isler, the supply chain is engineered rather than assembled &mdash; every component and material partner is audited before it is approved, critical parts are dual-sourced, and material flow is planned through the same ERP and control tower that runs the shop floor. That is the evidence a buyer asks for on a China+1 sourcing review, ready before they ask for it.</p>
+        </div>
+        <div class="rev2-band__media hp-reveal">
+          <img src="assets/images/manufacturing/factory-floor.webp"
+               alt="The Isler shop floor in Greater Noida" loading="lazy">
+          <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- ── 5. CERTIFICATIONS (ISO + BIS) ────────────────────────────────── -->
+    <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="mfg-inner">
+        <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Our Certifications</h2>
+        <div class="mfg-cert-row mfg-reveal">
+          <span class="mfg-cert"><img src="assets/images/certifications/iso-9001.webp" alt="ISO 9001 certified" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/iso-14001.webp" alt="ISO 14001 certified" loading="lazy"></span>
+          <span class="mfg-cert"><img src="assets/images/certifications/bis.webp" alt="BIS — Bureau of Indian Standards" loading="lazy"></span>
+        </div>
+      </div>
+    </section>
     <!-- ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ───────────────────────────── -->
     <section class="mfg-section mfg-vendors mfg-pad" aria-labelledby="mfg-supply-h">
       <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;background:rgba(244,180,0,0.10);top:-100px;right:-80px;"></div>
@@ -1516,174 +2300,115 @@
       </div>
     </section>
 
-    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
-    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
-      <div class="mfg-inner">
-        <div class="mfg-labs__banner mfg-reveal">
-          <video autoplay muted loop playsinline preload="metadata"
-                 aria-hidden="true" tabindex="-1"
-                 disablepictureinpicture>
-            <source src="assets/videos/lab-test.mp4" type="video/mp4">
-          </video>
-        </div>
-
-        <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
-        <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our DNA - Engineered, Tested, and Certified to Global Standards</h2>
-        <p class="mfg-sub mfg-reveal" style="max-width:80ch;margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
-      </div>
-    </section>
-
-    <!-- ── 5. CERTIFICATIONS (ISO + BIS) ────────────────────────────────── -->
-    <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="mfg-inner">
-        <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Our Certifications</h2>
-        <div class="mfg-cert-row mfg-reveal">
-          <span class="mfg-cert"><img src="assets/images/certifications/iso-9001.webp" alt="ISO 9001 certified" loading="lazy"></span>
-          <span class="mfg-cert"><img src="assets/images/certifications/iso-14001.webp" alt="ISO 14001 certified" loading="lazy"></span>
-          <span class="mfg-cert"><img src="assets/images/certifications/bis.webp" alt="BIS — Bureau of Indian Standards" loading="lazy"></span>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-
   <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 2 — The Range
-       Product images + structure sourced from Isler-India-Revamp
+       SECTION 6 — BRANDS STRIP
+       Design reference: the scrolling client-logo strip on vestelinternational.com
+       PLACEHOLDER SLOTS ONLY — do NOT add third-party brand logos without
+       written authorisation from the brand owner. Drop an <img> inside each
+       .brand-slot once approved logos are supplied.
+       The track is duplicated (aria-hidden on copy 2) for a seamless loop.
   ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="range" class="range-section">
-    <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
-    <div class="section-header">
-      <span class="section-eyebrow">Isler's Range</span>
-      <h2 class="section-heading">Key Products Range</h2>
+  <section id="brands" class="brands-section" aria-labelledby="brands-h">
+    <div class="brands-head">
+      <span class="section-eyebrow">Our Clients</span>
+      <h2 class="section-heading" id="brands-h">Brands We Build For</h2>
+      <p class="section-sub">Manufacturing partner to leading appliance brands across India and export markets.</p>
     </div>
 
-    <div class="cat-grid-wrap">
-      <div class="cat-carousel" aria-label="Product range" role="group" aria-roledescription="carousel">
-        <button class="cat-nav cat-nav--prev" type="button" aria-label="Previous products">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="cat-viewport">
-        <div class="cat-track">
-        <a href="hobs.html" class="cat-card" aria-label="Hobs">
-          <img class="cat-card__img" src="assets/catalog/hobs/fw/neo-cook-card.webp" alt="Hobs" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Hobs</span></div>
+    <div class="brands-marquee">
+      <div class="brands-track">
+        <!-- copy 1 -->
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <!-- copy 2 — seamless loop -->
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+      </div>
+    </div>
+
+    <p class="brands-note"><span class="hp-ph">Client logos to be supplied</span></p>
+  </section>
+
+  <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
+       homepage doc. Kept in place pending a decision — delete this
+       section if Isler confirms it should come off the homepage. -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 5 — QUATRO SERIES
+       Copy adapted from the client-approved About Us paragraph (about.html).
+       Card images are existing site product shots — swap for final Quatro
+       series photography when Isler supplies it.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="quatro" class="quatro-section" aria-labelledby="quatro-h">
+    <div class="quatro-inner">
+      <div class="section-header">
+        <span class="section-eyebrow">Quatro Series</span>
+        <h2 class="section-heading" id="quatro-h">One Design Language,<br>Your Entire Kitchen Line-Up</h2>
+      </div>
+
+      <p class="quatro-lead hp-reveal">Isler is the only manufacturing company in India to offer a Quatro series — chimney, built-in hob, microwave and oven, each designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
+
+      <div class="quatro-grid">
+
+        <a href="kitchen-chimneys.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.webp" alt="Isler chimney — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">One of four</span>
+            <span class="quatro-card__name">Chimney</span>
+          </div>
         </a>
 
-        <a href="cooktops.html" class="cat-card" aria-label="Cooktops">
-          <img class="cat-card__img" src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.webp" alt="Cooktops" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Cooktops</span></div>
+        <a href="built-in-hobs.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/hob-brillare.webp" alt="Isler built-in hob — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Two of four</span>
+            <span class="quatro-card__name">Built-in Hob</span>
+          </div>
         </a>
 
-        <a href="kitchen-chimneys.html" class="cat-card" aria-label="Chimneys">
-          <img class="cat-card__img" src="assets/catalog/chimneys/best-t-isl1001-card.webp" alt="Chimneys" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Chimneys</span></div>
+        <a href="built-in-microwaves.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/microwave-silver-core.webp" alt="Isler built-in microwave — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Three of four</span>
+            <span class="quatro-card__name">Microwave</span>
+          </div>
         </a>
 
-        <a href="built-in-ovens.html" class="cat-card" aria-label="Ovens">
-          <img class="cat-card__img" src="assets/catalog/built-in-ovens/is-ch-1001.webp" alt="Ovens" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Ovens</span></div>
+        <a href="built-in-ovens.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/oven-gold-grande.webp" alt="Isler built-in oven — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Four of four</span>
+            <span class="quatro-card__name">Oven</span>
+          </div>
         </a>
 
-        <a href="built-in-microwaves.html" class="cat-card" aria-label="Microwaves">
-          <img class="cat-card__img" src="assets/catalog/microwaves/silver-edge.webp" alt="Microwaves" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Microwaves</span></div>
-        </a>
-
-        <a href="small-appliances.html" class="cat-card" aria-label="Small Domestic Appliances">
-          <img class="cat-card__img" src="assets/catalog/air-purifiers/jh22.webp" alt="Small Domestic Appliances" loading="lazy">
-          <div class="cat-card__overlay" aria-hidden="true"></div>
-          <div class="cat-card__content"><span class="cat-card__name">Small Domestic Appliances</span></div>
-        </a>
-        </div>
-        </div>
-        <button class="cat-nav cat-nav--next" type="button" aria-label="Next products">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
       </div>
     </div>
   </section>
 
-  <script>
-  /* Key Products Range — stepped auto-sliding carousel (mirrors the "Our Clients"
-     carousel: shows N cards, advances 1 every 5s with a 500ms slide, loops forever,
-     pauses on hover/focus, prev/next arrows). Recycles DOM nodes for a seamless loop. */
-  (function () {
-    var root  = document.querySelector('#range .cat-carousel');
-    var track = root && root.querySelector('.cat-track');
-    if (!track) return;
-    var prevBtn = root.querySelector('.cat-nav--prev');
-    var nextBtn = root.querySelector('.cat-nav--next');
-    var SPEED = 500, DELAY = 5000, EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var animating = false, timer = null;
 
-    function setVis() {
-      var w = window.innerWidth, n = 1;
-      if (w >= 1200) n = 4; else if (w >= 900) n = 3; else if (w >= 600) n = 2;
-      root.style.setProperty('--vis', n);
-    }
-    function gap() { return parseFloat(getComputedStyle(track).columnGap) || 24; }
-    function stepPx() { return track.firstElementChild.getBoundingClientRect().width + gap(); }
-
-    function next() {
-      if (animating || track.children.length < 2) return;
-      animating = true;
-      if (reduce) { track.appendChild(track.firstElementChild); animating = false; return; }
-      track.style.transition = 'transform ' + SPEED + 'ms ' + EASE;
-      track.style.transform = 'translateX(-' + stepPx() + 'px)';
-      var end = function () {
-        track.removeEventListener('transitionend', end);
-        track.style.transition = 'none';
-        track.appendChild(track.firstElementChild);
-        track.style.transform = 'translateX(0)';
-        void track.offsetWidth;
-        animating = false;
-      };
-      track.addEventListener('transitionend', end);
-    }
-    function prev() {
-      if (animating || track.children.length < 2) return;
-      animating = true;
-      track.style.transition = 'none';
-      track.insertBefore(track.lastElementChild, track.firstElementChild);
-      track.style.transform = 'translateX(-' + stepPx() + 'px)';
-      void track.offsetWidth;
-      if (reduce) { track.style.transform = 'translateX(0)'; animating = false; return; }
-      track.style.transition = 'transform ' + SPEED + 'ms ' + EASE;
-      track.style.transform = 'translateX(0)';
-      var end = function () { track.removeEventListener('transitionend', end); animating = false; };
-      track.addEventListener('transitionend', end);
-    }
-    function play() { if (reduce) return; stop(); timer = setInterval(next, DELAY); }
-    function stop() { if (timer) { clearInterval(timer); timer = null; } }
-
-    nextBtn && nextBtn.addEventListener('click', function () { next(); play(); });
-    prevBtn && prevBtn.addEventListener('click', function () { prev(); play(); });
-    root.addEventListener('mouseenter', stop);
-    root.addEventListener('mouseleave', play);
-    root.addEventListener('focusin', stop);
-    root.addEventListener('focusout', play);
-    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(setVis, 150); });
-
-    setVis();
-    play();
-  })();
-  </script>
-
-
+  <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
+       homepage doc. Kept in place pending a decision — delete this
+       section if Isler confirms it should come off the homepage. -->
   <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 4 — Insights / Blog
        Section + content sourced from Isler-India-Revamp homepage (BLOG SECTION).
@@ -1772,6 +2497,30 @@
 
 
   <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 4 — RFQ (build to order)
+       PENDING: the products PDF (assets/docs/isler-products.pdf) does not exist
+       yet — the download button is wired and flagged until Isler supplies it.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="rfq" class="rfq-section" aria-labelledby="rfq-h">
+    <div class="rfq-inner">
+      <span class="rfq__eyebrow">Build to Order</span>
+      <h2 class="rfq__heading" id="rfq-h">We Don’t Just Manufacture What We Have —<br>We Build What You Need.</h2>
+      <p class="rfq__sub">Bring us a specification, a design brief, or a benchmark unit. Our new product development team takes it from concept through tooling, certification and full-scale production — under your brand.</p>
+
+      <div class="rfq__actions">
+        <a href="assets/docs/isler-products.pdf" class="rfq-btn rfq-btn--ghost" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Products PDF
+        </a>
+        <span class="hp-ph hp-ph--dark">PDF to be supplied</span>
+      </div>
+
+      <p class="rfq__note">Typical response within 2 working days. MOQ and lead times shared with the quotation.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 5 — CTA Box
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section class="cta-box-section">
@@ -1786,8 +2535,8 @@
       </div>
 
       <div class="cta-box__actions">
-        <a href="#range" class="cta-box__btn cta-box__btn--primary">View Our Products</a>
-        <a href="mailto:info@islerindia.com" class="cta-box__btn cta-box__btn--secondary">Contact Us</a>
+        <a href="#rfq" class="cta-box__btn cta-box__btn--primary">Start an RFQ</a>
+        <a href="business.html" class="cta-box__btn cta-box__btn--secondary">View Our Products</a>
       </div>
 
     </div>
@@ -1814,7 +2563,7 @@
             <li><a href="gas-cooktops.html">Gas Cooktops</a></li>
             <li><a href="induction-cooktops.html">Induction Cooktops</a></li><li><a href="infrared-cooktops.html">Infrared Cooktops</a></li><li><a href="hybrid-cooktops.html">Hybrid Cooktops</a></li>
             <li><a href="built-in-ovens.html">Built-in Ovens</a></li>
-            <li><a href="index.html#range">View All Products</a></li>
+            <li><a href="business.html">View All Products</a></li>
           </ul>
         </div>
 
@@ -1949,8 +2698,10 @@
        is fully visible and counters show their final values immediately. -->
   <script id="mfg-scroll">
     (function () {
-      var section = document.getElementById('mfg');
-      if (!section) return;
+      // Rev-2: the manufacturing sub-sections are no longer inside one
+      // wrapper, so scope to the document. .mfg-reveal / .mfg-stat__num
+      // only exist inside manufacturing markup.
+      var section = document;
 
       function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
 
@@ -2041,5 +2792,115 @@
     })();
   </script>
   <script src="assets/js/search.js" defer></script>
+  <!-- New B2B sections: scroll-reveal + stat count-up. Self-contained, no GSAP.
+       Degrades to fully-visible content with final numbers if IO is missing
+       or the user prefers reduced motion. -->
+  <script id="hp-b2b-scroll">
+  (function () {
+    var nums = [].slice.call(document.querySelectorAll('.hp-count'));
+    function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+    function setFinal() {
+      nums.forEach(function (n) { n.textContent = fmt(parseFloat(n.getAttribute('data-count')) || 0); });
+    }
+    setFinal();
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    document.body.classList.add('hp-anim-on');
+
+    var reveals = [].slice.call(document.querySelectorAll('.hp-reveal'));
+    var ro = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        ro.unobserve(e.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    reveals.forEach(function (el) { ro.observe(el); });
+
+    var co = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        co.unobserve(e.target);
+        var el = e.target, target = parseFloat(el.getAttribute('data-count')) || 0, t0 = null;
+        var tick = function (ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / 1400, 1);
+          el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.4 });
+    nums.forEach(function (n) { co.observe(n); });
+  })();
+  </script>
+
+  <script id="hp-rev2-npd">
+  (function () {
+    // Containers whose children animate in sequence. Add a selector here
+    // and give its children an inline --i to sequence a new group.
+    var SEQ = ['.npd-flow', '.ways-grid'];
+    if (!('IntersectionObserver' in window)) return;
+    var groups = SEQ.map(function (s) { return document.querySelector(s); })
+                    .filter(Boolean);
+    if (!groups.length) return;
+    // body.hp-anim-on is only set when motion is allowed; the CSS is
+    // scoped to it, so this class is inert under reduced-motion.
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle('is-running', e.isIntersecting);
+      });
+    }, { threshold: 0.25 });
+    groups.forEach(function (el) { io.observe(el); });
+  })();
+  </script>
+
+  <script id="hp-rev2-hero-auto">
+  (function () {
+    var HOLD = 3000;                      // client: change every 3 seconds
+    var STOPS = [0, 0.38, 0.63, 0.88];    // scroll progress per scene
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    var hero = document.getElementById('hero-section');
+    if (!hero) return;
+
+    var timer = null, i = 0, stopped = false;
+
+    function stop() {
+      if (stopped) return;
+      stopped = true;
+      clearTimeout(timer);
+      ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
+        window.removeEventListener(ev, stop);
+      });
+    }
+    // Any real input hands control back for good. Note these are input
+    // events, not 'scroll' — 'scroll' fires for our own glide too.
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) {
+      window.addEventListener(ev, stop, { passive: true });
+    });
+
+    function next() {
+      if (stopped) return;
+      i++;
+      if (i >= STOPS.length) return;                 // last scene: stop, don't loop
+      var range = hero.offsetHeight - window.innerHeight;
+      if (range <= 0) return;
+      window.scrollTo({ top: Math.round(range * STOPS[i]), behavior: 'smooth' });
+      timer = setTimeout(next, HOLD);
+    }
+
+    window.addEventListener('load', function () {
+      // Only ever autoplay a fresh view of the top of the page.
+      if (stopped || window.scrollY > 10) return;
+      timer = setTimeout(next, HOLD);
+    });
+  })();
+  </script>
+
 </body>
 </html>
