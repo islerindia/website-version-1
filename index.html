@@ -2067,6 +2067,71 @@
       gap: clamp(10px, 1.2vw, 18px);
       margin-top: var(--space-md);
     }
+    /* ══════════════════════════════════════════════════════════════
+       HERO SCENE ANIMATION
+       Each of the four hero scenes plays itself in when it becomes the live
+       one: the headline rises word by word, then the sub-line, then the CTAs.
+
+       WHY IT TARGETS CHILDREN, NEVER `.hero-scene` ITSELF:
+       assets/js/hero-sequence.js drives the scenes with GSAP — it writes
+       `opacity` and `transform` straight onto `.hero-scene` off scroll
+       progress. Animating that same element here would put two systems on one
+       transform and they would fight (the same trap that made the Rev-2
+       `.hp-reveal` steps flicker). The words, sub-line and button row are
+       untouched by GSAP, so they are safe to animate.
+
+       `.is-live` is toggled by the hp-hero-anim script at the bottom of the
+       page. Removing the class resets the animations, so re-entering a scene —
+       by scrolling back or by the 3s autoplay — replays it.
+
+       All of it is scoped to body.hero-anim-on, which that script only adds
+       when motion is allowed, so reduced-motion and JS-off users get the plain
+       static text with nothing hidden. */
+    .hero-headline { perspective: 700px; }
+    .hero-headline .hw { display: inline-block; will-change: transform, opacity; }
+
+    body.hero-anim-on .hero-scene .hw {
+      opacity: 0;
+      transform: translateY(0.55em) rotateX(-38deg);
+      transform-origin: 50% 100%;
+    }
+    body.hero-anim-on .hero-scene .hero-subhead,
+    body.hero-anim-on .hero-scene .hero-cta-row {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    body.hero-anim-on .hero-scene.is-live .hw {
+      animation: heroWordIn 640ms cubic-bezier(0.22, 0.72, 0.24, 1) both;
+      /* --w is the word's index, set inline by the script */
+      animation-delay: calc(var(--w) * 55ms);
+    }
+    body.hero-anim-on .hero-scene.is-live .hero-subhead {
+      animation: heroLift 700ms cubic-bezier(0.22, 0.72, 0.24, 1) both;
+      animation-delay: 300ms;
+    }
+    body.hero-anim-on .hero-scene.is-live .hero-cta-row {
+      animation: heroLift 700ms cubic-bezier(0.22, 0.72, 0.24, 1) both;
+      animation-delay: 440ms;
+    }
+
+    @keyframes heroWordIn {
+      from { opacity: 0; transform: translateY(0.55em) rotateX(-38deg); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes heroLift {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.hero-anim-on .hero-scene .hw,
+      body.hero-anim-on .hero-scene .hero-subhead,
+      body.hero-anim-on .hero-scene .hero-cta-row {
+        opacity: 1; transform: none; animation: none;
+      }
+    }
+
     .hero-cta-row .hero-cta-btn { margin-top: 0; border: 1.5px solid transparent; }
     /* NOTE: these two selectors must stay two-class. The rule above is (0,2,0),
        so a plain .hero-cta-btn--ghost (0,1,0) loses to it and the outline comes
@@ -3198,6 +3263,70 @@
       if (stopped || window.scrollY > 10) return;
       timer = setTimeout(next, HOLD);
     });
+  })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO SCENE ANIMATION — driver for the CSS in <style id="hp-rev2">
+       Two jobs: split each headline into per-word spans, and mark whichever
+       scene is currently on screen with .is-live so its words play in.
+       Deliberately does NOT touch assets/js/hero-sequence.js — that file owns
+       the GSAP scroll timeline, and the homepage rule is to stay inside
+       index.html so a shared file never changes for a homepage-only effect.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <script id="hp-hero-anim">
+  (function () {
+    'use strict';
+    var scenes = Array.prototype.slice.call(document.querySelectorAll('.hero-scene'));
+    if (!scenes.length) return;
+
+    // ── 1. Split every headline into words.
+    // Done even under reduced motion: the spans are inert without the CSS, and
+    // keeping one code path means the markup is identical either way. Words
+    // stay as real text nodes inside inline spans, so selection, wrapping and
+    // screen readers behave exactly as before.
+    scenes.forEach(function (scene) {
+      var h = scene.querySelector('.hero-headline');
+      if (!h || h.getAttribute('data-split')) return;
+      var words = h.textContent.trim().split(/\s+/);
+      h.textContent = '';
+      words.forEach(function (word, i) {
+        var span = document.createElement('span');
+        span.className = 'hw';
+        span.style.setProperty('--w', i);
+        span.textContent = word;
+        h.appendChild(span);
+        // a real space between words, so lines still wrap normally
+        if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
+      });
+      h.setAttribute('data-split', '1');
+    });
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.body.classList.add('hero-anim-on');
+
+    // ── 2. Track the live scene.
+    // GSAP writes the crossfade straight into each scene's INLINE style, so
+    // reading style.opacity is a cheap string read — no getComputedStyle, no
+    // layout, safe to poll every frame. The scene with the highest opacity is
+    // the one the visitor is looking at; 0.55 keeps the class from flickering
+    // between two scenes mid-crossfade.
+    var live = -1;
+    function frame() {
+      var best = -1, bestOp = 0;
+      for (var i = 0; i < scenes.length; i++) {
+        var op = parseFloat(scenes[i].style.opacity);
+        if (!isNaN(op) && op > bestOp) { bestOp = op; best = i; }
+      }
+      if (best !== -1 && best !== live && bestOp > 0.55) {
+        for (var j = 0; j < scenes.length; j++) {
+          scenes[j].classList.toggle('is-live', j === best);
+        }
+        live = best;
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   })();
   </script>
 
