@@ -798,7 +798,10 @@
       letter-spacing: -0.025em;
       line-height: 1.05;
       color: var(--white);
-      max-width: 16ch;
+      /* 16ch was tuned for the old 68px size; at 60px it still forced FOUR
+         lines because the measure, not the size, was doing the wrapping. This
+         string is 64 characters — 22ch lands it on three, like the hero. */
+      max-width: 22ch;
     }
     .mfg-opener__copy {
       margin-top: 22px;
@@ -1213,7 +1216,7 @@
       /* client 2026-08-10: "niche rakho thoda text ke" — more air between
          the copy paragraph and the numbers, so they read as their own row
          rather than as the last line of the paragraph. */
-      margin: clamp(64px, 13vh, 150px) 0 0;
+      margin: clamp(100px, 24vh, 260px) 0 0;
       max-width: none;
       gap: clamp(16px, 3vw, 48px);
       background: none;
@@ -1231,7 +1234,7 @@
       /* client 2026-08-10: a bit smaller. Down from the shared
          clamp(32px, 4.4vw, 56px) — without a box around them the numbers
          were competing with the 48px heading right above. */
-      font-size: clamp(26px, 2.9vw, 40px);
+      font-size: clamp(30px, 3.2vw, 48px);
       text-shadow: 0 2px 18px rgba(6, 15, 36, 0.55);
     }
     .mfg-opener .hp-stat__label {
@@ -1282,17 +1285,8 @@
       flex-direction: column;
       justify-content: center;
     }
-    /* connector between cells — same hairline as .npd-step::after */
-    .cap-cell::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: -10px;
-      width: 10px;
-      height: 1px;
-      background: rgba(11, 26, 61, 0.22);
-    }
-    .cap-cell:last-child::after { display: none; }
+    /* no connector: a hairline joining one card to the next is what made
+       this read as a chain of steps. Client 2026-08-10. */
     .cap-cell__value {
       display: block;
       /* a ninth of the row is ~114px, so this is sized to hold the longest
@@ -1314,18 +1308,35 @@
       color: var(--gray-mid);
       line-height: 1.35;
     }
-    /* same sweep as the NPD flow, driven by .is-running on .cap-grid */
-    body.hp-anim-on .cap-cell { opacity: 0; }
-    body.hp-anim-on .cap-cell::after { width: 0; }
-    body.hp-anim-on .cap-grid.is-running .cap-cell {
-      animation: npdIn 800ms var(--ease-out) both,
-                 npdPulse 1500ms ease both;
-      animation-delay: calc(var(--i, 0) * 200ms),
-                       calc(var(--i, 0) * 200ms + 400ms);
+    /* Supply Chain gets the same treatment as the capacity strip, per the
+       client. It shares .npd-step with Fast NPD, so the process cues have to
+       be peeled off here by id rather than by not adding them.
+       Fast NPD is deliberately left alone — "From brief to first shipment"
+       IS a process, and the sweep is what the client liked about it. */
+    #proof .npd-step::after { display: none; }
+    body.hp-anim-on #proof .npd-flow.is-running .npd-step {
+      animation: factIn 800ms var(--ease-out) both;
+      animation-delay: calc(var(--d, 0) * 200ms);
     }
-    body.hp-anim-on .cap-grid.is-running .cap-cell::after {
-      animation: npdLine 1000ms ease both;
-      animation-delay: calc(var(--i, 0) * 200ms + 500ms);
+
+    /* ── NOT A PROCESS ──────────────────────────────────────────────────
+       These are nine independent facts, not nine steps. So: no connectors,
+       no travelling highlight, and no left-to-right order. Each card just
+       settles in place, timed outward from the middle (--d = distance from
+       the centre card) so the eye is not led along a direction.
+       Timing matches the Fast NPD strip exactly — 800ms per card, 200ms
+       between them — because the client wanted it at the same pace as
+       "from brief to first shipment".
+       The connectors are removed outright further up rather than animated
+       to zero width — see .cap-cell::after. */
+    @keyframes factIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.985); }
+      to   { opacity: 1; transform: none; }
+    }
+    body.hp-anim-on .cap-cell { opacity: 0; }
+    body.hp-anim-on .cap-grid.is-running .cap-cell {
+      animation: factIn 800ms var(--ease-out) both;
+      animation-delay: calc(var(--d, 0) * 200ms);
     }
     /* breakpoints mirror .npd-flow exactly, connectors off once it wraps */
     @media (max-width: 1200px) {
@@ -1980,7 +1991,6 @@
 
     /* every section heading, one size — these four each used to set their own */
     .ways-head__title,
-    .mfg-opener__title,
     .mfg-certs__heading,
     .rfq__heading {
       font-size: clamp(28px, 3.5vw, 48px);
@@ -2032,6 +2042,25 @@
        16px on paper. Deliberately 18px, not back to 19px, so it stays
        within a step of the shared size. Every OTHER paragraph on the page
        is still 16px. */
+    /* HERO-SIZED, client 2026-08-10: "headline wale ka jitna text hai utna
+       iska kar de". This is the hero headline's exact clamp from
+       assets/css/hero.css:103, so the two full-bleed image sections carry
+       the same size. A deliberate exception to the shared 48px scale — the
+       opener is a full-bleed video section, not a heading on a white band.
+       Every other section heading is still 48px. */
+    /* Sized DOWN from the hero's own 76px. The hero can carry 76px because
+       its headlines are short — "Designed to Belong Together" is three lines
+       at max-width 600px. This string is 60 characters and ran to FOUR lines
+       and 319px, which swamped the block and pushed the section past 1000px.
+       60px keeps it clearly above the 48px section headings — still the hero
+       family, not the body scale — without taking over the section. */
+    .mfg-opener__title { font-size: clamp(34px, 4.4vw, 60px); }
+    /* hero.css drops the hero headline below 768px; follow it exactly, or
+       the two sections match on a desktop and diverge on a phone. */
+    @media (max-width: 768px) {
+      .mfg-opener__title { font-size: clamp(26px, 7vw, 40px); }
+    }
+
     .mfg-opener__copy { font-size: 20px; }
 
     /* CARD NAMES — the label under a card thumbnail. There were two sizes for
@@ -2064,11 +2093,14 @@
       .section-heading,
       .mfg-heading,
       .ways-head__title,
-      .mfg-opener__title,
       .mfg-certs__heading,
       .rfq__heading {
         font-size: clamp(22px, 4.4vh, 48px);
       }
+      /* .mfg-opener__title is NOT in the list above — same reason as
+         .mfg-opener__copy below it. This tier protects the one-screen
+         .hp-frame blocks; the opener is not one, and the hero headline it
+         now matches does not shrink on height either. */
       .rev2-band__body,
       .rev2-band__lead,
       .mfg-sub,
@@ -2849,39 +2881,39 @@
           <span class="mfg-eyebrow" style="margin-bottom:10px;">Capacity at a Glance <span class="hp-ph">Numbers to be supplied</span></span>
         </div>
         <div class="cap-grid" style="margin-top:12px;">
-          <div class="cap-cell" style="--i:0">
+          <div class="cap-cell" style="--i:0;--d:4">
             <span class="cap-cell__value">30,000 sq. ft.</span>
             <span class="cap-cell__label">Integrated facility</span>
           </div>
-          <div class="cap-cell" style="--i:1">
+          <div class="cap-cell" style="--i:1;--d:3">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Units per year</span>
           </div>
-          <div class="cap-cell" style="--i:2">
+          <div class="cap-cell" style="--i:2;--d:2">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Production lines</span>
           </div>
-          <div class="cap-cell" style="--i:3">
+          <div class="cap-cell" style="--i:3;--d:1">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Shifts per day</span>
           </div>
-          <div class="cap-cell" style="--i:4">
+          <div class="cap-cell" style="--i:4;--d:0">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Headcount</span>
           </div>
-          <div class="cap-cell" style="--i:5">
+          <div class="cap-cell" style="--i:5;--d:1">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Engineers</span>
           </div>
-          <div class="cap-cell" style="--i:6">
+          <div class="cap-cell" style="--i:6;--d:2">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">OEE %</span>
           </div>
-          <div class="cap-cell" style="--i:7">
+          <div class="cap-cell" style="--i:7;--d:3">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">On-time delivery %</span>
           </div>
-          <div class="cap-cell" style="--i:8">
+          <div class="cap-cell" style="--i:8;--d:4">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Defect rate (PPM)</span>
           </div>
@@ -2994,15 +3026,15 @@
            the same left-to-right sweep, driven by .is-running. --i is the
            step's position in that sweep. -->
       <div class="npd-flow">
-        <div class="npd-step" style="--i:0"><span class="npd-step__no">01</span><span class="npd-step__name">Vendor Identification</span></div>
-        <div class="npd-step" style="--i:1"><span class="npd-step__no">02</span><span class="npd-step__name">Partner Audit</span></div>
-        <div class="npd-step" style="--i:2"><span class="npd-step__no">03</span><span class="npd-step__name">Approval</span></div>
-        <div class="npd-step" style="--i:3"><span class="npd-step__no">04</span><span class="npd-step__name">Dual Sourcing</span></div>
-        <div class="npd-step" style="--i:4"><span class="npd-step__no">05</span><span class="npd-step__name">Material Planning</span></div>
-        <div class="npd-step" style="--i:5"><span class="npd-step__no">06</span><span class="npd-step__name">Inbound QC</span></div>
-        <div class="npd-step" style="--i:6"><span class="npd-step__no">07</span><span class="npd-step__name">Control Tower</span></div>
-        <div class="npd-step" style="--i:7"><span class="npd-step__no">08</span><span class="npd-step__name">Line Feed</span></div>
-        <div class="npd-step" style="--i:8"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
+        <div class="npd-step" style="--i:0;--d:4"><span class="npd-step__no">01</span><span class="npd-step__name">Vendor Identification</span></div>
+        <div class="npd-step" style="--i:1;--d:3"><span class="npd-step__no">02</span><span class="npd-step__name">Partner Audit</span></div>
+        <div class="npd-step" style="--i:2;--d:2"><span class="npd-step__no">03</span><span class="npd-step__name">Approval</span></div>
+        <div class="npd-step" style="--i:3;--d:1"><span class="npd-step__no">04</span><span class="npd-step__name">Dual Sourcing</span></div>
+        <div class="npd-step" style="--i:4;--d:0"><span class="npd-step__no">05</span><span class="npd-step__name">Material Planning</span></div>
+        <div class="npd-step" style="--i:5;--d:1"><span class="npd-step__no">06</span><span class="npd-step__name">Inbound QC</span></div>
+        <div class="npd-step" style="--i:6;--d:2"><span class="npd-step__no">07</span><span class="npd-step__name">Control Tower</span></div>
+        <div class="npd-step" style="--i:7;--d:3"><span class="npd-step__no">08</span><span class="npd-step__name">Line Feed</span></div>
+        <div class="npd-step" style="--i:8;--d:4"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
       </div>
 
       <p class="npd-note">
