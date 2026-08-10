@@ -458,16 +458,10 @@ body.home-edgenav .isler-nav.is-top {
   border-color: transparent;
   box-shadow: none;
 }
-/* the scrim: a soft top-down gradient so white text stays readable wherever
-   the hero happens to be bright. Sits behind the bar's own content. */
-body.home-edgenav .isler-nav.is-top::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(6, 15, 36, 0.55) 0%, rgba(6, 15, 36, 0) 100%);
-  pointer-events: none;
-}
+/* Client 2026-08-10: nothing behind the logo at all. The scrim that used to
+   sit behind the bar is gone too — the bar is now genuinely nothing but its
+   own text over the footage. The links keep their text-shadow, which is the
+   only legibility help left. */
 /* THE LOGO KEEPS ITS OWN COLOURS (client 2026-08-10: "Isler wala symbol aur
    Isler ko waise hi colour mein rehne de jaise the"). It is not a one-colour
    mark — orange factory symbol + navy wordmark — so the earlier
@@ -476,10 +470,11 @@ body.home-edgenav .isler-nav.is-top::before {
    the 2026-07-24 opacity attempt rejected, so instead of recolouring it the
    mark gets a soft light halo: colours untouched, but it separates from
    whatever is behind it. Remove this line if the client wants it bare. */
+/* Client 2026-08-10: "Isler ke peeche white blur hata". The logo now sits on
+   the footage completely bare — own colours, no halo, no plate. Legibility
+   comes only from the bar scrim above. */
 body.home-edgenav .isler-nav.is-top .isler-nav__logo img {
-  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95))
-          drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
-          drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+  filter: none;
 }
 body.home-edgenav .isler-nav.is-top .isler-nav__links > li > a,
 body.home-edgenav .isler-nav.is-top .isler-nav__trigger {
