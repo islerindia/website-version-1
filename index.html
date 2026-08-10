@@ -763,6 +763,17 @@
       align-items: center;
       background: #0B1A3D;   /* on-brand navy loading state behind the video */
     }
+    /* Client 2026-08-10: "isko thoda sa upar karde". The block was dead
+       centred — .mfg-pad puts 160px above and below and align-items:center
+       splits the rest evenly. Rather than switching to flex-start (which
+       pins the text hard against the auto-hiding nav pill), the padding is
+       made asymmetric: the content stays centred inside its box and the box
+       itself sits higher. Two-class selector because .mfg-pad has the same
+       specificity and would otherwise win on source order. */
+    .mfg-section.mfg-opener {
+      padding-top: clamp(88px, 11vh, 130px);
+      padding-bottom: clamp(150px, 24vh, 250px);
+    }
     .mfg-opener__video,
     .mfg-opener__scrim {
       position: absolute;
@@ -1202,7 +1213,7 @@
       /* client 2026-08-10: "niche rakho thoda text ke" — more air between
          the copy paragraph and the numbers, so they read as their own row
          rather than as the last line of the paragraph. */
-      margin: clamp(44px, 8vh, 96px) 0 0;
+      margin: clamp(64px, 13vh, 150px) 0 0;
       max-width: none;
       gap: clamp(16px, 3vw, 48px);
       background: none;
@@ -2010,13 +2021,18 @@
        Kept as a class rather than deleted so the one block that has a heading
        under a heading is still findable. */
 
-    /* every lead and body paragraph, one size.
-       .mfg-opener__copy was the last paragraph on the page still setting its
-       own size — clamp(15px, 1.5vw, 19px), so 19px at 1600 against the 16px
-       every other section's copy runs at. The Rev-2 rule is 48px heading /
-       16px copy; this brings the opener onto it. */
-    .quatro-lead,
-    .mfg-opener__copy { font-size: 16px; }
+    /* every lead and body paragraph, one size */
+    .quatro-lead { font-size: 16px; }
+
+    /* EXCEPTION, client 2026-08-10: "iske size thoda badha, thoda sa".
+       This paragraph was pulled onto the shared 16px earlier in the same
+       session (it had been running at 19px). The client then asked for it
+       back up — it is the only body copy that sits over footage rather than
+       on a white band, and 16px reversed out of a photo reads smaller than
+       16px on paper. Deliberately 18px, not back to 19px, so it stays
+       within a step of the shared size. Every OTHER paragraph on the page
+       is still 16px. */
+    .mfg-opener__copy { font-size: 20px; }
 
     /* CARD NAMES — the label under a card thumbnail. There were two sizes for
        one thing: .ways-card__name at 20px (OEM / ODM / Private Label) and
@@ -2056,11 +2072,16 @@
       .rev2-band__body,
       .rev2-band__lead,
       .mfg-sub,
-      .quatro-lead,
-      .mfg-opener__copy {
+      .quatro-lead {
         font-size: clamp(12.5px, 2.1vh, 16px);
         line-height: 1.5;
       }
+      /* .mfg-opener__copy is deliberately NOT in the list above. This tier
+         exists so .hp-frame blocks still fit one screen; the opener is not
+         a frame, so shrinking it saved nothing and just made the paragraph
+         render 13.86px on a laptop against 20px on a desktop. Its own floor
+         keeps it readable at every height. */
+      .mfg-opener__copy { font-size: clamp(17px, 2.7vh, 20px); line-height: 1.55; }
     }
 
   </style>
@@ -3137,6 +3158,70 @@
     </div>
 
     <p class="brands-note"><span class="hp-ph">Partner logos to be supplied — 24 slots across three rows</span></p>
+  </section>
+
+  <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
+       homepage doc. Kept in place pending a decision — delete this
+       section if Isler confirms it should come off the homepage. -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 5 — QUATRO SERIES
+       Copy adapted from the client-approved About Us paragraph (about.html).
+       Card images are existing site product shots — swap for final Quatro
+       series photography when Isler supplies it.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="quatro" class="quatro-section" aria-labelledby="quatro-h">
+    <div class="quatro-inner">
+      <div class="section-header">
+        <span class="section-eyebrow">Quatro Series</span>
+        <h2 class="section-heading" id="quatro-h">One Design Language,<br>Your Entire Kitchen Line-Up</h2>
+      </div>
+
+      <p class="quatro-lead hp-reveal">Isler is the only manufacturing company in India to offer a Quatro series — chimney, built-in hob, microwave and oven, each designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
+
+      <div class="quatro-grid">
+
+        <a href="kitchen-chimneys.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.webp" alt="Isler chimney — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">One of four</span>
+            <span class="quatro-card__name">Chimney</span>
+          </div>
+        </a>
+
+        <a href="built-in-hobs.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/hob-brillare.webp" alt="Isler built-in hob — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Two of four</span>
+            <span class="quatro-card__name">Built-in Hob</span>
+          </div>
+        </a>
+
+        <a href="built-in-microwaves.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/microwave-silver-core.webp" alt="Isler built-in microwave — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Three of four</span>
+            <span class="quatro-card__name">Microwave</span>
+          </div>
+        </a>
+
+        <a href="built-in-ovens.html" class="quatro-card hp-reveal">
+          <div class="quatro-card__media">
+            <img src="assets/images/oven-gold-grande.webp" alt="Isler built-in oven — Quatro series" loading="lazy">
+          </div>
+          <div class="quatro-card__body">
+            <span class="quatro-card__step">Four of four</span>
+            <span class="quatro-card__name">Oven</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
   </section>
 
   <!-- The Insights / "From the Isler Blog" section was MOVED to

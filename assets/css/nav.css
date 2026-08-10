@@ -434,3 +434,93 @@
 }
 /* Stay fixed while scrolling — neutralise the auto-hide slide-up on all pages */
 .isler-nav--hidden { transform: none; }
+
+
+/* ════════════════════════════════════════════════════════════════════════
+   TRANSPARENT OVER THE HERO  —  homepage only (client 2026-08-10)
+   The bar disappears into the hero image at the top of the page and turns
+   back into the solid bar as soon as you scroll. Everything here is behind
+   body.home-edgenav .isler-nav.is-top, so it cannot reach the other pages.
+
+   NOTE the history: an earlier version of this just dropped the pill's
+   opacity and the navy logo went dark and blurry against the hero. Opacity
+   alone is not enough — the logo and links have to invert to white and get a
+   scrim, which is what the two rules further down do.
+   ════════════════════════════════════════════════════════════════════════ */
+body.home-edgenav .isler-nav {
+  transition: transform 320ms cubic-bezier(0.4, 0, 0.2, 1),
+              background 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+body.home-edgenav .isler-nav.is-top {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+/* the scrim: a soft top-down gradient so white text stays readable wherever
+   the hero happens to be bright. Sits behind the bar's own content. */
+body.home-edgenav .isler-nav.is-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(6, 15, 36, 0.55) 0%, rgba(6, 15, 36, 0) 100%);
+  pointer-events: none;
+}
+/* THE LOGO KEEPS ITS OWN COLOURS (client 2026-08-10: "Isler wala symbol aur
+   Isler ko waise hi colour mein rehne de jaise the"). It is not a one-colour
+   mark — orange factory symbol + navy wordmark — so the earlier
+   brightness(0) invert(1) flattened both brand colours to white.
+   The navy wordmark on a dark hero is the exact contrast problem that got
+   the 2026-07-24 opacity attempt rejected, so instead of recolouring it the
+   mark gets a soft light halo: colours untouched, but it separates from
+   whatever is behind it. Remove this line if the client wants it bare. */
+body.home-edgenav .isler-nav.is-top .isler-nav__logo img {
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.95))
+          drop-shadow(0 0 5px rgba(255, 255, 255, 0.9))
+          drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__links > li > a,
+body.home-edgenav .isler-nav.is-top .isler-nav__trigger {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 12px rgba(6, 15, 36, 0.55);
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__links > li > a:hover,
+body.home-edgenav .isler-nav.is-top .isler-nav__trigger:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__search-toggle,
+body.home-edgenav .isler-nav.is-top .isler-nav__burger span {
+  color: rgba(255, 255, 255, 0.92);
+  background-color: currentColor;
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__search-toggle { background-color: transparent; }
+/* while a menu is open the bar goes solid again — a transparent bar with a
+   white mega-panel hanging off it reads as two disconnected things */
+body.home-edgenav .isler-nav.is-open,
+body.home-edgenav .isler-nav.is-search-open { }
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-edgenav .isler-nav { transition: none; }
+}
+
+/* the search field belongs to the bar, so it goes translucent with it — a
+   navy-tinted box sitting on a dark photo was the one panel still visible */
+body.home-edgenav .isler-nav.is-top .isler-nav__search {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__search:focus-within {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.34);
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__search input { color: #fff; }
+body.home-edgenav .isler-nav.is-top .isler-nav__search input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+body.home-edgenav .isler-nav.is-top .isler-nav__search svg circle,
+body.home-edgenav .isler-nav.is-top .isler-nav__search svg line {
+  stroke: rgba(255, 255, 255, 0.7);
+}

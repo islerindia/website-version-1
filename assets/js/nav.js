@@ -106,6 +106,19 @@
       var y = window.pageYOffset || document.documentElement.scrollTop || 0;
       var menuOpen = nav.classList.contains('is-open') ||
                      (item && item.classList.contains('is-open'));
+      // .is-top drives the transparent-over-hero treatment (homepage only,
+      // see body.home-edgenav in nav.css).
+      // Tied to the HERO still being under the bar, not to a scroll figure:
+      // the homepage hero is GSAP-pinned over ~5500px AND auto-advances its
+      // scenes by scrolling the page itself, so any "y < n" test flips the bar
+      // solid a second or two after load while the image is still full-screen.
+      // No #hero-section on a page means no transparent state, which is what
+      // the other 195 pages want anyway.
+      var heroEl = document.getElementById('hero-section');
+      var overHero = heroEl && heroEl.getBoundingClientRect().bottom > 80;
+      if (overHero && !menuOpen) { nav.classList.add('is-top'); }
+      else { nav.classList.remove('is-top'); }
+
       if (y <= 4 || menuOpen) {
         nav.classList.remove('isler-nav--hidden');            // at top / menu open
       } else if (y > lastY + 2 && y > 80) {
@@ -116,6 +129,7 @@
       lastY = y;
       ticking = false;
     }
+    onScroll();   // set .is-top before the first scroll event
     window.addEventListener('scroll', function () {
       if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
     }, { passive: true });
