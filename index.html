@@ -1044,7 +1044,7 @@
     .mfg-cert {
       flex: 0 0 auto;
       display: flex; align-items: center; justify-content: center;
-      padding: 22px 32px;
+      padding: clamp(20px, 2.8vh, 34px) clamp(26px, 2.4vw, 44px);
       background: var(--white);
       border-radius: var(--radius-md);
       box-shadow: 0 12px 30px rgba(6,15,36,0.28);
@@ -1190,6 +1190,44 @@
       .hp-stats { grid-template-columns: repeat(2, 1fr); }
     }
 
+    /* ── THE NUMBERS OVER THE FACILITY FOOTAGE ──────────────────────
+       Client 2026-08-10: no box. The numbers sit straight on the shot the
+       way the eyebrow, heading and copy above them already do — no panel,
+       no hairline grid, no blur. Everything the base .hp-stats draws to make
+       a bordered white table has to be undone here, not just recoloured:
+       the 1px gap + background pair is what renders the grid lines.
+       Legibility now comes from the scrim plus a text shadow, which is what
+       the title above uses, rather than from a plate behind the text. */
+    .mfg-opener .hp-stats {
+      /* client 2026-08-10: "niche rakho thoda text ke" — more air between
+         the copy paragraph and the numbers, so they read as their own row
+         rather than as the last line of the paragraph. */
+      margin: clamp(44px, 8vh, 96px) 0 0;
+      max-width: none;
+      gap: clamp(16px, 3vw, 48px);
+      background: none;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+    }
+    .mfg-opener .hp-stat {
+      background: none;
+      padding: 0;
+      text-align: left;
+    }
+    .mfg-opener .hp-stat__value {
+      color: #fff;
+      /* client 2026-08-10: a bit smaller. Down from the shared
+         clamp(32px, 4.4vw, 56px) — without a box around them the numbers
+         were competing with the 48px heading right above. */
+      font-size: clamp(26px, 2.9vw, 40px);
+      text-shadow: 0 2px 18px rgba(6, 15, 36, 0.55);
+    }
+    .mfg-opener .hp-stat__label {
+      color: rgba(255, 255, 255, 0.82);
+      text-shadow: 0 1px 10px rgba(6, 15, 36, 0.55);
+    }
+
     /* ══════════════════════════════════════════════════════════════
        PROOF — supply-chain / audit proof points
     ══════════════════════════════════════════════════════════════ */
@@ -1203,37 +1241,87 @@
     .proof-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
 
     /* Capacity numbers grid (used inside the Manufacturing block) */
+    /* ── CAPACITY AT A GLANCE — client 2026-08-10: "ek hi line mein karna hai
+       jaise 'From brief to first shipment' wala hai, same animation ke saath".
+       So this is deliberately the SAME COMPONENT as .npd-flow: nine separate
+       cards in one row, hairline connectors between them, and the identical
+       left-to-right sweep. It used to be a 3 x 3 hairline-joined table.
+       Nine cells, nine steps — the counts already matched.
+       The shared pieces (npdIn / npdPulse / npdLine keyframes, and the
+       .is-running driver) live with .npd-flow further down; this block only
+       adds the layout and hooks the same animations onto .cap-cell. */
     .cap-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(11, 26, 61, 0.10);
-      border: 1px solid rgba(11, 26, 61, 0.10);
-      border-radius: var(--radius-md);
-      overflow: hidden;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 10px;
+      align-items: stretch;
       margin-top: clamp(28px, 3.5vw, 44px);
     }
-    .cap-cell { background: var(--white); padding: 20px 16px; text-align: center; }
+    .cap-cell {
+      position: relative;
+      background: var(--white);
+      border: 1px solid rgba(11, 26, 61, 0.10);
+      border-radius: var(--radius-md);
+      padding: 20px 10px 18px;   /* identical to .npd-step */
+      text-align: center;
+      /* taller card, contents centred — fills the frame instead of
+         leaving a band of dead space under the strip */
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    /* connector between cells — same hairline as .npd-step::after */
+    .cap-cell::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      width: 10px;
+      height: 1px;
+      background: rgba(11, 26, 61, 0.22);
+    }
+    .cap-cell:last-child::after { display: none; }
     .cap-cell__value {
       display: block;
-      font-size: clamp(22px, 2.4vw, 30px);
+      /* a ninth of the row is ~114px, so this is sized to hold the longest
+         real value ("30,000 sq. ft.") rather than the old 3-across 30px */
+      font-size: clamp(13px, 1.05vw, 16px);
       font-weight: 700;
-      line-height: 1.1;
+      line-height: 1.15;
       color: var(--navy);
       letter-spacing: -0.02em;
     }
     .cap-cell__value--empty { color: rgba(11, 26, 61, 0.28); }
     .cap-cell__label {
       display: block;
-      margin-top: 8px;
-      font-size: 11px;
+      margin-top: 6px;
+      font-size: 9px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--gray-mid);
-      line-height: 1.4;
+      line-height: 1.35;
     }
-    @media (max-width: 1100px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+    /* same sweep as the NPD flow, driven by .is-running on .cap-grid */
+    body.hp-anim-on .cap-cell { opacity: 0; }
+    body.hp-anim-on .cap-cell::after { width: 0; }
+    body.hp-anim-on .cap-grid.is-running .cap-cell {
+      animation: npdIn 800ms var(--ease-out) both,
+                 npdPulse 1500ms ease both;
+      animation-delay: calc(var(--i, 0) * 200ms),
+                       calc(var(--i, 0) * 200ms + 400ms);
+    }
+    body.hp-anim-on .cap-grid.is-running .cap-cell::after {
+      animation: npdLine 1000ms ease both;
+      animation-delay: calc(var(--i, 0) * 200ms + 500ms);
+    }
+    /* breakpoints mirror .npd-flow exactly, connectors off once it wraps */
+    @media (max-width: 1200px) {
+      .cap-grid { grid-template-columns: repeat(3, 1fr); }
+      .cap-cell::after { display: none; }
+    }
+    @media (max-width: 560px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
 
     /* ══════════════════════════════════════════════════════════════
        RFQ — build-to-order call to action
@@ -1414,6 +1502,18 @@
       from { transform: translateX(0); }
       to   { transform: translateX(calc(-50% - 14px)); }   /* half the track + half the gap */
     }
+    /* the middle row runs the other way — same keyframes, played backwards */
+    @keyframes brands-scroll-rev {
+      from { transform: translateX(calc(-50% - 14px)); }
+      to   { transform: translateX(0); }
+    }
+    /* THREE ROWS, alternating direction (client 2026-08-10).
+       The durations are deliberately unequal — three rows on the same 46s
+       would keep re-aligning into a visible grid as they loop. */
+    .brands-rows { display: flex; flex-direction: column; gap: 20px; }
+    .brands-track--a { animation: brands-scroll     46s linear infinite; }
+    .brands-track--b { animation: brands-scroll-rev 39s linear infinite; }
+    .brands-track--c { animation: brands-scroll     53s linear infinite; }
     .brand-slot {
       flex: 0 0 auto;
       width: 190px;
@@ -1480,7 +1580,7 @@
     /* The range stat box sits at the top of this section now — full width,
        flush with the OEM/ODM/Private Label cards, and .ways-head's own top
        margin provides the gap below it. */
-    .ways-inner > .hp-stats { max-width: none; margin: 0; }
+    /* (.ways-inner > .hp-stats removed — the stats moved onto the opener) */
 
     .ways-head { margin: clamp(44px, 5vw, 68px) 0 26px; }
     .ways-head__title {
@@ -1593,6 +1693,12 @@
       border-radius: var(--radius-md);
       padding: 20px 10px 18px;
       text-align: center;
+      /* taller card with centred contents, same as .cap-cell — fills the
+         frame instead of leaving dead space under the strip */
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     /* connector between steps */
     .npd-step::after {
@@ -1780,8 +1886,11 @@
        figure moved into it out of the "Isler at a Glance" copy panel — so it
        runs 3 x 3 flush instead of 4 + 4 + 1. (This block loads after the
        #hp-b2b one, so it also supersedes that block's 1100px 2-column rule.) */
-    .cap-grid { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 760px) { .cap-grid { grid-template-columns: 1fr; } }
+    /* (was repeat(3) for the old 3 x 3 block — the capacity numbers are now a
+       single nine-across strip like .npd-flow, so the columns and the wrap
+       breakpoints are set with that component above and NOT overridden here.
+       Left as a marker because this block otherwise supersedes the earlier
+       one, and a stray column rule here silently beat it.) */
 
     /* the full-width strip that follows a band */
     .rev2-band + .npd-lead { margin-top: clamp(40px, 5vw, 64px); }
@@ -1819,6 +1928,143 @@
        first cut of this only worked down to 680px and looked unchanged on a
        normal laptop.
   ═══════════════════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       ONE TYPE SCALE FOR THE WHOLE PAGE
+       Client 2026-08-07: "some are small and some are big". An audit at 1600px
+       found section headings rendering at SIX different sizes down one page —
+       25.7, 32, 40, 46, 48 and 68px — and eyebrows at two, 11px and 24px.
+
+       The base classes were never the problem: .section-eyebrow and
+       .mfg-eyebrow are both 11px, .section-heading and .mfg-heading are both
+       clamp(28px, 3.5vw, 48px). The drift came from (a) four inline
+       style="font-size:…" attributes in the markup, now deleted, and (b) a few
+       one-off classes that set their own size. Those are pulled onto the shared
+       scale below, so there is one value per level and one place to change it.
+
+       THE SCALE
+         eyebrow ......... 11px / 600 / 0.22em   (all caps, yellow)
+         section heading . clamp(28px, 3.5vw, 48px)
+         sub-heading ..... clamp(22px, 2.4vw, 32px)   one step down
+         lead + body ..... 16px
+
+       .mfg-subheading is the only thing still allowed to be smaller than a
+       section heading, and only where a section heading already sits directly
+       above it — "Isler at a Glance" is the one such block. Making it 48px too
+       would stack two identical headings on top of each other.
+
+       This block sits BEFORE hp-glance-frame on purpose: that block's
+       (max-height: 860px) rules shrink "Isler at a Glance" so its capacity grid
+       still fits one screen on a laptop, and being later they must keep winning.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <style id="hp-type-scale">
+
+    /* every eyebrow, one size */
+    .section-eyebrow,
+    .mfg-eyebrow,
+    .rfq__eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+    }
+
+    /* every section heading, one size — these four each used to set their own */
+    .ways-head__title,
+    .mfg-opener__title,
+    .mfg-certs__heading,
+    .rfq__heading {
+      font-size: clamp(28px, 3.5vw, 48px);
+      /* .mfg-opener__title tracked at -0.025em against -0.02em everywhere
+         else, which reads as a slightly different typeface at 48px */
+      letter-spacing: -0.02em;
+    }
+
+    /* ── CASING FROM THE CLIENT DOC ("the think we need to do.docx").
+       The doc names the homepage blocks in full caps —
+         ISLER AT A GLANCE : / QUALITY IS OUR FIRST PRIORITY /
+         FAST NEW PRODUCT DEVELOPMENT / SUPPLY CHAIN EXCELLENCE /
+         VARIETY, QUALITY AND QUANTITY
+       and the wording on the page already matched exactly; only the case did
+       not. Applied to every section heading rather than just those four, so
+       the page does not end up half caps and half title case.
+
+       Done with text-transform, NOT by retyping the markup: the DOM keeps
+       readable title case, which is what screen readers announce and what
+       search engines index, while the page renders the doc's casing.
+       Tracking goes from -0.02em to 0 — negative tracking is for lower-case
+       shapes and jams capitals together. */
+    .section-heading,
+    .mfg-heading,
+    .ways-head__title,
+    .mfg-opener__title,
+    .mfg-certs__heading,
+    .rfq__heading {
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    /* The band heading inside "Isler at a Glance" was the last thing on the
+       page still at its own size and case — 32px, title case, against 48px
+       caps everywhere else. Client 2026-08-07 asked for it to match, so
+       .mfg-subheading now carries nothing of its own and simply inherits the
+       shared .mfg-heading rules above: same 48px, same 700 weight, same caps.
+       Kept as a class rather than deleted so the one block that has a heading
+       under a heading is still findable. */
+
+    /* every lead and body paragraph, one size.
+       .mfg-opener__copy was the last paragraph on the page still setting its
+       own size — clamp(15px, 1.5vw, 19px), so 19px at 1600 against the 16px
+       every other section's copy runs at. The Rev-2 rule is 48px heading /
+       16px copy; this brings the opener onto it. */
+    .quatro-lead,
+    .mfg-opener__copy { font-size: 16px; }
+
+    /* CARD NAMES — the label under a card thumbnail. There were two sizes for
+       one thing: .ways-card__name at 20px (OEM / ODM / Private Label) and
+       .quatro-card__name at 19px (Chimney / Built-in Hob / …). Same component
+       role, so one value. 19px, because the Quatro row carries more of them. */
+    .ways-card__name,
+    .quatro-card__name { font-size: 19px; }
+
+    /* ── SHORT SCREENS — the scale comes down AS A WHOLE ───────────────────
+       The complaint this block exists to fix was that headings differed from
+       each other ON THE SAME SCREEN, not that they were large. So the fix for
+       a short laptop screen is NOT to shrink the one block that overflows —
+       that is precisely what produced "koi chhote hai koi bade hai", where
+       Manufacturing Operations rendered at 19px beside 48px headings.
+
+       Instead every level steps down together. At any given viewport all
+       headings still match each other; only the whole page gets smaller.
+
+       Why it is needed: Manufacturing Operations is the tallest block on the
+       page — it carries a band AND the capacity strip — and its blocks must
+       fit one screen ("ek baar mein dono dikhna chahiye"). At 1366x660 with
+       the full 48px scale its heading wrapped to three lines (158px) and the
+       block measured 717px against 660px of page area. Stepping the scale
+       down brings it back inside without singling the block out.
+
+       Measured: 1600x900 untouched (media does not apply) · 1440x780 fits ·
+       1366x660 fits · 1280x620 fits. */
+    @media (max-height: 860px) {
+      .section-heading,
+      .mfg-heading,
+      .ways-head__title,
+      .mfg-opener__title,
+      .mfg-certs__heading,
+      .rfq__heading {
+        font-size: clamp(22px, 4.4vh, 48px);
+      }
+      .rev2-band__body,
+      .rev2-band__lead,
+      .mfg-sub,
+      .quatro-lead,
+      .mfg-opener__copy {
+        font-size: clamp(12.5px, 2.1vh, 16px);
+        line-height: 1.5;
+      }
+    }
+
+  </style>
+
   <style id="hp-glance-frame">
 
     /* base padding — the inline 72px was removed from the section so this
@@ -1908,13 +2154,35 @@
          the frame's fill without touching type or panel sizes. Still tighter
          than the frame's own outer padding, so the two keep reading as one
          block rather than as two stacked sections. */
-      .hp-frame--pair > .mfg-labs { padding-top: clamp(30px, 5vh, 76px); padding-bottom: clamp(28px, 5vh, 80px); }
-      .hp-frame--pair > .mfg-certs { padding-top: clamp(36px, 6.5vh, 96px); padding-bottom: clamp(36px, 6.5vh, 96px); }
+      /* Floors dropped after "Our Certifications" joined the shared type scale
+         (25.7px -> 48px): the extra heading height pushed this pair to 586px
+         against a 580px screen. The size stays standard; the strip's padding
+         gives way instead, and only at the short end — the vh mid-values are
+         unchanged, so nothing moves on a normal desktop. */
+      .hp-frame--pair > .mfg-labs { padding-top: clamp(24px, 5vh, 76px); padding-bottom: clamp(20px, 5vh, 80px); }
+      .hp-frame--pair > .mfg-certs { padding-top: clamp(28px, 6.6vh, 110px); padding-bottom: clamp(28px, 6.6vh, 110px); }
       /* the navy strip is full-bleed, so giving it more height is the cheapest
          way to make this frame read as full — it anchors the bottom instead of
          leaving white space under it */
+      /* margin only — the size comes from the shared scale in hp-type-scale.
+         This used to set font-size too, which is what rendered "Our
+         Certifications" at 25.7px against 48px everywhere else. */
       .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(20px, 3.6vh, 56px); }
-      .hp-frame--pair .mfg-cert img { height: clamp(52px, 8.5vh, 104px); }
+      /* ── Certification logos, client 2026-08-07: bigger, but still inside
+         the strip. They were 77px tall at 1600x900 and pinned at 92px on a
+         1080p screen because the base rule caps them (max-height: 92px /
+         max-width: 180px) — so the height clamp alone could not grow them and
+         both caps have to be lifted here.
+         The room is paid for out of the band photo above (see the media rule),
+         not out of the frame, which stays exactly one screen. */
+      .hp-frame--pair .mfg-cert img {
+        /* client 2026-08-10: "certification ke jo icons ya symbol hai unko
+           bada kar" — up from 12vh / 260px. Both caps have to move: the base
+           rule caps max-width at 180px, so a height alone cannot grow them. */
+        height: clamp(80px, 19vh, 240px);
+        max-height: none;
+        max-width: 380px;
+      }
 
       /* TYPE SCALE — sized to USE the frame, not to survive it.
          The first cut clamped so hard that on a laptop every value sat on its
@@ -1948,8 +2216,28 @@
          684x468 = 1.46:1 against 2.17:1 everywhere else, and the client read
          it as square rather than as a rectangle like the rest. Matching the
          others costs fill on that block — see the note on #proof below. */
-      #npd .rev2-band__media { height: clamp(190px, 40vh, 540px); }
+      /* ── Client 2026-08-10: "jaisa Fast New Product wale ka image size hai,
+         waisa hi Supply Chain aur Manufacturing Operations wale ka bhi".
+         So these three share ONE height — Fast NPD's — rather than each
+         carrying its own. #proof is in the list even though it sits outside
+         the frame system: it matches on the id, and without a height here it
+         falls back to the base 4/3 and renders ~200px taller than the others.
+         Manufacturing Operations can afford NPD's taller photo now that
+         Capacity at a Glance is a single row instead of three. */
+      #npd .rev2-band__media,
+      #proof .rev2-band__media,
+      .mfg-production .rev2-band__media {
+        aspect-ratio: auto;
+        height: clamp(190px, 40vh, 540px);
+      }
+      /* trimmed from 40vh to make room for the bigger certification logos
+         below, so the pair still lands on exactly one screen */
+      /* Client 2026-08-10: "usko bhi upar wale img size jitna karna" — the
+         Quality photo was the last one still on its own height (306px against
+         360px for the other three) and read as thinner than the bands above
+         it. On the shared value now, so all FOUR band photos match. */
       .hp-frame--pair .rev2-band__media { height: clamp(190px, 40vh, 540px); }
+
       /* ── TYPE: base sizes, exactly like Supply Chain.
          Client 2026-08-06: "jaise supply chain wale frame mein text aur heading
          rakhe hain, waise hi saare frames mein — bas text". Supply Chain is
@@ -1976,21 +2264,62 @@
         margin-bottom: 0;
       }
 
-      /* ── SHORT-SCREEN SAFETY, "Isler at a Glance" only.
-         Base type is what the client asked for, but this block carries the most
-         of it — heading, intro, band copy AND nine capacity cells — so at base
-         sizes it stops fitting one screen on a laptop: measured 745px of
-         content against a 580px screen, 796 against 760. That would push the
-         capacity numbers back out of frame, which is the exact thing the
-         one-frame work was for. So the type scales down HERE ONLY, and only
-         once the screen is short enough to need it — above 860px tall this
-         block renders at the same base sizes as every other block. */
-      @media (max-height: 860px) {
-        .mfg-production #mfg-prod-h { font-size: clamp(21px, 3.6vh, 40px) !important; }
-        .mfg-production #mfg-prod-h + .mfg-sub { font-size: clamp(12.5px, 2.1vh, 18px); line-height: 1.45; }
-        .mfg-production .rev2-band__copy .mfg-eyebrow { font-size: clamp(11.5px, 1.95vh, 22px) !important; }
-        .mfg-production .rev2-band__copy .mfg-heading { font-size: clamp(17px, 2.95vh, 34px) !important; }
-        .mfg-production .rev2-band__copy .mfg-sub { font-size: clamp(12px, 2.1vh, 18px); line-height: 1.5; }
+      /* ── SHORT-SCREEN SAFETY — SPACE GIVES WAY, TYPE NEVER DOES.
+         Client 2026-08-10: "text ko standard kar, koi chhota koi bada lag raha
+         hai". Every per-block font-size override that used to live in these
+         three media queries has been DELETED. A heading is 48px on a 1600px
+         desktop and 48px on a 1024x580 laptop; eyebrows are 11px and body copy
+         is 16px everywhere. There is now exactly one size per level on the
+         whole page, and it does not move with the viewport.
+
+         These blocks still have to fit one screen, so what shrinks instead is
+         SPACE — the band photo, section padding, grid-cell padding and the
+         certification logos. Those are the things a reader does not measure
+         against each other; two headings at different sizes on one page is.
+
+         The bounds are unchanged (they came from a sweep of 81 viewports), so
+         nothing here touches a screen big enough to fit the block as-is. */
+      @media (max-height: 860px), (max-height: 940px) and (max-width: 1560px) {
+        /* Manufacturing Operations no longer sets its own photo height — the
+           three bands share one. But it is the TALLEST of the three (it also
+           carries the capacity strip), so on a short screen the shared value
+           has to come down for ALL of them, not just for this block. Shrinking
+           one would put the sizes back out of step, which is the exact thing
+           the client asked to fix. At 660px of page area 40vh overshot the
+           frame by 57px; 30vh brings it back inside with room to spare. */
+        #npd .rev2-band__media,
+        #proof .rev2-band__media,
+        .mfg-production .rev2-band__media { height: clamp(150px, 30vh, 540px); }
+        .mfg-production #mfg-prod-h + .mfg-sub { margin-top: clamp(3px, 0.9vh, 16px) !important; }
+        .mfg-production .cap-label { margin-top: clamp(8px, 1.8vh, 52px) !important; }
+        .mfg-production .cap-grid { margin-top: clamp(5px, 1vh, 18px) !important; }
+        .mfg-production .cap-cell { padding: clamp(4px, 0.85vh, 24px) clamp(8px, 1vw, 16px); }
+
+        .hp-frame--pair .rev2-band__media { height: clamp(150px, 30vh, 540px); }
+        .hp-frame--pair > .mfg-labs { padding-top: clamp(16px, 3.4vh, 76px); padding-bottom: clamp(14px, 3vh, 80px); }
+        .hp-frame--pair > .mfg-certs { padding-top: clamp(20px, 6.4vh, 110px); padding-bottom: clamp(20px, 6.4vh, 110px); }
+        .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(10px, 2vh, 56px); }
+        .hp-frame--pair .mfg-cert img { height: clamp(56px, 18vh, 220px); }
+      }
+
+      /* Fast NPD's nine-step strip drops from nine columns to five below
+         1200px, so it gains a whole extra row exactly where the screen is
+         shortest. The row is paid for out of the photo and the step padding —
+         the step labels keep their size. */
+      @media (max-width: 1250px) and (max-height: 760px) {
+        #npd .rev2-band__media,
+        #proof .rev2-band__media,
+        .mfg-production .rev2-band__media { height: clamp(112px, 24vh, 540px); }
+        #npd .npd-step { padding: clamp(4px, 1vh, 20px) 8px clamp(4px, 0.9vh, 18px); }
+        #npd .npd-flow { gap: clamp(4px, 0.8vh, 10px); }
+        #npd .rev2-band + .npd-lead { margin-top: clamp(10px, 2.2vh, 96px) !important; }
+        #npd .npd-note { margin-top: clamp(6px, 1.2vh, 24px); }
+      }
+
+      @media (max-width: 1150px) and (max-height: 700px) {
+        .hp-frame--pair .rev2-band__media { height: clamp(112px, 24vh, 540px); }
+        .hp-frame--pair .mfg-cert img { height: clamp(48px, 15vh, 200px); }
+        .hp-frame--pair .mfg-cert-row { gap: clamp(14px, 3vw, 56px); }
       }
 
       /* ── FAST NEW PRODUCT DEVELOPMENT — the "brief to first shipment" strip.
@@ -1999,20 +2328,32 @@
          here 901–1199px gets 5 columns (2 rows) instead. */
       /* client 2026-08-06: drop "From brief to first shipment" (and the flow
          strip under it) a little lower, away from the band above */
+      #proof .rev2-band + .npd-lead,
       .npd-section .rev2-band + .npd-lead { margin-top: clamp(30px, 6vh, 96px) !important; }
+      /* "From brief to first shipment" is the strip's eyebrow — same 11px as
+         every other eyebrow instead of its own 10-12px clamp. */
+      #proof .npd-lead,
       .npd-section .npd-lead {
         margin-bottom: clamp(8px, 1.5vh, 22px);
-        font-size: clamp(10px, 1.4vh, 12px);
+        font-size: 11px;
       }
+      #proof .npd-flow,
       .npd-section .npd-flow { gap: clamp(6px, 1vh, 10px); }
-      .npd-section .npd-step { padding: clamp(8px, 1.7vh, 20px) 10px clamp(7px, 1.5vh, 18px); }
+      #proof .npd-step,
+      .npd-section .npd-step {
+        padding: clamp(8px, 1.7vh, 20px) 10px clamp(7px, 1.5vh, 18px);
+        /* height taken from the screen, exactly like .cap-cell */
+        min-height: clamp(64px, 15vh, 170px);
+      }
       .npd-section .npd-step__no { font-size: clamp(9px, 1.3vh, 11px); }
       .npd-section .npd-step__name {
         margin-top: clamp(3px, 0.9vh, 8px);
         font-size: clamp(11px, 1.8vh, 14px);
       }
+      #proof .npd-note,
       .npd-section .npd-note { margin-top: clamp(10px, 1.9vh, 24px); }
       @media (max-width: 1199px) {
+        #proof .npd-flow,
         .npd-section .npd-flow { grid-template-columns: repeat(5, 1fr); }
       }
 
@@ -2020,30 +2361,41 @@
          The gap above the label is deliberately the biggest in the section —
          it is what separates the two halves of the frame, and the client asked
          for the numbers to sit lower rather than tucked under the band. */
-      .mfg-production .cap-label { margin-top: clamp(14px, 3vh, 52px) !important; }
-      .mfg-production .cap-label .mfg-eyebrow {
-        font-size: clamp(10.5px, 1.6vh, 19px) !important;
-        margin-bottom: 0;
+      .mfg-production .cap-label { margin-top: clamp(12px, 2.6vh, 52px) !important; }
+      /* "Capacity at a Glance" is an eyebrow like every other eyebrow, so it
+         takes the shared 11px — it used to run up to 19px on a tall screen,
+         which is why one eyebrow looked bigger than the rest. Margin only. */
+      .mfg-production .cap-label .mfg-eyebrow { margin-bottom: 0; }
+      .mfg-production .cap-grid { margin-top: clamp(7px, 1.3vh, 18px) !important; }
+      /* Nine across, so the cell is ~114px wide and these are sized to the
+         WIDTH available, not just the height. The old values here were built
+         for the 3 x 3 block (value up to 32px) and overflowed a ninth-width
+         cell. Going to one row also gives the frame back two rows of height,
+         which is why the vh ceilings can stay this generous. */
+      /* the same padding the NPD steps get, so a capacity card and a flow
+         step are the same height — client: the capacity cards looked patla */
+      .mfg-production .cap-cell {
+        padding: clamp(8px, 1.7vh, 20px) 10px clamp(7px, 1.5vh, 18px);
+        /* the frame is 100svh, so the card height is taken from the screen
+           too — it grows into the room a tall screen actually has and
+           collapses on a short one, where the frame has none to give. */
+        min-height: clamp(64px, 15vh, 170px);
       }
-      .mfg-production .cap-grid { margin-top: clamp(8px, 1.5vh, 18px) !important; }
-      .mfg-production .cap-cell { padding: clamp(7px, 1.35vh, 24px) clamp(10px, 1vw, 16px); }
-      .mfg-production .cap-cell__value { font-size: clamp(15.5px, 2.5vh, 32px); }
+      .mfg-production .cap-cell__value { font-size: clamp(12px, 1.9vh, 17px); }
       .mfg-production .cap-cell__label {
-        margin-top: clamp(2px, 0.75vh, 9px);
-        font-size: clamp(9px, 1.45vh, 12px);
-        letter-spacing: 0.08em;
+        margin-top: clamp(2px, 0.6vh, 7px);
+        font-size: clamp(8px, 1.15vh, 10px);
+        letter-spacing: 0.05em;
       }
 
       /* ── OUR CERTIFICATIONS, as the strip under the Quality band. Its 56px
-         heading margin and full-size logos were sized for a standalone
-         section; inside the shared frame they scale with the screen like
-         everything else. */
-      .hp-frame--pair .mfg-certs__heading {
-        font-size: clamp(18px, 2.85vh, 34px);
-        margin-bottom: clamp(12px, 2.4vh, 40px);
-      }
+         standalone-section margin and full-size logos are scaled to the frame
+         here. The heading SIZE is deliberately not set — it comes from the
+         shared scale in hp-type-scale, so this strip's title matches every
+         other section heading. (It used to set font-size here, which is why it
+         rendered at 25.7px next to 48px headings.) */
+      .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(12px, 2.4vh, 40px); }
       .hp-frame--pair .mfg-cert-row { gap: clamp(20px, 4vw, 56px); }
-      .hp-frame--pair .mfg-cert img { height: clamp(44px, 7vh, 88px); width: auto; }
 
       /* ── BAND SIDES — the doc alternates media/copy down the page. Moving
          Certifications & Quality below Supply Chain left two media-left bands
@@ -2163,7 +2515,7 @@
         <circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/>
         <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      <input type="search" placeholder="Search products…" aria-label="Search products">
+      <input type="search" placeholder="Search" aria-label="Search">
     </div>
     <ul class="isler-nav__links">
       <li><a href="index.html">Home</a></li>
@@ -2254,7 +2606,7 @@
       <li><a href="career.html">Career</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <button class="isler-nav__search-toggle" type="button" aria-label="Search products" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="isler-nav__search-toggle" type="button" aria-label="Search" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
 
 
@@ -2358,28 +2710,6 @@
   <section id="ways" class="ways-section" aria-labelledby="ways-h">
     <div class="ways-inner">
 
-      <!-- Hard numbers, per client brief: total SKUs + number of categories.
-           Counts are generated from assets/js/search.js + the product pages;
-           re-check them after any catalogue update. -->
-      <div class="hp-stats">
-        <div class="hp-stat hp-reveal">
-          <span class="hp-stat__value hp-count" data-count="183">183</span>
-          <span class="hp-stat__label">SKUs in the catalogue</span>
-        </div>
-        <div class="hp-stat hp-reveal">
-          <span class="hp-stat__value hp-count" data-count="22">22</span>
-          <span class="hp-stat__label">Product categories</span>
-        </div>
-        <div class="hp-stat hp-reveal">
-          <span class="hp-stat__value hp-count" data-count="4">4</span>
-          <span class="hp-stat__label">Product divisions</span>
-        </div>
-        <div class="hp-stat hp-reveal">
-          <span class="hp-stat__value hp-count" data-count="1">1</span>
-          <span class="hp-stat__label">Shared design language</span>
-        </div>
-      </div>
-
       <!-- ── Three ways to build ────────────────────────────────────────── -->
       <div class="ways-head">
         <h2 class="ways-head__title" id="ways-h">Three ways to build with Isler</h2>
@@ -2433,6 +2763,29 @@
         <span class="mfg-eyebrow mfg-opener__eyebrow mfg-reveal">Manufacturing</span>
         <h2 class="mfg-opener__title mfg-reveal">A State-of-the-Art Facility Built for Scale, Speed, and Precision</h2>
         <p class="mfg-opener__copy mfg-reveal">Isler’s manufacturing facility in Greater Noida was inaugurated by Shri Sanjiv Singh, Joint Secretary, DPIIT, Ministry of Commerce and Industry — an event covered by more than 30 media channels. Isler was also featured by the Hon’ble Union Minister of Commerce &amp; Industry, Mr. Piyush Goyal, in recognition of its contribution to India’s manufacturing journey.</p>
+        <!-- Hard numbers, per client brief: total SKUs + number of categories.
+             Counts are generated from assets/js/search.js + the product pages;
+             re-check them after any catalogue update.
+             Moved here from #ways on 2026-08-10 so they read over the facility
+             footage rather than as a separate white bar further down. -->
+        <div class="hp-stats">
+          <div class="hp-stat hp-reveal">
+            <span class="hp-stat__value hp-count" data-count="183">183</span>
+            <span class="hp-stat__label">SKUs in the catalogue</span>
+          </div>
+          <div class="hp-stat hp-reveal">
+            <span class="hp-stat__value hp-count" data-count="22">22</span>
+            <span class="hp-stat__label">Product categories</span>
+          </div>
+          <div class="hp-stat hp-reveal">
+            <span class="hp-stat__value hp-count" data-count="4">4</span>
+            <span class="hp-stat__label">Product divisions</span>
+          </div>
+          <div class="hp-stat hp-reveal">
+            <span class="hp-stat__value hp-count" data-count="1">1</span>
+            <span class="hp-stat__label">Shared design language</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2447,7 +2800,7 @@
       <div class="mfg-inner">
         <!-- Heading + intro (top-left, above the data box) -->
         <div>
-          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h" style="font-size:clamp(28px,3vw,40px);">Isler at a Glance</h2>
+          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h">Isler at a Glance</h2>
           <p class="mfg-sub mfg-reveal" style="margin-top:14px;max-width:none;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof — enabling faster iteration from design to dispatch.</p>
         </div>
         <!-- Doc format: media LEFT / copy RIGHT, copy laid out exactly like
@@ -2461,8 +2814,8 @@
             </video>
           </div>
           <div class="rev2-band__copy">
-            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Manufacturing Operations</span>
-            <h3 class="mfg-heading mfg-reveal" id="mfg-vendor-h" style="font-size:clamp(22px,2.4vw,32px);margin-bottom:18px;">Process-Led, Digital &amp; Quality-First Operations</h3>
+            <span class="mfg-eyebrow mfg-reveal">Manufacturing Operations</span>
+            <h3 class="mfg-heading mfg-subheading mfg-reveal" id="mfg-vendor-h" style="margin-bottom:18px;">Process-Led, Digital &amp; Quality-First Operations</h3>
             <p class="mfg-sub mfg-reveal">A world-class manufacturing organisation run on documented process — 13+ processes, 25+ sub-processes and 130+ templates covering every stage of the build.</p>
             <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, the shop floor and the system are one. An ERP and data backbone carries every order end to end, a Supply Network Control Tower (SNCT) watches material and capacity across the partner base, and a digital shopfloor records what actually happened on the line — so the status a buyer is given is the status the plant is working to.</p>
           </div>
@@ -2474,40 +2827,40 @@
         <div class="cap-label" style="margin-top:clamp(28px,3.5vw,44px);">
           <span class="mfg-eyebrow" style="margin-bottom:10px;">Capacity at a Glance <span class="hp-ph">Numbers to be supplied</span></span>
         </div>
-        <div class="cap-grid mfg-reveal" style="margin-top:12px;">
-          <div class="cap-cell">
+        <div class="cap-grid" style="margin-top:12px;">
+          <div class="cap-cell" style="--i:0">
             <span class="cap-cell__value">30,000 sq. ft.</span>
             <span class="cap-cell__label">Integrated facility</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:1">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Units per year</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:2">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Production lines</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:3">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Shifts per day</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:4">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Headcount</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:5">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Engineers</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:6">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">OEE %</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:7">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">On-time delivery %</span>
           </div>
-          <div class="cap-cell">
+          <div class="cap-cell" style="--i:8">
             <span class="cap-cell__value cap-cell__value--empty">—</span>
             <span class="cap-cell__label">Defect rate (PPM)</span>
           </div>
@@ -2594,7 +2947,7 @@
        back to its own natural height, the way it was before the one-frame
        work. Trade-off, deliberately accepted: the block below it can share a
        screen with it. -->
-  <section id="proof" class="proof-section" aria-labelledby="proof-h">
+  <section id="proof" class="proof-section hp-frame" aria-labelledby="proof-h">
     <div class="proof-inner">
       <!-- Doc format: copy LEFT / media RIGHT, then the certifications
            and brands strips full width below. -->
@@ -2613,6 +2966,27 @@
           <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
         </div>
       </div>
+
+      <p class="npd-lead">From vendor to line</p>
+
+      <!-- Same component as the Fast NPD strip — .npd-flow / .npd-step and
+           the same left-to-right sweep, driven by .is-running. --i is the
+           step's position in that sweep. -->
+      <div class="npd-flow">
+        <div class="npd-step" style="--i:0"><span class="npd-step__no">01</span><span class="npd-step__name">Vendor Identification</span></div>
+        <div class="npd-step" style="--i:1"><span class="npd-step__no">02</span><span class="npd-step__name">Partner Audit</span></div>
+        <div class="npd-step" style="--i:2"><span class="npd-step__no">03</span><span class="npd-step__name">Approval</span></div>
+        <div class="npd-step" style="--i:3"><span class="npd-step__no">04</span><span class="npd-step__name">Dual Sourcing</span></div>
+        <div class="npd-step" style="--i:4"><span class="npd-step__no">05</span><span class="npd-step__name">Material Planning</span></div>
+        <div class="npd-step" style="--i:5"><span class="npd-step__no">06</span><span class="npd-step__name">Inbound QC</span></div>
+        <div class="npd-step" style="--i:6"><span class="npd-step__no">07</span><span class="npd-step__name">Control Tower</span></div>
+        <div class="npd-step" style="--i:7"><span class="npd-step__no">08</span><span class="npd-step__name">Line Feed</span></div>
+        <div class="npd-step" style="--i:8"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
+      </div>
+
+      <p class="npd-note">
+        <span class="hp-ph">Stage names follow the copy above &mdash; exact list to be confirmed by Isler</span>
+      </p>
     </div>
   </section>
 
@@ -2638,7 +3012,7 @@
              full width below. -->
         <div class="rev2-band">
           <div class="rev2-band__copy">
-            <span class="mfg-eyebrow mfg-reveal" style="font-size:clamp(15px,1.9vw,24px);">Certifications &amp; Quality</span>
+            <span class="mfg-eyebrow mfg-reveal">Certifications &amp; Quality</span>
             <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our First Priority</h2>
             <p class="mfg-sub mfg-reveal">Engineered, tested and certified to global standards — in-house labs, incoming and outgoing inspection, and a QMS your auditors can walk line by line.</p>
             <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
@@ -2689,189 +3063,88 @@
   <section id="brands" class="brands-section" aria-labelledby="brands-h">
     <div class="brands-head">
       <span class="section-eyebrow">Our Clients</span>
-      <h2 class="section-heading" id="brands-h">Brands We Build For</h2>
+      <h2 class="section-heading" id="brands-h">Partners We Build For</h2>
       <p class="section-sub">Manufacturing partner to leading appliance brands across India and export markets.</p>
     </div>
 
+    <div class="brands-rows">
     <div class="brands-marquee">
-      <div class="brands-track">
+      <div class="brands-track brands-track--a">
         <!-- copy 1 -->
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 01</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 02</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 03</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 04</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 05</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 06</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 07</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 08</span></div>
         <!-- copy 2 — seamless loop -->
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Client Logo</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 01</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 02</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 03</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 04</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 05</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 06</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 07</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 08</span></div>
       </div>
     </div>
+    <div class="brands-marquee">
+      <div class="brands-track brands-track--b">
+        <!-- copy 1 -->
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 09</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 10</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 11</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 12</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 13</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 14</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 15</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 16</span></div>
+        <!-- copy 2 — seamless loop -->
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 09</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 10</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 11</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 12</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 13</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 14</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 15</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 16</span></div>
+      </div>
+    </div>
+    <div class="brands-marquee">
+      <div class="brands-track brands-track--c">
+        <!-- copy 1 -->
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 17</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 18</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 19</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 20</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 21</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 22</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 23</span></div>
+        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 24</span></div>
+        <!-- copy 2 — seamless loop -->
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 17</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 18</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 19</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 20</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 21</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 22</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 23</span></div>
+        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 24</span></div>
+      </div>
+    </div>
+    </div>
 
-    <p class="brands-note"><span class="hp-ph">Client logos to be supplied</span></p>
+    <p class="brands-note"><span class="hp-ph">Partner logos to be supplied — 24 slots across three rows</span></p>
   </section>
 
-  <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
-       homepage doc. Kept in place pending a decision — delete this
-       section if Isler confirms it should come off the homepage. -->
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 5 — QUATRO SERIES
-       Copy adapted from the client-approved About Us paragraph (about.html).
-       Card images are existing site product shots — swap for final Quatro
-       series photography when Isler supplies it.
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="quatro" class="quatro-section" aria-labelledby="quatro-h">
-    <div class="quatro-inner">
-      <div class="section-header">
-        <span class="section-eyebrow">Quatro Series</span>
-        <h2 class="section-heading" id="quatro-h">One Design Language,<br>Your Entire Kitchen Line-Up</h2>
-      </div>
-
-      <p class="quatro-lead hp-reveal">Isler is the only manufacturing company in India to offer a Quatro series — chimney, built-in hob, microwave and oven, each designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
-
-      <div class="quatro-grid">
-
-        <a href="kitchen-chimneys.html" class="quatro-card hp-reveal">
-          <div class="quatro-card__media">
-            <img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.webp" alt="Isler chimney — Quatro series" loading="lazy">
-          </div>
-          <div class="quatro-card__body">
-            <span class="quatro-card__step">One of four</span>
-            <span class="quatro-card__name">Chimney</span>
-          </div>
-        </a>
-
-        <a href="built-in-hobs.html" class="quatro-card hp-reveal">
-          <div class="quatro-card__media">
-            <img src="assets/images/hob-brillare.webp" alt="Isler built-in hob — Quatro series" loading="lazy">
-          </div>
-          <div class="quatro-card__body">
-            <span class="quatro-card__step">Two of four</span>
-            <span class="quatro-card__name">Built-in Hob</span>
-          </div>
-        </a>
-
-        <a href="built-in-microwaves.html" class="quatro-card hp-reveal">
-          <div class="quatro-card__media">
-            <img src="assets/images/microwave-silver-core.webp" alt="Isler built-in microwave — Quatro series" loading="lazy">
-          </div>
-          <div class="quatro-card__body">
-            <span class="quatro-card__step">Three of four</span>
-            <span class="quatro-card__name">Microwave</span>
-          </div>
-        </a>
-
-        <a href="built-in-ovens.html" class="quatro-card hp-reveal">
-          <div class="quatro-card__media">
-            <img src="assets/images/oven-gold-grande.webp" alt="Isler built-in oven — Quatro series" loading="lazy">
-          </div>
-          <div class="quatro-card__body">
-            <span class="quatro-card__step">Four of four</span>
-            <span class="quatro-card__name">Oven</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
-       homepage doc. Kept in place pending a decision — delete this
-       section if Isler confirms it should come off the homepage. -->
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       SECTION 4 — Insights / Blog
-       Section + content sourced from Isler-India-Revamp homepage (BLOG SECTION).
-       Adapted to demo tokens: navy/yellow palette, demo section-header pattern,
-       Range-style card hover. Post links are # placeholders (post pages not in demo).
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="insights" class="blog-section">
-    <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-    <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
-    <div class="section-header">
-      <span class="section-eyebrow">Insights</span>
-      <h2 class="section-heading">From the Isler Blog</h2>
-      <p class="section-sub">Industry perspectives and manufacturing innovations from our team</p>
-    </div>
-
-    <div class="blog-grid-wrap">
-      <div class="blog-grid">
-
-        <!-- Post 1 -->
-        <article class="blog-card">
-          <a href="blog-localized-manufacturing.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
-            <div class="blog-card__media">
-              <img src="assets/images/manufacturing/factory-floor.webp"
-                   alt="Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions"
-                   loading="lazy" width="800" height="450">
-            </div>
-          </a>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__category">Manufacturing</span>
-              <time class="blog-card__date" datetime="2024-10-09">October 9, 2024</time>
-            </div>
-            <h3 class="blog-card__title"><a href="blog-localized-manufacturing.html">Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions?</a></h3>
-            <p class="blog-card__excerpt">In recent years, India's kitchen appliance industry has experienced a major transformation driven by evolving consumer demands, rapid technological advancements, and disruptions in global supply chains.</p>
-            <a href="blog-localized-manufacturing.html" class="blog-card__cta" aria-label="Read more about localized manufacturing solutions">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-        </article>
-
-        <!-- Post 2 -->
-        <article class="blog-card">
-          <a href="blog-manufacturing-partner.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
-            <div class="blog-card__media">
-              <img src="assets/images/blog-post-2.webp"
-                   alt="5 Reasons Why Isler India is Your Ideal Manufacturing Partner"
-                   loading="lazy" width="800" height="450">
-            </div>
-          </a>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__category">Partnership</span>
-              <time class="blog-card__date" datetime="2024-09-14">September 14, 2024</time>
-            </div>
-            <h3 class="blog-card__title"><a href="blog-manufacturing-partner.html">5 Reasons Why Isler India is Your Ideal Manufacturing Partner</a></h3>
-            <p class="blog-card__excerpt">In today's competitive manufacturing landscape, staying compliant with BIS is not only a necessity but a mark of excellence. Here's why Isler India is your ideal partner.</p>
-            <a href="blog-manufacturing-partner.html" class="blog-card__cta" aria-label="Read more about Isler India as manufacturing partner">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-        </article>
-
-        <!-- Post 3 -->
-        <article class="blog-card">
-          <a href="blog-kitchen-chimney-innovations.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
-            <div class="blog-card__media">
-              <img src="assets/images/blog-post-3.webp"
-                   alt="Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits"
-                   loading="lazy" width="800" height="450">
-            </div>
-          </a>
-          <div class="blog-card__body">
-            <div class="blog-card__meta">
-              <span class="blog-card__category">Smart Chimneys</span>
-              <time class="blog-card__date" datetime="2024-05-29">May 29, 2024</time>
-            </div>
-            <h3 class="blog-card__title"><a href="blog-kitchen-chimney-innovations.html">Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits</a></h3>
-            <p class="blog-card__excerpt">Isler India stands out as a beacon of innovation, offering state-of-the-art kitchen chimneys that blend functionality, aesthetics, and cutting-edge smart technology.</p>
-            <a href="blog-kitchen-chimney-innovations.html" class="blog-card__cta" aria-label="Read more about modern kitchen chimney innovations">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          </div>
-        </article>
-
-      </div>
-
-      <div class="blog-actions">
-        <a href="blog.html" class="blog-view-all">View All Articles</a>
-      </div>
-    </div>
-  </section>
+  <!-- The Insights / "From the Isler Blog" section was MOVED to
+       our-story.html on 2026-08-10 at the client's request ("usko About Us
+       ke Our Story mein mention kar de, aur first page se hata de").
+       Its CSS is deliberately left in this file's <style> — the .blog-*
+       rules are now unused here, but keeping them makes putting the section
+       back a paste rather than a rebuild. Same call as .mfg-vendors. -->
 
 
   <!-- ═══════════════════════════════════════════════════════════════════════
@@ -3205,10 +3478,13 @@
   (function () {
     // Containers whose children animate in sequence. Add a selector here
     // and give its children an inline --i to sequence a new group.
-    var SEQ = ['.npd-flow', '.ways-grid'];
+    var SEQ = ['.npd-flow', '.ways-grid', '.cap-grid'];
     if (!('IntersectionObserver' in window)) return;
-    var groups = SEQ.map(function (s) { return document.querySelector(s); })
-                    .filter(Boolean);
+    // querySelectorAll, not querySelector: there are now two .npd-flow
+    // strips on the page (Fast NPD and Supply Chain) and both must sweep.
+    var groups = SEQ.reduce(function (acc, s) {
+      return acc.concat([].slice.call(document.querySelectorAll(s)));
+    }, []);
     if (!groups.length) return;
     // body.hp-anim-on is only set when motion is allowed; the CSS is
     // scoped to it, so this class is inert under reduced-motion.

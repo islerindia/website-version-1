@@ -348,6 +348,226 @@
 
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
+
+  <style id="os-insights">
+    /* ── FROM THE ISLER BLOG ───────────────────────────────────────────
+       Moved here from the homepage on 2026-08-10. The rules below are
+       copied verbatim from index.html so the cards look identical on both
+       pages; our-story.html carried none of them (no .section-header,
+       .section-heading, .blog-card, …), which is why the whole set comes
+       across rather than just the .blog-* half.
+       The one addition is the .blog-section padding, which on the homepage
+       came from a shared rule grouping it with .proof/.range/.quatro. */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-heading {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+
+
+    /* ══════════════════════════════════════════════════════════════
+       INSIGHTS / BLOG SECTION
+       Adapted from Isler-India-Revamp (teal accent → demo yellow/navy)
+    ══════════════════════════════════════════════════════════════ */
+
+    .blog-section {
+      background: var(--off-white);
+      padding: var(--space-3xl) clamp(24px, 5vw, 96px);
+      position: relative;
+      overflow: clip;
+    }
+
+    .section-sub {
+      margin-top: var(--space-sm);
+      font-size: 16px;
+      color: var(--gray-mid);
+      line-height: 1.6;
+    }
+
+    .blog-grid-wrap {
+      max-width: 1680px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border: 1px solid rgba(11, 26, 61, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      transition: box-shadow 280ms var(--ease-out), transform 280ms var(--ease-out);
+    }
+
+    .blog-card:hover {
+      box-shadow: 0 18px 40px rgba(11, 26, 61, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .blog-card__media-link {
+      display: block;
+      overflow: hidden;
+    }
+
+    .blog-card__media {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--gray-light);
+    }
+
+    .blog-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 600ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__media img {
+      transform: scale(1.06);
+    }
+
+    .blog-card__body {
+      padding: 24px 26px 26px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--gray-mid);
+      margin-bottom: 14px;
+    }
+
+    .blog-card__category {
+      font-weight: 700;
+      color: var(--yellow);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .blog-card__title {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      flex: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .blog-card__title a {
+      color: var(--navy);
+      text-decoration: none;
+      transition: color 150ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__title a {
+      color: var(--yellow);
+    }
+
+    .blog-card__excerpt {
+      font-size: 14px;
+      color: var(--gray-mid);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .blog-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      margin-top: auto;
+      transition: color 150ms var(--ease-out);
+    }
+
+    .blog-card__cta svg {
+      transition: transform 200ms var(--ease-out);
+    }
+
+    .blog-card:hover .blog-card__cta {
+      color: var(--yellow);
+    }
+
+    .blog-card:hover .blog-card__cta svg {
+      transform: translateX(4px);
+    }
+
+    .blog-actions {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .blog-view-all {
+      display: inline-block;
+      padding: 14px 40px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      border: 2px solid var(--navy);
+      border-radius: 100px;
+      transition: background 180ms ease, color 180ms ease, transform 150ms ease;
+    }
+
+    .blog-view-all:hover {
+      background: var(--navy);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 991px) {
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 599px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+
+    .blog-section {
+      padding-top: clamp(48px, 5vw, 72px);
+      padding-bottom: clamp(48px, 5vw, 72px);
+    }
+  </style>
 </head>
 <body>
 
@@ -361,7 +581,7 @@
         <circle cx="6" cy="6" r="4.5" stroke="white" stroke-width="1.5"/>
         <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      <input type="search" placeholder="Search products…" aria-label="Search products">
+      <input type="search" placeholder="Search" aria-label="Search">
     </div>
     <ul class="isler-nav__links">
       <li><a href="index.html">Home</a></li>
@@ -452,7 +672,7 @@
       <li><a href="career.html">Career</a></li>
       <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <button class="isler-nav__search-toggle" type="button" aria-label="Search products" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="isler-nav__search-toggle" type="button" aria-label="Search" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
 
 
@@ -515,6 +735,160 @@
       </div>
     </section>
     <!-- ROADMAP-SECTION-END -->
+
+    <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
+         homepage doc. Kept in place pending a decision — delete this
+         section if Isler confirms it should come off the homepage. -->
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SECTION 5 — QUATRO SERIES
+         Copy adapted from the client-approved About Us paragraph (about.html).
+         Card images are existing site product shots — swap for final Quatro
+         series photography when Isler supplies it.
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <section id="quatro" class="quatro-section" aria-labelledby="quatro-h">
+      <div class="quatro-inner">
+        <div class="section-header">
+          <span class="section-eyebrow">Quatro Series</span>
+          <h2 class="section-heading" id="quatro-h">One Design Language,<br>Your Entire Kitchen Line-Up</h2>
+        </div>
+
+        <p class="quatro-lead hp-reveal">Isler is the only manufacturing company in India to offer a Quatro series — chimney, built-in hob, microwave and oven, each designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
+
+        <div class="quatro-grid">
+
+          <a href="kitchen-chimneys.html" class="quatro-card hp-reveal">
+            <div class="quatro-card__media">
+              <img src="assets/images/islerindia_chimney_incline_60-ac_blackmatte_a_01-400x310.webp" alt="Isler chimney — Quatro series" loading="lazy">
+            </div>
+            <div class="quatro-card__body">
+              <span class="quatro-card__step">One of four</span>
+              <span class="quatro-card__name">Chimney</span>
+            </div>
+          </a>
+
+          <a href="built-in-hobs.html" class="quatro-card hp-reveal">
+            <div class="quatro-card__media">
+              <img src="assets/images/hob-brillare.webp" alt="Isler built-in hob — Quatro series" loading="lazy">
+            </div>
+            <div class="quatro-card__body">
+              <span class="quatro-card__step">Two of four</span>
+              <span class="quatro-card__name">Built-in Hob</span>
+            </div>
+          </a>
+
+          <a href="built-in-microwaves.html" class="quatro-card hp-reveal">
+            <div class="quatro-card__media">
+              <img src="assets/images/microwave-silver-core.webp" alt="Isler built-in microwave — Quatro series" loading="lazy">
+            </div>
+            <div class="quatro-card__body">
+              <span class="quatro-card__step">Three of four</span>
+              <span class="quatro-card__name">Microwave</span>
+            </div>
+          </a>
+
+          <a href="built-in-ovens.html" class="quatro-card hp-reveal">
+            <div class="quatro-card__media">
+              <img src="assets/images/oven-gold-grande.webp" alt="Isler built-in oven — Quatro series" loading="lazy">
+            </div>
+            <div class="quatro-card__body">
+              <span class="quatro-card__step">Four of four</span>
+              <span class="quatro-card__name">Oven</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
+         homepage doc. Kept in place pending a decision — delete this
+         section if Isler confirms it should come off the homepage. -->
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SECTION 4 — Insights / Blog
+         Section + content sourced from Isler-India-Revamp homepage (BLOG SECTION).
+         Adapted to demo tokens: navy/yellow palette, demo section-header pattern,
+         Range-style card hover. Post links are # placeholders (post pages not in demo).
+    ═══════════════════════════════════════════════════════════════════════════ -->
+    <section id="insights" class="blog-section">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="section-header">
+        <span class="section-eyebrow">Insights</span>
+        <h2 class="section-heading">From the Isler Blog</h2>
+        <p class="section-sub">Industry perspectives and manufacturing innovations from our team</p>
+      </div>
+
+      <div class="blog-grid-wrap">
+        <div class="blog-grid">
+
+          <!-- Post 1 -->
+          <article class="blog-card">
+            <a href="blog-localized-manufacturing.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+              <div class="blog-card__media">
+                <img src="assets/images/manufacturing/factory-floor.webp"
+                     alt="Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions"
+                     loading="lazy" width="800" height="450">
+              </div>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Manufacturing</span>
+                <time class="blog-card__date" datetime="2024-10-09">October 9, 2024</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-localized-manufacturing.html">Why Indian Kitchen Appliance Brands Are Shifting to Localized Manufacturing Solutions?</a></h3>
+              <p class="blog-card__excerpt">In recent years, India's kitchen appliance industry has experienced a major transformation driven by evolving consumer demands, rapid technological advancements, and disruptions in global supply chains.</p>
+              <a href="blog-localized-manufacturing.html" class="blog-card__cta" aria-label="Read more about localized manufacturing solutions">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article class="blog-card">
+            <a href="blog-manufacturing-partner.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+              <div class="blog-card__media">
+                <img src="assets/images/blog-post-2.webp"
+                     alt="5 Reasons Why Isler India is Your Ideal Manufacturing Partner"
+                     loading="lazy" width="800" height="450">
+              </div>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Partnership</span>
+                <time class="blog-card__date" datetime="2024-09-14">September 14, 2024</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-manufacturing-partner.html">5 Reasons Why Isler India is Your Ideal Manufacturing Partner</a></h3>
+              <p class="blog-card__excerpt">In today's competitive manufacturing landscape, staying compliant with BIS is not only a necessity but a mark of excellence. Here's why Isler India is your ideal partner.</p>
+              <a href="blog-manufacturing-partner.html" class="blog-card__cta" aria-label="Read more about Isler India as manufacturing partner">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+          </article>
+
+          <!-- Post 3 -->
+          <article class="blog-card">
+            <a href="blog-kitchen-chimney-innovations.html" class="blog-card__media-link" tabindex="-1" aria-hidden="true">
+              <div class="blog-card__media">
+                <img src="assets/images/blog-post-3.webp"
+                     alt="Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits"
+                     loading="lazy" width="800" height="450">
+              </div>
+            </a>
+            <div class="blog-card__body">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Smart Chimneys</span>
+                <time class="blog-card__date" datetime="2024-05-29">May 29, 2024</time>
+              </div>
+              <h3 class="blog-card__title"><a href="blog-kitchen-chimney-innovations.html">Isler India's Innovations: Modern Kitchen Chimneys' Innovative Features and Benefits</a></h3>
+              <p class="blog-card__excerpt">Isler India stands out as a beacon of innovation, offering state-of-the-art kitchen chimneys that blend functionality, aesthetics, and cutting-edge smart technology.</p>
+              <a href="blog-kitchen-chimney-innovations.html" class="blog-card__cta" aria-label="Read more about modern kitchen chimney innovations">Read More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="blog-actions">
+          <a href="blog.html" class="blog-view-all">View All Articles</a>
+        </div>
+      </div>
+    </section>
 
   </main>
 
