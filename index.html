@@ -1116,7 +1116,11 @@
       border-radius: 0;
       border-left: 0;
       border-right: 0;
-      border-top: 0;
+      /* Client 2026-08-11: brand-orange outline on the bar's top and bottom
+         edge. Full shorthand on purpose — see the matching note in nav.css:
+         a bare width leaves the style at `none` and the edge renders 0px. */
+      border-top: 1.5px solid #E69500;
+      border-bottom: 1.5px solid #E69500;
       box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
       padding-top: 9px;                 /* thinner bar (was 13px) */
       padding-bottom: 9px;
@@ -1218,6 +1222,13 @@
          rather than as the last line of the paragraph. */
       margin: clamp(100px, 24vh, 260px) 0 0;
       max-width: none;
+      /* client 2026-08-11: "middle lag nahi raha". The row was already dead
+         centred — measured mid 800 on a 1600 viewport — but it was boxed to
+         the same 894px column as the left-aligned heading and paragraph, so
+         it read as a continuation of THEIR left edge instead of as a centred
+         band. Breaking it out wider than the text column is what actually
+         makes it look centred; nudging it right would only skew real
+         geometry to chase the illusion. See the breakout rule below. */
       gap: clamp(16px, 3vw, 48px);
       background: none;
       border: 0;
@@ -1227,7 +1238,12 @@
     .mfg-opener .hp-stat {
       background: none;
       padding: 0;
-      text-align: left;
+      /* client 2026-08-11: the numbers didn't read as centred. Each cell is
+         1/4 of the inner width; left-aligning inside it pinned every number
+         to its column's left edge, so the row looked ragged against the
+         varying label lengths. Centring inside the cell centres the label
+         under its own number and makes the four read as one balanced row. */
+      text-align: center;
     }
     .mfg-opener .hp-stat__value {
       color: #fff;
@@ -1240,6 +1256,23 @@
     .mfg-opener .hp-stat__label {
       color: rgba(255, 255, 255, 0.82);
       text-shadow: 0 1px 10px rgba(6, 15, 36, 0.55);
+    }
+    /* The breakout, via symmetric NEGATIVE margins — deliberately not a width.
+       .mfg-inner is shrink-to-fit, so setting an explicit width on this row
+       grew the container itself (894px → 1180px) and dragged the heading and
+       paragraph left with it, from x=353 to x=210. Their position is already
+       signed off, so the row has to widen without resizing its parent.
+       Negative margins do exactly that: the margin box stays the container's
+       width, so the parent never grows, while the border box overflows evenly
+       on both sides and the row stays centred on the page.
+       Desktop only — below 1024px the column is already near full width and
+       overflowing it would push the page sideways. */
+    @media (min-width: 1024px) {
+      .mfg-opener .hp-stats {
+        margin-left: clamp(-150px, -8vw, -40px);
+        margin-right: clamp(-150px, -8vw, -40px);
+        gap: clamp(20px, 3.4vw, 56px);
+      }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -1315,7 +1348,8 @@
        IS a process, and the sweep is what the client liked about it. */
     #proof .npd-step::after { display: none; }
     body.hp-anim-on #proof .npd-flow.is-running .npd-step {
-      animation: factIn 800ms var(--ease-out) both;
+      opacity: 1;
+      animation: factIn 800ms var(--ease-out) backwards;
       animation-delay: calc(var(--d, 0) * 200ms);
     }
 
@@ -1335,8 +1369,41 @@
     }
     body.hp-anim-on .cap-cell { opacity: 0; }
     body.hp-anim-on .cap-grid.is-running .cap-cell {
-      animation: factIn 800ms var(--ease-out) both;
+      opacity: 1;
+      animation: factIn 800ms var(--ease-out) backwards;
       animation-delay: calc(var(--d, 0) * 200ms);
+    }
+
+    /* ── HOVER POP-OUT (client 2026-08-11) ──────────────────────────────
+       The two FACT strips lift under the cursor: Capacity at a Glance and
+       Supply Chain. "From brief to first shipment" (#npd) is deliberately
+       excluded — the client asked for everything except that one, and it is
+       the strip that already carries its own travelling sweep.
+
+       Note the fill-mode above went `both` → `backwards`. With `both`, the
+       entry animation keeps filling forwards after it ends, and a filling
+       animation outranks normal declarations in the cascade — so the :hover
+       transform below would have been silently ignored once the card landed.
+       `backwards` still holds the from-state during the stagger delay, then
+       hands the card back to plain CSS, which is what hover needs. The
+       explicit opacity:1 replaces what the forwards fill used to hold. */
+    .cap-cell,
+    #proof .npd-step {
+      transition: transform 220ms var(--ease-out),
+                  box-shadow 220ms var(--ease-out),
+                  border-color 220ms var(--ease-out);
+    }
+    .cap-cell:hover,
+    #proof .npd-step:hover {
+      transform: translateY(-6px) scale(1.045);
+      box-shadow: 0 18px 34px rgba(11, 26, 61, 0.16);
+      border-color: rgba(230, 149, 0, 0.55);
+      /* the scaled card has to sit over its neighbours, not under them */
+      z-index: 2;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cap-cell, #proof .npd-step { transition: none; }
+      .cap-cell:hover, #proof .npd-step:hover { transform: none; }
     }
     /* breakpoints mirror .npd-flow exactly, connectors off once it wraps */
     @media (max-width: 1200px) {
@@ -1518,8 +1585,11 @@
       gap: 28px;
       animation: brands-scroll 46s linear infinite;
     }
-    .brands-marquee:hover .brands-track,
-    .brands-marquee:focus-within .brands-track { animation-play-state: paused; }
+    /* Client 2026-08-11: the rows must NOT stop under the cursor. With 3 rows
+       running at deliberately unequal speeds, pausing all of them on hover
+       froze the whole band and made the strip look broken mid-scroll.
+       (Keyboard focus no longer pauses either — the slots are non-interactive
+       placeholders, so there is nothing to hold still and read.) */
     @keyframes brands-scroll {
       from { transform: translateX(0); }
       to   { transform: translateX(calc(-50% - 14px)); }   /* half the track + half the gap */
@@ -2571,7 +2641,7 @@
       <input type="search" placeholder="Search" aria-label="Search">
     </div>
     <ul class="isler-nav__links">
-      <li><a href="index.html">Home</a></li>
+      <li class="isler-nav__search-li"><button class="isler-nav__search-toggle isler-nav__search-toggle--inline" type="button" aria-label="Search" aria-expanded="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></li><li><a href="index.html">Home</a></li>
       <li class="isler-nav__item has-mega" id="isler-products-item">
         <a href="business.html" class="isler-nav__trigger" id="isler-products-trigger"
            aria-haspopup="true" aria-expanded="false" aria-controls="isler-mega">

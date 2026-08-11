@@ -15,12 +15,16 @@
   align-items: center;
   gap: 22px;
   padding: 13px 14px 13px 16px;
-  /* Soft warm-grey frosted pill so the navy Isler logo + navy links stay legible */
-  background: rgba(233, 231, 226, 0.98);
+  /* Client 2026-08-11: the scrolled bar is plain WHITE, outlined in brand
+     orange. It used to be a warm-grey frosted pill (rgba(233,231,226,.98))
+     with a grey hairline — the client read that grey as dirty against the
+     white page. The blur stays so anything passing under the pill still
+     softens instead of reading through it sharply. */
+  background: #FFFFFF;
   backdrop-filter: blur(20px) saturate(150%);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
   border-radius: 100px;
-  border: 1px solid rgba(90, 88, 82, 0.24);
+  border: 1.5px solid #E69500;
   box-shadow: 0 8px 30px rgba(30, 28, 24, 0.16);
   min-width: min(1160px, calc(100vw - 40px));
   font-family: var(--font);
@@ -30,11 +34,21 @@
    Keeps the horizontal centering while sliding out of view. */
 .isler-nav--hidden { transform: translateX(-50%) translateY(-120%); }
 
-/* ── Logo: plain navy mark (no backing pill, no drop-shadow) ── */
+/* ── Logo ──
+   Client 2026-08-11: a white pill sits behind the symbol + wordmark so the
+   mark stays clearly readable — this matters most on the homepage, where the
+   bar goes transparent over the hero footage and the navy wordmark otherwise
+   disappears into the video. The plate is part of the logo link itself, so it
+   travels with the mark in every bar state. */
 .isler-nav__logo {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  background: #fff;
+  /* Client 2026-08-11: tried square, they preferred the cylinder — keep the
+     fully-rounded pill. */
+  border-radius: 100px;
+  padding: 6px 16px;
 }
 .isler-nav__logo img {
   height: 34px;
@@ -43,9 +57,16 @@
   image-rendering: -webkit-optimize-contrast;
 }
 
-/* ── Search ── */
+/* ── Search ──
+   Client 2026-08-11: the always-visible search rectangle is gone from the bar.
+   What's left in the bar is a single magnifier icon sitting immediately to the
+   right of "Home"; clicking it drops the field open underneath the pill. The
+   field itself is the SAME element as before — it is only hidden until
+   .is-search-open is set — so assets/js/search.js keeps working untouched and
+   the mobile magnifier (which already worked this way) is unchanged.
+   That is why this rule is display:none rather than the field being deleted. */
 .isler-nav__search {
-  display: flex;
+  display: none;
   align-items: center;
   background: rgba(11, 26, 61, 0.05);
   border: 1px solid rgba(11, 26, 61, 0.12);
@@ -65,6 +86,48 @@
   font-size: 15px; font-family: inherit; width: 190px; padding: 8px 0; letter-spacing: 0.01em;
 }
 .isler-nav__search input::placeholder { color: rgba(11, 26, 61, 0.45); }
+
+/* ── The magnifier that opens it, first item in the links row, left of "Home" ──
+   A separate element from the mobile .isler-nav__search-toggle (which lives
+   next to the burger and is hidden above 1023px). Both carry the toggle class
+   so one handler in search.js drives either; only one is ever on screen. */
+.isler-nav__search-toggle--inline { display: none; }
+@media (min-width: 1024px) {
+  /* Two classes deep on purpose: the shared `.isler-nav__search-toggle
+     { display:none }` reset lives further down this file, and at equal
+     specificity source order would hand it the win and keep the icon
+     invisible on desktop. */
+  .isler-nav .isler-nav__search-toggle--inline {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 9px; margin-right: 2px;
+    background: none; border: none; border-radius: 100px;
+    cursor: pointer; color: var(--navy);
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .isler-nav__search-toggle--inline svg { display: block; }
+  .isler-nav__search-toggle--inline:hover { background: rgba(11, 26, 61, 0.06); }
+  .isler-nav.is-search-open .isler-nav__search-toggle--inline { background: rgba(11, 26, 61, 0.08); }
+}
+
+/* ── Open state: the field drops out of the pill, full width underneath ──
+   These rules used to live inside the max-width:1023px block because the
+   drop-open field was mobile-only. Desktop now uses the same interaction, so
+   they are global; the mobile block keeps only what genuinely differs. */
+.isler-nav.is-search-open .isler-nav__search {
+  display: flex;
+  position: absolute; top: calc(100% + 10px); left: 0; right: 0; margin: 0;
+  background: rgba(7, 17, 44, 0.96);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+          backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 4px 14px;
+}
+.isler-nav.is-search-open .isler-nav__search input { width: 100%; color: #fff; }
+.isler-nav.is-search-open .isler-nav__search input::placeholder { color: rgba(255, 255, 255, 0.5); }
+.isler-nav.is-search-open .isler-nav__search svg circle,
+.isler-nav.is-search-open .isler-nav__search svg line { stroke: rgba(255, 255, 255, 0.7); }
+.isler-nav__search .isler-search__results { left: 0; right: 0; width: auto; }
 
 /* Product search results dropdown */
 .isler-nav__search { position: relative; }
@@ -307,25 +370,16 @@
 /* ════════════════════════════  RESPONSIVE  ════════════════════════════ */
 @media (max-width: 1023px) {
   .isler-nav { gap: 14px; padding: 10px 10px 10px 14px; min-width: min(740px, calc(100vw - 28px)); }
-  .isler-nav__search { display: none; }
   .isler-nav__logo img { height: 28px; }
+  .isler-nav__logo { padding: 5px 12px; }
   .isler-nav__links > li > a, .isler-nav__trigger { font-size: 14px; padding: 9px 16px; }
 
-  /* Mobile search entry point: a magnifier icon reveals a full-width search field below the pill */
-  .isler-nav__search-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: var(--navy); }
+  /* Mobile search entry point: the magnifier next to the burger. The open-state
+     panel it reveals is styled globally now — only the button's own display
+     switch is width-dependent. */
+  .isler-nav__search-toggle:not(.isler-nav__search-toggle--inline) { display: inline-flex; align-items: center; justify-content: center; padding: 8px; background: none; border: none; cursor: pointer; color: var(--navy); }
   .isler-nav__search-toggle svg { display: block; }
   .isler-nav.is-search-open .isler-nav__search-toggle { color: var(--navy); background: rgba(11, 26, 61, 0.08); border-radius: 100px; }
-  .isler-nav.is-search-open .isler-nav__search {
-    display: flex; position: absolute; top: calc(100% + 10px); left: 0; right: 0; margin: 0;
-    background: rgba(7, 17, 44, 0.96);
-    -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 4px 14px;
-  }
-  .isler-nav.is-search-open .isler-nav__search input { width: 100%; color: #fff; }
-  .isler-nav.is-search-open .isler-nav__search input::placeholder { color: rgba(255, 255, 255, 0.5); }
-  .isler-nav.is-search-open .isler-nav__search svg circle,
-  .isler-nav.is-search-open .isler-nav__search svg line { stroke: rgba(255, 255, 255, 0.7); }
-  .isler-nav__search .isler-search__results { left: 0; right: 0; width: auto; }
 }
 
 /* Mobile: collapse links into a burger-toggled vertical panel; mega stacks. */
@@ -425,7 +479,14 @@
   border-radius: 0;
   border-left: 0;
   border-right: 0;
-  border-top: 0;
+  /* Client 2026-08-11: brand-orange outline on the bar's top and bottom edge.
+     The bar is full-bleed, so those two edges are the whole visible outline.
+     This MUST be the full shorthand, not just a width: `border-top: 0` also
+     reset the style to none and the colour to currentColor, which silently
+     beat the orange set on .isler-nav further up and rendered a 0px charcoal
+     edge instead. */
+  border-top: 1.5px solid #E69500;
+  border-bottom: 1.5px solid #E69500;
   box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
   padding-top: 9px;
   padding-bottom: 9px;
@@ -501,21 +562,15 @@ body.home-edgenav .isler-nav.is-search-open { }
   body.home-edgenav .isler-nav { transition: none; }
 }
 
-/* the search field belongs to the bar, so it goes translucent with it — a
-   navy-tinted box sitting on a dark photo was the one panel still visible */
-body.home-edgenav .isler-nav.is-top .isler-nav__search {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.22);
+/* The over-the-hero translucency for the search field is GONE (2026-08-11).
+   It existed to tint the inline rectangle when the bar went transparent, but
+   the field is no longer in the bar — it is a dark drop-down panel that only
+   appears once you click the magnifier. These rules outranked the panel's own
+   background (4 classes vs 2), so leaving them turned the open panel into a
+   near-invisible translucent sheet over the hero video. */
+body.home-edgenav .isler-nav.is-top .isler-nav__search-toggle--inline {
+  color: rgba(255, 255, 255, 0.92);
 }
-body.home-edgenav .isler-nav.is-top .isler-nav__search:focus-within {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.34);
-}
-body.home-edgenav .isler-nav.is-top .isler-nav__search input { color: #fff; }
-body.home-edgenav .isler-nav.is-top .isler-nav__search input::placeholder {
-  color: rgba(255, 255, 255, 0.55);
-}
-body.home-edgenav .isler-nav.is-top .isler-nav__search svg circle,
-body.home-edgenav .isler-nav.is-top .isler-nav__search svg line {
-  stroke: rgba(255, 255, 255, 0.7);
+body.home-edgenav .isler-nav.is-top .isler-nav__search-toggle--inline:hover {
+  background: rgba(255, 255, 255, 0.12);
 }

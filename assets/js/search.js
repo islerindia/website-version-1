@@ -122,20 +122,36 @@ var SEARCH_INDEX = [{"n":"Air Fryers","c":"Category","u":"air-fryers.html","t":"
     document.addEventListener('click', function(e){ if (!box.contains(e.target) && !panel.contains(e.target)) panel.style.display='none'; });
   }
   function initToggle(nav){
-    var toggle = nav.querySelector('.isler-nav__search-toggle');
+    /* querySelectorAll, not querySelector: since 2026-08-11 there are TWO
+       magnifiers in the markup — the inline one after "Home" (desktop) and the
+       one beside the burger (mobile). Only one is ever visible, but binding
+       just the first left the other dead depending on source order. */
+    var toggles = nav.querySelectorAll('.isler-nav__search-toggle');
     var box = nav.querySelector('.isler-nav__search');
-    if (!toggle || !box || toggle.__ready) return;
-    toggle.__ready = true;
+    if (!toggles.length || !box) return;
     var input = box.querySelector('input');
-    toggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      nav.classList.remove('is-open');
-      var open = nav.classList.toggle('is-search-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (open && input) setTimeout(function () { input.focus(); }, 60);
-    });
+    function setExpanded(open){
+      for (var i = 0; i < toggles.length; i++) {
+        toggles[i].setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+    }
+    for (var i = 0; i < toggles.length; i++) {
+      (function (toggle) {
+        if (toggle.__ready) return;
+        toggle.__ready = true;
+        toggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          nav.classList.remove('is-open');
+          var open = nav.classList.toggle('is-search-open');
+          setExpanded(open);
+          if (open && input) setTimeout(function () { input.focus(); }, 60);
+        });
+      })(toggles[i]);
+    }
+    if (nav.__outsideReady) return;
+    nav.__outsideReady = true;
     document.addEventListener('click', function (e) {
-      if (!nav.contains(e.target)) { nav.classList.remove('is-search-open'); toggle.setAttribute('aria-expanded', 'false'); }
+      if (!nav.contains(e.target)) { nav.classList.remove('is-search-open'); setExpanded(false); }
     });
   }
   function boot(){
