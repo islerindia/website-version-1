@@ -2346,6 +2346,51 @@
          all four frames, so the panels stay the same size band to band. */
       .hp-frame .rev2-band { margin-top: clamp(13px, 2.4vh, 48px) !important; }
       .hp-frame .rev2-band:first-child { margin-top: 0 !important; }
+
+      /* ── "Isler at a Glance" sits at the TOP of its frame (client 2026-08-11:
+         "edge pe ya thoda sa edge ke niche"). Every other .hp-frame stays
+         flex-centred; only this one opens the run, so it reads as a title.
+
+         NOT flush to the edge: the navbar is fixed and ~74px tall, so anything
+         actually on the frame's top edge scrolls underneath it. The top
+         padding is the bar's height plus breathing room — that is the "thoda
+         sa neeche" part, and it is a floor (clamp min 94px) so the heading
+         never tucks under the bar on a short screen.
+
+         The bottom padding drops to compensate: the frame is min-height:100vh
+         and this is the tallest block on the page, so the top padding has to
+         be paid for or the content stops fitting one screen. */
+      .mfg-production.hp-frame {
+        justify-content: flex-start;
+        padding-top: clamp(94px, 11.5vh, 140px);
+        padding-bottom: clamp(24px, 4vh, 72px);
+      }
+      /* Client 2026-08-11: the intro was sitting almost on top of the
+         "Manufacturing Operations" band. The shared .hp-frame rule above
+         computes to only ~22px at 900px tall — it is tuned to keep the four
+         frames on one screen, not to separate a section opener from the band
+         it introduces. Scoped bump, so the other three frames are untouched. */
+      .mfg-production .rev2-band { margin-top: clamp(30px, 5vh, 72px) !important; }
+
+      /* Short screens pay for the top-align. On a 660px-tall laptop the block
+         is the tallest on the page and the generous top padding above pushed
+         the capacity grid off the bottom by ~25-34px. The heading still clears
+         the nav (58px there) with 12px to spare, which is all "thoda sa edge
+         ke niche" needs — the roomier values above are for tall screens.
+         NB: measure this block with the content's own bottom, NOT
+         section.scrollHeight — the decorative .ambient-circle divs sit at
+         bottom:-60px and make scrollHeight report a constant 60px of
+         overflow that has never been real. */
+      @media (max-height: 700px) {
+        /* The top value is a floor of 70px against a 66px bar — it cannot go
+           lower without tucking the heading under the nav, so the extra room
+           at 620px comes out of the BOTTOM padding instead. */
+        .mfg-production.hp-frame {
+          padding-top: clamp(70px, 10vh, 96px);
+          padding-bottom: clamp(14px, 2.5vh, 40px);
+        }
+        .mfg-production .rev2-band { margin-top: clamp(20px, 3vh, 40px) !important; }
+      }
       .hp-frame .rev2-band__media {
         aspect-ratio: auto;
         height: clamp(165px, 35vh, 500px);
@@ -2945,7 +2990,7 @@
              rather than a full-width ragged block. -->
         <div class="mfg-prod-head">
           <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h">Isler at a Glance</h2>
-          <p class="mfg-sub mfg-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof — enabling faster iteration from design to dispatch.</p>
+          <p class="mfg-sub mfg-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof, enabling faster iteration from design to dispatch.</p>
         </div>
         <!-- Doc format: media LEFT / copy RIGHT, copy laid out exactly like
              "Quality Is Our First Priority" — eyebrow, heading, lead, body. -->
