@@ -71,7 +71,11 @@
   align-items: flex-start;
   justify-content: center;
   padding-left: max(64px, 8vw);
-  padding-right: 52vw;
+  /* One measure for all four scenes. Was 52vw, which left a 560px column —
+     fine for the three short slides, but the finale carries the company
+     paragraph and stacked it into a narrow ragged block. Client 2026-08-12
+     asked for the four to read as one set, so the width is shared. */
+  padding-right: max(40px, 26vw);
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
@@ -101,6 +105,9 @@
 }
 
 .hero-headline {
+  /* Original size, restored 2026-08-12: "chaaro page wale ke heading wali line
+     sahi thi pehle wali". It was briefly stepped down while the finale was
+     being fitted — that was the wrong lever. Do not resize this. */
   font-size: clamp(36px, 5.5vw, 76px);
   font-weight: 700;
   color: var(--white);
@@ -110,13 +117,18 @@
 }
 
 .hero-subhead {
-  font-size: clamp(14px, 1.8vw, 22px);   /* -2 from original 16/24 */
+  /* Original 22px size, shared by all four scenes. The finale briefly carried
+     its own 17px, which is what the client saw as "koi bada koi chhota" —
+     every scene reads from this one rule now, so they cannot diverge.
+     Only the MEASURE is wider than the original 560px: the finale's company
+     paragraph stacked into a narrow ragged column at that width. */
+  font-size: clamp(14px, 1.8vw, 22px);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.72);
   margin-top: var(--space-sm);
   letter-spacing: 0.01em;
-  max-width: 560px;
-  line-height: 1.5;
+  max-width: 800px;
+  line-height: 1.55;
 }
 
 .hero-cta-btn {
@@ -200,5 +212,42 @@
 
   .hero-subhead {
     font-size: clamp(14px, 3.5vw, 18px);
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   ALL FOUR SCENES SHARE ONE TREATMENT
+   Client 2026-08-12: "unke jo paras ke text hain wo saare page ke uniform
+   nahi lag rahe — koi bada koi chhota". The finale used to carry its own
+   smaller type and its own scrim, which is exactly what made the set look
+   mismatched. Size and measure now live on the base .hero-headline /
+   .hero-subhead rules above, and the scrim below is applied to EVERY scene.
+   Do not give one scene its own font-size again.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* The shared .hero-text-overlay has faded to 0.1 black by 80% of the width,
+   which is short of where these lines now end — white copy washed out over
+   the brighter frames (the factory video especially). Each scene carries its
+   own scrim so the backing is identical on all four. z-index:-1 keeps it
+   behind that scene's text; .hero-scene animates opacity, so it is already a
+   stacking context and the scrim cannot leak onto its neighbours. */
+.hero-scene::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.70)  0%,
+    rgba(0, 0, 0, 0.56) 45%,
+    rgba(0, 0, 0, 0.30) 72%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+@media (max-width: 860px) {
+  .hero-scene {
+    padding-right: max(24px, 8vw);
   }
 }

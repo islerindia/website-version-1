@@ -1,0 +1,67 @@
+/* ════════════════════════════════════════════════════════════════════════
+   type.css — the site's typeface, in one place.
+
+   Why this file exists: tokens.css has always declared
+   --font: 'Supreme', 'Inter', sans-serif, but neither face was ever loaded —
+   no @font-face, no font files, nothing linked. Every page was therefore
+   rendering in whatever the browser's default sans-serif is (Arial on
+   Windows), which is why the type read as flat. The category pages were the
+   one exception: catalog.css pulls in Montserrat, so they looked different
+   again from everything else.
+
+   The pairing, client 2026-08-12 ("premium lagni chahiye"):
+     Sora  — display. A geometric grotesque with a tall x-height and tight,
+             even spacing; it is what makes the big navy headings read as
+             engineered rather than generic.
+     Inter — body. Holds up at 15-19px far better than Sora, and it was
+             already the second name in --font, so this is what the CSS
+             always intended.
+
+   LOAD THIS LAST. It has to come after catalog.css, whose .cat-page rules
+   would otherwise keep Montserrat on the 182 catalogue pages.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Body text ──────────────────────────────────────────────────────────── */
+body,
+.cat-page {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ── Display ────────────────────────────────────────────────────────────── */
+h1, h2, h3,
+.cat-page h1, .cat-page h2, .cat-page h3,
+/* homepage */
+.hero-headline, .ways-head__title, .ways-card__name,
+.mfg-opener__title, .mfg-heading, .mfg-subheading, .mfg-certs__heading,
+.section-heading, .rfq__heading, .quatro-title, .hp-stat__value, .npd-lead,
+/* business */
+.biz-hero__title, .biz-title, .obz__title, .obz-tile__label,
+/* our story */
+.szz__pagetitle, .szz__title, .szz__standfirst, .story__h, .story__pull,
+.roadmap__title,
+/* category + product pages */
+.cat-hero__title, .cat-card__name, .pd__title, .pd__specs-title,
+/* interior pages */
+.page-hero__title {
+  font-family: 'Sora', 'Inter', system-ui, sans-serif;
+  /* Sora sets wider than the old fallback, so display tracking is pulled in
+     a touch to keep long headlines on the same line count as before */
+  letter-spacing: -0.03em;
+}
+
+/* ── Small caps-y labels stay on Inter ──────────────────────────────────────
+   Sora's caps are wide; at 10-12px with letter-spacing they stop reading as
+   labels and start fighting the headings next to them. */
+.mfg-eyebrow, .section-eyebrow, .hp-stat__label, .cap-cell__label,
+.biz-hero__eyebrow, .biz-eyebrow, .obz__intro,
+.szz__eyebrow, .szz__label, .cat-hero__eyebrow, .eyebrow,
+.ways-card__text, .npd-step__name, .footer__col-heading {
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: normal;
+}
+.mfg-eyebrow, .section-eyebrow, .biz-hero__eyebrow, .biz-eyebrow,
+.szz__eyebrow, .cat-hero__eyebrow, .eyebrow, .hp-stat__label,
+.cap-cell__label { letter-spacing: 0.2em; }
+
+/* Buttons and form controls follow the body face, not the display one. */
+button, input, select, textarea { font-family: inherit; }

@@ -1,18 +1,15 @@
 /* ════════════════════════════════════════════════════════════════════════
    catalog.css — product listing + detail pages (Isler revamp2)
    Reuses revamp2 palette (navy #0B1A3D / yellow #F4B400) and footer system.
-   Typeface: Montserrat (per Phase 2 brief).
+   Typeface: set centrally in type.css (Sora display / Inter body), 2026-08-12.
+   Montserrat was pulled here per the Phase 2 brief and is no longer used —
+   its @import was downloading 25 unused faces on all 182 catalogue pages.
    ════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
-
 .cat-page {
-  font-family: 'Montserrat', 'Supreme', system-ui, sans-serif;
+  /* font-family comes from type.css, which loads after this file */
   color: var(--charcoal);
   background: var(--white);
-}
-.cat-page h1, .cat-page h2, .cat-page h3, .cat-page button, .cat-page input {
-  font-family: 'Montserrat', 'Supreme', system-ui, sans-serif;
 }
 .cat-wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(20px, 5vw, 64px); }
 /* Listing/category pages get a wider — but still bounded & centered — container so wide
@@ -186,7 +183,7 @@
 }
 
 /* ─────────────────────────  REUSABLE CATEGORY FILTER  ─────────────────────────
-   Sidebar on desktop, collapsible on mobile. Inherits the page font (Montserrat),
+   Sidebar on desktop, collapsible on mobile. Inherits the page font,
    navy/yellow palette. Markup is category-agnostic; assets/js/filter.js fills the
    groups from each card's data-* attributes. */
 .cat-filter-layout {

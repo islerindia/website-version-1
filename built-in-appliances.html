@@ -3,326 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Isler India — India's first design-focused kitchen appliance manufacturing company. Empowering brands with accelerated NPD, localized manufacturing, and ISO-certified quality.">
-  <meta name="theme-color" content="#0B1A3D">
-  <title>Modern Kitchen Chimneys: Innovative Features and Benefits — Isler India</title>
-  <link rel="icon" href="assets/images/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <title>Built-in Appliances — Isler India</title>
+  <link rel="icon" href="assets/images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
-  <style>
-
-    /* ══════════════════════════════════════════════════════════════
-       NAVBAR  (copied verbatim from index.html)
-    ══════════════════════════════════════════════════════════════ */
-    .demo-nav {
-      position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
-      z-index: 200; display: flex; align-items: center; padding: 20px 24px;
-      background: rgba(7, 17, 44, 0.25);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-radius: 100px; border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-      min-width: min(1160px, calc(100vw - 40px)); gap: 27px;
-    }
-    .demo-nav__logo { display: flex; align-items: center; flex-shrink: 0; }
-    .demo-nav__logo img { height: 38px; width: auto; display: block; image-rendering: -webkit-optimize-contrast; }
-    .demo-nav__search {
-      display: flex; align-items: center; margin-left: 20px;
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 100px; padding: 0 14px 0 12px; gap: 7px;
-      transition: background 150ms ease, border-color 150ms ease;
-    }
-    .demo-nav__search:focus-within { background: rgba(255, 255, 255, 0.13); border-color: rgba(255, 255, 255, 0.22); }
-    .demo-nav__search svg { flex-shrink: 0; opacity: 0.45; }
-    .demo-nav__search input {
-      background: transparent; border: none; outline: none; color: rgba(255, 255, 255, 0.85);
-      font-size: 13px; font-family: inherit; width: 220px; padding: 8px 0; letter-spacing: 0.01em;
-    }
-    .demo-nav__search input::placeholder { color: rgba(255, 255, 255, 0.35); }
-    .demo-nav__links { display: flex; align-items: center; gap: 4px; margin-left: auto; list-style: none; }
-    .demo-nav__links a {
-      font-size: 13px; font-weight: 500; color: rgba(255, 255, 255, 0.68);
-      padding: 10px 32px; border-radius: 100px;
-      transition: color 150ms ease, background 150ms ease; letter-spacing: 0.02em;
-      white-space: nowrap; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    }
-    .demo-nav__links a:hover { color: #fff; background: rgba(255, 255, 255, 0.09); }
-    @media (max-width: 1023px) {
-      .demo-nav { padding: 10px 10px 10px 20px; min-width: min(660px, calc(100vw - 40px)); }
-      .demo-nav__logo img { height: 30px; }
-      .demo-nav__links a { font-size: 13px; padding: 8px 18px; }
-      .demo-nav__search { display: none; }
-    }
-    @media (max-width: 639px) {
-      .demo-nav { top: 10px; min-width: calc(100vw - 24px); padding: 8px 6px 8px 16px; }
-      .demo-nav__logo img { height: 26px; }
-      .demo-nav__links a { font-size: 12px; padding: 6px 12px; }
-    }
-
-    /* ── MEGA-MENU (copied verbatim from index.html) ── */
-    .demo-nav__item { position: static; }
-    .demo-nav__mega-trigger { display: inline-flex !important; align-items: center; gap: 5px; position: relative; }
-    .demo-nav__chevron { transition: transform 200ms ease; opacity: 0.7; }
-    .has-megamenu.is-open .demo-nav__chevron { transform: rotate(180deg); }
-    .has-megamenu.is-open .demo-nav__mega-trigger { color: #fff; background: rgba(255, 255, 255, 0.09); }
-    .has-megamenu.is-open .demo-nav__mega-trigger::after {
-      content: ''; position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%);
-      width: 22px; height: 2px; border-radius: 2px; background: var(--yellow);
-    }
-    .demo-megamenu {
-      position: absolute; top: calc(100% + 12px); left: 0; right: 0; margin: 0 auto;
-      transform: translateY(-8px); background: #ffffff; border: 1px solid rgba(11, 26, 61, 0.08);
-      border-radius: 20px; box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
-      opacity: 0; visibility: hidden; pointer-events: none;
-      transition: opacity 160ms ease, transform 160ms ease, visibility 0ms 160ms; z-index: 199;
-    }
-    .demo-megamenu.is-open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; transition: opacity 160ms ease, transform 160ms ease; }
-    .demo-megamenu::before { content: ''; position: absolute; top: -16px; left: 0; right: 0; height: 16px; }
-    .demo-megamenu__inner { padding: 28px 34px; }
-    .demo-mm__label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); margin: 22px 0 8px; }
-    .demo-mm__label:first-child { margin-top: 0; }
-    .demo-mm__row { display: grid; gap: 10px; }
-    .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
-    .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
-    .demo-mm__cell { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; text-decoration: none; transition: background-color 150ms ease; }
-    .demo-mm__cell:hover { background-color: rgba(244, 180, 0, 0.08); }
-    .demo-mm__thumb { flex-shrink: 0; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
-    .demo-mm__thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .demo-mm__cell:nth-child(1) .demo-mm__thumb img { object-fit: contain; padding: 6px; background: #fff; }
-    .demo-mm__text { flex: 1 1 auto; min-width: 0; }
-    .demo-mm__name { display: block; font-size: 13.5px; font-weight: 600; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: color 150ms ease; }
-    .demo-mm__cell:hover .demo-mm__name { color: var(--yellow); }
-    .demo-mm__tagline { display: block; font-size: 11px; color: var(--gray-mid); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .demo-mm__soon { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-mid); opacity: 0.65; margin-top: 3px; }
-    .demo-mm__arrow { flex-shrink: 0; font-size: 13px; color: var(--yellow); opacity: 0; transform: translateX(-4px); transition: opacity 150ms ease, transform 150ms ease; }
-    .demo-mm__cell:hover .demo-mm__arrow { opacity: 1; transform: translateX(0); }
-    @media (max-width: 1023px) {
-      .demo-megamenu { top: calc(100% + 10px); }
-      .demo-mm__row--5, .demo-mm__row--3 { grid-template-columns: repeat(2, 1fr); }
-      .demo-megamenu__inner { padding: 20px 18px; }
-    }
-    @media (max-width: 559px) {
-      .demo-mm__row--5, .demo-mm__row--3 { grid-template-columns: 1fr; }
-      .demo-mm__name { font-size: 13px; }
-    }
-
-    /* ══════════════════════════════════════════════════════════════
-       SHARED PAGE KIT  (about / career / contact)
-    ══════════════════════════════════════════════════════════════ */
-    .ambient-circle { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
-    .container { max-width: 1200px; margin: 0 auto; padding-inline: clamp(24px, 5vw, 96px); }
-    .page-section { position: relative; padding: clamp(56px, 8vw, 110px) 0; overflow: clip; }
-    .bg-white { background: var(--white); }
-    .bg-offwhite { background: var(--off-white); }
-    /* Navy treatment matching the homepage USP / vendors sections (#475A82). */
-    .bg-navy { background: #475A82; }
-    .bg-navy .body-copy { color: rgba(255,255,255,0.82); }
-    .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
-    .h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
-    .body-copy { font-size: 17.5px; color: #55606E; line-height: 1.7; margin-bottom: 20px; }
-    .section-head { text-align: center; max-width: 660px; margin: 0 auto clamp(40px, 5vw, 60px); position: relative; z-index: 1; }
-    .section-head .h2 { margin-top: 6px; }
-    .section-head p { color: #55606E; font-size: 17px; line-height: 1.7; margin-top: 14px; }
-
-    /* Page hero */
-    .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 64px; overflow: hidden; background: var(--navy); }
-    .page-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
-    .page-hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,15,36,0.94) 0%, rgba(6,15,36,0.6) 55%, rgba(6,15,36,0.5) 100%); }
-    .page-hero__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
-    .page-hero__breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
-    .page-hero__breadcrumb a { color: rgba(255,255,255,0.65); transition: color .15s; }
-    .page-hero__breadcrumb a:hover { color: var(--yellow); }
-    .page-hero__breadcrumb-sep { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); display: inline-block; }
-    .page-hero__eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
-    .page-hero__title { font-size: clamp(30px, 5vw, 54px); font-weight: 700; color: #fff; line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
-    .page-hero__desc { font-size: clamp(16px, 1.6vw, 19px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
-
-    /* About */
-    .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: start; position: relative; z-index: 1; }
-    .about-img { border-radius: 20px; overflow: hidden; box-shadow: 0 24px 60px rgba(11,26,61,0.16); }
-    .about-img img { width: 100%; height: 100%; object-fit: cover; }
-    .about-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; margin-top: 28px; }
-    .about-bullet { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--navy); font-size: 14.5px; }
-    .about-bullet::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); flex-shrink: 0; }
-    .vm-card { background: var(--off-white); border-radius: 20px; padding: clamp(28px, 3vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; margin-top: clamp(36px, 5vw, 56px); }
-    .vm-item { border-left: 3px solid var(--yellow); padding-left: 20px; }
-    .vm-item--mission { border-left-color: #2BB3A3; }
-    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2BB3A3; margin-bottom: 8px; }
-    .vm-item__text { font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.45; }
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .stat { background: var(--off-white); border-radius: 18px; padding: 36px 28px; text-align: center; }
-    .stat__num { font-size: clamp(36px, 5vw, 56px); font-weight: 700; color: var(--yellow); line-height: 1; }
-    .stat__label { margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--navy); letter-spacing: .02em; }
-    .motto { background: var(--navy); position: relative; overflow: hidden; text-align: center; }
-    .motto .container { position: relative; z-index: 1; }
-    .motto__heading { font-size: clamp(30px, 4vw, 48px); font-weight: 700; color: #fff; letter-spacing: -0.01em; }
-    .motto__text { max-width: 700px; margin: 20px auto 0; color: rgba(255,255,255,0.78); font-size: 16px; line-height: 1.7; }
-    .motto__ceo { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 36px; }
-    .motto__ceo img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--yellow); }
-    .motto__ceo-role { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--yellow); }
-    .motto__ceo-name { font-size: 18px; font-weight: 700; color: #fff; }
-
-    /* ══════════════════════════════════════════════════════════════
-       CTA BOX SECTION
-    ══════════════════════════════════════════════════════════════ */
-
-    .cta-box-section {
-      background: var(--gray-light);
-      padding: var(--space-xl) var(--space-lg);
-      position: relative;
-      overflow: clip;
-    }
-
-    .cta-box {
-      max-width: 860px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-      background: var(--navy);
-      border-radius: 24px;
-      padding: 64px 64px;
-      position: relative;
-      overflow: hidden;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.033) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.033) 1px, transparent 1px);
-      background-size: 44px 44px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    /* Vignette so grid pattern fades at edges */
-    .cta-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 40%, rgba(11, 26, 61, 0.6) 100%);
-      pointer-events: none;
-    }
-
-    .cta-box__content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-box__eyebrow {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: 16px;
-    }
-
-    .cta-box__heading {
-      font-size: clamp(26px, 3vw, 42px);
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: -0.02em;
-      line-height: 1.13;
-      margin-bottom: 16px;
-    }
-
-    .cta-box__sub {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.52);
-      line-height: 1.65;
-    }
-
-    .cta-box__actions {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      margin-top: 32px;
-    }
-
-    .cta-box__btn {
-      display: block;
-      width: 320px;
-      padding: 15px 36px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      border-radius: 100px;
-      transition: transform 150ms ease, box-shadow 150ms ease, background 180ms ease, color 180ms ease;
-      cursor: pointer;
-    }
-
-    .cta-box__btn--primary {
-      background: var(--yellow);
-      color: var(--navy);
-      border: 2px solid var(--yellow);
-    }
-
-    .cta-box__btn--primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
-    }
-
-    .cta-box__btn--secondary {
-      background: transparent;
-      color: var(--yellow);
-      border: 2px solid var(--yellow);
-    }
-
-    .cta-box__btn--secondary:hover {
-      background: var(--yellow);
-      color: var(--navy);
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 639px) {
-      .cta-box {
-        padding: 48px 28px;
-      }
-      .cta-box__btn {
-        width: 100%;
-        max-width: 320px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .about-split { grid-template-columns: 1fr; }
-      .vm-card { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .about-bullets { grid-template-columns: 1fr; }
-      .page-hero { min-height: 54vh; padding-top: 130px; }
-    }
-
-    /* Blog article */
-    .post-hero__meta { display: flex; align-items: center; gap: 14px; margin-top: 18px; color: rgba(255,255,255,0.82); font-size: 14px; }
-    .post-hero__meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--yellow); }
-    .article { max-width: 780px; margin: 0 auto; }
-    .article__lead { font-size: 19px; color: var(--navy); font-weight: 500; line-height: 1.7; margin-bottom: 26px; }
-    .article h2 { font-size: clamp(21px, 2.5vw, 29px); font-weight: 700; color: var(--navy); margin: 42px 0 14px; letter-spacing: -0.01em; }
-    .article p { font-size: 17px; color: #384150; line-height: 1.75; margin-bottom: 18px; }
-    .article ul { margin: 4px 0 22px; padding-left: 22px; display: grid; gap: 11px; }
-    .article li { font-size: 16.5px; color: #384150; line-height: 1.62; }
-    .article li strong { color: var(--navy); }
-    .article__back { display: inline-flex; align-items: center; gap: 8px; margin-top: 44px; padding-top: 26px; border-top: 1px solid rgba(11,26,61,0.1); font-size: 14px; font-weight: 700; color: var(--navy); text-decoration: none; }
-    .article__back:hover { color: var(--yellow); }
-  </style>
+  <link rel="stylesheet" href="assets/css/catalog.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/category-carousel.css">
   <link rel="stylesheet" href="assets/css/type.css">
 </head>
-<body>
-
-  <!-- ═══ NAVBAR (identical to index.html) ═══ -->
-  <nav class="isler-nav" aria-label="Primary navigation">
+<body class="cat-page">
+<nav class="isler-nav" aria-label="Primary navigation">
     <a class="isler-nav__logo" href="index.html" aria-label="Isler India — home">
       <img src="assets/images/newlogo-removebg-preview.webp" alt="Isler India">
     </a>
@@ -424,77 +119,69 @@
     </ul>
     <button class="isler-nav__search-toggle" type="button" aria-label="Search" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
+<header class="cat-hero"><div class="cat-hero__inner"><nav class="cat-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="business.html">Our Business</a><span>/</span>Built-in Appliances</nav><span class="cat-hero__eyebrow">Our Business &middot; Built-in Appliances</span><h1 class="cat-hero__title">Built-in Appliances</h1><p class="cat-hero__intro">Appliances that sit flush in the kitchen line — chimneys, built-in hobs, ovens and microwaves, designed as one family so a brand's whole built-in range shares a single look. Choose a range to explore.</p></div></header>
+<section class="cat-section"><div class="cat-wrap"><div class="cat-grid"><a class="cat-card" href="kitchen-chimneys.html"><div class="cat-card__media"><img src="assets/catalog/chimneys/best-t-isl1001-card.webp" alt="Kitchen Chimneys" loading="lazy"></div><div class="cat-card__body"><div class="cat-card__name">Kitchen Chimneys</div><div class="cat-card__spec">T-shape, curve and inclined &middot; Ducted and ductless</div><div class="cat-card__foot"><span class="cat-card__view">View range</span></div></div></a><a class="cat-card" href="built-in-hobs.html"><div class="cat-card__media"><img src="assets/catalog/hobs/fw/neo-cook-card.webp" alt="Built-in Hobs" loading="lazy"></div><div class="cat-card__body"><div class="cat-card__name">Built-in Hobs</div><div class="cat-card__spec">Gas and glass tops &middot; 2 to 5 burners</div><div class="cat-card__foot"><span class="cat-card__view">View range</span></div></div></a><a class="cat-card" href="built-in-ovens.html"><div class="cat-card__media"><img src="assets/catalog/built-in-ovens/is-ch-1001.webp" alt="Built-in Ovens" loading="lazy"></div><div class="cat-card__body"><div class="cat-card__name">Built-in Ovens</div><div class="cat-card__spec">Convection and multifunction &middot; 60 cm</div><div class="cat-card__foot"><span class="cat-card__view">View range</span></div></div></a><a class="cat-card" href="built-in-microwaves.html"><div class="cat-card__media"><img src="assets/catalog/microwaves/silver-edge.webp" alt="Built-in Microwaves" loading="lazy"></div><div class="cat-card__body"><div class="cat-card__name">Built-in Microwaves</div><div class="cat-card__spec">Solo, grill and convection &middot; 20 to 34 L</div><div class="cat-card__foot"><span class="cat-card__view">View range</span></div></div></a></div></div></section>
 
+<!-- ═════════════════════════════════════════════════════════════════════
+     CATEGORY SWITCHER — the same carousel the homepage carries in
+     "Variety, Quality and Quantity". Generated by
+     Downloads/gen_category_carousel.py — re-run it rather than editing
+     this block by hand, so all the category pages stay in step.
+══════════════════════════════════════════════════════════════════════ -->
+<section class="pcx-section" aria-labelledby="pcx-h">
+  <div class="pcx-head">
+    <span class="pcx-eyebrow">Product Portfolio</span>
+    <h2 class="pcx-title" id="pcx-h">Explore Other Categories</h2>
+  </div>
+  <div class="pcx-wrap">
+    <div class="pcx-carousel" aria-label="Product categories" role="group" aria-roledescription="carousel">
+      <button class="pcx-nav pcx-nav--prev" type="button" aria-label="Previous categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div class="pcx-viewport">
+        <div class="pcx-track">
+          <a href="hobs.html" class="pcx-card" aria-label="Hobs">
+            <img class="pcx-card__img" src="assets/catalog/hobs/fw/neo-cook-card.webp" alt="Hobs" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Hobs</span></div>
+          </a>
 
-  <main id="main-content">
+          <a href="cooktops.html" class="pcx-card" aria-label="Cooktops">
+            <img class="pcx-card__img" src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.webp" alt="Cooktops" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Cooktops</span></div>
+          </a>
 
-    <!-- PAGE HERO -->
-    <section class="page-hero" aria-labelledby="page-title">
-      <div class="page-hero__bg" style="background-image:url('assets/images/blog-post-3.webp');" aria-hidden="true"></div>
-      <div class="page-hero__inner">
-        <nav class="page-hero__breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="page-hero__breadcrumb-sep" aria-hidden="true"></span><a href="blog.html">Blog</a><span class="page-hero__breadcrumb-sep" aria-hidden="true"></span><span aria-current="page">Kitchen Chimney Innovations</span></nav>
-        <span class="page-hero__eyebrow">Smart Chimneys</span>
-        <h1 class="page-hero__title" id="page-title">Modern Kitchen Chimneys: Innovative Features and Benefits</h1>
-        <p class="page-hero__desc">Isler India&rsquo;s state-of-the-art kitchen chimneys blend functionality, aesthetics and cutting-edge smart technology.</p>
-        <div class="post-hero__meta"><span>Smart Chimneys</span><span class="dot"></span><time datetime="2024-05-29">May 29, 2024</time></div>
-      </div>
-    </section>
+          <a href="kitchen-chimneys.html" class="pcx-card" aria-label="Chimneys">
+            <img class="pcx-card__img" src="assets/catalog/chimneys/best-t-isl1001-card.webp" alt="Chimneys" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Chimneys</span></div>
+          </a>
 
-    <section class="page-section bg-white" aria-label="Article">
-      <div class="container">
-        <article class="article">
-          <p class="article__lead">Isler India stands out as a beacon of innovation, offering state-of-the-art kitchen chimneys that blend functionality, aesthetics and cutting-edge smart technology.</p>
-          <h2>A fast-growing market</h2>
-          <p>India&rsquo;s kitchen-appliance sector is on a steep growth curve, expected to more than double over the coming years. Rising availability across online and offline channels, the popularity of modular appliances, and the need for strong ventilation in traditional Indian cooking are all fuelling demand for better chimneys.</p>
-          <h2>Innovative features</h2>
-          <ul>
-            <li><strong>Sleek, efficient design</strong> &mdash; T-shape, inclined and curved styles in 60 cm and 90 cm sizes that complement a modern kitchen.</li>
-            <li><strong>Energy efficiency</strong> &mdash; improved efficiency with integrated LED lighting for a brighter cooktop.</li>
-            <li><strong>Powerful suction</strong> &mdash; high-capacity motors rated at 1600+ m&sup3;/hr to handle everything from light saut&eacute;ing to heavy frying.</li>
-            <li><strong>Advanced filtration</strong> &mdash; filter-less technology with thermal auto-clean that liquefies grease for easy maintenance.</li>
-            <li><strong>Smart sensors</strong> &mdash; automatic detection of smoke and odour, adjusting suction for optimal air purification.</li>
-            <li><strong>Gesture and touch controls</strong> &mdash; intuitive operation with clear digital display panels.</li>
-            <li><strong>Quiet operation</strong> &mdash; noise-reduction engineering for a calmer kitchen.</li>
-            <li><strong>Lasting durability</strong> &mdash; high-quality materials and robust engineering built for years of reliable use.</li>
-          </ul>
-          <h2>The benefits</h2>
-          <ul>
-            <li>A healthier cooking environment, free of smoke, grease and lingering odours.</li>
-            <li>Enhanced kitchen aesthetics with a modern, sophisticated silhouette.</li>
-            <li>Effortless maintenance thanks to auto-clean technology.</li>
-            <li>Real energy savings from efficient motors and LED lighting.</li>
-          </ul>
-          <h2>The Isler difference</h2>
-          <p>By combining innovation, style and everyday functionality, Isler India&rsquo;s chimneys are designed for the way modern India cooks &mdash; powerful where it matters, quiet where it counts, and beautiful in any kitchen.</p>
-          <a href="blog.html" class="article__back">&larr; Back to all posts</a>
-        </article>
-      </div>
-    </section>
+          <a href="built-in-ovens.html" class="pcx-card" aria-label="Ovens">
+            <img class="pcx-card__img" src="assets/catalog/built-in-ovens/is-ch-1001.webp" alt="Ovens" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Ovens</span></div>
+          </a>
 
-    <section class="cta-box-section">
-      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(244,180,0,0.18);top:-60px;left:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(230,149,0,0.15);bottom:-50px;right:-50px;"></div>
-      <div class="cta-box">
+          <a href="built-in-microwaves.html" class="pcx-card" aria-label="Microwaves">
+            <img class="pcx-card__img" src="assets/catalog/microwaves/silver-edge.webp" alt="Microwaves" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Microwaves</span></div>
+          </a>
 
-        <div class="cta-box__content">
-          <span class="cta-box__eyebrow">Get in Touch</span>
-          <h2 class="cta-box__heading">Ready to Transform<br>Your Kitchen?</h2>
-          <p class="cta-box__sub">Explore our product range or speak with our team.</p>
+          <a href="small-appliances.html" class="pcx-card" aria-label="Small Domestic Appliances" aria-current="page">
+            <img class="pcx-card__img" src="assets/catalog/air-purifiers/jh22.webp" alt="Small Domestic Appliances" loading="lazy">
+            <div class="pcx-card__overlay" aria-hidden="true"></div>
+            <div class="pcx-card__content"><span class="pcx-card__name">Small Domestic Appliances</span></div>
+          </a>
         </div>
-
-        <div class="cta-box__actions">
-          <a href="business.html" class="cta-box__btn cta-box__btn--primary">View Our Products</a>
-          <a href="mailto:info@islerindia.com" class="cta-box__btn cta-box__btn--secondary">Contact Us</a>
-        </div>
-
       </div>
-    </section>
+      <button class="pcx-nav pcx-nav--next" type="button" aria-label="Next categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+  </div>
+</section>
 
-  </main>
+<footer class="site-footer" id="site-footer-el">
 
-
-  <!-- ═══ FOOTER (identical to index.html) ═══ -->
-  <footer class="site-footer" id="site-footer-el">
     <div class="footer__main">
       <div class="footer__main-inner">
 
@@ -559,6 +246,7 @@
               <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
             </div>
           </div>
+
           <div class="footer__newsletter">
             <p class="footer__newsletter-heading">Stay Updated</p>
             <form class="footer__newsletter-form" novalidate>
@@ -577,13 +265,16 @@
 
     <div class="footer__bottom">
       <div class="footer__bottom-inner">
+
         <a href="index.html" class="footer__bottom-logo" aria-label="Isler India — home">
           <img src="assets/images/newlogo-removebg-preview.webp" alt="Isler India" height="32" loading="lazy" style="width:auto">
         </a>
+
         <div class="footer__bottom-copy">
           <p>&copy; 2026 Isler India. All rights reserved.</p>
           <p>Manufacturing excellence since 2018 &nbsp;&middot;&nbsp; ISO 9001:2015 | ISO 14001 Certified</p>
         </div>
+
         <div class="footer__bottom-right">
           <nav class="footer__social-row" aria-label="Social media">
             <a href="https://www.facebook.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
@@ -604,26 +295,15 @@
           </nav>
           <span class="footer__made-in-india">🇮🇳 Made in India</span>
         </div>
+
       </div>
     </div>
-  </footer>
 
-  <!-- Footer accordion (mobile) -->
-  <script>
-    (function () {
-      function initFooterAccordion() {
-        if (window.innerWidth > 767) return;
-        document.querySelectorAll('[data-footer-accordion]').forEach(function (col) {
-          var heading = col.querySelector('.footer__col-heading');
-          if (!heading) return;
-          heading.addEventListener('click', function () { col.classList.toggle('is-open'); });
-        });
-      }
-      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initFooterAccordion); }
-      else { initFooterAccordion(); }
-    }());
-  </script>
+  </footer>
+  <script src="assets/js/catalog.js" defer></script>
   <script src="assets/js/nav.js" defer></script>
+  <script src="assets/js/filter.js" defer></script>
   <script src="assets/js/search.js" defer></script>
+<script src="assets/js/category-carousel.js" defer></script>
 </body>
 </html>

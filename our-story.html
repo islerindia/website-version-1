@@ -8,6 +8,9 @@
   <title>Our Story — Isler India</title>
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
@@ -311,6 +314,237 @@
     .legal li { font-size: 15.5px; color: #384150; line-height: 1.62; }
     .legal strong { color: var(--navy); font-weight: 700; }
     .legal a { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+
+    /* ── OUR STORY — open text zig-zag ────────────────────────────────────
+       Client 2026-08-12: "text ko zig zag kar, img mat laga wahan" and then
+       "khule zig zag, badi kar". The first pass boxed each beat in a bordered
+       card, which is what made it read as closed in — the boxes are gone and
+       the beats now sit directly on the page with a lot of air around them,
+       tied together only by a hairline spine and a marker.
+
+       No imagery in this block by request — an image-led zig-zag was built
+       earlier and rejected. Do not put pictures back in.
+
+       Falls to a single left-hand rail below 900px, where a two-sided
+       zig-zag has no room to read.                                        */
+    .story-zz { padding-bottom: clamp(40px, 5vw, 76px); }
+    .story-zz .container { max-width: 1500px; }
+
+    .szz__pagetitle {
+      margin: 0 0 20px;
+      text-align: center;
+      font-size: clamp(32px, 4vw, 58px);
+      font-weight: 700; letter-spacing: -0.03em; color: var(--navy);
+    }
+    .szz__standfirst {
+      max-width: 44ch;
+      margin: 0 auto clamp(56px, 8vw, 130px);
+      text-align: center;
+      font-size: clamp(19px, 1.9vw, 27px);
+      line-height: 1.5; font-weight: 600; color: var(--navy);
+    }
+
+    .szz {
+      list-style: none;
+      margin: 0; padding: 0;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: clamp(70px, 9vw, 170px);
+      row-gap: clamp(56px, 7vw, 120px);
+    }
+    /* the hairline the markers sit on — the only structure left */
+    .szz::before {
+      content: "";
+      position: absolute;
+      top: 10px; bottom: 10px; left: 50%;
+      width: 1px; margin-left: -0.5px;
+      background: linear-gradient(180deg,
+        rgba(11,26,61,0.00) 0%,
+        rgba(11,26,61,0.15) 10%,
+        rgba(11,26,61,0.15) 90%,
+        rgba(11,26,61,0.00) 100%);
+    }
+
+    .szz__item { position: relative; grid-column: 1; }
+    /* the zig: even beats cross to the right column and drop, so the two
+       sides interleave rather than sitting as neat pairs */
+    .szz__item:nth-child(even) { grid-column: 2; margin-top: clamp(70px, 9vw, 170px); }
+    .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: clamp(-170px, -9vw, -70px); }
+
+    /* open — no panel, no border, no shadow */
+    .szz__card { position: relative; }
+
+    /* marker on the spine, plus the hairline reaching out to it */
+    .szz__card::before {
+      content: "";
+      position: absolute; top: 16px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 0 4px var(--white);
+      z-index: 1;
+    }
+    .szz__card::after {
+      content: "";
+      position: absolute; top: 21px;
+      height: 1px;
+      background: rgba(11,26,61,0.15);
+    }
+    /* left-column beats reach right; right-column beats reach left */
+    .szz__item:nth-child(odd) .szz__card::before  { right: calc(-1 * (clamp(70px, 9vw, 170px) / 2) - 5.5px); }
+    .szz__item:nth-child(odd) .szz__card::after   { right: -1px; width: calc(clamp(70px, 9vw, 170px) / 2 - 5px); }
+    .szz__item:nth-child(even) .szz__card::before { left: calc(-1 * (clamp(70px, 9vw, 170px) / 2) - 5.5px); }
+    .szz__item:nth-child(even) .szz__card::after  { left: -1px; width: calc(clamp(70px, 9vw, 170px) / 2 - 5px); }
+
+    .szz__eyebrow {
+      display: inline-block;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 14px;
+    }
+    .szz__title {
+      margin: 0 0 20px;
+      font-size: clamp(25px, 2.5vw, 38px);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.025em;
+      color: var(--navy);
+    }
+    .szz__card p {
+      margin: 0 0 18px;
+      font-size: clamp(16px, 1.15vw, 18px);
+      line-height: 1.8;
+      color: #384150;
+    }
+    .szz__card p:last-child { margin-bottom: 0; }
+
+    .szz__pull {
+      font-size: clamp(19px, 1.7vw, 25px) !important;
+      line-height: 1.45 !important;
+      font-weight: 700;
+      color: var(--navy) !important;
+      margin: 28px 0 0 !important;
+      padding-left: 22px;
+      border-left: 4px solid var(--yellow);
+    }
+    .szz__label {
+      font-weight: 700;
+      color: var(--navy) !important;
+      margin-bottom: 12px !important;
+    }
+    /* Pills, not a grid. On a fixed grid the longest name ("Small Domestic
+       Appliances") wrapped to two lines while the rest sat on one, so the
+       rows came out ragged and the whole beat ran long. These hug their own
+       text and wrap naturally, which keeps this beat the same weight as the
+       other three. */
+    .szz__list {
+      margin: 0 0 26px; padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+    .szz__list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 16px 9px 13px;
+      background: var(--white);
+      border: 1px solid rgba(11,26,61,0.14);
+      border-radius: 999px;
+      font-size: 14.5px; font-weight: 600; line-height: 1.2;
+      color: var(--navy);
+      white-space: nowrap;
+      transition: border-color 220ms ease, transform 220ms ease;
+    }
+    .szz__list li::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+    }
+    .szz__list li:hover { border-color: rgba(244,180,0,0.85); transform: translateY(-2px); }
+    /* the pills fan in one after another once their beat is revealed */
+    body.story-anim-on .szz-reveal .szz__list li {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--p, 0) * 55ms + 220ms);
+    }
+    body.story-anim-on .szz-reveal.is-in .szz__list li { opacity: 1; transform: none; }
+    @media (max-width: 520px) {
+      .szz__list li { white-space: normal; }
+    }
+
+    /* ── Reveal ───────────────────────────────────────────────────────────
+       Each beat comes in from its own side, so the alternation is what the
+       eye follows down the page. #story-reveal adds .story-anim-on only when
+       it can actually animate — without JS, or under reduced motion, every
+       beat is plainly visible. */
+    body.story-anim-on .szz-reveal .szz__card {
+      opacity: 0;
+      transition: opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.story-anim-on .szz-reveal:nth-child(odd)  .szz__card { transform: translateX(-52px); }
+    body.story-anim-on .szz-reveal:nth-child(even) .szz__card { transform: translateX(52px); }
+    body.story-anim-on .szz-reveal.is-in .szz__card { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .szz { grid-template-columns: 1fr; row-gap: 46px; }
+      .szz::before { left: 5px; }
+      .szz__item,
+      .szz__item:nth-child(even) { grid-column: 1; margin-top: 0; }
+      .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: 0; }
+      .szz__item { padding-left: 34px; }
+      .szz__item:nth-child(odd) .szz__card::before,
+      .szz__item:nth-child(even) .szz__card::before { left: -34px; right: auto; }
+      .szz__item:nth-child(odd) .szz__card::after,
+      .szz__item:nth-child(even) .szz__card::after { left: -22px; right: auto; width: 20px; }
+      body.story-anim-on .szz-reveal:nth-child(odd)  .szz__card,
+      body.story-anim-on .szz-reveal:nth-child(even) .szz__card { transform: translateY(28px); }
+    }
+
+    /* ── the closing Make in India block keeps single-column prose ───────── */
+    .story { max-width: 860px; margin: 0 auto; }
+    .story p { font-size: 17px; line-height: 1.78; color: #384150; margin: 0 0 18px; }
+    .story__h {
+      font-size: clamp(21px, 2.4vw, 30px);
+      font-weight: 700; letter-spacing: -0.015em; color: var(--navy);
+      margin: 30px 0 16px; padding-top: 20px;
+      border-top: 3px solid var(--yellow); display: inline-block;
+    }
+    .story__pull {
+      font-size: clamp(19px, 2vw, 25px) !important;
+      line-height: 1.5 !important;
+      font-weight: 700; color: var(--navy) !important;
+      margin: 0 0 10px !important;
+      padding-left: 22px; border-left: 4px solid var(--yellow);
+    }
+    /* Client 2026-08-12: "made in india wala lion img bada nahi hai" — it was
+       capped at 1000px inside an 860px prose column, so it never actually got
+       to be a full-width moment. It now breaks out of the .story measure and
+       runs to the container edge. The source is 1600px wide, so it is not
+       upscaled past its own resolution. */
+    .story__figure {
+      max-width: none;
+      width: 100%;
+      margin: clamp(34px, 4vw, 56px) 0 clamp(30px, 3.5vw, 48px);
+    }
+    /* the figure is a direct child of .container, so the container has to
+       widen for the image to. The prose blocks inside keep .story's own
+       860px measure, so only the picture grows. */
+    .story-mii .container { max-width: 1360px; }
+    .story__figure img {
+      display: block; width: 100%; height: auto;
+      border-radius: var(--radius-lg, 16px);
+      box-shadow: 0 24px 54px rgba(11, 26, 61, 0.16);
+    }
+    @media (max-width: 560px) {
+      .story__list { grid-template-columns: 1fr; }
+      .story p { font-size: 16px; }
+    }
     .legal__contact { margin: 8px 0 20px; padding: 20px 24px; background: var(--off-white); border: 1px solid rgba(11,26,61,0.07); border-radius: 14px; }
     .legal__contact p { margin: 4px 0; font-size: 15.5px; }
 
@@ -348,6 +582,7 @@
 
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/type.css">
 
   <style id="os-insights">
     /* ── FROM THE ISLER BLOG ───────────────────────────────────────────
@@ -689,13 +924,80 @@
       </div>
     </section>
 
-    <section class="page-section bg-white" aria-label="Our Story">
+    <!-- ═══════════════════════════════════════════════════════════════════
+         OUR STORY — text-only zig-zag.
+
+         Copy is verbatim from the client's doc (WEBSITE (1) doc, "ABOUT US /
+         OUR STORY"). Client 2026-08-12: "text ko zig zag kar, img mat laga
+         wahan, bas text ke saath kar".
+
+         So the four beats alternate left / right of a centre spine, each with
+         a marker on the line. No photography anywhere in this block — an
+         earlier image-led zig-zag was built and rejected; do not put pictures
+         back in here. Blocks reveal from their own side via #story-reveal.
+    ═══════════════════════════════════════════════════════════════════ -->
+    <section class="page-section story-zz" aria-labelledby="story-title">
       <div class="container">
-        <div class="legal">
-          <h2>Our Story</h2>
-          <p>This is where Isler’s story will live — how we began, what we build, and where we’re headed. Full content coming soon.</p>
-          <!-- TODO: replace this placeholder with the client-provided "Our Story" copy and images. -->
-        </div>
+        <h2 class="szz__pagetitle" id="story-title">Our Story</h2>
+        <p class="szz__standfirst">At Isler, we believe world-class manufacturing is the foundation of world-class brands.</p>
+
+        <ol class="szz">
+
+          <li class="szz__item szz-reveal">
+            <div class="szz__card">
+              <span class="szz__eyebrow">The vision</span>
+              <h3 class="szz__title">Where it began</h3>
+              <p>Our journey began with a simple yet ambitious vision &mdash; to build an Indian manufacturing company capable of designing, developing and producing appliances that match global quality standards.</p>
+              <p>The vision was brought to life by two founders with complementary expertise. One, an alumnus of IIT Kanpur, spent years in Germany before leading global supply chain and manufacturing transformation projects at Accenture. The other built deep expertise in the home appliance industry through years at LG Electronics.</p>
+              <p>Together, they shared a common belief: India has the talent, the market and the potential to become a global manufacturing powerhouse.</p>
+            </div>
+          </li>
+
+          <li class="szz__item szz-reveal">
+            <div class="szz__card">
+              <span class="szz__eyebrow">2023</span>
+              <h3 class="szz__title">From Design to Manufacturing</h3>
+              <p>When Isler was founded in 2023, our initial objective was to become an Original Design Manufacturer (ODM), creating innovative, India-designed products backed by strong engineering and intellectual property.</p>
+              <p>However, as we worked with the manufacturing ecosystem, we encountered a significant challenge. Developing products that consistently met global quality standards proved difficult because India lacked the advanced manufacturing infrastructure required for precision appliance production.</p>
+              <p class="szz__pull">Instead of accepting this limitation, we decided to solve it.</p>
+            </div>
+          </li>
+
+          <li class="szz__item szz-reveal">
+            <div class="szz__card">
+              <span class="szz__eyebrow">2025</span>
+              <h3 class="szz__title">Building Manufacturing Excellence</h3>
+              <p>We established our first manufacturing facility in Greater Noida, which became operational in January 2025, with commercial production beginning in February 2025.</p>
+              <p class="szz__label">Production started with</p>
+              <ul class="szz__list">
+                <li style="--p:0">Kitchen Chimneys</li>
+                <li style="--p:1">Built-in Hobs</li>
+                <li style="--p:2">Cooktops</li>
+              </ul>
+              <p class="szz__label">As demand grew, so did our capabilities. Today, we are expanding into</p>
+              <ul class="szz__list">
+                <li style="--p:0">Built-in Ovens</li>
+                <li style="--p:1">Built-in Microwaves</li>
+                <li style="--p:2">Dishwashers</li>
+                <li style="--p:3">Small Domestic Appliances</li>
+                <li style="--p:4">Vacuum Cleaners</li>
+                <li style="--p:5">Air Purifiers</li>
+              </ul>
+              <p>Our vision is to become India&rsquo;s best electronics and electrical appliances manufacturer, developing products for both the domestic and global markets.</p>
+            </div>
+          </li>
+
+          <li class="szz__item szz-reveal">
+            <div class="szz__card">
+              <span class="szz__eyebrow">What comes next</span>
+              <h3 class="szz__title">Building the Future of Indian Manufacturing</h3>
+              <p>Manufacturing excellence requires continuous investment.</p>
+              <p>Over the coming years, Isler is expanding through new factories, backward integration, localisation of critical components and strategic technology partnerships.</p>
+              <p>Our long-term goal is to develop fully integrated manufacturing ecosystems capable of producing over 1 million appliances annually, enabling global brands to manufacture competitively from India.</p>
+            </div>
+          </li>
+
+        </ol>
       </div>
     </section>
 
@@ -735,6 +1037,35 @@
       </div>
     </section>
     <!-- ROADMAP-SECTION-END -->
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         MAKE IN INDIA VISION — closes the story. The client doc puts the
+         "this is more than our growth story" line straight after the graph
+         above, then the Make in India block with the lion artwork between
+         its two paragraphs. Image is the client's own, from the doc; it was
+         3000x1600 / 3.7 MB and is resized to 1600px / 180 KB here.
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <section class="page-section bg-white story-mii" aria-labelledby="mii-title">
+      <div class="container">
+        <div class="story">
+          <p class="story__pull">This is more than our growth story. It is our commitment to building the future of appliance manufacturing in India.</p>
+
+          <h3 class="story__h" id="mii-title">Make in India Vision</h3>
+
+          <p>We are proud to contribute to the Government of India&rsquo;s Make in India initiative by building advanced manufacturing capabilities within the country.</p>
+        </div>
+
+        <figure class="story__figure">
+          <img src="assets/images/make-in-india.jpg"
+               alt="Make in India — a lion built from gears and machine parts, over the colours of the Indian flag"
+               width="1600" height="853" loading="lazy" decoding="async">
+        </figure>
+
+        <div class="story">
+          <p>By investing in technology, skilled talent, research and local manufacturing, we aim to reduce import dependency, accelerate innovation, create high-quality employment, and establish India as a preferred global hub for premium appliance manufacturing.</p>
+        </div>
+      </div>
+    </section>
 
 
     <!-- NOTE (Rev-2): this block does not appear in the client's Rev-2
@@ -959,6 +1290,32 @@
       else { initFooterAccordion(); }
     }());
   </script>
+  <!-- Scroll reveal for the zig-zag cards. .story-anim-on is what arms the
+       CSS above, and it is only added when IntersectionObserver exists and
+       the user has not asked for reduced motion — so if either is missing the
+       cards render normally instead of staying stuck at opacity 0. -->
+  <script id="story-reveal">
+  (function () {
+    var cards = [].slice.call(document.querySelectorAll('.szz-reveal'));
+    if (!cards.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    document.body.classList.add('story-anim-on');
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);   // reveal once, do not re-hide on scroll up
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+
+    cards.forEach(function (c) { io.observe(c); });
+  }());
+  </script>
+
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/search.js" defer></script>
 </body>

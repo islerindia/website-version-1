@@ -8,11 +8,15 @@
   <title>Our Business — OEM, ODM &amp; Private Label | Isler India</title>
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/nav.css">
   <link rel="stylesheet" href="assets/css/category-carousel.css">
+  <link rel="stylesheet" href="assets/css/type.css">
   <style>
     .biz-hero {
       background: var(--navy);
@@ -38,6 +42,126 @@
       margin: 0; max-width: 68ch;
       font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65;
       color: rgba(255,255,255,0.82);
+    }
+
+    /* ── OUR BUSINESS mosaic ──────────────────────────────────────────────
+       Replaces the .pcx-* carousel. Four categories, no horizontal scroll,
+       laid out Vestel-style: one tall lead tile beside two stacked tiles,
+       then a wide tile across the bottom. Tiles are links, so the whole
+       block is keyboard-reachable without any JS. */
+    .obz { padding: clamp(40px, 4.5vw, 68px) clamp(24px, 5vw, 96px); }
+    /* The head shares the grid's width so the rule under "Our Business"
+       lines up with the left and right edges of the tiles below it. It was
+       900px against a 1240px grid, which is why the heading did not sit in
+       the same frame as the categories. Keep these two widths equal. */
+    .obz__head { max-width: 1160px; margin: 0 auto clamp(28px, 3.4vw, 44px); text-align: center; }
+    .obz__title {
+      margin: 0 0 18px;
+      font-size: clamp(23px, 2.4vw, 32px);
+      font-weight: 700; letter-spacing: -0.025em; color: var(--navy);
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(11,26,61,0.14);
+    }
+    .obz__intro { margin: 0 auto; max-width: 78ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.72; color: var(--gray-mid); }
+
+    /* The Vestel-style uneven mosaic: a tall lead tile beside two stacked
+       tiles, then one wide tile underneath. This first read as 'weird' only
+       because the tiles were carrying 4-40 KB catalogue cut-outs that cropped
+       badly at these sizes — they are on the full lifestyle photography now,
+       which is what the shape was designed for. */
+    .obz__grid {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: clamp(118px, 11.4vw, 162px);
+      gap: clamp(10px, 0.9vw, 16px);
+    }
+    /* lead tile spans both rows of the top block */
+    .obz-tile--lead { grid-row: span 2; }
+    /* the fourth category runs the full width underneath */
+    .obz-tile--wide { grid-column: 1 / -1; }
+
+    .obz-tile {
+      position: relative;
+      display: block;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--navy);
+      text-decoration: none;
+      isolation: isolate;
+    }
+    .obz-tile__img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .obz-tile__scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(6,15,36,0.80) 0%, rgba(6,15,36,0.30) 48%, rgba(6,15,36,0.05) 100%);
+      transition: background 300ms ease;
+    }
+    .obz-tile__label {
+      position: absolute; left: clamp(16px, 1.5vw, 24px); bottom: clamp(14px, 1.5vw, 22px); right: clamp(16px, 1.5vw, 24px);
+      font-size: clamp(15px, 1.25vw, 19px);
+      font-weight: 700; line-height: 1.25; letter-spacing: -0.015em;
+      color: #fff;
+    }
+    /* the yellow rule grows out from under the label on hover */
+    .obz-tile__label::after {
+      content: '';
+      display: block;
+      width: 34px; height: 3px;
+      margin-top: 12px;
+      background: var(--yellow);
+      transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .obz-tile:hover .obz-tile__img,
+    .obz-tile:focus-visible .obz-tile__img { transform: scale(1.05); }
+    .obz-tile:hover .obz-tile__scrim,
+    .obz-tile:focus-visible .obz-tile__scrim {
+      background: linear-gradient(to top, rgba(6,15,36,0.88) 0%, rgba(6,15,36,0.44) 55%, rgba(6,15,36,0.14) 100%);
+    }
+    .obz-tile:hover .obz-tile__label::after,
+    .obz-tile:focus-visible .obz-tile__label::after { width: 86px; }
+    .obz-tile:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+    @media (max-width: 760px) {
+      .obz__grid { grid-template-columns: 1fr; grid-auto-rows: clamp(140px, 34vw, 190px); }
+      .obz-tile--lead { grid-row: auto; }
+      .obz-tile--wide { grid-column: auto; }
+    }
+    /* ── Tile reveal ──────────────────────────────────────────────────────
+       The tiles rise in one after another as the mosaic scrolls into view.
+       Armed only by #obz-reveal adding .obz-anim-on, and that script bails
+       out under prefers-reduced-motion or without IntersectionObserver — so
+       with no JS the mosaic is simply visible rather than stuck invisible. */
+    body.obz-anim-on .obz-tile {
+      opacity: 0;
+      transform: translateY(26px) scale(0.985);
+      transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+    body.obz-anim-on .obz__grid.is-in .obz-tile {
+      opacity: 1;
+      transform: none;
+    }
+    /* the head lifts in just ahead of the tiles */
+    body.obz-anim-on .obz__head {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 560ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.obz-anim-on .obz__head.is-in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.obz-anim-on .obz-tile,
+      body.obz-anim-on .obz__head { opacity: 1; transform: none; transition: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .obz-tile__img, .obz-tile__scrim, .obz-tile__label::after { transition: none; }
+      .obz-tile:hover .obz-tile__img { transform: none; }
     }
 
     .biz-section { padding: clamp(48px, 5vw, 72px) clamp(24px, 5vw, 96px); position: relative; }
@@ -233,62 +357,67 @@
 </header>
 
 <!-- ═══════════════════════════════════════════════════════════════════
-     CATEGORY SELECTION — this is what the "Business" nav item now opens.
-     Same .pcx-* switcher the category pages carry.
+     OUR BUSINESS — category mosaic.
+
+     Client doc (WEBSITE (1) doc, "OUR BUSINESS PAGE", 2026-08-12):
+       "This is not the layout we finalized. Our layout will look like shown
+        below. Take reference from this website —
+        https://vestelinternational.com/our-business"
+       "this left right scrolling has to be removed along with section"
+       "Categories will be – Built-in appliances, Counter-top cooking,
+        Small domestic appliances & Other home appliances"
+
+     So the .pcx-* carousel (six cards, prev/next arrows, horizontal scroll)
+     is GONE and replaced by a static mosaic of the four categories, in the
+     Vestel style: large image tiles, name overlaid, no scrolling.
+
+     Photos: the doc says "Photos to be provided yet (for now use that
+     previous imgs)" — every tile therefore reuses a catalogue shot that was
+     already on this page. Swap the four src values when Isler supplies the
+     real category photography; nothing else needs to change.
 ═══════════════════════════════════════════════════════════════════ -->
-<section class="pcx-section" aria-labelledby="pcx-h">
-  <div class="pcx-head">
-    <span class="pcx-eyebrow">Product Portfolio</span>
-    <h2 class="pcx-title" id="pcx-h">Choose a Category</h2>
+<section class="obz" aria-labelledby="obz-h">
+  <div class="obz__head">
+    <h2 class="obz__title" id="obz-h">Our Business</h2>
+    <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
+         heading, not in the hero. Verbatim from the doc. The doc also carries
+         a "Discover Isler's wide range of innovative products…" line for this
+         page, which used to sit here — it is out at the client's request. -->
+    <p class="obz__intro">Isler is a global company that stands out with its capabilities in production, research &amp; development, innovation, design, and brand management in the fields of electrical &amp; electronic appliances.</p>
   </div>
-  <div class="pcx-wrap">
-    <div class="pcx-carousel" aria-label="Product categories" role="group" aria-roledescription="carousel">
-      <button class="pcx-nav pcx-nav--prev" type="button" aria-label="Previous categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
-      <div class="pcx-viewport">
-        <div class="pcx-track">
 
-          <a href="hobs.html" class="pcx-card" aria-label="Hobs">
-            <img class="pcx-card__img" src="assets/catalog/hobs/fw/neo-cook-card.webp" alt="Hobs" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Hobs</span></div>
-          </a>
+  <div class="obz__grid">
+    <a style="--i:0" class="obz-tile obz-tile--lead" href="built-in-appliances.html">
+      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-new.webp" alt="" decoding="async">
+      <span class="obz-tile__scrim" aria-hidden="true"></span>
+      <span class="obz-tile__label">Built-in Appliances</span>
+    </a>
 
-          <a href="cooktops.html" class="pcx-card" aria-label="Cooktops">
-            <img class="pcx-card__img" src="assets/catalog/non-gas-cooktops/induction/IS-AM2-Series-1001.webp" alt="Cooktops" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Cooktops</span></div>
-          </a>
+    <a style="--i:1" class="obz-tile" href="cooktops.html">
+      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-hobtops.webp" alt="" decoding="async">
+      <span class="obz-tile__scrim" aria-hidden="true"></span>
+      <span class="obz-tile__label">Counter-top Cooking</span>
+    </a>
 
-          <a href="kitchen-chimneys.html" class="pcx-card" aria-label="Chimneys">
-            <img class="pcx-card__img" src="assets/catalog/chimneys/best-t-isl1001-card.webp" alt="Chimneys" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Chimneys</span></div>
-          </a>
+    <a style="--i:2" class="obz-tile" href="small-appliances.html">
+      <img class="obz-tile__img" fetchpriority="low" src="assets/images/small-appliances-1.webp" alt="" decoding="async">
+      <span class="obz-tile__scrim" aria-hidden="true"></span>
+      <span class="obz-tile__label">Small Domestic Appliances</span>
+    </a>
 
-          <a href="built-in-ovens.html" class="pcx-card" aria-label="Ovens">
-            <img class="pcx-card__img" src="assets/catalog/built-in-ovens/is-ch-1001.webp" alt="Ovens" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Ovens</span></div>
-          </a>
-
-          <a href="built-in-microwaves.html" class="pcx-card" aria-label="Microwaves">
-            <img class="pcx-card__img" src="assets/catalog/microwaves/silver-edge.webp" alt="Microwaves" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Microwaves</span></div>
-          </a>
-
-          <a href="small-appliances.html" class="pcx-card" aria-label="Small Domestic Appliances">
-            <img class="pcx-card__img" src="assets/catalog/air-purifiers/jh22.webp" alt="Small Domestic Appliances" loading="lazy">
-            <div class="pcx-card__overlay" aria-hidden="true"></div>
-            <div class="pcx-card__content"><span class="pcx-card__name">Small Domestic Appliances</span></div>
-          </a>
-        
-        </div>
-      </div>
-      <button class="pcx-nav pcx-nav--next" type="button" aria-label="Next categories"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
-    </div>
+    <a style="--i:3" class="obz-tile obz-tile--wide" href="other-home-appliances.html">
+      <img class="obz-tile__img" fetchpriority="low" src="assets/catalog/air-purifiers/jh22.webp" alt="" decoding="async">
+      <span class="obz-tile__scrim" aria-hidden="true"></span>
+      <span class="obz-tile__label">Other Home Appliances</span>
+    </a>
   </div>
 </section>
+
+<!-- The .pcx-* carousel that used to sit here (six category cards on a
+     horizontal track with prev/next arrows) was removed on 2026-08-12 per the
+     doc. It still exists on the six category pages, so assets/css/
+     category-carousel.css and assets/js/category-carousel.js stay in the
+     project — they are simply no longer needed by THIS page. -->
 
 <!-- Client 2026-08-06: this page is the category picker plus the RFQ close,
      nothing else. Three Ways to Build, Production Quantities, the NPD flow,
@@ -303,9 +432,11 @@
     <p class="biz-lead">Send a brief — category, volume, launch window. Feasibility, MOQ and timeline within two business days.</p>
     <div class="biz-cta__actions">
       <a class="biz-btn biz-btn--primary" href="contact.html">Start an RFQ</a>
-      <a class="biz-btn biz-btn--ghost" href="#pcx-h">See Our Catalogue</a>
-      <a class="biz-btn biz-btn--ghost" href="assets/docs/isler-products.pdf" download>Download Products PDF</a>
-      <span class="biz-ph">PDF to be supplied</span>
+      <!-- was #pcx-h, which went with the carousel — now the mosaic heading -->
+      <a class="biz-btn biz-btn--ghost" href="#obz-h">See Our Catalogue</a>
+      <!-- "Download Products PDF" removed 2026-08-12. Client doc: "Keep this
+           below as it is (except the dow pdf part) — business PAGE mein bhi
+           uske niche bhi pdf wala". The file was never supplied and 404'd. -->
     </div>
   </div>
 </section>
@@ -430,6 +561,32 @@
     </div>
 
   </footer>
+<!-- Mosaic reveal. Mirrors the pattern used on our-story.html: the class is
+     only added when the browser can actually animate, so the no-JS and
+     reduced-motion states render the tiles normally. -->
+<script id="obz-reveal">
+(function () {
+  var grid = document.querySelector('.obz__grid');
+  var head = document.querySelector('.obz__head');
+  if (!grid) return;
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+
+  document.body.classList.add('obz-anim-on');
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+  if (head) io.observe(head);
+  io.observe(grid);
+}());
+</script>
   <script src="assets/js/nav.js" defer></script>
   <script src="assets/js/search.js" defer></script>
   <script src="assets/js/category-carousel.js" defer></script>

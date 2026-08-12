@@ -7,6 +7,17 @@
   <meta name="description" content="India’s design-led ODM for kitchen and home appliances. Chimneys, hobs, cooktops, ovens, microwaves and small domestic appliances built to your brand’s standard at an ISO-certified Greater Noida facility.">
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/images/favicon.png">
+  <!-- The type stack in tokens.css is 'Supreme', 'Inter', sans-serif, but
+       neither face was ever actually loaded — no @font-face, no font files,
+       nothing linked. The homepage was therefore rendering in whatever the
+       browser's default sans-serif is (Arial on Windows), which is why the
+       type read as flat. Inter is the stack's own second choice, so loading
+       it is what the CSS always intended; nothing else has to change.
+       preconnect first so the font request starts before the CSS is parsed. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/hero.css">
@@ -793,7 +804,7 @@
     .mfg-opener .mfg-inner { max-width: 1280px; }
     .mfg-opener__eyebrow { color: var(--yellow); }
     .mfg-opener__title {
-      font-size: clamp(32px, 5vw, 68px);
+      font-size: clamp(29px, 4.2vw, 56px);
       font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 1.05;
@@ -810,6 +821,14 @@
       color: rgba(255,255,255,0.78);
       max-width: 60ch;
     }
+    /* Client 2026-08-12: "isko center align kar" — eyebrow, heading and the
+       inauguration paragraph. The stats row underneath was already centred,
+       so the block now reads as one centred column instead of a left-aligned
+       lead sitting over centred numbers. The two max-widths above still do the
+       wrapping; auto margins are what actually centre them. */
+    .mfg-opener .mfg-inner { text-align: center; }
+    .mfg-opener__title,
+    .mfg-opener__copy { margin-left: auto; margin-right: auto; }
 
     /* ── 2. PRODUCTION CAPABILITIES ── */
     .mfg-production { background: var(--off-white); }
@@ -1102,6 +1121,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/hero-sequence.js" defer></script>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/type.css">
 
   <!-- Homepage-only navbar override: edge-to-edge rectangular bar, a touch
        shorter, and pinned to the top (no auto-hide) while scrolling. -->
@@ -1803,16 +1823,11 @@
       background: rgba(11, 26, 61, 0.22);
     }
     .npd-step:last-child::after { display: none; }
-    .npd-step__no {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--yellow);
-    }
+    /* .npd-step__no removed with the 01–09 numerals, client doc Rev-2 —
+       both rails now read as named stages, not a numbered checklist. */
     .npd-step__name {
       display: block;
-      margin-top: 8px;
+      margin-top: 0;
       font-size: 14px;
       font-weight: 700;
       line-height: 1.3;
@@ -1932,6 +1947,14 @@
 
     .rev2-band {
       display: grid;
+      /* Columns stay EQUAL on purpose. An unequal ratio was tried for the
+         client doc's "increase the image or video size" and it broke the
+         "all four the same" rule the client asked for on 2026-08-12: two of
+         the four bands put the media on the right (#npd by an order swap,
+         .mfg-labs by document order), so the photo landed in whichever track
+         happened to be narrow and the set rendered 658px against 526px. The
+         size increase comes from the shared height clamps instead, which
+         every band reads from one selector list. */
       grid-template-columns: 1fr 1fr;
       gap: clamp(32px, 5vw, 72px);
       align-items: center;
@@ -2124,7 +2147,9 @@
        and 319px, which swamped the block and pushed the section past 1000px.
        60px keeps it clearly above the 48px section headings — still the hero
        family, not the body scale — without taking over the section. */
-    .mfg-opener__title { font-size: clamp(34px, 4.4vw, 60px); }
+    /* Client 2026-08-12: "thoda sa chhota kar de" — down a step from
+         clamp(34px, 4.4vw, 60px). */
+      .mfg-opener__title { font-size: clamp(30px, 3.7vw, 50px); }
     /* hero.css drops the hero headline below 768px; follow it exactly, or
        the two sections match on a desktop and diverge on a phone. */
     @media (max-width: 768px) {
@@ -2299,7 +2324,14 @@
          against a 580px screen. The size stays standard; the strip's padding
          gives way instead, and only at the short end — the vh mid-values are
          unchanged, so nothing moves on a normal desktop. */
-      .hp-frame--pair > .mfg-labs { padding-top: clamp(24px, 5vh, 76px); padding-bottom: clamp(20px, 5vh, 80px); }
+      /* padding-bottom opened up on client instruction 2026-08-12 (marked with
+         a blue arrow on their screenshot): the lab photo was landing almost on
+         top of the navy certifications band. Raised from clamp(20px,5vh,80px). */
+      .hp-frame--pair > .mfg-labs { padding-top: clamp(24px, 5vh, 76px); padding-bottom: clamp(30px, 9vh, 150px); }
+      /* padding-TOP doubled from clamp(28px,6.6vh,110px), client 2026-08-12:
+         "gap aur badha, jitna abhi hai uska double … certification wale pe".
+         Only the top moves — the bottom keeps the strip's original footing so
+         the logos stay centred in the navy block rather than riding high. */
       .hp-frame--pair > .mfg-certs { padding-top: clamp(28px, 6.6vh, 110px); padding-bottom: clamp(28px, 6.6vh, 110px); }
       /* the navy strip is full-bleed, so giving it more height is the cheapest
          way to make this frame read as full — it anchors the bottom instead of
@@ -2372,14 +2404,18 @@
            anything less reads as the heading touching the bar. The heading and
            its intro travel together — they are one block. */
         padding-top: clamp(76px, 7.4vh, 88px);
-        padding-bottom: clamp(24px, 4vh, 72px);
+        /* Trimmed from clamp(24px,4vh,72px) on 2026-08-12 to pay for the taller
+           band photo ("length bada kar de"). The client cleared this: "niche
+           wali cheezon ko upar-niche kar sakta hai, waise bhi kaafi gap bacha
+           rehta hai unme". padding-TOP is untouched — it is the navbar floor. */
+        padding-bottom: clamp(8px, 1.2vh, 24px);
       }
       /* Client 2026-08-11: the intro was sitting almost on top of the
          "Manufacturing Operations" band. The shared .hp-frame rule above
          computes to only ~22px at 900px tall — it is tuned to keep the four
          frames on one screen, not to separate a section opener from the band
          it introduces. Scoped bump, so the other three frames are untouched. */
-      .mfg-production .rev2-band { margin-top: clamp(30px, 5vh, 72px) !important; }
+      .mfg-production .rev2-band { margin-top: clamp(12px, 2vh, 30px) !important; }
 
       /* Short screens pay for the top-align. On a 660px-tall laptop the block
          is the tallest on the page and the generous top padding above pushed
@@ -2398,11 +2434,11 @@
           padding-top: clamp(70px, 10vh, 96px);
           padding-bottom: clamp(14px, 2.5vh, 40px);
         }
-        .mfg-production .rev2-band { margin-top: clamp(20px, 3vh, 40px) !important; }
+        .mfg-production .rev2-band { margin-top: clamp(10px, 1.6vh, 24px) !important; }
       }
       .hp-frame .rev2-band__media {
         aspect-ratio: auto;
-        height: clamp(165px, 35vh, 500px);
+        height: clamp(185px, 40vh, 570px);
       }
       /* ── PER-BLOCK PANEL HEIGHT (must stay AFTER the rule above).
          Fast NPD runs a little taller because its copy column is short.
@@ -2418,19 +2454,26 @@
          falls back to the base 4/3 and renders ~200px taller than the others.
          Manufacturing Operations can afford NPD's taller photo now that
          Capacity at a Glance is a single row instead of three. */
+      /* Client 2026-08-10: "usko bhi upar wale img size jitna karna", and again
+         2026-08-12: all four band photos must be identical. The Quality band
+         (.hp-frame--pair) used to carry its own copy of this height under a
+         DIFFERENT set of media-query conditions, which is how it drifted to
+         197px against 158px on a 1280x800 screen. All four now share one
+         selector list at every breakpoint — do not split them again. */
       #npd .rev2-band__media,
       #proof .rev2-band__media,
-      .mfg-production .rev2-band__media {
+      .mfg-production .rev2-band__media,
+      .hp-frame--pair .rev2-band__media {
         aspect-ratio: auto;
-        height: clamp(190px, 40vh, 540px);
+        height: clamp(215px, 46vh, 620px);
       }
-      /* trimmed from 40vh to make room for the bigger certification logos
-         below, so the pair still lands on exactly one screen */
-      /* Client 2026-08-10: "usko bhi upar wale img size jitna karna" — the
-         Quality photo was the last one still on its own height (306px against
-         360px for the other three) and read as thinner than the bands above
-         it. On the shared value now, so all FOUR band photos match. */
-      .hp-frame--pair .rev2-band__media { height: clamp(190px, 40vh, 540px); }
+
+      /* The doc's "isme yeh differ bada dio gap ka" on Quality was first read
+         as the copy column's internal spacing; the client's marked-up
+         screenshot (2026-08-12, blue arrow) showed it is the gap BELOW the
+         block — between the lab photo and the navy certifications band. That
+         is handled on .hp-frame--pair > .mfg-labs padding-bottom above, so the
+         copy column keeps the shared rhythm and no rule is needed here. */
 
       /* ── TYPE: base sizes, exactly like Supply Chain.
          Client 2026-08-06: "jaise supply chain wale frame mein text aur heading
@@ -2483,15 +2526,24 @@
            frame by 57px; 30vh brings it back inside with room to spare. */
         #npd .rev2-band__media,
         #proof .rev2-band__media,
-        .mfg-production .rev2-band__media { height: clamp(150px, 30vh, 540px); }
-        .mfg-production #mfg-prod-h + .mfg-sub { margin-top: clamp(3px, 0.9vh, 16px) !important; }
-        .mfg-production .cap-label { margin-top: clamp(8px, 1.8vh, 52px) !important; }
-        .mfg-production .cap-grid { margin-top: clamp(5px, 1vh, 18px) !important; }
-        .mfg-production .cap-cell { padding: clamp(4px, 0.85vh, 24px) clamp(8px, 1vw, 16px); }
-
+        .mfg-production .rev2-band__media,
         .hp-frame--pair .rev2-band__media { height: clamp(150px, 30vh, 540px); }
-        .hp-frame--pair > .mfg-labs { padding-top: clamp(16px, 3.4vh, 76px); padding-bottom: clamp(14px, 3vh, 80px); }
-        .hp-frame--pair > .mfg-certs { padding-top: clamp(20px, 6.4vh, 110px); padding-bottom: clamp(20px, 6.4vh, 110px); }
+        .mfg-production #mfg-prod-h + .mfg-sub { margin-top: clamp(3px, 0.9vh, 16px) !important; }
+
+        /* The gap the client arrowed on their screenshot. This is the rule that
+           applies on a normal laptop, so it is the one to change — the 9vh
+           version further up never gets a look in at these heights. */
+        .hp-frame--pair > .mfg-labs { padding-top: clamp(16px, 3.4vh, 76px); padding-bottom: clamp(44px, 11vh, 180px); }
+        /* padding-TOP doubled here as well, 2026-08-12. This is the rule that
+           actually applies on a normal laptop (it wins over the 13.2vh one
+           further up), so changing only that one moved nothing on screen. */
+        /* Client 2026-08-12: "gap theek hai, but license ke blue wale section
+           ke andar license ke upar-niche gap zyada hai". These were briefly
+           doubled to 12.8vh while chasing the arrowed gap — but that gap is
+           OUTSIDE this block (it comes from .mfg-labs padding-bottom above and
+           is correct now). This padding is the air INSIDE the navy block, so
+           it comes back down: 97px above and below the logos was too much. */
+        .hp-frame--pair > .mfg-certs { padding-top: clamp(20px, 5.5vh, 92px); padding-bottom: clamp(20px, 5.5vh, 92px); }
         .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(10px, 2vh, 56px); }
         .hp-frame--pair .mfg-cert img { height: clamp(56px, 18vh, 220px); }
       }
@@ -2503,15 +2555,17 @@
       @media (max-width: 1250px) and (max-height: 760px) {
         #npd .rev2-band__media,
         #proof .rev2-band__media,
-        .mfg-production .rev2-band__media { height: clamp(112px, 24vh, 540px); }
+        .mfg-production .rev2-band__media,
+        .hp-frame--pair .rev2-band__media { height: clamp(112px, 24vh, 540px); }
         #npd .npd-step { padding: clamp(4px, 1vh, 20px) 8px clamp(4px, 0.9vh, 18px); }
         #npd .npd-flow { gap: clamp(4px, 0.8vh, 10px); }
         #npd .rev2-band + .npd-lead { margin-top: clamp(10px, 2.2vh, 96px) !important; }
         #npd .npd-note { margin-top: clamp(6px, 1.2vh, 24px); }
       }
 
+      /* Certification logos only — the Quality photo's height is set with the
+         other three above and must not be re-set here. */
       @media (max-width: 1150px) and (max-height: 700px) {
-        .hp-frame--pair .rev2-band__media { height: clamp(112px, 24vh, 540px); }
         .hp-frame--pair .mfg-cert img { height: clamp(48px, 15vh, 200px); }
         .hp-frame--pair .mfg-cert-row { gap: clamp(14px, 3vw, 56px); }
       }
@@ -2693,6 +2747,54 @@
       border-color: #FFFFFF;
     }
 
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       BAND MEDIA HEIGHT — the single source of truth for all four photos
+       below "Isler at a Glance" (Manufacturing Operations, Fast NPD, Supply
+       Chain, Quality).
+
+       Client 2026-08-12: "length bada kar de, width utni hi rehne de" and
+       "sab uniform". Widths come from .rev2-band's equal columns and are
+       already identical; this rule is the only thing that sets the height,
+       and it lists all four selectors so they can never drift apart again.
+       It sits last in the last stylesheet deliberately — every earlier
+       breakpoint rule is superseded, so there is one number to change.
+
+       At 900px viewport this takes the photo from 227px to ~351px, past the
+       tallest copy column (315px), so the media is now the element that sets
+       each band's height rather than the short one beside it.
+       ═══════════════════════════════════════════════════════════════════════ */
+    #npd .rev2-band__media,
+    #proof .rev2-band__media,
+    .mfg-production .rev2-band__media,
+    .hp-frame--pair .rev2-band__media {
+      aspect-ratio: auto;
+      height: clamp(300px, 53vh, 780px);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       "ISLER AT A GLANCE" AS A SUPER-HEADING
+       Client 2026-08-12: "yeh super heading hai, iske niche wo chaar section
+       aa rahe hain — iska text bada rakh … it must look ki yeh un sab ki super
+       heading hai". It was rendering at exactly the same size as the four
+       section headings under it (48px against 48px), so nothing marked it as
+       the parent. Sized about 1.35x them, with the lead paragraph lifted to
+       match. The four section headings below are deliberately untouched —
+       the client confirmed those are correct.
+       ═══════════════════════════════════════════════════════════════════════ */
+    .mfg-production .mfg-prod-head #mfg-prod-h {
+      font-size: clamp(32px, 3.3vw, 66px) !important;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+    }
+    .mfg-production .mfg-prod-head .mfg-sub {
+      font-size: clamp(15px, 1.25vw, 19px) !important;
+      max-width: 74ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
   </style>
 </head>
 <body class="home-edgenav">
@@ -2812,28 +2914,28 @@
 
       <!-- ── Cinematic scene layers: 4 layers crossfaded by scroll ─────────── -->
 
-      <!-- Scene 1 — Designed to Belong Together — BG: product-series image (STAND-IN placeholder, Isler to supply final product-series shot) -->
+      <!-- Scene 1 — Precisely Built for Your Brand — BG: product-series image (STAND-IN placeholder, Isler to supply final product-series shot) -->
       <div class="hero-scene-img" aria-hidden="true">
         <img src="assets/images/scenes/scene-05-finale-pullback.webp"
-             alt="Isler kitchen appliances designed to belong together">
+             alt="Isler kitchen appliances built to a brand's specification">
       </div>
 
-      <!-- Scene 2 — Built on a Supply Chain You Can Trust — BG: manufacturing / supply chain -->
+      <!-- Scene 2 — Designed to Belong Together — BG: appliance / innovation (the photo the client doc asked to pair with this line) -->
+      <div class="hero-scene-img" aria-hidden="true">
+        <img src="assets/images/scenes/scene-04-isler.webp"
+             alt="Matched Isler chimney, hob, microwave and oven in one kitchen">
+      </div>
+
+      <!-- Scene 3 — Built on a Supply Chain You Can Trust — BG: manufacturing / supply chain -->
       <div class="hero-scene-img" aria-hidden="true">
         <img src="assets/images/scenes/factory_floor.webp"
              alt="Isler manufacturing floor and supply chain">
       </div>
 
-      <!-- Scene 3 — Every Kitchen. Every Style. Every Need. — BG: products-showcase VIDEO (STAND-IN placeholder, Isler to supply final product-range video) -->
+      <!-- Scene 4 — Every Home, Every Appliance, Every Need — BG: products-showcase VIDEO (STAND-IN placeholder, Isler to supply final product-range video) -->
       <div class="hero-scene-img" aria-hidden="true">
         <video src="assets/videos/assembly-line.mp4" autoplay muted loop playsinline
                aria-label="Isler product range showcase"></video>
-      </div>
-
-      <!-- Scene 4 — Innovation That Works for You — BG: appliance / innovation -->
-      <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/scene-04-isler.webp"
-             alt="Isler appliance innovation detail">
       </div>
 
       <!-- Dark gradient overlay — left-heavy for text legibility -->
@@ -2842,28 +2944,36 @@
       <!-- ── Text scenes: 4 scenes driven by GSAP scroll progress ─────────── -->
       <div class="hero-text-layer" aria-live="polite">
 
-        <!-- Scene 1 -->
+        <!-- Scene 1 — client doc Rev-2: headline changed from "Designed to
+             Belong Together" (that line moves to Scene 4, where the innovation
+             photo already sits). Subhead is the OEM line from the same doc —
+             exact hero copy still to be confirmed by Isler. -->
         <div class="hero-scene">
-          <h1 class="hero-headline">Designed to Belong Together</h1>
-          <p class="hero-subhead">Perfectly matched hobs chimneys and appliances that create one seamless kitchen experience.</p>
+          <h1 class="hero-headline">Precisely Built for Your Brand</h1>
+          <p class="hero-subhead">Get your product manufactured to your exact requirements, with your branding, at the volumes you need.</p>
         </div>
 
-        <!-- Scene 2 -->
+        <!-- Scene 2 — client 2026-08-12: "Designed to Belong Together" is the
+             second page. It runs over the innovation photo the doc asked to
+             pair with this line — that photo is this scene's background. -->
+        <div class="hero-scene">
+          <p class="hero-headline">Designed to Belong Together</p>
+          <p class="hero-subhead">Perfectly matched Chimney, Built-in Hob, Microwave, Oven &amp; other appliances that create one seamless kitchen experience.</p>
+        </div>
+
+        <!-- Scene 3 — unchanged copy, moved down a slot by the client's
+             2026-08-12 running order. -->
         <div class="hero-scene">
           <p class="hero-headline">Built on a Supply Chain You Can Trust</p>
           <p class="hero-subhead">From manufacturing to delivery our robust supply network ensures every product reaches you with speed precision and uncompromising quality.</p>
         </div>
 
-        <!-- Scene 3 -->
-        <div class="hero-scene">
-          <p class="hero-headline">Every Kitchen Every Style Every Need</p>
-          <p class="hero-subhead">From modern essentials to premium innovations our extensive collection offers the perfect solution for every kitchen.</p>
-        </div>
-
-        <!-- Scene 4 — Finale with CTA -->
+        <!-- Scene 4 — the finale, per the client 2026-08-12: "Every home, Every
+             appliance, Every Need" is the fourth page and the RFQ / Explore
+             Products links belong on it. Company intro paragraph from the doc. -->
         <div class="hero-scene scene-cta">
-          <p class="hero-headline">Innovation That Works for You</p>
-          <p class="hero-subhead">Smart technologies engineered to deliver superior performance greater efficiency and effortless everyday cooking.</p>
+          <p class="hero-headline">Every Home, Every Appliance, Every Need</p>
+          <p class="hero-subhead">Isler is one of India&rsquo;s fastest-growing design-led manufacturers of premium electronics and electrical appliances. We partner with leading factories in China, Italy and Turkey to design, develop, manufacture and deliver world-class products to the top global brands. Our extensive collection offers a perfect solution for your appliance business.</p>
           <!-- Two actions, client 2026-08-06: the yellow RFQ button keeps the
                primary slot, with Explore Products beside it as the ghost
                secondary. Products live on business.html — the homepage #range
@@ -2920,7 +3030,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4 6 4v12"/><path d="M15 21V13h6v8"/><path d="M3 21h18"/><path d="M7 13h2"/><path d="M7 17h2"/></svg>
           </span>
           <span class="ways-card__name">OEM</span>
-          <p class="ways-card__text">You bring the specification. We manufacture it at scale, to your drawings and your quality plan.</p>
+          <p class="ways-card__text">Get your product manufactured to your exact requirements, with your branding, at the volumes you need.</p>
         </div>
 
         <div class="ways-card" style="--i:1">
@@ -2928,7 +3038,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l2.1 2.1"/><path d="M16.3 16.3l2.1 2.1"/><path d="M18.4 5.6l-2.1 2.1"/><path d="M7.7 16.3l-2.1 2.1"/></svg>
           </span>
           <span class="ways-card__name">ODM</span>
-          <p class="ways-card__text">We design and build the product for you &mdash; concept, tooling, certification and production under one roof.</p>
+          <p class="ways-card__text">Develop the product from concept to finished unit &mdash; engineering, prototyping and manufacturing &mdash; under your brand.</p>
         </div>
 
         <div class="ways-card" style="--i:2">
@@ -2936,7 +3046,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22l-9-9V4a1 1 0 0 1 1-1h9l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
           </span>
           <span class="ways-card__name">Private Label</span>
-          <p class="ways-card__text">Your brand on our existing platforms &mdash; proven products, your identity, your packaging, our production.</p>
+          <p class="ways-card__text">Pick from our existing product range and launch it under your own brand &mdash; no design or tooling investment required, just your label on a proven product.</p>
         </div>
 
       </div>
@@ -2956,28 +3066,29 @@
       <div class="mfg-inner">
         <span class="mfg-eyebrow mfg-opener__eyebrow mfg-reveal">Manufacturing</span>
         <h2 class="mfg-opener__title mfg-reveal">A State-of-the-Art Facility Built for Scale, Speed, and Precision</h2>
-        <p class="mfg-opener__copy mfg-reveal">Isler’s manufacturing facility in Greater Noida was inaugurated by Shri Sanjiv Singh, Joint Secretary, DPIIT, Ministry of Commerce and Industry — an event covered by more than 30 media channels. Isler was also featured by the Hon’ble Union Minister of Commerce &amp; Industry, Mr. Piyush Goyal, in recognition of its contribution to India’s manufacturing journey.</p>
-        <!-- Hard numbers, per client brief: total SKUs + number of categories.
-             Counts are generated from assets/js/search.js + the product pages;
-             re-check them after any catalogue update.
-             Moved here from #ways on 2026-08-10 so they read over the facility
-             footage rather than as a separate white bar further down. -->
+        <p class="mfg-opener__copy mfg-reveal">Isler’s manufacturing facility in Greater Noida was inaugurated by Shri Sanjiv Singh, former Joint Secretary of DPIIT, Ministry of Commerce and Industry. Isler was also featured by the Hon’ble Union Minister of Commerce &amp; Industry, Mr. Piyush Goyal, in recognition of its contribution to India’s manufacturing journey.</p>
+        <!-- Capacity figures supplied by the client, Rev-2 doc: replaces the
+             earlier catalogue counts (SKUs / categories / divisions / design
+             language). Deliberately NOT .hp-count — the count-up formats with
+             toLocaleString('en-US'), which would render 3,00,000 as 300,000
+             and cannot animate the "3 + 4" line at all. Static text keeps the
+             client's Indian digit grouping. -->
         <div class="hp-stats">
           <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value hp-count" data-count="183">183</span>
-            <span class="hp-stat__label">SKUs in the catalogue</span>
+            <span class="hp-stat__value">3,00,000</span>
+            <span class="hp-stat__label">Units per year</span>
           </div>
           <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value hp-count" data-count="22">22</span>
-            <span class="hp-stat__label">Product categories</span>
+            <span class="hp-stat__value">30,000</span>
+            <span class="hp-stat__label">Sq. ft. facility</span>
           </div>
           <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value hp-count" data-count="4">4</span>
-            <span class="hp-stat__label">Product divisions</span>
+            <span class="hp-stat__value">3 + 4</span>
+            <span class="hp-stat__label">Production &amp; sub-assembly lines</span>
           </div>
           <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value hp-count" data-count="1">1</span>
-            <span class="hp-stat__label">Shared design language</span>
+            <span class="hp-stat__value">100+</span>
+            <span class="hp-stat__label">Team members</span>
           </div>
         </div>
       </div>
@@ -3019,50 +3130,10 @@
           </div>
         </div>
 
-        <!-- CAPACITY NUMBERS — requested by the client; values still to be
-             supplied by Isler. Replace the em-dashes and drop the
-             cap-cell__value--empty class + the chip below once filled. -->
-        <div class="cap-label" style="margin-top:clamp(28px,3.5vw,44px);">
-          <span class="mfg-eyebrow" style="margin-bottom:10px;">Capacity at a Glance <span class="hp-ph">Numbers to be supplied</span></span>
-        </div>
-        <div class="cap-grid" style="margin-top:12px;">
-          <div class="cap-cell" style="--i:0;--d:4">
-            <span class="cap-cell__value">30,000 sq. ft.</span>
-            <span class="cap-cell__label">Integrated facility</span>
-          </div>
-          <div class="cap-cell" style="--i:1;--d:3">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Units per year</span>
-          </div>
-          <div class="cap-cell" style="--i:2;--d:2">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Production lines</span>
-          </div>
-          <div class="cap-cell" style="--i:3;--d:1">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Shifts per day</span>
-          </div>
-          <div class="cap-cell" style="--i:4;--d:0">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Headcount</span>
-          </div>
-          <div class="cap-cell" style="--i:5;--d:1">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Engineers</span>
-          </div>
-          <div class="cap-cell" style="--i:6;--d:2">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">OEE %</span>
-          </div>
-          <div class="cap-cell" style="--i:7;--d:3">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">On-time delivery %</span>
-          </div>
-          <div class="cap-cell" style="--i:8;--d:4">
-            <span class="cap-cell__value cap-cell__value--empty">—</span>
-            <span class="cap-cell__label">Defect rate (PPM)</span>
-          </div>
-        </div>
+        <!-- Capacity at a Glance strip removed on client instruction,
+             2026-08-12: eight of its nine cells were still em-dash
+             placeholders. The real figures now live in the stats strip
+             on the Manufacturing opener above. -->
       </div>
     </section>
 
@@ -3110,18 +3181,18 @@
            .is-running (added/removed by #hp-rev2-npd), and two systems
            writing the same opacity/transform would fight. -->
       <div class="npd-flow">
-        <div class="npd-step" style="--i:0"><span class="npd-step__no">01</span><span class="npd-step__name">RFQ</span></div>
-        <div class="npd-step" style="--i:1"><span class="npd-step__no">02</span><span class="npd-step__name">Feasibility</span></div>
-        <div class="npd-step" style="--i:2"><span class="npd-step__no">03</span><span class="npd-step__name">Design</span></div>
-        <div class="npd-step" style="--i:3"><span class="npd-step__no">04</span><span class="npd-step__name">Sampling</span></div>
+        <div class="npd-step" style="--i:0"><span class="npd-step__name">RFQ</span></div>
+        <div class="npd-step" style="--i:1"><span class="npd-step__name">Feasibility</span></div>
+        <div class="npd-step" style="--i:2"><span class="npd-step__name">Design</span></div>
+        <div class="npd-step" style="--i:3"><span class="npd-step__name">Sampling</span></div>
         <!-- Validation is the step the client asked us to add. It was picked
              out in yellow while it was new; client 2026-08-06: don't highlight
              it — it reads as a normal stage now. -->
-        <div class="npd-step" style="--i:4"><span class="npd-step__no">05</span><span class="npd-step__name">Validation</span></div>
-        <div class="npd-step" style="--i:5"><span class="npd-step__no">06</span><span class="npd-step__name">Tooling</span></div>
-        <div class="npd-step" style="--i:6"><span class="npd-step__no">07</span><span class="npd-step__name">Production</span></div>
-        <div class="npd-step" style="--i:7"><span class="npd-step__no">08</span><span class="npd-step__name">QC</span></div>
-        <div class="npd-step" style="--i:8"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
+        <div class="npd-step" style="--i:4"><span class="npd-step__name">Validation</span></div>
+        <div class="npd-step" style="--i:5"><span class="npd-step__name">Tooling</span></div>
+        <div class="npd-step" style="--i:6"><span class="npd-step__name">Production</span></div>
+        <div class="npd-step" style="--i:7"><span class="npd-step__name">QC</span></div>
+        <div class="npd-step" style="--i:8"><span class="npd-step__name">Dispatch</span></div>
       </div>
 
       <p class="npd-note">
@@ -3165,26 +3236,9 @@
         </div>
       </div>
 
-      <p class="npd-lead">From vendor to line</p>
-
-      <!-- Same component as the Fast NPD strip — .npd-flow / .npd-step and
-           the same left-to-right sweep, driven by .is-running. --i is the
-           step's position in that sweep. -->
-      <div class="npd-flow">
-        <div class="npd-step" style="--i:0;--d:4"><span class="npd-step__no">01</span><span class="npd-step__name">Vendor Identification</span></div>
-        <div class="npd-step" style="--i:1;--d:3"><span class="npd-step__no">02</span><span class="npd-step__name">Partner Audit</span></div>
-        <div class="npd-step" style="--i:2;--d:2"><span class="npd-step__no">03</span><span class="npd-step__name">Approval</span></div>
-        <div class="npd-step" style="--i:3;--d:1"><span class="npd-step__no">04</span><span class="npd-step__name">Dual Sourcing</span></div>
-        <div class="npd-step" style="--i:4;--d:0"><span class="npd-step__no">05</span><span class="npd-step__name">Material Planning</span></div>
-        <div class="npd-step" style="--i:5;--d:1"><span class="npd-step__no">06</span><span class="npd-step__name">Inbound QC</span></div>
-        <div class="npd-step" style="--i:6;--d:2"><span class="npd-step__no">07</span><span class="npd-step__name">Control Tower</span></div>
-        <div class="npd-step" style="--i:7;--d:3"><span class="npd-step__no">08</span><span class="npd-step__name">Line Feed</span></div>
-        <div class="npd-step" style="--i:8;--d:4"><span class="npd-step__no">09</span><span class="npd-step__name">Dispatch</span></div>
-      </div>
-
-      <p class="npd-note">
-        <span class="hp-ph">Stage names follow the copy above &mdash; exact list to be confirmed by Isler</span>
-      </p>
+      <!-- "From vendor to line" stage strip removed on client instruction,
+           2026-08-12. Fast NPD keeps its own strip; this one duplicated the
+           same nine-card component and its stage names were still unconfirmed. -->
     </div>
   </section>
 
@@ -3259,10 +3313,12 @@
        The track is duplicated (aria-hidden on copy 2) for a seamless loop.
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section id="brands" class="brands-section" aria-labelledby="brands-h">
+    <!-- Client doc Rev-2: the yellow "Our Clients" eyebrow is dropped
+         ("remove our clients from the beginning"), the heading becomes
+         "Partners in Our Journey", and the sub-line is the client's copy. -->
     <div class="brands-head">
-      <span class="section-eyebrow">Our Clients</span>
-      <h2 class="section-heading" id="brands-h">Partners We Build For</h2>
-      <p class="section-sub">Manufacturing partner to leading appliance brands across India and export markets.</p>
+      <h2 class="section-heading" id="brands-h">Partners in Our Journey</h2>
+      <p class="section-sub">From the brands that trust us with their products to the partners backing our growth &mdash; we&rsquo;re building Isler alongside people who share our ambition for Indian manufacturing.</p>
     </div>
 
     <div class="brands-rows">
@@ -3418,8 +3474,8 @@
        RFQ, View Our Products, and the products download.
        Note the primary button was pointed at contact.html, not the old
        "#rfq" — inside this section that link would have scrolled to itself.
-       PENDING: the products PDF (assets/docs/isler-products.pdf) does not exist
-       yet — the download button is wired and flagged until Isler supplies it.
+       The products-PDF download that used to sit beside them was removed on
+       2026-08-12; the file was never supplied and the link 404'd.
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section id="rfq" class="rfq-section" aria-labelledby="rfq-h">
     <div class="rfq-inner">
@@ -3430,11 +3486,9 @@
       <div class="rfq__actions">
         <a href="contact.html" class="rfq-btn rfq-btn--primary">Start an RFQ</a>
         <a href="business.html" class="rfq-btn rfq-btn--ghost">View Our Products</a>
-        <a href="assets/docs/isler-products.pdf" class="rfq-btn rfq-btn--ghost" download>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download Products PDF
-        </a>
-        <span class="hp-ph hp-ph--dark">PDF to be supplied</span>
+        <!-- "Download Products PDF" removed on client instruction, 2026-08-12.
+             It pointed at assets/docs/isler-products.pdf, which was never
+             supplied and 404'd on the live site. -->
       </div>
 
       <p class="rfq__note">Typical response within 2 working days. MOQ and lead times shared with the quotation.</p>
