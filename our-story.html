@@ -522,24 +522,21 @@
       margin: 0 0 10px !important;
       padding-left: 22px; border-left: 4px solid var(--yellow);
     }
-    /* Client 2026-08-12: "made in india wala lion img bada nahi hai" — it was
-       capped at 1000px inside an 860px prose column, so it never actually got
-       to be a full-width moment. It now breaks out of the .story measure and
-       runs to the container edge. The source is 1600px wide, so it is not
-       upscaled past its own resolution. */
+    /* Sized four times. At the full 860px prose measure it still read as a
+       banner filling the frame: the source is a 1600x853 wide crop and most of
+       it is flag wash, so the lion itself is small while the block is huge.
+       It is now an inline emblem at 440px. The card treatment (radius +
+       shadow) is gone too — the artwork's own background is near-white, so on
+       a white section the shadow framed the wash instead of the subject. */
     .story__figure {
-      max-width: none;
-      width: 100%;
-      margin: clamp(34px, 4vw, 56px) 0 clamp(30px, 3.5vw, 48px);
+      /* 640, not the prose column's full 860: at 860 the art filled the frame
+         on its own; at 640 the paragraph below it is on screen with it. */
+      max-width: 640px;
+      margin: clamp(20px, 2.4vw, 28px) auto clamp(18px, 2vw, 26px);
     }
-    /* the figure is a direct child of .container, so the container has to
-       widen for the image to. The prose blocks inside keep .story's own
-       860px measure, so only the picture grows. */
-    .story-mii .container { max-width: 1360px; }
     .story__figure img {
       display: block; width: 100%; height: auto;
       border-radius: var(--radius-lg, 16px);
-      box-shadow: 0 24px 54px rgba(11, 26, 61, 0.16);
     }
     @media (max-width: 560px) {
       .story__list { grid-template-columns: 1fr; }
@@ -1045,7 +1042,7 @@
          its two paragraphs. Image is the client's own, from the doc; it was
          3000x1600 / 3.7 MB and is resized to 1600px / 180 KB here.
     ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="page-section bg-white story-mii" aria-labelledby="mii-title">
+    <section class="page-section bg-white" aria-labelledby="mii-title">
       <div class="container">
         <div class="story">
           <p class="story__pull">This is more than our growth story. It is our commitment to building the future of appliance manufacturing in India.</p>
