@@ -2236,6 +2236,26 @@
       margin-right: auto;
     }
 
+    /* ── make it read as the SUPER-heading it is (client 2026-08-13) ───────
+       It did not, and the measurements say why: at 1600 it rendered 52.8px
+       against 48px for the band headings underneath it — the same rank. And
+       because "Process-led, Digital & Quality-first Operations" runs to three
+       uppercase lines, the child actually carried more visual mass than its
+       parent, so the hierarchy read inverted.
+
+       Fixed with size and treatment rather than with new copy: a short gold
+       rule above it, then a heading large enough that nothing below competes.
+       Scoped to .mfg-production's head so the other three story blocks — NPD,
+       Supply Chain, Quality — keep their existing rank as its siblings. */
+    .mfg-production .mfg-prod-head::before {
+      content: '';
+      display: block;
+      width: clamp(40px, 4vw, 62px); height: 3px;
+      margin: 0 auto clamp(16px, 1.6vw, 24px);
+      border-radius: 2px;
+      background: linear-gradient(90deg, rgba(244,180,0,0.30), var(--yellow), rgba(244,180,0,0.30));
+    }
+
     @media (min-width: 901px) and (min-height: 580px) {
 
       /* ── the frame: AT MOST one screen, never padded out to exactly one.
@@ -2782,11 +2802,18 @@
        the parent. Sized about 1.35x them, with the lead paragraph lifted to
        match. The four section headings below are deliberately untouched —
        the client confirmed those are correct.
+
+       Raised again 2026-08-13: it still did not read as the parent. The 1.35x
+       above only held on very wide screens — the 3.3vw slope gave 52.8px at
+       1600 against 48px for the section headings, so at the width most people
+       see it the two were the same rank, and "Process-led, Digital & Quality-
+       first Operations" running to three uppercase lines carried more mass
+       than the heading above it. The slope is what needed fixing, not the cap.
        ═══════════════════════════════════════════════════════════════════════ */
     .mfg-production .mfg-prod-head #mfg-prod-h {
-      font-size: clamp(32px, 3.3vw, 66px) !important;
-      letter-spacing: -0.025em;
-      line-height: 1.05;
+      font-size: clamp(34px, 4.6vw, 80px) !important;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
     }
     .mfg-production .mfg-prod-head .mfg-sub {
       font-size: clamp(15px, 1.25vw, 19px) !important;
