@@ -130,17 +130,42 @@
     .section-head p { color: #55606E; font-size: 17px; line-height: 1.7; margin-top: 14px; }
 
     /* Page hero */
-    .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 64px; overflow: hidden; background: var(--navy); }
+    .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 72px; overflow: hidden; background: var(--navy); }
     .page-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
-    .page-hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,15,36,0.94) 0%, rgba(6,15,36,0.6) 55%, rgba(6,15,36,0.5) 100%); }
-    .page-hero__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
+    /* Two scrims, not one. The old single bottom-up wash sat the copy on flat
+       grey; the linear one still carries the text, and a side vignette adds the
+       depth that made the frame read as a snapshot rather than a hero. Tinted
+       navy (#060f24 -> the brand navy) so the photo warms into the palette
+       instead of going muddy. */
+    .page-hero__bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(6,15,36,0.95) 0%, rgba(8,20,48,0.72) 38%, rgba(11,26,61,0.42) 100%),
+        radial-gradient(120% 90% at 78% 40%, rgba(6,15,36,0.00) 0%, rgba(6,15,36,0.55) 100%);
+    }
+    /* A very slow push-in. One pass, no loop — it settles by the time the
+       visitor has read the title, so it reads as production value rather than
+       as an animation. */
+    .page-hero__bg { transform: scale(1.06); animation: heroSettle 2200ms cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes heroSettle { to { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .page-hero__bg { transform: none; animation: none; }
+    }
+    /* softens the hard cut from the photo into the white section below */
+    .page-hero::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 58px;
+      background: linear-gradient(to top, var(--white, #fff) 0%, rgba(255,255,255,0.55) 42%, rgba(255,255,255,0) 100%);
+      z-index: 1; pointer-events: none;
+    }
+    .page-hero__inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
     .page-hero__breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
     .page-hero__breadcrumb a { color: rgba(255,255,255,0.65); transition: color .15s; }
     .page-hero__breadcrumb a:hover { color: var(--yellow); }
     .page-hero__breadcrumb-sep { width: 5px; height: 5px; border-radius: 50%; background: var(--yellow); display: inline-block; }
-    .page-hero__eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
-    .page-hero__title { font-size: clamp(30px, 5vw, 54px); font-weight: 700; color: #fff; line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
-    .page-hero__desc { font-size: clamp(16px, 1.6vw, 19px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
+    .page-hero__eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--yellow); margin-bottom: 16px; }
+    .page-hero__eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--yellow); flex: 0 0 auto; }
+    .page-hero__title { font-size: clamp(32px, 5.4vw, 62px); font-weight: 700; color: #fff; line-height: 1.04; letter-spacing: -0.035em; max-width: 20ch; text-shadow: 0 2px 30px rgba(0,0,0,0.28); }
+    .page-hero__desc { font-size: clamp(16px, 1.6vw, 20px); color: rgba(255,255,255,0.86); line-height: 1.65; margin-top: 20px; max-width: 58ch; }
 
     /* About */
     .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 72px); align-items: start; position: relative; z-index: 1; }
@@ -327,33 +352,54 @@
 
        Falls to a single left-hand rail below 900px, where a two-sided
        zig-zag has no room to read.                                        */
-    .story-zz { padding-bottom: clamp(40px, 5vw, 76px); }
+    /* A whisper of warmth off pure white, plus a gold bloom behind the top of
+       the spine. Both are near-invisible on their own; together they stop the
+       block reading as an untreated white page, which was the main thing
+       making an otherwise well-set section feel unfinished. */
+    .story-zz {
+      padding-bottom: clamp(40px, 5vw, 76px);
+      background:
+        radial-gradient(58% 34% at 50% 6%, rgba(244,180,0,0.055) 0%, rgba(244,180,0,0) 100%),
+        linear-gradient(180deg, #fff 0%, #FBFAF6 34%, #FBFAF6 72%, #fff 100%);
+    }
     .story-zz .container { max-width: 1500px; }
 
     .szz__pagetitle {
-      margin: 0 0 20px;
+      margin: 0 0 22px;
       text-align: center;
-      font-size: clamp(32px, 4vw, 58px);
-      font-weight: 700; letter-spacing: -0.03em; color: var(--navy);
+      font-size: clamp(32px, 4.2vw, 62px);
+      font-weight: 700; letter-spacing: -0.038em; color: var(--navy);
     }
     .szz__standfirst {
+      position: relative;
       max-width: 44ch;
       margin: 0 auto clamp(56px, 8vw, 130px);
+      padding-bottom: clamp(26px, 3vw, 40px);
       text-align: center;
       font-size: clamp(19px, 1.9vw, 27px);
       line-height: 1.5; font-weight: 600; color: var(--navy);
+    }
+    /* a short gold rule closing the standfirst — the one piece of ornament in
+       the block, and it marks where the narrative starts */
+    .szz__standfirst::after {
+      content: ''; position: absolute; left: 50%; bottom: 0;
+      width: 54px; height: 3px; margin-left: -27px; border-radius: 2px;
+      background: linear-gradient(90deg, rgba(244,180,0,0.25), var(--yellow), rgba(244,180,0,0.25));
     }
 
     .szz {
       list-style: none;
       margin: 0; padding: 0;
       position: relative;
+      counter-reset: szz;
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: clamp(70px, 9vw, 170px);
       row-gap: clamp(56px, 7vw, 120px);
     }
-    /* the hairline the markers sit on — the only structure left */
+    /* the hairline the markers sit on — the only structure left.
+       Gold through the middle third, fading to navy hairline at both ends, so
+       the spine has a light in it rather than being a flat grey rule. */
     .szz::before {
       content: "";
       position: absolute;
@@ -361,12 +407,39 @@
       width: 1px; margin-left: -0.5px;
       background: linear-gradient(180deg,
         rgba(11,26,61,0.00) 0%,
-        rgba(11,26,61,0.15) 10%,
-        rgba(11,26,61,0.15) 90%,
+        rgba(11,26,61,0.16) 10%,
+        rgba(244,180,0,0.55) 34%,
+        rgba(244,180,0,0.55) 66%,
+        rgba(11,26,61,0.16) 90%,
         rgba(11,26,61,0.00) 100%);
     }
 
-    .szz__item { position: relative; grid-column: 1; }
+    /* the top padding is the numeral's room — see .szz__item::before */
+    .szz__item { position: relative; grid-column: 1; counter-increment: szz; padding-top: clamp(52px, 5.5vw, 92px); }
+
+    /* Ghost numeral behind each beat. The client rejected boxing these blocks,
+       so the sense of "chapter" has to come from typography instead: an
+       oversized 01–04 set almost at the paper, sitting outside the text on the
+       far side from the spine. Content-free — generated from a counter, so
+       adding a beat renumbers itself.
+
+       Sized against the item's own padding-top so the glyph (line-height 1,
+       digits have no descender, so it ends around 0.72em) clears the eyebrow
+       instead of sitting on it — the first pass overlapped and read as a
+       mistake rather than a watermark. */
+    .szz__item::before {
+      content: counter(szz, decimal-leading-zero);
+      position: absolute; top: 0;
+      font-size: clamp(70px, 7vw, 120px);
+      font-weight: 700; line-height: 1;
+      letter-spacing: -0.05em;
+      color: rgba(11,26,61,0.07);
+      z-index: 0; pointer-events: none; user-select: none;
+    }
+    .szz__item:nth-child(odd)::before  { left: -0.05em; }
+    .szz__item:nth-child(even)::before { right: -0.05em; }
+    /* the prose has to sit over the numeral */
+    .szz__card > * { position: relative; z-index: 1; }
     /* the zig: even beats cross to the right column and drop, so the two
        sides interleave rather than sitting as neat pairs */
     .szz__item:nth-child(even) { grid-column: 2; margin-top: clamp(70px, 9vw, 170px); }
@@ -375,21 +448,29 @@
     /* open — no panel, no border, no shadow */
     .szz__card { position: relative; }
 
-    /* marker on the spine, plus the hairline reaching out to it */
+    /* marker on the spine, plus the hairline reaching out to it.
+       Ring in the section's own tint so the node reads as cut out of the
+       spine, then a soft gold halo for depth. */
     .szz__card::before {
       content: "";
-      position: absolute; top: 16px;
-      width: 11px; height: 11px;
+      position: absolute; top: 15px;
+      width: 13px; height: 13px;
       border-radius: 50%;
       background: var(--yellow);
-      box-shadow: 0 0 0 4px var(--white);
-      z-index: 1;
+      box-shadow: 0 0 0 5px #FBFAF6,
+                  0 0 0 6px rgba(244,180,0,0.30),
+                  0 0 16px 3px rgba(244,180,0,0.30);
+      z-index: 2;
     }
     .szz__card::after {
       content: "";
       position: absolute; top: 21px;
       height: 1px;
-      background: rgba(11,26,61,0.15);
+      background: linear-gradient(90deg, rgba(11,26,61,0.05), rgba(244,180,0,0.55));
+      z-index: 1;
+    }
+    .szz__item:nth-child(even) .szz__card::after {
+      background: linear-gradient(90deg, rgba(244,180,0,0.55), rgba(11,26,61,0.05));
     }
     /* left-column beats reach right; right-column beats reach left */
     .szz__item:nth-child(odd) .szz__card::before  { right: calc(-1 * (clamp(70px, 9vw, 170px) / 2) - 5.5px); }
@@ -398,23 +479,36 @@
     .szz__item:nth-child(even) .szz__card::after  { left: -1px; width: calc(clamp(70px, 9vw, 170px) / 2 - 5px); }
 
     .szz__eyebrow {
-      display: inline-block;
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.26em; text-transform: uppercase;
       color: var(--yellow);
       margin-bottom: 14px;
     }
+    .szz__eyebrow::after {
+      content: ''; width: 26px; height: 2px; border-radius: 2px;
+      background: rgba(244,180,0,0.45);
+    }
     .szz__title {
-      margin: 0 0 20px;
-      font-size: clamp(25px, 2.5vw, 38px);
-      font-weight: 700; line-height: 1.15; letter-spacing: -0.025em;
+      margin: 0 0 22px;
+      font-size: clamp(26px, 2.7vw, 42px);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.035em;
       color: var(--navy);
+      text-wrap: balance;
     }
     .szz__card p {
       margin: 0 0 18px;
+      max-width: 62ch;
       font-size: clamp(16px, 1.15vw, 18px);
       line-height: 1.8;
-      color: #384150;
+      color: #3B4557;
+    }
+    /* the opening line of each beat carries a touch more weight, so the eye
+       has somewhere to land before it settles into the body */
+    .szz__card > p:first-of-type {
+      font-size: clamp(17px, 1.3vw, 20px);
+      line-height: 1.68;
+      color: #2E3949;
     }
     .szz__card p:last-child { margin-bottom: 0; }
 
@@ -455,7 +549,8 @@
       font-size: 14.5px; font-weight: 600; line-height: 1.2;
       color: var(--navy);
       white-space: nowrap;
-      transition: border-color 220ms ease, transform 220ms ease;
+      box-shadow: 0 1px 2px rgba(11,26,61,0.04), 0 4px 14px rgba(11,26,61,0.045);
+      transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
     }
     .szz__list li::before {
       content: "";
@@ -464,7 +559,7 @@
       border-radius: 50%;
       background: var(--yellow);
     }
-    .szz__list li:hover { border-color: rgba(244,180,0,0.85); transform: translateY(-2px); }
+    .szz__list li:hover { border-color: rgba(244,180,0,0.85); transform: translateY(-2px); box-shadow: 0 2px 4px rgba(11,26,61,0.05), 0 10px 22px rgba(11,26,61,0.08); }
     /* the pills fan in one after another once their beat is revealed */
     body.story-anim-on .szz-reveal .szz__list li {
       opacity: 0;
@@ -501,26 +596,44 @@
       .szz__item:nth-child(odd) .szz__card::before,
       .szz__item:nth-child(even) .szz__card::before { left: -34px; right: auto; }
       .szz__item:nth-child(odd) .szz__card::after,
-      .szz__item:nth-child(even) .szz__card::after { left: -22px; right: auto; width: 20px; }
+      .szz__item:nth-child(even) .szz__card::after { left: -22px; right: auto; width: 20px;
+        background: linear-gradient(90deg, rgba(244,180,0,0.55), rgba(11,26,61,0.05)); }
+      /* single rail — every numeral goes to the outer (right) edge, and comes
+         down in size so it never crowds the text at this width */
+      .szz__item { padding-top: clamp(40px, 8vw, 64px); }
+      .szz__item:nth-child(odd)::before,
+      .szz__item:nth-child(even)::before {
+        left: auto; right: 0; top: 0;
+        font-size: clamp(54px, 9vw, 80px);
+      }
       body.story-anim-on .szz-reveal:nth-child(odd)  .szz__card,
       body.story-anim-on .szz-reveal:nth-child(even) .szz__card { transform: translateY(28px); }
     }
 
     /* ── the closing Make in India block keeps single-column prose ───────── */
     .story { max-width: 860px; margin: 0 auto; }
-    .story p { font-size: 17px; line-height: 1.78; color: #384150; margin: 0 0 18px; }
+    .story p { font-size: 17px; line-height: 1.78; color: #3B4557; margin: 0 0 18px; }
     .story__h {
-      font-size: clamp(21px, 2.4vw, 30px);
-      font-weight: 700; letter-spacing: -0.015em; color: var(--navy);
-      margin: 30px 0 16px; padding-top: 20px;
+      font-size: clamp(23px, 2.6vw, 34px);
+      font-weight: 700; letter-spacing: -0.03em; color: var(--navy);
+      margin: 34px 0 16px; padding-top: 22px;
       border-top: 3px solid var(--yellow); display: inline-block;
     }
+    /* The closing statement of the page — given the weight of one, with a
+       gradient rule instead of a flat bar so it matches the spine above. */
     .story__pull {
-      font-size: clamp(19px, 2vw, 25px) !important;
-      line-height: 1.5 !important;
+      position: relative;
+      font-size: clamp(20px, 2.2vw, 28px) !important;
+      line-height: 1.45 !important;
       font-weight: 700; color: var(--navy) !important;
+      letter-spacing: -0.02em;
       margin: 0 0 10px !important;
-      padding-left: 22px; border-left: 4px solid var(--yellow);
+      padding-left: 26px; border-left: 0;
+    }
+    .story__pull::before {
+      content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
+      width: 4px; border-radius: 2px;
+      background: linear-gradient(180deg, var(--yellow), rgba(244,180,0,0.25));
     }
     /* Sized four times. At the full 860px prose measure it still read as a
        banner filling the frame: the source is a 1600x853 wide crop and most of
@@ -531,9 +644,20 @@
     .story__figure {
       /* 640, not the prose column's full 860: at 860 the art filled the frame
          on its own; at 640 the paragraph below it is on screen with it. */
+      position: relative;
       max-width: 640px;
       margin: clamp(20px, 2.4vw, 28px) auto clamp(18px, 2vw, 26px);
     }
+    /* A glow, deliberately NOT a drop shadow — see the note above: the
+       artwork's own ground is near-white, so a shadow drew a box around the
+       flag wash. A radial behind it grounds the emblem without framing it. */
+    .story__figure::before {
+      content: ''; position: absolute; z-index: 0;
+      left: -6%; right: -6%; top: 4%; bottom: 4%;
+      background: radial-gradient(52% 48% at 50% 50%, rgba(244,180,0,0.10) 0%, rgba(244,180,0,0) 72%);
+      pointer-events: none;
+    }
+    .story__figure img { position: relative; z-index: 1; }
     .story__figure img {
       display: block; width: 100%; height: auto;
       border-radius: var(--radius-lg, 16px);
