@@ -334,6 +334,49 @@
     .team-grid--leaders .member-card--quoted:nth-child(odd)  { justify-self: start; }
     .team-grid--leaders .member-card--quoted:nth-child(even) { justify-self: end; }
     .member-card--quoted:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(11,26,61,0.12); }
+
+    /* ── leadership zig-zag reveal ────────────────────────────────────────
+       Each card comes in from the side it is justified to, so the alternation
+       is what the eye follows down the column, and they open one after
+       another rather than all at once. Same shape as the Our Story beats.
+
+       Armed only by #leaders-reveal adding .leaders-anim-on, and that script
+       bails out under prefers-reduced-motion or without IntersectionObserver
+       — so with no JS every card is simply visible rather than stuck at
+       opacity 0. */
+    body.leaders-anim-on .lead-reveal {
+      opacity: 0;
+      transition: opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.leaders-anim-on .team-grid--leaders .lead-reveal:nth-child(odd)  { transform: translateX(-58px); }
+    body.leaders-anim-on .team-grid--leaders .lead-reveal:nth-child(even) { transform: translateX(58px); }
+    body.leaders-anim-on .lead-reveal.is-in { opacity: 1; transform: none; }
+
+    /* the portrait and the quote settle a beat after the card itself, which
+       is what stops it reading as one flat slab sliding in */
+    body.leaders-anim-on .lead-reveal .member-card__person,
+    body.leaders-anim-on .lead-reveal .member-card__quote {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.leaders-anim-on .lead-reveal .member-card__person { transition-delay: 180ms; }
+    body.leaders-anim-on .lead-reveal .member-card__quote  { transition-delay: 300ms; }
+    body.leaders-anim-on .lead-reveal.is-in .member-card__person,
+    body.leaders-anim-on .lead-reveal.is-in .member-card__quote { opacity: 1; transform: none; }
+
+    @media (max-width: 640px) {
+      /* the cards are full width here, so a sideways entrance has nowhere to
+         come from — they lift instead */
+      body.leaders-anim-on .team-grid--leaders .lead-reveal:nth-child(odd),
+      body.leaders-anim-on .team-grid--leaders .lead-reveal:nth-child(even) { transform: translateY(30px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.leaders-anim-on .lead-reveal,
+      body.leaders-anim-on .lead-reveal .member-card__person,
+      body.leaders-anim-on .lead-reveal .member-card__quote { opacity: 1; transform: none; transition: none; }
+    }
     .member-card__person { flex: 0 0 176px; text-align: center; }
     .member-card--quoted .member-card__avatar { width: 124px; height: 124px; margin: 0 auto 14px; }
     .member-card__quote { flex: 1; margin: 0; border-left: 3px solid var(--yellow); padding-left: 26px; }
@@ -487,7 +530,7 @@
           <p>The founders and leaders driving Isler’s design-led manufacturing vision.</p>
         </div>
         <div class="team-grid team-grid--leaders">
-          <article class="member-card member-card--quoted">
+          <article class="member-card member-card--quoted lead-reveal">
             <div class="member-card__person">
               <div class="member-card__avatar"><img src="assets/images/team/pravesh-kumar.webp" alt="Pravesh Kumar" loading="lazy"></div>
               <h3 class="member-card__name">Pravesh Kumar</h3>
@@ -498,7 +541,7 @@
               <cite>— Pravesh Kumar</cite>
             </blockquote>
           </article>
-          <article class="member-card member-card--quoted">
+          <article class="member-card member-card--quoted lead-reveal">
             <div class="member-card__person">
               <div class="member-card__avatar"><img src="assets/images/team/chirag-kakkar.webp" alt="Chirag Kakkar" loading="lazy"></div>
               <h3 class="member-card__name">Chirag Kakkar</h3>
@@ -509,7 +552,7 @@
               <cite>— Chirag Kakkar</cite>
             </blockquote>
           </article>
-          <article class="member-card member-card--quoted">
+          <article class="member-card member-card--quoted lead-reveal">
             <div class="member-card__person">
               <div class="member-card__avatar"><img src="assets/images/team/mudit-mishra.webp" alt="Mudit Mishra" loading="lazy"></div>
               <h3 class="member-card__name">Mudit Mishra</h3>
@@ -520,7 +563,7 @@
               <cite>— Mudit Mishra</cite>
             </blockquote>
           </article>
-          <article class="member-card member-card--quoted">
+          <article class="member-card member-card--quoted lead-reveal">
             <div class="member-card__person">
               <div class="member-card__avatar"><img src="assets/images/team/varun-krishna.webp" alt="Varun Krishna R" loading="lazy"></div>
               <h3 class="member-card__name">Varun Krishna R</h3>
@@ -749,6 +792,46 @@
     }());
   </script>
   <script src="assets/js/nav.js" defer></script>
+  <!-- Leadership zig-zag reveal. Intersection only marks a card eligible; a
+       queue releases them in document order so card N+1 never opens before
+       card N, which is what makes it read as a sequence rather than as
+       whatever happened to cross the threshold. -->
+  <script id="leaders-reveal">
+  (function () {
+    var cards = [].slice.call(document.querySelectorAll('.lead-reveal'));
+    if (!cards.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) return;
+
+    document.body.classList.add('leaders-anim-on');
+
+    var GAP = 240, next = 0, eligible = [], timer = null;
+
+    function release() {
+      timer = null;
+      if (next >= cards.length || !eligible[next]) return;
+      cards[next].classList.add('is-in');
+      next++;
+      timer = setTimeout(release, GAP);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        /* everything above this card has been scrolled past, so mark it
+           eligible too — otherwise landing mid-page leaves an earlier card
+           that never intersected blocking every card after it */
+        var i = cards.indexOf(e.target);
+        for (var j = 0; j <= i; j++) eligible[j] = true;
+      });
+      if (timer === null) release();
+    }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+
+    cards.forEach(function (c) { io.observe(c); });
+  }());
+  </script>
   <script src="assets/js/search.js" defer></script>
 </body>
 </html>
