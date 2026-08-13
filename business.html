@@ -45,71 +45,41 @@
     }
 
     /* ── OUR BUSINESS mosaic ──────────────────────────────────────────────
-       Rebuilt 2026-08-13 to match the client's reference screenshot
-       (Downloads/"aisa chiaye .png", the Vestel our-business band) exactly.
-
-       THREE things in that reference the first build got wrong, and they are
-       the whole character of it — do not quietly undo them:
-         1. the heading and standfirst are a PANEL INSIDE the grid, first
-            column, not a centred header above it;
-         2. tile labels sit TOP-left with a short vertical accent bar beside
-            them, not bottom-left with a rule underneath;
-         3. everything is one flush band — panel | one big tile | two stacked
-            | one tall — rather than a block of tiles under a title.
-
-       The reference carries three image tiles; Isler has four categories, so
-       the right-hand column is doubled rather than the shape being changed.
-       Tiles are links, so the block is keyboard-reachable without any JS. */
+       Replaces the .pcx-* carousel. Four categories, no horizontal scroll,
+       laid out Vestel-style: one tall lead tile beside two stacked tiles,
+       then a wide tile across the bottom. Tiles are links, so the whole
+       block is keyboard-reachable without any JS. */
     .obz { padding: clamp(40px, 4.5vw, 68px) clamp(24px, 5vw, 96px); }
-
-    .obz__grid {
-      max-width: 1400px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(210px, 0.82fr) 1.85fr 1.05fr 1.05fr;
-      /* minmax(..., auto), not a fixed height: the panel spans both rows and
-         its paragraph was overflowing the band by 9-21px between 1200 and
-         1600, clipping the last line. The rows now grow to fit it. */
-      grid-auto-rows: minmax(clamp(112px, 11vw, 168px), auto);
-      gap: clamp(8px, 0.7vw, 14px);
-    }
-    /* Every cell is placed EXPLICITLY. Auto-placement cannot produce this
-       shape from source order — after the lead tile takes column 2 across
-       both rows, the next auto item lands in column 3 row 1 and the one after
-       it in column 4, not underneath. Explicit placement also lets the markup
-       stay in reading order, so tab order matches the categories. */
-    .obz__panel        { grid-column: 1; grid-row: 1 / span 2; }
-    .obz-tile--lead    { grid-column: 2; grid-row: 1 / span 2; }
-    .obz-tile--stack-a { grid-column: 3; grid-row: 1; }
-    .obz-tile--stack-b { grid-column: 3; grid-row: 2; }
-    .obz-tile--tall    { grid-column: 4; grid-row: 1 / span 2; }
-
-    /* ── the text panel — the reference's left-hand card ──────────────────
-       Logo mark at the top, the heading under it, a hairline, and the
-       standfirst pushed to the BOTTOM of the panel (margin-top:auto), which
-       is what makes it sit against the base of the band like the reference
-       rather than floating under the title. */
-    .obz__panel {
-      display: flex; flex-direction: column;
-      padding: clamp(18px, 1.6vw, 28px);
-      background: var(--off-white, #F4F5F7);
-      border-radius: var(--radius-lg);
-    }
-    /* the site mark carries the wordmark beside the glyph, so it needs more
-       width than the reference's bare logo to read at all */
-    .obz__mark { display: block; width: clamp(64px, 5.4vw, 92px); height: auto; margin-bottom: clamp(14px, 1.4vw, 22px); }
+    /* The head shares the grid's width so the rule under "Our Business"
+       lines up with the left and right edges of the tiles below it. It was
+       900px against a 1240px grid, which is why the heading did not sit in
+       the same frame as the categories. Keep these two widths equal. */
+    .obz__head { max-width: 1160px; margin: 0 auto clamp(28px, 3.4vw, 44px); text-align: center; }
     .obz__title {
-      margin: 0 0 clamp(12px, 1.2vw, 18px);
-      font-size: clamp(22px, 2.2vw, 34px);
-      font-weight: 700; line-height: 1.08; letter-spacing: -0.035em;
-      color: var(--navy);
-      padding-bottom: clamp(12px, 1.2vw, 18px);
-      border-bottom: 1px solid rgba(11,26,61,0.16);
+      margin: 0 0 18px;
+      font-size: clamp(23px, 2.4vw, 32px);
+      font-weight: 700; letter-spacing: -0.025em; color: var(--navy);
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(11,26,61,0.14);
     }
-    .obz__intro {
-      margin: auto 0 0;
-      font-size: clamp(11.5px, 0.82vw, 13.5px);
-      line-height: 1.62; color: var(--gray-mid);
+    .obz__intro { margin: 0 auto; max-width: 78ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.72; color: var(--gray-mid); }
+
+    /* The Vestel-style uneven mosaic: a tall lead tile beside two stacked
+       tiles, then one wide tile underneath. This first read as 'weird' only
+       because the tiles were carrying 4-40 KB catalogue cut-outs that cropped
+       badly at these sizes — they are on the full lifestyle photography now,
+       which is what the shape was designed for. */
+    .obz__grid {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: clamp(118px, 11.4vw, 162px);
+      gap: clamp(10px, 0.9vw, 16px);
     }
+    /* lead tile spans both rows of the top block */
+    .obz-tile--lead { grid-row: span 2; }
+    /* the fourth category runs the full width underneath */
+    .obz-tile--wide { grid-column: 1 / -1; }
 
     .obz-tile {
       position: relative;
@@ -126,62 +96,40 @@
       object-fit: cover; display: block;
       transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    /* darkens the TOP of the tile, because that is where the label now sits */
     .obz-tile__scrim {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(6,15,36,0.72) 0%, rgba(6,15,36,0.26) 44%, rgba(6,15,36,0.04) 100%);
+      background: linear-gradient(to top, rgba(6,15,36,0.80) 0%, rgba(6,15,36,0.30) 48%, rgba(6,15,36,0.05) 100%);
       transition: background 300ms ease;
     }
     .obz-tile__label {
-      position: absolute; top: clamp(13px, 1.2vw, 20px); left: clamp(15px, 1.4vw, 22px); right: clamp(15px, 1.4vw, 22px);
-      display: flex; align-items: flex-start; gap: clamp(8px, 0.7vw, 11px);
-      font-size: clamp(14px, 1.1vw, 17px);
-      font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;
+      position: absolute; left: clamp(16px, 1.5vw, 24px); bottom: clamp(14px, 1.5vw, 22px); right: clamp(16px, 1.5vw, 24px);
+      font-size: clamp(15px, 1.25vw, 19px);
+      font-weight: 700; line-height: 1.25; letter-spacing: -0.015em;
       color: #fff;
     }
-    /* the short accent bar beside the label — red in the reference, yellow
-       here. It grows on hover; that replaces the underline the old tiles had. */
-    .obz-tile__label::before {
+    /* the yellow rule grows out from under the label on hover */
+    .obz-tile__label::after {
       content: '';
-      flex: 0 0 auto;
-      width: 3px; height: 1.1em;
-      border-radius: 2px;
+      display: block;
+      width: 34px; height: 3px;
+      margin-top: 12px;
       background: var(--yellow);
-      transition: height 380ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     .obz-tile:hover .obz-tile__img,
     .obz-tile:focus-visible .obz-tile__img { transform: scale(1.05); }
     .obz-tile:hover .obz-tile__scrim,
     .obz-tile:focus-visible .obz-tile__scrim {
-      background: linear-gradient(to bottom, rgba(6,15,36,0.82) 0%, rgba(6,15,36,0.40) 52%, rgba(6,15,36,0.12) 100%);
+      background: linear-gradient(to top, rgba(6,15,36,0.88) 0%, rgba(6,15,36,0.44) 55%, rgba(6,15,36,0.14) 100%);
     }
-    .obz-tile:hover .obz-tile__label::before,
-    .obz-tile:focus-visible .obz-tile__label::before { height: 2.3em; }
+    .obz-tile:hover .obz-tile__label::after,
+    .obz-tile:focus-visible .obz-tile__label::after { width: 86px; }
     .obz-tile:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 
-    /* Four columns need a lot of width. Below 1180 the band folds to
-       panel-across-the-top plus a 2x2 of tiles, which keeps the shape
-       readable; below 760 it is a single column. */
-    @media (max-width: 1180px) {
-      /* rows size to content here, with the tiles carrying their own
-         min-height. A fixed grid-auto-rows clipped the panel: once it is
-         a full-width cell its paragraph is taller than one tile row. */
-      .obz__grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
-      .obz-tile { min-height: clamp(150px, 22vw, 215px); }
-      /* drop every explicit placement, or the cells keep reaching for
-         columns 3 and 4 that no longer exist */
-      .obz-tile--lead,
-      .obz-tile--stack-a,
-      .obz-tile--stack-b,
-      .obz-tile--tall { grid-column: auto; grid-row: auto; }
-      .obz__panel { grid-row: auto; grid-column: 1 / -1; }
-      .obz__title { font-size: clamp(22px, 3.4vw, 30px); }
-      .obz__intro { margin-top: 12px; font-size: 13.5px; max-width: 82ch; }
-    }
     @media (max-width: 760px) {
-      .obz__grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-      .obz-tile { min-height: clamp(150px, 40vw, 210px); }
-      .obz__panel { grid-column: auto; }
+      .obz__grid { grid-template-columns: 1fr; grid-auto-rows: clamp(140px, 34vw, 190px); }
+      .obz-tile--lead { grid-row: auto; }
+      .obz-tile--wide { grid-column: auto; }
     }
     /* ── Tile reveal ──────────────────────────────────────────────────────
        The tiles rise in one after another as the mosaic scrolls into view.
@@ -199,20 +147,20 @@
       opacity: 1;
       transform: none;
     }
-    /* the text panel lifts in just ahead of the tiles */
-    body.obz-anim-on .obz__panel {
+    /* the head lifts in just ahead of the tiles */
+    body.obz-anim-on .obz__head {
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 560ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
     }
-    body.obz-anim-on .obz__grid.is-in .obz__panel { opacity: 1; transform: none; }
+    body.obz-anim-on .obz__head.is-in { opacity: 1; transform: none; }
 
     @media (prefers-reduced-motion: reduce) {
       body.obz-anim-on .obz-tile,
-      body.obz-anim-on .obz__panel { opacity: 1; transform: none; transition: none; }
+      body.obz-anim-on .obz__head { opacity: 1; transform: none; transition: none; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .obz-tile__img, .obz-tile__scrim, .obz-tile__label::before { transition: none; }
+      .obz-tile__img, .obz-tile__scrim, .obz-tile__label::after { transition: none; }
       .obz-tile:hover .obz-tile__img { transform: none; }
     }
 
@@ -404,11 +352,11 @@
     <nav class="biz-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Our Business</nav>
     <span class="biz-hero__eyebrow">Our Business</span>
     <h1 class="biz-hero__title">Built to Manufacture at Your Brand's Standard</h1>
-    <!-- Client 2026-08-13, verbatim. This replaces the OEM/ODM/MOQ pitch that
-         used to sit here. Note it is the "Discover Isler's wide range…" line
-         that was taken OUT of the mosaic head on 2026-08-12 — the client did
-         not want it under "Our Business", they want it in the hero. Do not
-         put a second copy back into the mosaic. -->
+    <!-- Client 2026-08-13, verbatim — the small line under the headline. It
+         replaces the OEM/ODM/MOQ pitch that used to sit here. Note this is the
+         "Discover Isler's wide range…" sentence that was taken OUT of the
+         mosaic head on 2026-08-12: they want it under the headline, not under
+         "Our Business". Do not put a second copy back into the mosaic. -->
     <p class="biz-hero__intro">Discover Isler&rsquo;s wide range of innovative products designed to shape modern living. From Built in Appliances and Countertop cooking to small domestic appliances and other home appliances, Isler offers superior quality and technology to meet your every need.</p>
   </div>
 </header>
@@ -434,40 +382,35 @@
      real category photography; nothing else needs to change.
 ═══════════════════════════════════════════════════════════════════ -->
 <section class="obz" aria-labelledby="obz-h">
+  <div class="obz__head">
+    <h2 class="obz__title" id="obz-h">Our Business</h2>
+    <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
+         heading, not in the hero. Verbatim from the doc. The doc also carries
+         a "Discover Isler's wide range of innovative products…" line for this
+         page, which used to sit here — it is out at the client's request. -->
+    <p class="obz__intro">Isler is a global company that stands out with its capabilities in production, research &amp; development, innovation, design, and brand management in the fields of electrical &amp; electronic appliances.</p>
+  </div>
+
   <div class="obz__grid">
-
-    <!-- The reference's left-hand card: mark, heading, hairline, standfirst.
-         It is the FIRST CELL OF THE GRID, not a header above it — that is the
-         thing the client kept pointing at in the screenshot. -->
-    <div class="obz__panel">
-      <img class="obz__mark" src="assets/images/newlogo-removebg-preview.webp" alt="" width="46" height="46" decoding="async">
-      <h2 class="obz__title" id="obz-h">Our<br>Business</h2>
-      <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
-           heading, not in the hero. Verbatim from the doc. The doc also carries
-           a "Discover Isler's wide range of innovative products…" line for this
-           page, which used to sit here — it is out at the client's request. -->
-      <p class="obz__intro">Isler is a global company that stands out with its capabilities in production, research &amp; development, innovation, design, and brand management in the fields of electrical &amp; electronic appliances.</p>
-    </div>
-
     <a style="--i:0" class="obz-tile obz-tile--lead" href="built-in-appliances.html">
       <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-new.webp" alt="" decoding="async">
       <span class="obz-tile__scrim" aria-hidden="true"></span>
       <span class="obz-tile__label">Built-in Appliances</span>
     </a>
 
-    <a style="--i:1" class="obz-tile obz-tile--stack-a" href="cooktops.html">
+    <a style="--i:1" class="obz-tile" href="cooktops.html">
       <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-hobtops.webp" alt="" decoding="async">
       <span class="obz-tile__scrim" aria-hidden="true"></span>
       <span class="obz-tile__label">Counter-top Cooking</span>
     </a>
 
-    <a style="--i:2" class="obz-tile obz-tile--stack-b" href="small-appliances.html">
+    <a style="--i:2" class="obz-tile" href="small-appliances.html">
       <img class="obz-tile__img" fetchpriority="low" src="assets/images/small-appliances-1.webp" alt="" decoding="async">
       <span class="obz-tile__scrim" aria-hidden="true"></span>
       <span class="obz-tile__label">Small Domestic Appliances</span>
     </a>
 
-    <a style="--i:3" class="obz-tile obz-tile--tall" href="other-home-appliances.html">
+    <a style="--i:3" class="obz-tile obz-tile--wide" href="other-home-appliances.html">
       <img class="obz-tile__img" fetchpriority="low" src="assets/catalog/air-purifiers/jh22.webp" alt="" decoding="async">
       <span class="obz-tile__scrim" aria-hidden="true"></span>
       <span class="obz-tile__label">Other Home Appliances</span>
@@ -629,8 +572,7 @@
 <script id="obz-reveal">
 (function () {
   var grid = document.querySelector('.obz__grid');
-  // the panel is a grid cell now, so it reveals with the grid rather than
-  // needing an observer of its own
+  var head = document.querySelector('.obz__head');
   if (!grid) return;
 
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -646,6 +588,7 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
 
+  if (head) io.observe(head);
   io.observe(grid);
 }());
 </script>
