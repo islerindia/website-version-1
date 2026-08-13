@@ -395,7 +395,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       column-gap: clamp(70px, 9vw, 170px);
-      row-gap: clamp(56px, 7vw, 120px);
+      /* Client 2026-08-13: more separation top-to-bottom. NOTE the column-gap
+         above is load-bearing — the marker and connector offsets are computed
+         from it — so only the vertical values move. */
+      row-gap: clamp(72px, 8.6vw, 150px);
     }
     /* the hairline the markers sit on — the only structure left.
        Gold through the middle third, fading to navy hairline at both ends, so
@@ -442,8 +445,8 @@
     .szz__card > * { position: relative; z-index: 1; }
     /* the zig: even beats cross to the right column and drop, so the two
        sides interleave rather than sitting as neat pairs */
-    .szz__item:nth-child(even) { grid-column: 2; margin-top: clamp(70px, 9vw, 170px); }
-    .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: clamp(-170px, -9vw, -70px); }
+    .szz__item:nth-child(even) { grid-column: 2; margin-top: clamp(112px, 14vw, 262px); }
+    .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: clamp(-262px, -14vw, -112px); }
 
     /* open — no panel, no border, no shadow */
     .szz__card { position: relative; }
@@ -1425,12 +1428,41 @@
 
     document.body.classList.add('story-anim-on');
 
+    /* Client 2026-08-13: the beats should open one after another, in zig-zag
+       order, rather than each firing the moment it happens to cross the
+       threshold. Left to itself the observer opens whatever is in view — and
+       because the two columns overlap vertically, a left beat and the right
+       beat below it often crossed together and popped at the same moment,
+       which is the opposite of a sequence.
+
+       So intersection only marks a beat ELIGIBLE; a queue releases them in
+       document order, never letting beat N+1 open before beat N, with a fixed
+       gap between releases. */
+    var GAP = 260;      // ms between one beat opening and the next
+    var next = 0;       // the next beat allowed to open, in document order
+    var eligible = [];
+    var timer = null;
+
+    function release() {
+      timer = null;
+      if (next >= cards.length || !eligible[next]) return;
+      cards[next].classList.add('is-in');
+      next++;
+      timer = setTimeout(release, GAP);
+    }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.classList.add('is-in');
         io.unobserve(e.target);   // reveal once, do not re-hide on scroll up
+        /* Everything above this beat has been scrolled past, so mark it
+           eligible too. Without this, landing mid-page — a #hash link, a
+           restored scroll position — leaves an earlier beat that never
+           intersected blocking every beat after it. */
+        var i = cards.indexOf(e.target);
+        for (var j = 0; j <= i; j++) eligible[j] = true;
       });
+      if (timer === null) release();
     }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
 
     cards.forEach(function (c) { io.observe(c); });
