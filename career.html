@@ -128,7 +128,16 @@
 
     .page-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; padding: 160px clamp(24px, 5vw, 96px) 64px; overflow: hidden; background: var(--navy); }
     .page-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
-    .page-hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,15,36,0.94) 0%, rgba(6,15,36,0.6) 55%, rgba(6,15,36,0.5) 100%); }
+    /* Client 2026-08-13: the team photo was barely readable. Layout is
+       unchanged — this is the scrim only. The old ramp never went below 0.5,
+       so even the top of the frame, which is all photo and no text, sat under
+       half a stop of navy. It now stays heavy across the bottom third where
+       the copy actually is and opens up above it, where the team is. */
+    .page-hero__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,15,36,0.92) 0%, rgba(6,15,36,0.68) 30%, rgba(6,15,36,0.32) 62%, rgba(6,15,36,0.14) 100%); }
+    /* buys back the contrast the lighter scrim gives up, without darkening
+       the picture again */
+    .page-hero__title,
+    .page-hero__desc { text-shadow: 0 2px 18px rgba(6,15,36,0.55); }
     .page-hero__inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
     .page-hero__breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
     .page-hero__breadcrumb a { color: rgba(255,255,255,0.65); transition: color .15s; }
@@ -137,89 +146,6 @@
     .page-hero__eyebrow { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
     .page-hero__title { font-size: clamp(30px, 5vw, 54px); font-weight: 700; color: #fff; line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; }
     .page-hero__desc { font-size: clamp(15px, 1.5vw, 18px); color: rgba(255,255,255,0.8); line-height: 1.6; margin-top: 18px; max-width: 62ch; }
-
-    /* ── the team photo hero (client 2026-08-13: "picture sahi se dikh nahi rahi")
-       Three separate things were hiding it, and all three are the shared
-       .page-hero treatment meeting a photo it was not designed for:
-
-         1. The group stands in the LEFT half of the frame and the copy is also
-            left-aligned, so the headline sat straight across their faces.
-         2. The photo is 1600x841 (1.9:1) inside a hero running about 3.4:1 at
-            desktop, so `cover` cropped a narrow band out of the middle and cut
-            the group off at the shins and the foreheads.
-         3. The scrim is a bottom-up wash, i.e. heaviest exactly where the
-            people are.
-
-       So on this page only: the copy moves to the right half, over the
-       building; the frame gets taller and anchors to the bottom of the photo
-       so the whole group is in it; and the scrim runs right-to-left, dark
-       behind the text and nearly clear over the team. */
-    .page-hero--team {
-      min-height: clamp(460px, 64vh, 640px);
-      align-items: center;
-      padding-top: clamp(120px, 12vh, 168px);
-      padding-bottom: clamp(32px, 5vh, 64px);
-    }
-    .page-hero--team .page-hero__bg { background-position: center bottom; }
-    .page-hero--team .page-hero__bg::after {
-      background: linear-gradient(to left,
-        rgba(6,15,36,0.93) 0%,
-        rgba(6,15,36,0.86) 26%,
-        rgba(6,15,36,0.52) 50%,
-        rgba(6,15,36,0.16) 72%,
-        rgba(6,15,36,0.08) 100%);
-    }
-    .page-hero--team .page-hero__inner {
-      max-width: 1200px;
-      display: flex;
-      justify-content: flex-end;
-    }
-    .page-hero--team .page-hero__copy { max-width: 46ch; }
-    .page-hero--team .page-hero__title { max-width: none; }
-    .page-hero--team .page-hero__desc { max-width: none; }
-
-    /* Below this the copy cannot sit beside the photo — there is no width for
-       a second column — so it stacks instead: the frame gets tall enough that
-       `cover` stops cropping the photo vertically at all, the copy drops to
-       the BOTTOM of it, and the scrim is weighted to the bottom too. That
-       leaves the team in the clear upper half with the text under them,
-       rather than across their faces.
-
-       The height is what makes the crop work. At 480 wide a short frame
-       renders the photo at its own 1.9:1 and there is nothing to pan; at
-       ~560px tall it renders 1066 wide instead, and 32% then centres the
-       window on the group rather than on the building. */
-    @media (max-width: 900px) {
-      .page-hero--team {
-        min-height: clamp(520px, 76vh, 660px);
-        align-items: flex-end;
-        padding-top: clamp(110px, 14vh, 150px);
-        padding-bottom: clamp(28px, 4vh, 48px);
-      }
-      .page-hero--team .page-hero__inner { display: block; }
-      .page-hero--team .page-hero__copy { max-width: none; }
-      .page-hero--team .page-hero__bg { background-position: 32% center; }
-      .page-hero--team .page-hero__bg::after {
-        background: linear-gradient(to top,
-          rgba(6,15,36,0.96) 0%,
-          rgba(6,15,36,0.88) 32%,
-          rgba(6,15,36,0.34) 62%,
-          rgba(6,15,36,0.12) 100%);
-      }
-    }
-    /* Phone widths crop hardest, so the window has to be aimed properly: 32%
-       still landed half on the building. Taller frame (which also scales the
-       photo up, so the faces are not tiny) and the pan moved left onto the
-       densest part of the group. */
-    @media (max-width: 620px) {
-      /* .page-hero.page-hero--team, not .page-hero--team: a single class is
-         specificity 0,1,0, exactly the same as the .page-hero { min-height:
-         54vh } in the max-width:560px block further down this stylesheet — and
-         that one is later in source order, so it won and the frame collapsed
-         to 456px on a phone. Qualifying it takes the specificity to 0,2,0. */
-      .page-hero.page-hero--team { min-height: clamp(560px, 82vh, 700px); }
-      .page-hero--team .page-hero__bg { background-position: 16% center; }
-    }
 
     /* CTA strip */
     /* ══════════════════════════════════════════════════════════════
@@ -528,21 +454,17 @@
   <main id="main-content">
 
     <!-- PAGE HERO -->
-    <section class="page-hero page-hero--team" aria-labelledby="page-title">
+    <section class="page-hero" aria-labelledby="page-title">
       <div class="page-hero__bg" style="background-image:url('assets/images/careers-hero.webp');" aria-hidden="true"></div>
       <div class="page-hero__inner">
-        <!-- wrapper so the copy can be held to one column on the right of the
-             frame without the flex row stretching it — see .page-hero--team -->
-        <div class="page-hero__copy">
-          <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html">Home</a>
-            <span class="page-hero__breadcrumb-sep" aria-hidden="true"></span>
-            <span aria-current="page">Career</span>
-          </nav>
-          <span class="page-hero__eyebrow">Join Our Team</span>
-          <h1 class="page-hero__title" id="page-title">Empowering Innovation, Excellence, and Growth</h1>
-          <p class="page-hero__desc">Be part of India's first design-focused kitchen appliance manufacturing company. We're looking for passionate people to help us build the future.</p>
-        </div>
+        <nav class="page-hero__breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="page-hero__breadcrumb-sep" aria-hidden="true"></span>
+          <span aria-current="page">Career</span>
+        </nav>
+        <span class="page-hero__eyebrow">Join Our Team</span>
+        <h1 class="page-hero__title" id="page-title">Empowering Innovation, Excellence, and Growth</h1>
+        <p class="page-hero__desc">Be part of India's first design-focused kitchen appliance manufacturing company. We're looking for passionate people to help us build the future.</p>
       </div>
     </section>
 
