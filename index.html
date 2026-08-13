@@ -2826,7 +2826,13 @@
        grid capped at 1400 on top of it, so at 1600 roughly 100px of each
        margin was empty. Both are cut so the band stretches wider, and the
        vertical padding comes down with it. */
-    .obz { padding: clamp(22px, 2.4vw, 38px) clamp(16px, 2.6vw, 48px); }
+    .obz { padding: clamp(10px, 1vw, 16px) clamp(16px, 2.6vw, 48px) clamp(22px, 2.4vw, 38px); }
+    /* Most of the gap above the band was never the band's: #brands carries
+       var(--space-xl) = 80px of bottom padding, so trimming .obz alone left
+       ~92px of the original 118px in place. This trims the other side of the
+       same gap. Scoped to the homepage's own <style>, and it only affects
+       what sits between Brands and this band. */
+    #brands { padding-bottom: clamp(20px, 2.2vw, 36px); }
 
     .obz__grid {
       max-width: 1680px; margin: 0 auto;
