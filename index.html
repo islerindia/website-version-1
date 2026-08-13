@@ -2251,7 +2251,10 @@
       content: '';
       display: block;
       width: clamp(40px, 4vw, 62px); height: 3px;
-      margin: 0 auto clamp(16px, 1.6vw, 24px);
+      /* Trimmed 2026-08-13 ("thoda upar"): the rule plus this margin added
+         ~27px above the heading when it went in, which is most of what
+         pushed the heading down from where it used to sit. */
+      margin: 0 auto clamp(9px, 0.9vw, 14px);
       border-radius: 2px;
       background: linear-gradient(90deg, rgba(244,180,0,0.30), var(--yellow), rgba(244,180,0,0.30));
     }
@@ -2423,6 +2426,10 @@
            floor: the navbar is pinned on the homepage (no auto-hide), so
            anything less reads as the heading touching the bar. The heading and
            its intro travel together — they are one block. */
+        /* Tried 74px / 7.0vh on 2026-08-13 and put it back: it left only 8px
+           between the pinned bar and the gold rule at 1366x768 and 1280x720,
+           which reads as the block tucking under the navbar. The heading was
+           moved up by trimming the rule's own margin instead. */
         padding-top: clamp(76px, 7.4vh, 88px);
         /* Trimmed from clamp(24px,4vh,72px) on 2026-08-12 to pay for the taller
            band photo ("length bada kar de"). The client cleared this: "niche
