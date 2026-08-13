@@ -31,6 +31,11 @@
     function setVis() {
       var w = window.innerWidth, n = 1;
       if (w >= 1200) n = 4; else if (w >= 900) n = 3; else if (w >= 600) n = 2;
+      // Never show every card at once, or sliding would be a no-op: the track
+      // holds four super-categories, so at >=1200px a naive n=4 would fill the
+      // viewport and each step would swap a card for an identical one. Keeping
+      // one card off-screen means every slide brings a new category into view.
+      n = Math.min(n, track.children.length - 1);
       root.style.setProperty('--vis', n);
     }
     function gap() { return parseFloat(getComputedStyle(track).columnGap) || 24; }
