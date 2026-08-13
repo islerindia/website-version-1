@@ -2821,10 +2821,15 @@
        The reference carries three image tiles; Isler has four categories, so
        the right-hand column is doubled rather than the shape being changed.
        Tiles are links, so the block is keyboard-reachable without any JS. */
-    .obz { padding: clamp(40px, 4.5vw, 68px) clamp(24px, 5vw, 96px); }
+    /* Client 2026-08-13: the band had too much air on all four sides. The
+       side padding was the homepage's usual clamp(24px,5vw,96px) and the
+       grid capped at 1400 on top of it, so at 1600 roughly 100px of each
+       margin was empty. Both are cut so the band stretches wider, and the
+       vertical padding comes down with it. */
+    .obz { padding: clamp(22px, 2.4vw, 38px) clamp(16px, 2.6vw, 48px); }
 
     .obz__grid {
-      max-width: 1400px; margin: 0 auto;
+      max-width: 1680px; margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(210px, 0.82fr) 1.85fr 1.05fr 1.05fr;
       /* minmax(..., auto), not a fixed height: the panel spans both rows and
@@ -2855,9 +2860,6 @@
       background: var(--off-white, #F4F5F7);
       border-radius: var(--radius-lg);
     }
-    /* the site mark carries the wordmark beside the glyph, so it needs more
-       width than the reference's bare logo to read at all */
-    .obz__mark { display: block; width: clamp(64px, 5.4vw, 92px); height: auto; margin-bottom: clamp(14px, 1.4vw, 22px); }
     .obz__title {
       margin: 0 0 clamp(12px, 1.2vw, 18px);
       font-size: clamp(22px, 2.2vw, 34px);
@@ -3615,7 +3617,6 @@
          It is the FIRST CELL OF THE GRID, not a header above it — that is the
          thing the client kept pointing at in the screenshot. -->
     <div class="obz__panel">
-      <img class="obz__mark" src="assets/images/newlogo-removebg-preview.webp" alt="" width="46" height="46" decoding="async">
       <h2 class="obz__title" id="obz-h">Our<br>Business</h2>
       <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
            heading, not in the hero. Verbatim from the doc. The doc also carries
