@@ -151,12 +151,9 @@
     @media (prefers-reduced-motion: reduce) {
       .page-hero__bg { transform: none; animation: none; }
     }
-    /* softens the hard cut from the photo into the white section below */
-    .page-hero::after {
-      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 58px;
-      background: linear-gradient(to top, var(--white, #fff) 0%, rgba(255,255,255,0.55) 42%, rgba(255,255,255,0) 100%);
-      z-index: 1; pointer-events: none;
-    }
+    /* No bottom fade. The white-into-photo wash read as a blurry smear across
+       the base of the hero; a clean cut from the photo into the section below
+       is sharper and more deliberate. */
     .page-hero__inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; width: 100%; }
     .page-hero__breadcrumb { display: flex; align-items: center; gap: 10px; font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
     .page-hero__breadcrumb a { color: rgba(255,255,255,0.65); transition: color .15s; }
