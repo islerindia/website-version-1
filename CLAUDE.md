@@ -2,9 +2,9 @@
 
 \- Never ask for confirmation before editing files, running scripts, or making fixes — just do it.
 
-\- Commit and push automatically once a change is verified working locally (visually checked or matches the requested fix). Don't wait for "push it".
+\- NEVER commit or push without Rajesh's explicit permission ("push it"), for any change, big or small (restated 2026-10-22). Preview on localhost first and wait.
 
-\- Only pause and ask before pushing if the change is structural (major layout rework, deleting content/sections, routing/nav changes) or touches something outside index.html/business.html/style without being asked.
+\- "push it" covers only the change just discussed; anything else stays parked until named.
 
 \- After any push, report the commit hash and a one-line summary of what changed. Don't ask if it's live — check the Actions run yourself and confirm.
 

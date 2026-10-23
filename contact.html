@@ -91,7 +91,7 @@
     .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
     .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
     .demo-mm__cell { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; text-decoration: none; transition: background-color 150ms ease; }
-    .demo-mm__cell:hover { background-color: rgba(244, 180, 0, 0.08); }
+    .demo-mm__cell:hover { background-color: rgba(242, 140, 40, 0.08); }
     .demo-mm__thumb { flex-shrink: 0; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
     .demo-mm__thumb img { width: 100%; height: 100%; object-fit: cover; }
     .demo-mm__cell:nth-child(1) .demo-mm__thumb img { object-fit: contain; padding: 6px; background: #fff; }
@@ -155,7 +155,7 @@
     .contact-info { background: var(--navy); border-radius: 20px; padding: clamp(28px, 3vw, 40px); }
     .contact-info__heading { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 24px; }
     .contact-info__item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
-    .contact-info__icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(244,180,0,0.14); display: flex; align-items: center; justify-content: center; color: var(--yellow); flex-shrink: 0; }
+    .contact-info__icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(242, 140, 40,0.14); display: flex; align-items: center; justify-content: center; color: var(--yellow); flex-shrink: 0; }
     .contact-info__label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
     .contact-info__value { font-size: 14.5px; color: #fff; line-height: 1.5; }
     .contact-info__value a { color: #fff; }
@@ -192,6 +192,8 @@
     }
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-dark.css">
   <link rel="stylesheet" href="assets/css/type.css">
 </head>
 <body>
@@ -320,7 +322,7 @@
 
     <!-- CONTACT FORM + INFO -->
     <section class="page-section bg-white" aria-labelledby="contact-form-heading">
-      <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(244,180,0,0.14);top:-50px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(242, 140, 40,0.14);top:-50px;right:-60px;"></div>
       <div class="container">
         <div class="contact-layout">
 

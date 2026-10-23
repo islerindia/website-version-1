@@ -269,7 +269,7 @@
       transition: background-color 150ms ease;
     }
     .demo-mm__cell:hover {
-      background-color: rgba(244, 180, 0, 0.08);
+      background-color: rgba(242, 140, 40, 0.08);
     }
 
     .demo-mm__thumb {
@@ -700,7 +700,7 @@
 
     .cta-box__btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
+      box-shadow: 0 10px 28px rgba(242, 140, 40, 0.38);
     }
 
     .cta-box__btn--secondary {
@@ -894,7 +894,7 @@
       height: 10px;
       border-radius: 3px;
       background: var(--yellow);
-      box-shadow: 0 0 0 4px rgba(244,180,0,0.18);
+      box-shadow: 0 0 0 4px rgba(242, 140, 40,0.18);
       transform: rotate(45deg);
     }
     .mfg-prod-grid {
@@ -957,8 +957,8 @@
 
     /* ── 3. SUPPLY CHAIN STRENGTH (VENDORS) ──
        Background + design matched to the "What Sets Us Apart" USP section
-       (solid #475A82 with low-opacity yellow/amber ambient circles). */
-    .mfg-vendors { background: #475A82; }
+       (solid #14275A with low-opacity yellow/amber ambient circles). */
+    .mfg-vendors { background: #14275A; }
     .mfg-vendors .mfg-heading { color: var(--white); }
     .mfg-vendors .mfg-sub { color: rgba(255,255,255,0.7); }
     .mfg-vendor-head { text-align: center; margin-bottom: 48px; }
@@ -989,7 +989,7 @@
       transition: border-color 200ms ease, background 200ms ease, color 200ms ease;
     }
     .mfg-vendor-slot:hover {
-      border-color: rgba(244,180,0,0.5);
+      border-color: rgba(242, 140, 40,0.5);
       background: rgba(255,255,255,0.07);
       color: rgba(255,255,255,0.7);
     }
@@ -1038,13 +1038,13 @@
     .mfg-lab-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 18px 40px rgba(11,26,61,0.12);
-      border-color: rgba(244,180,0,0.45);
+      border-color: rgba(242, 140, 40,0.45);
     }
     .mfg-lab-card__icon {
       width: 52px; height: 52px;
       display: flex; align-items: center; justify-content: center;
       border-radius: 12px;
-      background: rgba(244,180,0,0.12);
+      background: rgba(242, 140, 40,0.12);
       color: var(--navy);
       margin-bottom: 20px;
     }
@@ -1056,7 +1056,7 @@
     .mfg-lab-card__text { font-size: 14px; line-height: 1.6; color: var(--gray-mid); }
 
     /* ── 5. CERTIFICATIONS ── */
-    .mfg-certs { background: #475A82; text-align: center; }
+    .mfg-certs { background: #14275A; text-align: center; }
     .mfg-certs__label {
       display: block;
       font-size: 11px; font-weight: 600;
@@ -1121,6 +1121,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/hero-sequence.js" defer></script>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-dark.css">
   <link rel="stylesheet" href="assets/css/type.css">
 
   <!-- Homepage-only navbar override: edge-to-edge rectangular bar, a touch
@@ -1139,8 +1141,8 @@
       /* Client 2026-08-11: brand-orange outline on the bar's top and bottom
          edge. Full shorthand on purpose — see the matching note in nav.css:
          a bare width leaves the style at `none` and the edge renders 0px. */
-      border-top: 1.5px solid #E69500;
-      border-bottom: 1.5px solid #E69500;
+      border-top: 1.5px solid #F28C28;
+      border-bottom: 1.5px solid #F28C28;
       box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
       padding-top: 9px;                 /* thinner bar (was 13px) */
       padding-bottom: 9px;
@@ -1172,14 +1174,14 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #8A6A00;
-      background: rgba(244, 180, 0, 0.18);
-      border: 1px dashed rgba(244, 180, 0, 0.75);
+      color: #9A4D00;
+      background: rgba(242, 140, 40, 0.18);
+      border: 1px dashed rgba(242, 140, 40, 0.75);
       border-radius: 999px;
       padding: 3px 10px;
       white-space: nowrap;
     }
-    .hp-ph--dark { color: var(--yellow); background: rgba(244, 180, 0, 0.14); }
+    .hp-ph--dark { color: var(--yellow); background: rgba(242, 140, 40, 0.14); }
 
     /* ══════════════════════════════════════════════════════════════
        RANGE — hard-numbers stat bar
@@ -1417,7 +1419,7 @@
     #proof .npd-step:hover {
       transform: translateY(-6px) scale(1.045);
       box-shadow: 0 18px 34px rgba(11, 26, 61, 0.16);
-      border-color: rgba(230, 149, 0, 0.55);
+      border-color: rgba(242, 140, 40, 0.55);
       /* the scaled card has to sit over its neighbours, not under them */
       z-index: 2;
     }
@@ -1504,7 +1506,7 @@
       transition: transform 240ms var(--ease-out), background 240ms ease, color 240ms ease;
     }
     .rfq-btn--primary { background: var(--yellow); color: var(--navy); }
-    .rfq-btn--primary:hover { transform: translateY(-2px); background: #ffc426; }
+    .rfq-btn--primary:hover { transform: translateY(-2px); background: #F6A04C; }
     .rfq-btn--ghost {
       background: transparent;
       color: var(--white);
@@ -1622,7 +1624,7 @@
     /* THREE ROWS, alternating direction (client 2026-08-10).
        The durations are deliberately unequal — three rows on the same 46s
        would keep re-aligning into a visible grid as they loop. */
-    .brands-rows { display: flex; flex-direction: column; gap: 20px; }
+    .brands-rows { display: flex; flex-direction: column; gap: 0; }
     .brands-track--a { animation: brands-scroll     46s linear infinite; }
     .brands-track--b { animation: brands-scroll-rev 39s linear infinite; }
     .brands-track--c { animation: brands-scroll     53s linear infinite; }
@@ -1643,13 +1645,29 @@
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      filter: grayscale(1);
-      opacity: 0.85;
-      transition: filter 260ms ease, opacity 260ms ease;
+      /* Client 2026-10-22: logos in full colour (no grey), and the card pops
+         out on hover. .brands-marquee carries vertical padding so the lifted
+         card and its shadow are not clipped by the marquee's overflow. */
+      position: relative;
+      transition: transform 260ms var(--ease-out), box-shadow 260ms ease, border-color 260ms ease;
     }
-    .brand-slot:hover { filter: grayscale(0); opacity: 1; }
+    .brand-slot:hover {
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 14px 30px rgba(11, 26, 61, 0.16);
+      border-color: var(--yellow);
+      z-index: 2;
+    }
+    .brands-marquee { padding: 12px 0 34px; }
     /* Real logos, once supplied, drop straight in as <img> inside .brand-slot */
     .brand-slot img { max-width: 72%; max-height: 56px; object-fit: contain; }
+    /* Real logos (2026-10-22): solid white card so the logos' own white
+       backgrounds disappear into it. */
+    .brand-slot--logo { background: #fff; border-style: solid; border-color: rgba(11, 26, 61, 0.10); }
+    .brand-slot--logo img { max-width: 78%; max-height: 52px; }
+    .brand-slot--text { background: #fff; border-style: solid; border-color: rgba(11, 26, 61, 0.10);
+      color: var(--navy); font-size: 17px; letter-spacing: 0; text-transform: none; font-weight: 700; text-align: center; padding: 0 14px; }
+    .brands-row-label { margin: 6px 0 4px; text-align: center; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-mid); }
     .brands-note { text-align: center; margin-top: 28px; padding: 0 24px; }
     @media (prefers-reduced-motion: reduce) {
       .brands-track { animation: none; }
@@ -1670,107 +1688,43 @@
   <style id="hp-rev2">
 
     /* ══════════════════════════════════════════════════════════════
-       THREE WAYS TO BUILD — capability bar + OEM / ODM / Private Label
-       Client doc: "ODM, OEM AND Private label will be symbolic".
+       STATS BAR — navy + orange (client 2026-10-22). Sits straight under
+       the hero where "Three ways to build" used to be.
     ══════════════════════════════════════════════════════════════ */
-    .ways-section {
-      background: var(--white);
-      padding: clamp(48px, 5.5vw, 80px) clamp(24px, 5vw, 96px);
-      position: relative;
-      overflow: clip;
-      scroll-margin-top: 90px;
+    /* 2026-10-22 v2: "little bit space" — the bar floats as a rounded navy
+       card on a light band instead of running edge to edge between the dark
+       hero and the dark factory video. */
+    .hp-statbar { background: var(--off-white); padding: clamp(40px, 5vw, 80px) clamp(14px, 1.8vw, 32px); }
+    .hp-statbar__inner {
+      max-width: none; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+      background: var(--navy); border-radius: var(--radius-lg);
+      border-bottom: 4px solid #F28C28;
+      padding: clamp(30px, 3.4vw, 52px) clamp(12px, 2vw, 32px);
+      box-shadow: 0 18px 44px rgba(11, 26, 61, 0.18);
     }
-    .ways-inner { max-width: 1400px; margin: 0 auto; }
-
-    /* The capability bar (Units/yr - Production lines - Engineers -
-       Categories - Certifications) used to live here, under the hero. Client
-       2026-08-06: removed from the page; the range stat box moved up into
-       its place instead, so .cap-bar / .range-capbar styles are gone too.
-       The 30,000 sq. ft. figure it once carried lives in the "Isler at a
-       Glance" capacity grid. */
-
-    /* The range stat box sits at the top of this section now — full width,
-       flush with the OEM/ODM/Private Label cards, and .ways-head's own top
-       margin provides the gap below it. */
-    /* (.ways-inner > .hp-stats removed — the stats moved onto the opener) */
-
-    .ways-head { margin: clamp(44px, 5vw, 68px) 0 26px; }
-    .ways-head__title {
-      font-size: clamp(22px, 2.4vw, 32px);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--navy);
-      margin: 0;
+    .hp-statbar__item {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 10px clamp(10px, 1.4vw, 24px);
+      border-left: 1px solid rgba(255, 255, 255, 0.14);
     }
-    .ways-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .ways-card {
-      background: var(--off-white);
-      border: 1px solid rgba(11, 26, 61, 0.08);
-      border-top: 3px solid var(--yellow);
-      border-radius: var(--radius-lg);
-      padding: 32px 28px 34px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .hp-statbar__item:first-child { border-left: 0; }
+    .hp-statbar__value {
+      font-size: clamp(28px, 2.7vw, 42px); font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em; color: #F28C28;
     }
-    .ways-card__icon {
-      width: 46px; height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: var(--radius-md);
-      background: rgba(244, 180, 0, 0.16);
-      color: var(--navy);
+    .hp-statbar__label {
+      margin-top: 10px; font-size: clamp(13px, 1vw, 15px); font-weight: 500; line-height: 1.4;
+      color: rgba(255, 255, 255, 0.82);
     }
-    .ways-card__icon svg { width: 24px; height: 24px; }
-    .ways-card__name {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: -0.01em;
+    @media (max-width: 900px) {
+      .hp-statbar__inner { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 28px; }
+      .hp-statbar__item:nth-child(4) { border-left: 0; }
     }
-    .ways-card__text { margin: 0; font-size: 15px; line-height: 1.65; color: var(--gray-mid); }
-    @media (max-width: 900px) { .ways-grid { grid-template-columns: 1fr; } }
-
-    /* ── The three cards open one after another ────────────────────────────
-       Same machinery as the NPD flow: .is-running is toggled on the grid by
-       #hp-rev2-npd when it scrolls in and off when it leaves, so the sequence
-       replays every time you come back to it. Each card carries --i (0-2,
-       inline in the markup) and its contents follow a beat behind the card
-       itself, so a card reads as opening rather than just fading. All scoped
-       to body.hp-anim-on, which is only set when JS is on and reduced-motion
-       is off — otherwise the cards simply sit there. Full pass ~1.4s.      */
-    @keyframes waysOpen {
-      from { opacity: 0; transform: translateY(22px) scale(0.97); }
-      to   { opacity: 1; transform: none; }
-    }
-    @keyframes waysIcon {
-      from { opacity: 0; transform: scale(0.6) rotate(-8deg); }
-      to   { opacity: 1; transform: none; }
-    }
-    @keyframes waysText {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: none; }
-    }
-    body.hp-anim-on .ways-card,
-    body.hp-anim-on .ways-card__icon,
-    body.hp-anim-on .ways-card__name,
-    body.hp-anim-on .ways-card__text { opacity: 0; }
-
-    body.hp-anim-on .ways-grid.is-running .ways-card {
-      animation: waysOpen 700ms var(--ease-out) both;
-      animation-delay: calc(var(--i, 0) * 300ms);
-    }
-    body.hp-anim-on .ways-grid.is-running .ways-card__icon {
-      animation: waysIcon 500ms var(--ease-out) both;
-      animation-delay: calc(var(--i, 0) * 300ms + 220ms);
-    }
-    body.hp-anim-on .ways-grid.is-running .ways-card__name {
-      animation: waysText 450ms var(--ease-out) both;
-      animation-delay: calc(var(--i, 0) * 300ms + 300ms);
-    }
-    body.hp-anim-on .ways-grid.is-running .ways-card__text {
-      animation: waysText 450ms var(--ease-out) both;
-      animation-delay: calc(var(--i, 0) * 300ms + 380ms);
+    @media (max-width: 520px) {
+      .hp-statbar__inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hp-statbar__item { border-left: 0; }
+      .hp-statbar__item:nth-child(even) { border-left: 1px solid rgba(255, 255, 255, 0.14); }
     }
 
     /* ══════════════════════════════════════════════════════════════
@@ -1850,8 +1804,8 @@
     /* the card lights up as the sweep passes through it */
     @keyframes npdPulse {
       0%   { border-color: rgba(11, 26, 61, 0.10); background: var(--white); box-shadow: none; }
-      40%  { border-color: rgba(244, 180, 0, 0.90); background: rgba(244, 180, 0, 0.12);
-             box-shadow: 0 10px 26px rgba(244, 180, 0, 0.25); }
+      40%  { border-color: rgba(242, 140, 40, 0.90); background: rgba(242, 140, 40, 0.12);
+             box-shadow: 0 10px 26px rgba(242, 140, 40, 0.25); }
       100% { border-color: rgba(11, 26, 61, 0.10); background: var(--white); box-shadow: none; }
     }
     /* the connector draws in yellow behind the sweep, then settles to hairline */
@@ -1977,7 +1931,7 @@
        Sits on top of an image, so it needs an opaque backing of its own. */
     .rev2-band__ph {
       position: absolute; left: 16px; bottom: 16px; z-index: 2;
-      background: #FFF6DC;
+      background: #FFF1E3;
       border-style: solid;
       border-color: rgba(138, 106, 0, 0.55);
       box-shadow: 0 4px 14px rgba(11, 26, 61, 0.28);
@@ -1989,6 +1943,18 @@
     .rev2-band__copy .mfg-sub { max-width: 56ch; }
     /* the body paragraph under the lead — every band carries one, the way
        "Quality Is Our First Priority" does */
+    /* Section 3 bullet lists (client doc "Website flow 01", 2026-10-22) —
+       replace the eyebrow + lead + body copy in the four bands. */
+    .rev2-band__list { list-style: none; margin: 18px 0 0; padding: 0; max-width: 58ch; }
+    .rev2-band__list li {
+      position: relative; padding-left: 26px; margin-top: 12px;
+      font-size: 15.5px; line-height: 1.6; color: var(--gray-mid);
+    }
+    .rev2-band__list li:first-child { margin-top: 0; }
+    .rev2-band__list li::before {
+      content: ''; position: absolute; left: 4px; top: 0.62em;
+      width: 8px; height: 8px; border-radius: 50%; background: #F28C28;
+    }
     .rev2-band__body {
       margin: 18px 0 0;
       font-size: 16px;
@@ -2256,7 +2222,7 @@
          pushed the heading down from where it used to sit. */
       margin: 0 auto clamp(9px, 0.9vw, 14px);
       border-radius: 2px;
-      background: linear-gradient(90deg, rgba(244,180,0,0.30), var(--yellow), rgba(244,180,0,0.30));
+      background: linear-gradient(90deg, rgba(242, 140, 40,0.30), var(--yellow), rgba(242, 140, 40,0.30));
     }
 
     @media (min-width: 901px) and (min-height: 580px) {
@@ -2694,6 +2660,141 @@
       gap: clamp(10px, 1.2vw, 18px);
       margin-top: var(--space-md);
     }
+    /* ── HERO SCENE 4 — icon panel (>=1360px). Text keeps the left column;
+       the four category cards sit in a 2x2 grid on the right, each listing its
+       sub-appliances as icon + label. Glass cards on the video, orange accents
+       to match the stats bar. */
+    .hero-range { display: none; }
+    @media (min-width: 1360px) {
+      .hero-scene.scene-range { padding-right: max(40px, 5vw); }
+      .scene-range .hero-subhead { max-width: 560px; }
+      .scene-range .hero-cats { display: none; }
+      /* client 2026-10-22: buttons a little further below the sub-line */
+      .scene-range .hero-cta-row { margin-top: 44px; }
+      .hero-range {
+        display: grid; grid-template-columns: 1fr; gap: 10px;
+        /* Anchored to the END OF THE HEADLINE, not the right edge (client
+           2026-10-22: the gap in the middle was too big on wide screens).
+           --hr-left = scene padding + headline width (8.6em of the headline's
+           own clamp) + a fixed 56px gap; the panel then fills toward the
+           right edge, capped at 760px. */
+        --hr-left: calc(max(64px, 8vw) + 8.6 * clamp(36px, 5.5vw, 76px) + 56px);
+        position: absolute; left: var(--hr-left); top: 50%; transform: translateY(-50%);
+        width: min(calc(100vw - var(--hr-left) - max(32px, 3.4vw)), 760px);
+      }
+    }
+    /* One row per category: name left, icons right on a shared 7-column
+       track so the icons line up down the panel (layout v2, 2026-10-22). */
+    .hero-range__card {
+      display: grid; grid-template-columns: 104px minmax(0, 1fr); align-items: center; column-gap: 6px;
+      padding: 12px 14px; border-radius: var(--radius-lg);
+      background: rgba(8, 18, 42, 0.58); border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .hero-range__head {
+      display: flex; flex-direction: column; gap: 4px;
+      font-size: 14px; font-weight: 700; color: #fff; text-decoration: none; line-height: 1.25;
+    }
+    .hero-range__head:hover { color: #F28C28; }
+    .hero-range__no { font-size: 12px; font-weight: 800; color: #F28C28; letter-spacing: 0.04em; }
+    .hero-range__items { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; }
+    .hero-range__item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 7px 2px 6px; border-radius: 10px; text-decoration: none; text-align: center;
+      color: rgba(255, 255, 255, 0.86);
+      transition: background 200ms ease, transform 200ms ease, color 200ms ease;
+    }
+    .hero-range__ico {
+      width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(242, 140, 40, 0.14); color: #F28C28;
+      transition: background 200ms ease, color 200ms ease;
+    }
+    .hero-range__ico svg { width: 20px; height: 20px; }
+    .hero-range__lbl { font-size: 10px; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+    a.hero-range__item:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-2px); color: #fff; }
+    /* 1360–1499px: the panel is narrowest here, so the name column and
+       labels tighten a step to keep long labels (Dishwasher / Humidifier) apart. */
+    @media (max-width: 1499px) {
+      .hero-range__card { grid-template-columns: 92px minmax(0, 1fr); padding: 12px 10px 12px 14px; }
+      .hero-range__head { font-size: 13px; }
+      .hero-range__lbl { font-size: 9.5px; }
+    }
+    /* Laptops 1024–1359px (client 2026-10-23: "make both the same" — the
+       panel was only showing on the big monitor). Same panel, compact: the
+       headline keeps its locked size, so the panel starts 28px after it and
+       runs to the edge with smaller icons/labels. The pills stay hidden. */
+    @media (min-width: 1024px) and (max-width: 1359px) {
+      .scene-range .hero-cats { display: none; }
+      .scene-range .hero-subhead { max-width: calc(8.6 * clamp(36px, 5.5vw, 76px)); }
+      .scene-range .hero-cta-row { margin-top: 36px; }
+      .hero-range {
+        display: grid; grid-template-columns: 1fr; gap: 8px;
+        --hr-left: calc(max(64px, 8vw) + 8.6 * clamp(36px, 5.5vw, 76px) + 28px);
+        position: absolute; left: var(--hr-left); top: 50%; transform: translateY(-50%);
+        width: calc(100vw - var(--hr-left) - 20px);
+      }
+      .hero-range__card { grid-template-columns: 76px minmax(0, 1fr); column-gap: 4px; padding: 8px 6px 8px 10px; border-radius: 14px; }
+      .hero-range__head { font-size: 11.5px; gap: 2px; }
+      .hero-range__no { font-size: 10.5px; }
+      .hero-range__item { gap: 4px; padding: 5px 1px 4px; }
+      .hero-range__ico { width: 28px; height: 28px; }
+      .hero-range__ico svg { width: 16px; height: 16px; }
+      .hero-range__lbl { font-size: 8.5px; }
+    }
+    /* 1024–1199px: too narrow for name + 7 icons on one line, so the name
+       sits on its own row above the icons (01 and the name inline). */
+    @media (min-width: 1024px) and (max-width: 1199px) {
+      .hero-range__card { grid-template-columns: 1fr; row-gap: 2px; padding: 7px 8px 6px; }
+      .hero-range__head { flex-direction: row; align-items: baseline; gap: 6px; }
+    }
+    a.hero-range__item:hover .hero-range__ico { background: #F28C28; color: #0B1A3D; }
+    a.hero-range__item:focus-visible, .hero-range__head:focus-visible { outline: 2px solid #F28C28; outline-offset: 2px; }
+    body.hero-anim-on .hero-scene .hero-range__card { opacity: 0; transform: translateY(18px); }
+    body.hero-anim-on .hero-scene.is-live .hero-range__card {
+      animation: heroLift 700ms cubic-bezier(0.22, 0.72, 0.24, 1) both;
+    }
+    body.hero-anim-on .hero-scene.is-live .hero-range__card:nth-child(1) { animation-delay: 260ms; }
+    body.hero-anim-on .hero-scene.is-live .hero-range__card:nth-child(2) { animation-delay: 360ms; }
+    body.hero-anim-on .hero-scene.is-live .hero-range__card:nth-child(3) { animation-delay: 460ms; }
+    body.hero-anim-on .hero-scene.is-live .hero-range__card:nth-child(4) { animation-delay: 560ms; }
+    @media (prefers-reduced-motion: reduce) {
+      body.hero-anim-on .hero-scene .hero-range__card { opacity: 1; transform: none; animation: none; }
+    }
+
+    /* ── HERO SCENE 4 — category chips (2026-10-22). Same type as scenes 1–3;
+       the chips are the one extra: four glassy pills with an orange dot that
+       link to the category hubs. They animate in with the sub-line. */
+    .hero-cats {
+      list-style: none; margin: var(--space-md) 0 0; padding: 0;
+      display: flex; flex-wrap: wrap; gap: 10px; max-width: 960px;
+    }
+    /* 8.6em breaks the line as "One Partner. / Every Appliance." at every
+       size — the width scales with the font, so the break never moves. */
+    .scene-cta .hero-headline { max-width: 8.6em; }
+    .hero-cats a {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 9px 16px; border-radius: 999px;
+      font-size: clamp(12.5px, 1vw, 14.5px); font-weight: 600; letter-spacing: 0.01em;
+      color: #fff; text-decoration: none;
+      background: rgba(255, 255, 255, 0.10); border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+    }
+    .hero-cats a::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #F28C28; flex: none; }
+    .hero-cats a:hover { background: rgba(255, 255, 255, 0.2); border-color: #F28C28; transform: translateY(-2px); }
+    .hero-cats a:focus-visible { outline: 2px solid #F28C28; outline-offset: 3px; }
+    body.hero-anim-on .hero-scene .hero-cats { opacity: 0; transform: translateY(16px); }
+    body.hero-anim-on .hero-scene.is-live .hero-cats {
+      animation: heroLift 700ms cubic-bezier(0.22, 0.72, 0.24, 1) both; animation-delay: 370ms;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.hero-anim-on .hero-scene .hero-cats { opacity: 1; transform: none; animation: none; }
+    }
+    @media (max-width: 767px) {
+      .hero-cats { gap: 8px; }
+      .hero-cats a { padding: 7px 12px; font-size: 12px; }
+    }
+
     /* ══════════════════════════════════════════════════════════════
        HERO SCENE ANIMATION
        Each of the four hero scenes plays itself in when it becomes the live
@@ -2716,6 +2817,7 @@
        static text with nothing hidden. */
     .hero-headline { perspective: 700px; }
     .hero-headline .hw { display: inline-block; will-change: transform, opacity; }
+    .hero-accent, .hero-headline .hw--accent { color: var(--orange, #F28C28); font-style: normal; }
 
     body.hero-anim-on .hero-scene .hw {
       opacity: 0;
@@ -2836,189 +2938,6 @@
     
     
     
-    /* HOME-OBZ-CSS-START */
-    /* Lifted from business.html by Downloads/gen_home_obz.py.
-       Edit it THERE, then re-run — do not diverge the two copies. */
-    /* ── OUR BUSINESS mosaic ──────────────────────────────────────────────
-       Rebuilt 2026-08-13 to match the client's reference screenshot
-       (Downloads/"aisa chiaye .png", the Vestel our-business band) exactly.
-
-       THREE things in that reference the first build got wrong, and they are
-       the whole character of it — do not quietly undo them:
-         1. the heading and standfirst are a PANEL INSIDE the grid, first
-            column, not a centred header above it;
-         2. tile labels sit TOP-left with a short vertical accent bar beside
-            them, not bottom-left with a rule underneath;
-         3. everything is one flush band — panel | one big tile | two stacked
-            | one tall — rather than a block of tiles under a title.
-
-       The reference carries three image tiles; Isler has four categories, so
-       the right-hand column is doubled rather than the shape being changed.
-       Tiles are links, so the block is keyboard-reachable without any JS. */
-    /* Client 2026-08-13: the band had too much air on all four sides. The
-       side padding was the homepage's usual clamp(24px,5vw,96px) and the
-       grid capped at 1400 on top of it, so at 1600 roughly 100px of each
-       margin was empty. Both are cut so the band stretches wider, and the
-       vertical padding comes down with it. */
-    .obz { padding: clamp(10px, 1vw, 16px) clamp(16px, 2.6vw, 48px) clamp(22px, 2.4vw, 38px); }
-    /* Most of the gap above the band was never the band's: #brands carries
-       var(--space-xl) = 80px of bottom padding, so trimming .obz alone left
-       ~92px of the original 118px in place. This trims the other side of the
-       same gap. Scoped to the homepage's own <style>, and it only affects
-       what sits between Brands and this band. */
-    #brands { padding-bottom: clamp(20px, 2.2vw, 36px); }
-
-    .obz__grid {
-      max-width: 1680px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(210px, 0.82fr) 1.85fr 1.05fr 1.05fr;
-      /* minmax(..., auto), not a fixed height: the panel spans both rows and
-         its paragraph was overflowing the band by 9-21px between 1200 and
-         1600, clipping the last line. The rows now grow to fit it. */
-      grid-auto-rows: minmax(clamp(112px, 11vw, 168px), auto);
-      gap: clamp(8px, 0.7vw, 14px);
-    }
-    /* Every cell is placed EXPLICITLY. Auto-placement cannot produce this
-       shape from source order — after the lead tile takes column 2 across
-       both rows, the next auto item lands in column 3 row 1 and the one after
-       it in column 4, not underneath. Explicit placement also lets the markup
-       stay in reading order, so tab order matches the categories. */
-    .obz__panel        { grid-column: 1; grid-row: 1 / span 2; }
-    .obz-tile--lead    { grid-column: 2; grid-row: 1 / span 2; }
-    .obz-tile--stack-a { grid-column: 3; grid-row: 1; }
-    .obz-tile--stack-b { grid-column: 3; grid-row: 2; }
-    .obz-tile--tall    { grid-column: 4; grid-row: 1 / span 2; }
-
-    /* ── the text panel — the reference's left-hand card ──────────────────
-       Logo mark at the top, the heading under it, a hairline, and the
-       standfirst pushed to the BOTTOM of the panel (margin-top:auto), which
-       is what makes it sit against the base of the band like the reference
-       rather than floating under the title. */
-    .obz__panel {
-      display: flex; flex-direction: column;
-      padding: clamp(18px, 1.6vw, 28px);
-      background: var(--off-white, #F4F5F7);
-      border-radius: var(--radius-lg);
-    }
-    .obz__title {
-      margin: 0 0 clamp(12px, 1.2vw, 18px);
-      font-size: clamp(22px, 2.2vw, 34px);
-      font-weight: 700; line-height: 1.08; letter-spacing: -0.035em;
-      color: var(--navy);
-      padding-bottom: clamp(12px, 1.2vw, 18px);
-      border-bottom: 1px solid rgba(11,26,61,0.16);
-    }
-    .obz__intro {
-      margin: auto 0 0;
-      font-size: clamp(11.5px, 0.82vw, 13.5px);
-      line-height: 1.62; color: var(--gray-mid);
-    }
-
-    .obz-tile {
-      position: relative;
-      display: block;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
-      background: var(--navy);
-      text-decoration: none;
-      isolation: isolate;
-    }
-    .obz-tile__img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    /* darkens the TOP of the tile, because that is where the label now sits */
-    .obz-tile__scrim {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(6,15,36,0.72) 0%, rgba(6,15,36,0.26) 44%, rgba(6,15,36,0.04) 100%);
-      transition: background 300ms ease;
-    }
-    .obz-tile__label {
-      position: absolute; top: clamp(13px, 1.2vw, 20px); left: clamp(15px, 1.4vw, 22px); right: clamp(15px, 1.4vw, 22px);
-      display: flex; align-items: flex-start; gap: clamp(8px, 0.7vw, 11px);
-      font-size: clamp(14px, 1.1vw, 17px);
-      font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;
-      color: #fff;
-    }
-    /* the short accent bar beside the label — red in the reference, yellow
-       here. It grows on hover; that replaces the underline the old tiles had. */
-    .obz-tile__label::before {
-      content: '';
-      flex: 0 0 auto;
-      width: 3px; height: 1.1em;
-      border-radius: 2px;
-      background: var(--yellow);
-      transition: height 380ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .obz-tile:hover .obz-tile__img,
-    .obz-tile:focus-visible .obz-tile__img { transform: scale(1.05); }
-    .obz-tile:hover .obz-tile__scrim,
-    .obz-tile:focus-visible .obz-tile__scrim {
-      background: linear-gradient(to bottom, rgba(6,15,36,0.82) 0%, rgba(6,15,36,0.40) 52%, rgba(6,15,36,0.12) 100%);
-    }
-    .obz-tile:hover .obz-tile__label::before,
-    .obz-tile:focus-visible .obz-tile__label::before { height: 2.3em; }
-    .obz-tile:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
-
-    /* Four columns need a lot of width. Below 1180 the band folds to
-       panel-across-the-top plus a 2x2 of tiles, which keeps the shape
-       readable; below 760 it is a single column. */
-    @media (max-width: 1180px) {
-      /* rows size to content here, with the tiles carrying their own
-         min-height. A fixed grid-auto-rows clipped the panel: once it is
-         a full-width cell its paragraph is taller than one tile row. */
-      .obz__grid { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
-      .obz-tile { min-height: clamp(150px, 22vw, 215px); }
-      /* drop every explicit placement, or the cells keep reaching for
-         columns 3 and 4 that no longer exist */
-      .obz-tile--lead,
-      .obz-tile--stack-a,
-      .obz-tile--stack-b,
-      .obz-tile--tall { grid-column: auto; grid-row: auto; }
-      .obz__panel { grid-row: auto; grid-column: 1 / -1; }
-      .obz__title { font-size: clamp(22px, 3.4vw, 30px); }
-      .obz__intro { margin-top: 12px; font-size: 13.5px; max-width: 82ch; }
-    }
-    @media (max-width: 760px) {
-      .obz__grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
-      .obz-tile { min-height: clamp(150px, 40vw, 210px); }
-      .obz__panel { grid-column: auto; }
-    }
-    /* ── Tile reveal ──────────────────────────────────────────────────────
-       The tiles rise in one after another as the mosaic scrolls into view.
-       Armed only by #obz-reveal adding .obz-anim-on, and that script bails
-       out under prefers-reduced-motion or without IntersectionObserver — so
-       with no JS the mosaic is simply visible rather than stuck invisible. */
-    body.obz-anim-on .obz-tile {
-      opacity: 0;
-      transform: translateY(26px) scale(0.985);
-      transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: calc(var(--i, 0) * 90ms);
-    }
-    body.obz-anim-on .obz__grid.is-in .obz-tile {
-      opacity: 1;
-      transform: none;
-    }
-    /* the text panel lifts in just ahead of the tiles */
-    body.obz-anim-on .obz__panel {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 560ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    body.obz-anim-on .obz__grid.is-in .obz__panel { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      body.obz-anim-on .obz-tile,
-      body.obz-anim-on .obz__panel { opacity: 1; transform: none; transition: none; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .obz-tile__img, .obz-tile__scrim, .obz-tile__label::before { transition: none; }
-      .obz-tile:hover .obz-tile__img { transform: none; }
-    }
-    /* HOME-OBZ-CSS-END */
 </style>
 </head>
 <body class="home-edgenav">
@@ -3173,35 +3092,61 @@
              photo already sits). Subhead is the OEM line from the same doc —
              exact hero copy still to be confirmed by Isler. -->
         <div class="hero-scene">
-          <h1 class="hero-headline">Precisely Built for Your Brand</h1>
-          <p class="hero-subhead">Get your product manufactured to your exact requirements, with your branding, at the volumes you need.</p>
+          <h1 class="hero-headline">Precisely Built for Your <em class="hero-accent">Brand</em></h1>
+          <p class="hero-subhead">Get your product manufactured at your exact requirements, with your branding, at the volumes you need.</p>
         </div>
 
         <!-- Scene 2 — client 2026-08-12: "Designed to Belong Together" is the
              second page. It runs over the innovation photo the doc asked to
              pair with this line — that photo is this scene's background. -->
         <div class="hero-scene">
-          <p class="hero-headline">Designed to Belong Together</p>
-          <p class="hero-subhead">Perfectly matched Chimney, Built-in Hob, Microwave, Oven &amp; other appliances that create one seamless kitchen experience.</p>
+          <p class="hero-headline">Designed to Belong <em class="hero-accent">Together</em></p>
+          <p class="hero-subhead">Perfectly Matched Chimney, Built-In Hob, Microwave, Oven &amp; other appliances that create one seamless kitchen experience.</p>
         </div>
 
         <!-- Scene 3 — unchanged copy, moved down a slot by the client's
              2026-08-12 running order. -->
         <div class="hero-scene">
-          <p class="hero-headline">Built on a Supply Chain You Can Trust</p>
-          <p class="hero-subhead">From manufacturing to delivery our robust supply network ensures every product reaches you with speed precision and uncompromising quality.</p>
+          <p class="hero-headline">Built on the Supply Chain You Can <em class="hero-accent">Trust</em></p>
+          <p class="hero-subhead">With a global partner network across China, Italy and Turkey, we source, develop and deliver products with the speed, consistency and quality your business demands.</p>
         </div>
 
-        <!-- Scene 4 — the finale, per the client 2026-08-12: "Every home, Every
-             appliance, Every Need" is the fourth page and the RFQ / Explore
-             Products links belong on it. Company intro paragraph from the doc. -->
-        <div class="hero-scene scene-cta">
-          <p class="hero-headline">Every Home, Every Appliance, Every Need</p>
-          <p class="hero-subhead">Isler is one of India&rsquo;s fastest-growing design-led manufacturers of premium electronics and electrical appliances. We partner with leading factories in China, Italy and Turkey to design, develop, manufacture and deliver world-class products to the top global brands. Our extensive collection offers a perfect solution for your appliance business.</p>
-          <!-- Two actions, client 2026-08-06: the yellow RFQ button keeps the
-               primary slot, with Explore Products beside it as the ghost
-               secondary. Products live on business.html — the homepage #range
-               section was removed in the Rev-2 build. -->
+        <!-- Scene 4 — client doc "Website flow 01", 2026-10-22: "One Partner.
+             Every Appliance" replaces "Every Home, Every Appliance, Every Need".
+             Built like scenes 1–3 (same headline / sub-line type) so the four
+             read as one set; the doc's block wireframe is parked for later at
+             Rajesh's call. The four category chips link to the hub pages. -->
+        <div class="hero-scene scene-cta scene-range">
+          <p class="hero-headline">One Partner. <em class="hero-accent">Every Appliance</em></p>
+          <p class="hero-subhead">From built-in kitchen appliances, small domestic appliances to home appliances, our extensive product portfolio gives brands access to multiple categories through a single manufacturing partner.</p>
+          <!-- Desktop (>=1360px): every sub-appliance of the four categories as an
+               icon, 4+3+7+4 = 18. Icons reuse the nav mega-menu set; Mixer
+               grinder, Hand blender, Humidifier and Electric cooktop were drawn
+               to match. Below 1360px the .hero-cats pills show instead. -->
+          <div class="hero-range" aria-label="Product categories">
+            <div class="hero-range__card">
+              <a class="hero-range__head" href="built-in-appliances.html"><span class="hero-range__no">01</span>Built-in Appliances</a>
+              <div class="hero-range__items"><a class="hero-range__item" href="kitchen-chimneys.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3h4v6h-4z"/><path d="M4 9h16"/><path d="M6 9l1.4 6h9.2L18 9"/></svg></span><span class="hero-range__lbl">Chimney</span></a><a class="hero-range__item" href="built-in-hobs.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="8" cy="8" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="8" cy="16" r="2"/><circle cx="16" cy="16" r="2"/></svg></span><span class="hero-range__lbl">Hobs</span></a><a class="hero-range__item" href="built-in-microwaves.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><rect x="5" y="8" width="9" height="8" rx="1"/><path d="M18 8v8"/><path d="M18 11h.01"/></svg></span><span class="hero-range__lbl">Microwave</span></a><a class="hero-range__item" href="built-in-ovens.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M6.5 6.5h.01"/><path d="M9.5 6.5h.01"/><rect x="6" y="12" width="12" height="5" rx="1"/></svg></span><span class="hero-range__lbl">Oven</span></a></div>
+            </div>
+            <div class="hero-range__card">
+              <a class="hero-range__head" href="cooktops.html"><span class="hero-range__no">02</span>Counter-top Cooking</a>
+              <div class="hero-range__items"><a class="hero-range__item" href="tablet-hobs.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="8" cy="12" r="1.8"/><circle cx="16" cy="12" r="1.8"/></svg></span><span class="hero-range__lbl">Tablet hobs</span></a><a class="hero-range__item" href="gas-cooktops.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span><span class="hero-range__lbl">Gas cooktop</span></a><a class="hero-range__item" href="cooktops.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><circle cx="12" cy="12" r="5"/><path d="M12.8 9.2 11 12h2l-1.8 2.8"/></svg></span><span class="hero-range__lbl">Electric cooktop</span></a></div>
+            </div>
+            <div class="hero-range__card">
+              <a class="hero-range__head" href="small-appliances.html"><span class="hero-range__no">03</span>Small Domestic Appliances</a>
+              <div class="hero-range__items"><a class="hero-range__item" href="air-fryers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span class="hero-range__lbl">Air fryer</span></a><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l-1.2 9H9.2z"/><path d="M10.5 12v2M13.5 12v2"/><rect x="6" y="14" width="12" height="7" rx="2"/><circle cx="12" cy="17.5" r="1.3"/></svg></span><span class="hero-range__lbl">Mixer grinder</span></span><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="9" rx="2.5"/><path d="M11 11.5h2v6h-2z"/><path d="M8.5 17.5h7l-1.2 3.5H9.7z"/></svg></span><span class="hero-range__lbl">Hand blender</span></span><a class="hero-range__item" href="stand-mixers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8a4 4 0 0 1 4 4v2h-3"/><path d="M4 5v4"/><path d="M7 13h11l-1.4 5a2 2 0 0 1-1.9 1.5h-4.4a2 2 0 0 1-1.9-1.5z"/></svg></span><span class="hero-range__lbl">Stand mixer</span></a><a class="hero-range__item" href="dough-makers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span class="hero-range__lbl">Dough maker</span></a><a class="hero-range__item" href="kettles.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span class="hero-range__lbl">Kettle</span></a><a class="hero-range__item" href="toasters.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span class="hero-range__lbl">Toaster</span></a></div>
+            </div>
+            <div class="hero-range__card">
+              <a class="hero-range__head" href="other-home-appliances.html"><span class="hero-range__no">04</span>Other Home Appliances</a>
+              <div class="hero-range__items"><a class="hero-range__item" href="air-purifiers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 8c2 1 4 1 6 0"/><path d="M9 11.5c2 1 4 1 6 0"/><path d="M10 16h4"/></svg></span><span class="hero-range__lbl">Air purifier</span></a><a class="hero-range__item" href="vacuum-cleaners.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="15" r="5"/><circle cx="15" cy="15" r="1.5"/><path d="M10.6 11.6 8 6a2 2 0 0 0-2-1.5H4"/><path d="M4 19.5h4.5"/></svg></span><span class="hero-range__lbl">Vacuum cleaner</span></a><a class="hero-range__item" href="dishwashers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M7 5.5h.01"/><path d="M10 5.5h.01"/><circle cx="12" cy="14.5" r="3.4"/></svg></span><span class="hero-range__lbl">Dishwasher</span></a><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c-2.2 2.6-3.6 4.4-3.6 6.2a3.6 3.6 0 0 0 7.2 0c0-1.8-1.4-3.6-3.6-6.2z"/><rect x="6" y="15" width="12" height="6.5" rx="2"/><path d="M9.5 18.2h5"/></svg></span><span class="hero-range__lbl">Humidifier</span></span></div>
+            </div>
+          </div>
+          <ul class="hero-cats">
+            <li><a href="built-in-appliances.html">Built-in Appliances</a></li>
+            <li><a href="cooktops.html">Counter-top Cooking</a></li>
+            <li><a href="small-appliances.html">Small Domestic Appliances</a></li>
+            <li><a href="other-home-appliances.html">Other Home Appliances</a></li>
+          </ul>
           <div class="hero-cta-row">
             <a href="contact.html" class="hero-cta-btn">Start an RFQ</a>
             <a href="business.html" class="hero-cta-btn hero-cta-btn--ghost">Explore Products</a>
@@ -3227,53 +3172,18 @@
        Quality → NPD → Supply Chain → Partners → Brands → Products → RFQ.
   ══════════════════════════════════════════════════════════════════════════ -->
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       REV-2 / 2 — THREE WAYS TO BUILD WITH ISLER
-       Client doc, page 1: the capability bar + OEM / ODM / Private Label sit
-       directly under the scroll hero. "ODM, OEM AND Private label will be
-       symbolic" — hence the icon marks rather than photography.
-       Values in brackets on the client's wireframe are still owed by Isler and
-       are rendered as em-dashes behind a "to be supplied" chip.
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="ways" class="ways-section" aria-labelledby="ways-h">
-    <div class="ways-inner">
-
-      <!-- ── Three ways to build ────────────────────────────────────────── -->
-      <div class="ways-head">
-        <h2 class="ways-head__title" id="ways-h">Three ways to build with Isler</h2>
-      </div>
-
-      <!-- The cards open one after another when the grid scrolls into
-           view; --i is each card's place in the sequence. They do NOT
-           carry .hp-reveal — that system writes the same opacity and
-           transform and the two would fight. -->
-      <div class="ways-grid">
-
-        <div class="ways-card" style="--i:0">
-          <span class="ways-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4 6 4v12"/><path d="M15 21V13h6v8"/><path d="M3 21h18"/><path d="M7 13h2"/><path d="M7 17h2"/></svg>
-          </span>
-          <span class="ways-card__name">OEM</span>
-          <p class="ways-card__text">Get your product manufactured to your exact requirements, with your branding, at the volumes you need.</p>
-        </div>
-
-        <div class="ways-card" style="--i:1">
-          <span class="ways-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M12 18v3"/><path d="M3 12h3"/><path d="M18 12h3"/><circle cx="12" cy="12" r="4"/><path d="M5.6 5.6l2.1 2.1"/><path d="M16.3 16.3l2.1 2.1"/><path d="M18.4 5.6l-2.1 2.1"/><path d="M7.7 16.3l-2.1 2.1"/></svg>
-          </span>
-          <span class="ways-card__name">ODM</span>
-          <p class="ways-card__text">Develop the product from concept to finished unit &mdash; engineering, prototyping and manufacturing &mdash; under your brand.</p>
-        </div>
-
-        <div class="ways-card" style="--i:2">
-          <span class="ways-card__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22l-9-9V4a1 1 0 0 1 1-1h9l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg>
-          </span>
-          <span class="ways-card__name">Private Label</span>
-          <p class="ways-card__text">Pick from our existing product range and launch it under your own brand &mdash; no design or tooling investment required, just your label on a proven product.</p>
-        </div>
-
-      </div>
+  <!-- STATS BAR — client doc "Website flow 01", 2026-10-22: "Keep the stats
+       bar as below with navy and orange theme". Replaces "Three ways to build
+       with Isler" (OEM / ODM / Private Label), removed the same day. Figures
+       verbatim, Indian digit grouping kept, so static text and no count-up. -->
+  <section class="hp-statbar" aria-label="Isler in numbers">
+    <div class="hp-statbar__inner">
+      <div class="hp-statbar__item"><span class="hp-statbar__value">40,000</span><span class="hp-statbar__label">sq ft factory area</span></div>
+      <div class="hp-statbar__item"><span class="hp-statbar__value">3</span><span class="hp-statbar__label">Production Lines</span></div>
+      <div class="hp-statbar__item"><span class="hp-statbar__value">3,00,000</span><span class="hp-statbar__label">Units / Year Capacity</span></div>
+      <div class="hp-statbar__item"><span class="hp-statbar__value">100+</span><span class="hp-statbar__label">Team Members</span></div>
+      <div class="hp-statbar__item"><span class="hp-statbar__value">200+</span><span class="hp-statbar__label">SKUs</span></div>
+      <div class="hp-statbar__item"><span class="hp-statbar__value">50+</span><span class="hp-statbar__label">Partners</span></div>
     </div>
   </section>
 
@@ -3288,33 +3198,10 @@
       </video>
       <div class="mfg-opener__scrim" aria-hidden="true"></div>
       <div class="mfg-inner">
-        <span class="mfg-eyebrow mfg-opener__eyebrow mfg-reveal">Manufacturing</span>
         <h2 class="mfg-opener__title mfg-reveal">A State-of-the-Art Facility Built for Scale, Speed, and Precision</h2>
         <p class="mfg-opener__copy mfg-reveal">Isler’s manufacturing facility in Greater Noida was inaugurated by Shri Sanjiv Singh, former Joint Secretary of DPIIT, Ministry of Commerce and Industry. Isler was also featured by the Hon’ble Union Minister of Commerce &amp; Industry, Mr. Piyush Goyal, in recognition of its contribution to India’s manufacturing journey.</p>
-        <!-- Capacity figures supplied by the client, Rev-2 doc: replaces the
-             earlier catalogue counts (SKUs / categories / divisions / design
-             language). Deliberately NOT .hp-count — the count-up formats with
-             toLocaleString('en-US'), which would render 3,00,000 as 300,000
-             and cannot animate the "3 + 4" line at all. Static text keeps the
-             client's Indian digit grouping. -->
-        <div class="hp-stats">
-          <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value">3,00,000</span>
-            <span class="hp-stat__label">Units per year</span>
-          </div>
-          <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value">30,000</span>
-            <span class="hp-stat__label">Sq. ft. facility</span>
-          </div>
-          <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value">3 + 4</span>
-            <span class="hp-stat__label">Production &amp; sub-assembly lines</span>
-          </div>
-          <div class="hp-stat hp-reveal">
-            <span class="hp-stat__value">100+</span>
-            <span class="hp-stat__label">Team members</span>
-          </div>
-        </div>
+        <!-- The 4 capacity stats that sat over the video were removed 2026-10-22
+             (client): the navy .hp-statbar under the hero now carries them. -->
       </div>
     </section>
 
@@ -3323,9 +3210,9 @@
          once. Padding now comes from the hp-glance-frame stylesheet in head,
          not from an inline style. -->
     <section class="mfg-section mfg-production mfg-pad hp-frame" aria-labelledby="mfg-prod-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.13);bottom:12%;right:4%;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(242, 140, 40,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(242, 140, 40,0.13);bottom:12%;right:4%;"></div>
       <div class="mfg-inner">
         <!-- Heading + intro — CENTRED (client 2026-08-11): this block opens the
              run of sections below it, and centring is what reads as "the
@@ -3347,10 +3234,14 @@
             </video>
           </div>
           <div class="rev2-band__copy">
-            <span class="mfg-eyebrow mfg-reveal">Manufacturing Operations</span>
-            <h3 class="mfg-heading mfg-subheading mfg-reveal" id="mfg-vendor-h" style="margin-bottom:18px;">Process-Led, Digital &amp; Quality-First Operations</h3>
-            <p class="mfg-sub mfg-reveal">A world-class manufacturing organisation run on documented process — 13+ processes, 25+ sub-processes and 130+ templates covering every stage of the build.</p>
-            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, the shop floor and the system are one. An ERP and data backbone carries every order end to end, a Supply Network Control Tower (SNCT) watches material and capacity across the partner base, and a digital shopfloor records what actually happened on the line — so the status a buyer is given is the status the plant is working to.</p>
+            <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
+            <h3 class="mfg-heading mfg-subheading mfg-reveal" id="mfg-vendor-h" style="margin-bottom:18px;">Technology &ndash; LED Manufacturing</h3>
+            <ul class="rev2-band__list mfg-reveal">
+              <li>ERP-Enabled Manufacturing for efficient, data-driven operations and scalability.</li>
+              <li>Flexible Production Lines to accommodate diverse product configurations and volumes.</li>
+              <li>Component level traceability for end-to-end tracking and process visibility.</li>
+              <li>Digital Work Instructions &amp; Skilled Workforce enabling faster changeovers, consistent execution, and higher throughput.</li>
+            </ul>
           </div>
         </div>
 
@@ -3389,12 +3280,16 @@
           <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
         </div>
         <div class="rev2-band__copy">
+          <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
           <div class="section-header">
-            <span class="section-eyebrow">New Product Development</span>
-            <h2 class="section-heading" id="npd-h">Fast New Product Development</h2>
-            <p class="section-sub">An in-house NPD team takes a brief from first conversation to first shipment &mdash; design, validation, tooling and certification handled on the same site as production.</p>
+            <h2 class="section-heading" id="npd-h">Advanced R&amp;D Capabilities with Novel Design &amp; Innovation</h2>
           </div>
-          <p class="rev2-band__body">At Isler, new product development is not a hand-off &mdash; industrial design, engineering, tooling and certification sit beside the line that will build the product. Every stage is documented, reviewed and signed off before the next one starts, so a brief becomes a validated sample and a sample becomes a shipment in one continuous process.</p>
+          <ul class="rev2-band__list">
+            <li>Market Research &amp; Competitor Benchmarking to align products with market trends and customer needs.</li>
+            <li>In-House Design &amp; Product Validation for premium aesthetics, unified designs, functionality, and manufacturability.</li>
+            <li>Rapid Prototyping &amp; Iterative Refinement with at least two product iterations to validate and improve designs.</li>
+            <li>Structured 9-Stage Development Process from initial concept to production-ready product.</li>
+          </ul>
         </div>
       </div>
 
@@ -3446,12 +3341,15 @@
            and brands strips full width below. -->
       <div class="rev2-band">
         <div class="rev2-band__copy">
+          <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
           <div class="section-header">
-            <span class="section-eyebrow">Proof, Not Promises</span>
-            <h2 class="section-heading" id="proof-h">Supply Chain Excellence</h2>
-            <p class="section-sub">Certifications, an audited partner base, and a process system your quality team can inspect line by line.</p>
+            <h2 class="section-heading" id="proof-h">Global Supply Chain Network</h2>
           </div>
-          <p class="rev2-band__body">At Isler, the supply chain is engineered rather than assembled &mdash; every component and material partner is audited before it is approved, critical parts are dual-sourced, and material flow is planned through the same ERP and control tower that runs the shop floor. That is the evidence a buyer asks for on a China+1 sourcing review, ready before they ask for it.</p>
+          <ul class="rev2-band__list">
+            <li>AI-Powered Supply Network Control Tower for real-time exception detection, risk identification, and visibility into production performance and dispatch status.</li>
+            <li>Global Sourcing Network backed by 60+ vendor relationships, manufacturing partnerships in China for large and small appliances and a strong domestic supplier ecosystem in India.</li>
+            <li>Scalable Warehousing Infrastructure with <span class="hp-ph">X sq. m. &mdash; to be supplied</span> of capacity to support material availability and efficient inventory management.</li>
+          </ul>
         </div>
         <div class="rev2-band__media hp-reveal">
           <img src="assets/images/manufacturing/factory-floor.webp"
@@ -3481,17 +3379,21 @@
 
     <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
     <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(242, 140, 40,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.13);bottom:-60px;left:-60px;"></div>
       <div class="mfg-inner">
         <!-- Doc format: copy LEFT / media RIGHT, then the certifications strip
              full width below. -->
         <div class="rev2-band">
           <div class="rev2-band__copy">
-            <span class="mfg-eyebrow mfg-reveal">Certifications &amp; Quality</span>
-            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our First Priority</h2>
-            <p class="mfg-sub mfg-reveal">Engineered, tested and certified to global standards — in-house labs, incoming and outgoing inspection, and a QMS your auditors can walk line by line.</p>
-            <p class="mfg-sub mfg-reveal" style="margin-bottom:0;">At Isler, quality is not a checkpoint — it is built into every stage of our process. We follow a zero-defect philosophy, backed by a robust Quality Management System (QMS), advanced in-house testing labs, and rigorous compliance with national and international standards.</p>
+            <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
+            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our DNA</h2>
+            <ul class="rev2-band__list mfg-reveal">
+              <li>2&times; More Testing than BIS recommendations to strengthen product reliability and performance.</li>
+              <li>End-to-End Quality Assurance through rigorous IQC, LQC, and OQC checkpoints to maintain consistent quality at every stage and ensure only quality-approved products reach customers.</li>
+              <li>In-House Testing Laboratory to support product validation, performance testing, and quality assurance.</li>
+              <li>Quality &amp; Environmental Management Systems with ISO 9001:2015 and ISO 14001:2015 certifications, alongside BIS-certified products.</li>
+            </ul>
           </div>
           <div class="rev2-band__media mfg-reveal">
             <video autoplay muted loop playsinline preload="metadata"
@@ -3506,8 +3408,8 @@
 
     <!-- ── 5. CERTIFICATIONS (ISO + BIS) — the strip under the band above ── -->
     <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(242, 140, 40,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
       <div class="mfg-inner">
         <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Our Certifications</h2>
         <div class="mfg-cert-row mfg-reveal">
@@ -3545,76 +3447,94 @@
       <p class="section-sub">From the brands that trust us with their products to the partners backing our growth &mdash; we&rsquo;re building Isler alongside people who share our ambition for Indian manufacturing.</p>
     </div>
 
+    <!-- Client doc "Website flow 01", 2026-10-22: row 1 = clients, row 2 =
+         suppliers, row 3 = investors. Logos lifted from the doc, trimmed, in
+         assets/images/partners/. Whirlpool and Matrix Partners India are named
+         in the doc but have no logo there, so they show as text until supplied.
+         Short rows repeat their set so each marquee track is wide enough to loop. -->
     <div class="brands-rows">
+    <p class="brands-row-label">Clients</p>
     <div class="brands-marquee">
       <div class="brands-track brands-track--a">
         <!-- copy 1 -->
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 01</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 02</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 03</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 04</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 05</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 06</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 07</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 08</span></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/livspace.webp" alt="Livspace" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hafele.webp" alt="Häfele" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text"><span>Whirlpool</span></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hindware.webp" alt="Hindware" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/beyond.webp" alt="Beyond Appliances" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/blaupunkt.webp" alt="Blaupunkt" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/electrolux.webp" alt="Electrolux" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/curaa.webp" alt="Curaa" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/elica.webp" alt="Elica" loading="lazy" decoding="async"></div>
         <!-- copy 2 — seamless loop -->
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 01</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 02</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 03</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 04</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 05</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 06</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 07</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 08</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/livspace.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Whirlpool</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hindware.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/beyond.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/blaupunkt.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/electrolux.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/curaa.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/elica.webp" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
+    <p class="brands-row-label">Suppliers</p>
     <div class="brands-marquee">
       <div class="brands-track brands-track--b">
         <!-- copy 1 -->
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 09</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 10</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 11</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 12</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 13</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 14</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 15</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 16</span></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/midea.webp" alt="Midea" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/vatti.webp" alt="Chinabest Vatti" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/galanz.webp" alt="Galanz" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/dimple.webp" alt="Dimple" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/imagic.webp" alt="iMagic" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/sanlida.webp" alt="Sanlida" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
         <!-- copy 2 — seamless loop -->
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 09</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 10</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 11</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 12</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 13</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 14</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 15</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 16</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
+    <p class="brands-row-label">Investors</p>
     <div class="brands-marquee">
       <div class="brands-track brands-track--c">
         <!-- copy 1 -->
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 17</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 18</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 19</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 20</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 21</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 22</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 23</span></div>
-        <div class="brand-slot"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 24</span></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hafele.webp" alt="Häfele" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/singularity.webp" alt="Singularity AMC" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
         <!-- copy 2 — seamless loop -->
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 17</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 18</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 19</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 20</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 21</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 22</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 23</span></div>
-        <div class="brand-slot" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><span>Partner 24</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
       </div>
     </div>
     </div>
-
-    <p class="brands-note"><span class="hp-ph">Partner logos to be supplied — 24 slots across three rows</span></p>
   </section>
 
   <!-- SECTION 5 — QUATRO SERIES was REMOVED on 2026-08-12 at the client's
@@ -3646,51 +3566,8 @@
 
   
 
-  <!-- HOME-OBZ-START -->
-  <!-- OUR BUSINESS mosaic — client 2026-08-13, sits between
-       "Partners in Our Journey" and "Build to Order". Same block as
-       business.html; generated by Downloads/gen_home_obz.py. -->
-<section class="obz" aria-labelledby="obz-h">
-  <div class="obz__grid">
-
-    <!-- The reference's left-hand card: mark, heading, hairline, standfirst.
-         It is the FIRST CELL OF THE GRID, not a header above it — that is the
-         thing the client kept pointing at in the screenshot. -->
-    <div class="obz__panel">
-      <h2 class="obz__title" id="obz-h">Our<br>Business</h2>
-      <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
-           heading, not in the hero. Verbatim from the doc. The doc also carries
-           a "Discover Isler's wide range of innovative products…" line for this
-           page, which used to sit here — it is out at the client's request. -->
-      <p class="obz__intro">Isler is a global company that stands out with its capabilities in production, research &amp; development, innovation, design, and brand management in the fields of electrical &amp; electronic appliances.</p>
-    </div>
-
-    <a style="--i:0" class="obz-tile obz-tile--lead" href="built-in-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-new.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Built-in Appliances</span>
-    </a>
-
-    <a style="--i:1" class="obz-tile obz-tile--stack-a" href="cooktops.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-hobtops.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Counter-top Cooking</span>
-    </a>
-
-    <a style="--i:2" class="obz-tile obz-tile--stack-b" href="small-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/small-appliances-1.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Small Domestic Appliances</span>
-    </a>
-
-    <a style="--i:3" class="obz-tile obz-tile--tall" href="other-home-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/catalog/air-purifiers/jh22.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Other Home Appliances</span>
-    </a>
-  </div>
-</section>
-  <!-- HOME-OBZ-END -->
+  <!-- "Our Business" mosaic removed from the homepage, 2026-10-22 (client
+       request). It sat between "Partners in Our Journey" and "Build to Order". -->
 
   <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 4 — RFQ (build to order)  ·  closing call to action
@@ -3723,153 +3600,8 @@
   </section>
 
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       FOOTER — 4-column footer
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <footer class="site-footer" id="site-footer-el">
-
-    <!-- ── Tier 1: 4-column grid ── -->
-    <div class="footer__main">
-      <div class="footer__main-inner">
-
-        <!-- Col 1: Products -->
-        <div class="footer__col" data-footer-accordion>
-          <h3 class="footer__col-heading">
-            Products
-            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </h3>
-          <ul class="footer__col-links">
-            <li><a href="built-in-hobs.html">Built-in Hobs</a></li>
-            <li><a href="gas-cooktops.html">Gas Cooktops</a></li>
-            <li><a href="induction-cooktops.html">Induction Cooktops</a></li><li><a href="infrared-cooktops.html">Infrared Cooktops</a></li><li><a href="hybrid-cooktops.html">Hybrid Cooktops</a></li>
-            <li><a href="built-in-ovens.html">Built-in Ovens</a></li>
-            <li><a href="business.html">View All Products</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 2: Company -->
-        <div class="footer__col" data-footer-accordion>
-          <h3 class="footer__col-heading">
-            Company
-            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </h3>
-          <ul class="footer__col-links">
-            <li><a href="about.html">About Isler</a></li>
-            <li><a href="team.html">Our Leaders</a></li>
-            <li><a href="career.html">Career</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="blog.html">Blog</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 3: Resources -->
-        <div class="footer__col" data-footer-accordion>
-          <h3 class="footer__col-heading">
-            Resources
-            <svg class="footer__col-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          </h3>
-          <ul class="footer__col-links">
-            <li><a href="manufacturing.html">Manufacturing</a></li>
-            <li><a href="certifications-quality.html">Certifications &amp; Quality</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-          </ul>
-        </div>
-
-        <!-- Col 4: Get in Touch (no accordion) -->
-        <div class="footer__col footer__col--contact">
-          <h3 class="footer__col-heading">Get in Touch</h3>
-          <div class="footer__contact-block">
-            <div class="footer__contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Plot no. 81, Ecotech 10, Greater Noida, Uttar Pradesh, 203202</span>
-            </div>
-            <div class="footer__contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <a href="tel:+919717737964">+91 971 7737 964</a>
-            </div>
-            <div class="footer__contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              <a href="mailto:info@islerindia.com">info@islerindia.com</a>
-            </div>
-            <div class="footer__contact-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <span>Mon–Sat, 9:00 AM – 6:00 PM</span>
-            </div>
-          </div>
-
-          <div class="footer__newsletter">
-            <p class="footer__newsletter-heading">Stay Updated</p>
-            <form class="footer__newsletter-form" novalidate>
-              <div class="footer__newsletter-row">
-                <input type="email" name="email" placeholder="Your email address" autocomplete="email" required aria-label="Email for newsletter">
-                <button type="submit" aria-label="Subscribe">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ── Tier 2: Bottom bar ── -->
-    <div class="footer__bottom">
-      <div class="footer__bottom-inner">
-
-        <a href="#" class="footer__bottom-logo" aria-label="Isler India — home">
-          <img src="assets/images/newlogo-removebg-preview.webp" alt="Isler India" height="32" loading="lazy" style="width:auto">
-        </a>
-
-        <div class="footer__bottom-copy">
-          <p>&copy; 2026 Isler India. All rights reserved.</p>
-          <p>Manufacturing excellence since 2018 &nbsp;&middot;&nbsp; ISO 9001:2015 | ISO 14001 Certified</p>
-        </div>
-
-        <div class="footer__bottom-right">
-          <nav class="footer__social-row" aria-label="Social media">
-            <a href="https://www.facebook.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-            <a href="https://x.com/Islerindia" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/company/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/channel/UCxhMrjS6Fd1-sOlMz3YUBiA" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/islerindia/" class="footer__social-icon" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-            </a>
-          </nav>
-          <span class="footer__made-in-india">🇮🇳 Made in India</span>
-        </div>
-
-      </div>
-    </div>
-
-  </footer>
-
-  <script>
-    (function () {
-      function initFooterAccordion() {
-        if (window.innerWidth > 767) return;
-        document.querySelectorAll('[data-footer-accordion]').forEach(function (col) {
-          var heading = col.querySelector('.footer__col-heading');
-          if (!heading) return;
-          heading.addEventListener('click', function () { col.classList.toggle('is-open'); });
-        });
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initFooterAccordion);
-      } else {
-        initFooterAccordion();
-      }
-    }());
-  </script>
+  <!-- Footer removed from the homepage only, 2026-10-22 (client request).
+       Every other page keeps its footer. -->
 
   <!-- Manufacturing Excellence — scroll-reveal + stat counters.
        Self-contained IIFE scoped to #mfg. Reuses the GSAP/ScrollTrigger already
@@ -4021,7 +3753,7 @@
   (function () {
     // Containers whose children animate in sequence. Add a selector here
     // and give its children an inline --i to sequence a new group.
-    var SEQ = ['.npd-flow', '.ways-grid', '.cap-grid'];
+    var SEQ = ['.npd-flow', '.cap-grid'];
     if (!('IntersectionObserver' in window)) return;
     // querySelectorAll, not querySelector: there are now two .npd-flow
     // strips on the page (Fast NPD and Supply Chain) and both must sweep.
@@ -4107,11 +3839,16 @@
     scenes.forEach(function (scene) {
       var h = scene.querySelector('.hero-headline');
       if (!h || h.getAttribute('data-split')) return;
+      // Theme 2026-10-23: words inside <em class="hero-accent"> keep an orange class after the split
+      var accent = {};
+      Array.prototype.forEach.call(h.querySelectorAll('.hero-accent'), function (a) {
+        a.textContent.trim().split(/\s+/).forEach(function (w) { accent[w] = true; });
+      });
       var words = h.textContent.trim().split(/\s+/);
       h.textContent = '';
       words.forEach(function (word, i) {
         var span = document.createElement('span');
-        span.className = 'hw';
+        span.className = accent[word] ? 'hw hw--accent' : 'hw';
         span.style.setProperty('--w', i);
         span.textContent = word;
         h.appendChild(span);
@@ -4149,28 +3886,5 @@
   })();
   </script>
 
-<script id="obz-reveal">
-(function () {
-  var grid = document.querySelector('.obz__grid');
-  // the panel is a grid cell now, so it reveals with the grid rather than
-  // needing an observer of its own
-  if (!grid) return;
-
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) return;
-
-  document.body.classList.add('obz-anim-on');
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('is-in');
-      io.unobserve(e.target);
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-
-  io.observe(grid);
-}());
-</script>
 </body>
 </html>

@@ -1,0 +1,256 @@
+/* ════════════════════════════════════════════════════════════════════════
+   theme.css — the orange + navy brand layer (client, 2026-10-23).
+   Loaded on every page just before type.css (type.css stays last). It only adds the shared
+   visual characteristics: orange rules on eyebrows, button sheen + lift,
+   orange-edged cards, soft orange glows on navy bands, selection colour,
+   and a scroll-reveal (nav.js adds .tz-reveal; no JS = nothing hidden).
+   ════════════════════════════════════════════════════════════════════════ */
+
+::selection { background: var(--orange); color: var(--navy); }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+/* ── Eyebrows: a short orange rule leads every small-caps label ── */
+.eyebrow, .section-eyebrow, .cat-hero__eyebrow, .pd__eyebrow, .szz__eyebrow,
+.mfg-eyebrow, .rng__eyebrow, .rfq__eyebrow, .pcx-eyebrow, .cta-box__eyebrow,
+.biz-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.eyebrow::before, .section-eyebrow::before, .cat-hero__eyebrow::before,
+.pd__eyebrow::before, .szz__eyebrow::before, .mfg-eyebrow::before,
+.rng__eyebrow::before, .rfq__eyebrow::before, .pcx-eyebrow::before,
+.cta-box__eyebrow::before, .biz-eyebrow::before {
+  content: ''; width: 22px; height: 2px; border-radius: 2px;
+  background: var(--orange); flex: none;
+}
+
+/* ── Primary buttons: lift, orange glow, and a light sheen that sweeps across ── */
+.rfq-btn--primary, .hero-cta-btn:not(.hero-cta-btn--ghost), .btn-primary,
+.biz-btn--primary, .cta-box__btn--primary, .pd__btn--primary, .cat-nav__enquire,
+.career-form__submit, .contact-form__submit {
+  position: relative; overflow: hidden;
+  transition: transform 200ms var(--ease-out, ease), box-shadow 200ms ease, background 200ms ease;
+}
+.rfq-btn--primary::after, .hero-cta-btn:not(.hero-cta-btn--ghost)::after, .btn-primary::after,
+.biz-btn--primary::after, .cta-box__btn--primary::after, .pd__btn--primary::after, .cat-nav__enquire::after,
+.career-form__submit::after, .contact-form__submit::after {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 60%;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.38) 50%, transparent 80%);
+  transform: translateX(-140%); transition: transform 650ms ease; pointer-events: none;
+}
+.rfq-btn--primary:hover, .hero-cta-btn:not(.hero-cta-btn--ghost):hover, .btn-primary:hover,
+.biz-btn--primary:hover, .cta-box__btn--primary:hover, .pd__btn--primary:hover, .cat-nav__enquire:hover,
+.career-form__submit:hover, .contact-form__submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(var(--orange-rgb), 0.38);
+}
+.rfq-btn--primary:hover::after, .hero-cta-btn:not(.hero-cta-btn--ghost):hover::after, .btn-primary:hover::after,
+.biz-btn--primary:hover::after, .cta-box__btn--primary:hover::after, .pd__btn--primary:hover::after, .cat-nav__enquire:hover::after,
+.career-form__submit:hover::after, .contact-form__submit:hover::after {
+  transform: translateX(260%);
+}
+
+/* ── Ghost / secondary buttons fill orange on hover ── */
+.rfq-btn--ghost, .hero-cta-btn--ghost, .biz-btn--ghost, .cta-box__btn--secondary {
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease, transform 200ms var(--ease-out, ease);
+}
+.rfq-btn--ghost:hover, .hero-cta-btn--ghost:hover, .biz-btn--ghost:hover, .cta-box__btn--secondary:hover {
+  background: var(--orange); border-color: var(--orange); color: var(--navy); transform: translateY(-2px);
+}
+
+/* ── Cards: orange top edge on hover; "View range" pill is navy → orange ── */
+.cat-card:hover {
+  box-shadow: inset 0 3px 0 var(--orange), 0 18px 42px rgba(11, 26, 61, 0.13);
+}
+.cat-card__view { background: var(--navy); color: #fff; }
+.cat-card:hover .cat-card__view { background: var(--orange); color: var(--navy); }
+
+/* ── Navy bands get a soft orange glow in one corner (shape + colour) ── */
+.cat-hero, .rng__head, .cta-box, .biz-cta, .rfq, .bg-navy, .mfg-certs, .mfg-scale, .why-join {
+  background-image: radial-gradient(640px 320px at 100% 0%, rgba(var(--orange-rgb), 0.16), transparent 62%);
+}
+.site-footer {
+  background-image: radial-gradient(560px 280px at 100% 0%, rgba(var(--orange-rgb), 0.14), transparent 62%);
+}
+
+/* ── Scroll reveal: nav.js tags cards with .tz-reveal and flips .tz-in ── */
+.tz-reveal { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms var(--ease-out, ease); }
+.tz-reveal.tz-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tz-reveal { opacity: 1; transform: none; transition: none; }
+  .rfq-btn--primary::after, .hero-cta-btn::after, .btn-primary::after, .biz-btn--primary::after,
+  .cta-box__btn--primary::after, .pd__btn--primary::after, .cat-nav__enquire::after { display: none; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Layer 3 (client: "theme followed most"). Navy + orange on every surface.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Scrollbar in brand colours */
+html { scrollbar-color: var(--orange) var(--navy); }
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 8px; border: 3px solid var(--navy); }
+::-webkit-scrollbar-thumb:hover { background: var(--orange-dark); }
+
+/* Scroll-progress bar (nav.js sets --tz-progress) */
+.tz-progress {
+  position: fixed; top: 0; left: 0; z-index: 400; height: 3px; width: 100%;
+  transform-origin: left; transform: scaleX(var(--tz-progress, 0));
+  background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+  pointer-events: none;
+}
+
+/* Every hero / page head ends on an orange edge */
+.page-hero, .cat-hero, .rng__head { border-bottom: 4px solid var(--orange); }
+.page-hero { box-shadow: inset 0 -120px 160px -80px rgba(var(--orange-rgb), 0.28); }
+.page-hero__title::after, .cat-hero__title::after {
+  content: ''; display: block; width: 64px; height: 4px; border-radius: 4px; margin-top: 18px;
+  background: linear-gradient(90deg, var(--orange), rgba(var(--orange-rgb), 0.25));
+}
+
+/* Breadcrumb separators + current trail in orange */
+.cat-breadcrumb span { color: var(--orange); opacity: 1; }
+.page-hero__breadcrumb-sep { background: var(--orange); }
+
+/* Footer: orange column headings, orange rule under them */
+.footer__col-heading { color: var(--orange); letter-spacing: 0.02em; }
+.footer__newsletter-heading { color: var(--orange); }
+
+/* Catalogue cards: image zoom + navy name bar feel */
+.cat-card__media { overflow: hidden; }
+.cat-card__media img { transition: transform 420ms var(--ease-out, ease); }
+.cat-card:hover .cat-card__media img { transform: scale(1.06); }
+.cat-card__tier { background: var(--navy); color: var(--orange); }
+.cat-card__name { position: relative; padding-left: 14px; }
+.cat-card__name::before {
+  content: ''; position: absolute; left: 0; top: 0.2em; width: 3px; height: 1.1em; border-radius: 3px;
+  background: var(--orange);
+}
+
+/* Product page: spec chips and spec table */
+.pd__chip { border-left: 3px solid var(--orange); background: var(--off-white); }
+.pd__chip span { color: var(--orange-deep); }
+.pd__spec-table { border-top: 3px solid var(--orange); }
+.pd__spec-table th { color: var(--navy); font-weight: 700; }
+.pd__spec-table th::before {
+  content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange); margin-right: 10px; vertical-align: middle;
+}
+.pd__spec-table tr:hover { background: rgba(var(--orange-rgb), 0.08); }
+.pd__specs-title::after, .section-heading::after {
+  content: ''; display: inline-block; width: 40px; height: 4px; border-radius: 4px; margin-left: 16px;
+  background: var(--orange); vertical-align: middle;
+}
+
+/* Rows on the Business page: orange tile edge on hover */
+a.rng-tile:hover { box-shadow: inset 0 3px 0 var(--orange), 0 10px 28px rgba(11, 26, 61, 0.10); }
+.rng-tile__name { border-top: 1px solid rgba(var(--orange-rgb), 0.25); }
+
+/* Forms: orange focus everywhere */
+input:focus, textarea:focus, select:focus {
+  outline: none; border-color: var(--orange) !important;
+  box-shadow: 0 0 0 3px rgba(var(--orange-rgb), 0.22);
+}
+
+/* Pull quotes / story accents */
+.story__pull { border-left: 4px solid var(--orange); padding-left: 22px; }
+
+/* Back-to-top (nav.js injects .tz-top) */
+.tz-top {
+  position: fixed; right: 22px; bottom: 22px; z-index: 300;
+  width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--navy);
+  background: var(--orange); color: var(--navy); display: grid; place-items: center;
+  box-shadow: 0 10px 24px rgba(11, 26, 61, 0.28); cursor: pointer;
+  opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity 240ms ease, transform 240ms ease, background 160ms ease;
+}
+.tz-top.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.tz-top:hover { background: var(--navy); color: var(--orange); border-color: var(--orange); }
+.tz-top svg { width: 20px; height: 20px; }
+@media (max-width: 760px) { .tz-top { right: 14px; bottom: 14px; width: 42px; height: 42px; } }
+
+/* Mega / search panels and the mobile nav sheet already run navy; give
+   their active items the orange edge too */
+.isler-mega__link[aria-current="page"], .isler-nav__submenu a[aria-current="page"] {
+  box-shadow: inset 3px 0 0 var(--orange);
+}
+
+/* Product pages have no navy hero, so the (white) breadcrumb was invisible
+   on white; on light ground it runs navy with an orange trail. */
+.pd .cat-breadcrumb, .pd .cat-breadcrumb a { color: var(--navy); }
+.pd .cat-breadcrumb a:hover { color: var(--orange-deep); }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Layer 4 (site-wide "more theme", 2026-10-23): diagonal slants, patterns,
+   navy hover flips, count-up hooks, page fade-in. nav.js inserts .tz-slant
+   after every .page-hero / .cat-hero and before every .site-footer.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Page fade-in */
+@keyframes tzFadeIn { from { opacity: 0; } to { opacity: 1; } }
+body { animation: tzFadeIn 420ms ease-out both; }
+
+/* Diagonal slants. The element overlaps the band above it; its upper-right
+   half is transparent so the hero / previous section shows through, the
+   lower-left half is the NEXT band's colour (--tz-next, set by nav.js), with
+   an orange hairline along the diagonal. */
+.tz-slant {
+  position: relative; z-index: 3; height: 64px; margin-top: -64px; pointer-events: none;
+  background: linear-gradient(-2.2deg, var(--tz-next, #fff) 49.4%, var(--orange) 49.4%, var(--orange) 51.6%, transparent 51.6%);
+}
+.tz-slant--footer {
+  background: linear-gradient(-2.2deg, var(--navy) 49.4%, var(--orange) 49.4%, var(--orange) 51.6%, transparent 51.6%);
+}
+.page-hero.tz-has-slant, .cat-hero.tz-has-slant { border-bottom: 0; }
+.site-footer.tz-after-slant { border-top: 0; }
+@media (max-width: 760px) { .tz-slant { height: 40px; margin-top: -40px; } }
+
+/* Patterns: grid on navy bands, dots on light bands */
+.cat-hero, .bg-navy, .mfg-certs, .mfg-scale, .why-join, .rng__head {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(640px 320px at 100% 0%, rgba(var(--orange-rgb), 0.16), transparent 62%);
+  background-size: 44px 44px, 44px 44px, auto;
+}
+.bg-offwhite, .biz-section--alt, .pcx-section, .pd__specs, .cta-box-section {
+  background-image: radial-gradient(rgba(11, 26, 61, 0.09) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Catalogue cards: body flips to navy on hover */
+.cat-card__body { transition: background 220ms ease; }
+.cat-card:hover .cat-card__body { background: var(--navy); }
+.cat-card__name, .cat-card__spec, .cat-card__price, .cat-card__price small { transition: color 220ms ease; }
+.cat-card:hover .cat-card__name { color: #fff; }
+.cat-card:hover .cat-card__spec { color: rgba(255, 255, 255, 0.7); }
+.cat-card:hover .cat-card__price { color: var(--orange); }
+.cat-card:hover .cat-card__price small { color: rgba(255, 255, 255, 0.6); }
+
+/* Business tiles: name bar flips to navy */
+.rng-tile__name { transition: background 220ms ease, color 220ms ease; }
+a.rng-tile:hover .rng-tile__name { background: var(--navy); color: var(--orange); }
+
+/* Team + blog cards */
+.member-card__avatar { border: 3px solid transparent; transition: border-color 220ms ease, transform 220ms var(--ease-out, ease); }
+.member-card:hover .member-card__avatar { border-color: var(--orange); transform: translateY(-4px); }
+.member-card:hover .member-card__name { color: var(--orange-deep); }
+.blog-card__body { transition: background 220ms ease; }
+.blog-card:hover .blog-card__body { background: var(--navy); }
+.blog-card:hover .blog-card__title, .blog-card:hover .blog-card__title a { color: #fff; }
+.blog-card:hover .blog-card__excerpt { color: rgba(255, 255, 255, 0.72); }
+.blog-card:hover .blog-card__date { color: rgba(255, 255, 255, 0.6); }
+.blog-card:hover .blog-card__category { color: var(--orange); }
+.blog-card__title, .blog-card__excerpt, .blog-card__date { transition: color 220ms ease; }
+
+/* Stat values get an orange bar that grows in once counted */
+.hp-statbar__item, .stat { position: relative; }
+.hp-statbar__value, .stat__num { font-variant-numeric: tabular-nums; }
+.tz-counted::after { content: ''; display: block; width: 44px; height: 3px; border-radius: 3px; margin: 10px auto 0;
+  background: var(--orange); animation: tzBar 700ms var(--ease-out, ease) both; }
+@keyframes tzBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  .tz-counted::after { animation: none; }
+}

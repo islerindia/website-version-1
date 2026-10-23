@@ -4,6 +4,12 @@
    the mega inline. Closes on outside-click / Escape. One handler per .isler-nav. */
 (function () {
   function initNav(nav) {
+    // Theme 2026-10-23: mark the current page so nav.css can underline it.
+    var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    Array.prototype.forEach.call(nav.querySelectorAll('.isler-nav__links > li > a[href]'), function (a) {
+      var h = (a.getAttribute('href') || '').split('#')[0].split('?')[0].toLowerCase();
+      if (h && h === here) a.setAttribute('aria-current', 'page');
+    });
     var item    = nav.querySelector('.isler-nav__item.has-mega');
     var trigger = nav.querySelector('.isler-nav__trigger');
     var mega    = nav.querySelector('.isler-mega');
@@ -135,7 +141,101 @@
     }, { passive: true });
   }
 
-  function init() { document.querySelectorAll('.isler-nav').forEach(initNav); }
+  // Theme 2026-10-23: gentle scroll-reveal for cards on interior pages.
+  // Classes are added here, so without JS nothing is ever hidden.
+  function initReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els = document.querySelectorAll('.cat-card, .rng-row, .vm-item, .job-card, .stat, .blog-card, .cta-box, .cert-card, .team-card, .tz-item');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('tz-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    Array.prototype.forEach.call(els, function (el, i) {
+      el.classList.add('tz-reveal'); el.style.transitionDelay = ((i % 6) * 60) + 'ms'; io.observe(el);
+    });
+    // Safety net: whatever the observer has not reached after 4s is shown anyway.
+    setTimeout(function () { Array.prototype.forEach.call(els, function (el) { el.classList.add('tz-in'); }); }, 4000);
+  }
+  // Theme 2026-10-23 layer 3: scroll-progress bar + back-to-top button.
+  function initChrome() {
+    var bar = document.createElement('div'); bar.className = 'tz-progress'; bar.setAttribute('aria-hidden', 'true');
+    var top = document.createElement('button'); top.className = 'tz-top'; top.type = 'button';
+    top.setAttribute('aria-label', 'Back to top');
+    top.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(bar); document.body.appendChild(top);
+    top.addEventListener('click', function () {
+      var smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+    });
+    var tick = false;
+    function update() {
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - window.innerHeight) || 1;
+      var y = window.pageYOffset || doc.scrollTop || 0;
+      bar.style.setProperty('--tz-progress', Math.min(1, Math.max(0, y / max)).toFixed(4));
+      top.classList.toggle('is-on', y > 600);
+      tick = false;
+    }
+    update();
+    window.addEventListener('scroll', function () { if (!tick) { window.requestAnimationFrame(update); tick = true; } }, { passive: true });
+    window.addEventListener('resize', update);
+  }
+  // Theme 2026-10-23 layer 4: diagonal slants under page heroes and above
+  // the footer, plus a generic count-up for stat numbers.
+  function initSlants() {
+    if (document.body.classList.contains('ab-page')) return;   // About page has its own slants
+    function bgOf(el) {
+      var n = el, c;
+      while (n && n !== document.body) {
+        c = getComputedStyle(n).backgroundColor;
+        if (c && c !== 'rgba(0, 0, 0, 0)' && c !== 'transparent') return c;
+        n = n.parentElement;
+      }
+      return '#ffffff';
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('.page-hero, .cat-hero'), function (hero) {
+      var next = hero.nextElementSibling;
+      if (!next || next.classList.contains('tz-slant')) return;
+      var sl = document.createElement('div'); sl.className = 'tz-slant'; sl.setAttribute('aria-hidden', 'true');
+      sl.style.setProperty('--tz-next', bgOf(next));
+      hero.classList.add('tz-has-slant');
+      hero.parentNode.insertBefore(sl, next);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.site-footer'), function (f) {
+      var prev = f.previousElementSibling;
+      if (!prev || prev.classList.contains('tz-slant')) return;
+      var sl = document.createElement('div'); sl.className = 'tz-slant tz-slant--footer'; sl.setAttribute('aria-hidden', 'true');
+      f.classList.add('tz-after-slant');
+      f.parentNode.insertBefore(sl, f);
+    });
+  }
+  function initCountUp() {
+    var els = document.querySelectorAll('.hp-statbar__value, .stat__num, [data-count]');
+    if (!els.length) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function run(el) {
+      var raw = el.getAttribute('data-count') || el.textContent.trim();
+      el.classList.add('tz-counted');
+      if (!/^[0-9][0-9,]*\+?$/.test(raw)) return;           // only plain numbers like 40,000 / 100+
+      var suffix = /\+$/.test(raw) ? '+' : '', target = parseInt(raw.replace(/[^0-9]/g, ''), 10);
+      if (!target || reduce) { el.textContent = raw; return; }
+      var t0 = null, dur = 1400;
+      function step(ts) {
+        if (!t0) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * e).toLocaleString('en-IN') + suffix;
+        if (p < 1) requestAnimationFrame(step); else el.textContent = raw;
+      }
+      requestAnimationFrame(step);
+    }
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { run(en.target); io.unobserve(en.target); } });
+    }, { threshold: 0.4 });
+    Array.prototype.forEach.call(els, function (el) { io.observe(el); });
+  }
+  function init() { document.querySelectorAll('.isler-nav').forEach(initNav); initReveal(); initChrome(); /* initSlants() retired 2026-10-23: Rajesh did not like the diagonal line */ initCountUp(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 }());

@@ -16,152 +16,127 @@
   <link rel="stylesheet" href="assets/css/footer.css">
   <link rel="stylesheet" href="assets/css/nav.css">
   <link rel="stylesheet" href="assets/css/category-carousel.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-dark.css">
   <link rel="stylesheet" href="assets/css/type.css">
   <style>
-    .biz-hero {
-      background: var(--navy);
-      color: #fff;
-      padding: clamp(56px, 7vw, 104px) clamp(24px, 5vw, 96px) clamp(48px, 6vw, 88px);
-    }
-    .biz-hero__inner { max-width: 1680px; margin: 0 auto; }
     .biz-crumb { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 22px; }
     .biz-crumb a { color: rgba(255,255,255,0.85); text-decoration: none; }
     .biz-crumb a:hover { color: var(--yellow); }
     .biz-crumb span { margin: 0 8px; }
-    .biz-hero__eyebrow {
-      display: block; font-size: 12px; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--yellow); margin-bottom: 12px;
-    }
-    .biz-hero__title {
-      margin: 0 0 18px;
-      font-size: clamp(32px, 4.6vw, 60px);
-      font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
-    }
-    .biz-hero__intro {
-      margin: 0; max-width: 68ch;
-      font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65;
-      color: rgba(255,255,255,0.82);
-    }
 
-    /* ── OUR BUSINESS mosaic ──────────────────────────────────────────────
-       Replaces the .pcx-* carousel. Four categories, no horizontal scroll,
-       laid out Vestel-style: one tall lead tile beside two stacked tiles,
-       then a wide tile across the bottom. Tiles are links, so the whole
-       block is keyboard-reachable without any JS. */
-    .obz { padding: clamp(40px, 4.5vw, 68px) clamp(24px, 5vw, 96px); }
-    /* The head shares the grid's width so the rule under "Our Business"
-       lines up with the left and right edges of the tiles below it. It was
-       900px against a 1240px grid, which is why the heading did not sit in
-       the same frame as the categories. Keep these two widths equal. */
-    .obz__head { max-width: 1160px; margin: 0 auto clamp(28px, 3.4vw, 44px); text-align: center; }
-    .obz__title {
-      margin: 0 0 18px;
-      font-size: clamp(23px, 2.4vw, 32px);
-      font-weight: 700; letter-spacing: -0.025em; color: var(--navy);
-      padding-bottom: 18px;
-      border-bottom: 1px solid rgba(11,26,61,0.14);
-    }
-    .obz__intro { margin: 0 auto; max-width: 78ch; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.72; color: var(--gray-mid); }
-
-    /* The Vestel-style uneven mosaic: a tall lead tile beside two stacked
-       tiles, then one wide tile underneath. This first read as 'weird' only
-       because the tiles were carrying 4-40 KB catalogue cut-outs that cropped
-       badly at these sizes — they are on the full lifestyle photography now,
-       which is what the shape was designed for. */
-    .obz__grid {
-      max-width: 1160px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-auto-rows: clamp(118px, 11.4vw, 162px);
-      gap: clamp(10px, 0.9vw, 16px);
-    }
-    /* lead tile spans both rows of the top block */
-    .obz-tile--lead { grid-row: span 2; }
-    /* the fourth category runs the full width underneath */
-    .obz-tile--wide { grid-column: 1 / -1; }
-
-    .obz-tile {
-      position: relative;
-      display: block;
-      overflow: hidden;
-      border-radius: var(--radius-lg);
+    /* ── OUR RANGE ─────────────────────────────────────────────────────────
+       Client layout 2026-10-22, replaces the .obz mosaic. --rng-top is set
+       by #rng-tabs-js to the fixed nav's height so the tab strip sticks just
+       beneath it; 76px is the fallback when JS is off. */
+    .rng { --rng-accent: #F28C28; --rng-line: rgba(26,26,26,0.14); --rng-top: 76px; background: var(--white); }
+    .rng__head {
       background: var(--navy);
-      text-decoration: none;
-      isolation: isolate;
+      padding: clamp(56px, 7vw, 104px) clamp(24px, 5vw, 96px) clamp(40px, 4.5vw, 64px);
     }
-    .obz-tile__img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    .rng__head > * { max-width: 1680px; margin-left: auto; margin-right: auto; }
+    .rng__eyebrow {
+      display: inline-flex; font-size: 12px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 14px;
     }
-    .obz-tile__scrim {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(6,15,36,0.80) 0%, rgba(6,15,36,0.30) 48%, rgba(6,15,36,0.05) 100%);
-      transition: background 300ms ease;
+    .rng__title {
+      margin-top: 0; margin-bottom: 18px; max-width: 1680px;
+      font-size: clamp(30px, 4vw, 54px); font-weight: 800;
+      line-height: 1.08; letter-spacing: -0.03em; color: #fff;
     }
-    .obz-tile__label {
-      position: absolute; left: clamp(16px, 1.5vw, 24px); bottom: clamp(14px, 1.5vw, 22px); right: clamp(16px, 1.5vw, 24px);
-      font-size: clamp(15px, 1.25vw, 19px);
-      font-weight: 700; line-height: 1.25; letter-spacing: -0.015em;
-      color: #fff;
+    .rng__accent { font-style: normal; color: var(--orange, #F28C28);
     }
-    /* the yellow rule grows out from under the label on hover */
-    .obz-tile__label::after {
-      content: '';
-      display: block;
-      width: 34px; height: 3px;
-      margin-top: 12px;
-      background: var(--yellow);
-      transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    .rng__title, .rng__intro { padding-right: min(40%, 640px); }
+    .rng__intro { margin-top: 0; margin-bottom: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; color: rgba(255,255,255,0.78); }
+
+    .rng__tabs {
+      position: sticky; top: var(--rng-top); z-index: 20;
+      background: var(--white);
+      border-top: 1px solid var(--rng-line); border-bottom: 1px solid var(--rng-line);
+      padding: 0 clamp(24px, 5vw, 96px);
     }
-    .obz-tile:hover .obz-tile__img,
-    .obz-tile:focus-visible .obz-tile__img { transform: scale(1.05); }
-    .obz-tile:hover .obz-tile__scrim,
-    .obz-tile:focus-visible .obz-tile__scrim {
-      background: linear-gradient(to top, rgba(6,15,36,0.88) 0%, rgba(6,15,36,0.44) 55%, rgba(6,15,36,0.14) 100%);
+    .rng__tabs-inner {
+      max-width: 1680px; margin: 0 auto;
+      display: flex; gap: clamp(20px, 2.6vw, 40px);
+      overflow-x: auto; scrollbar-width: none;
     }
-    .obz-tile:hover .obz-tile__label::after,
-    .obz-tile:focus-visible .obz-tile__label::after { width: 86px; }
-    .obz-tile:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .rng__tabs-inner::-webkit-scrollbar { display: none; }
+    .rng-tab {
+      flex: none; position: relative; padding: 18px 0 16px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--charcoal); text-decoration: none; white-space: nowrap;
+      transition: color 200ms ease;
+    }
+    .rng-tab::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+      background: var(--rng-accent); transform: scaleX(0); transform-origin: left;
+      transition: transform 260ms var(--ease-out);
+    }
+    .rng-tab:hover, .rng-tab[aria-current="true"] { color: var(--rng-accent); }
+    .rng-tab[aria-current="true"]::after { transform: scaleX(1); }
+    .rng-tab:focus-visible { outline: 2px solid var(--rng-accent); outline-offset: 4px; }
+
+    .rng__body { padding: clamp(16px, 2vw, 28px) clamp(24px, 5vw, 96px) clamp(40px, 5vw, 72px); }
+    .rng-row {
+      max-width: 1680px; margin: 0 auto;
+      display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(20px, 3vw, 48px);
+      padding: clamp(24px, 2.6vw, 36px) 0;
+      border-bottom: 1px solid var(--rng-line);
+      scroll-margin-top: calc(var(--rng-top) + 64px);
+    }
+    .rng-row:last-child { border-bottom: 0; }
+    .rng-row__no { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--rng-accent); margin-bottom: 8px; }
+    .rng-row__title {
+      margin: 0 0 8px; font-size: clamp(22px, 2vw, 28px); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.02em; color: var(--navy);
+    }
+    .rng-row__count { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); }
+
+    .rng-row__grid {
+      list-style: none; margin: 0; padding: 0;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: clamp(12px, 1.2vw, 18px);
+    }
+    .rng-tile {
+      display: flex; flex-direction: column; height: 100%;
+      border: 1px solid var(--rng-line); background: var(--white);
+      color: var(--charcoal); text-decoration: none;
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms var(--ease-out);
+    }
+    .rng-tile__media {
+      position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+      background: var(--gray-light); display: flex; align-items: center; justify-content: center;
+    }
+    .rng-tile__media img {
+      width: 82%; height: 82%; object-fit: contain;
+      transition: transform 420ms var(--ease-out);
+    }
+    .rng-tile__name {
+      display: block; padding: 11px 12px; border-top: 1px solid var(--rng-line);
+      font-size: 13px; font-weight: 600; line-height: 1.3;
+    }
+    a.rng-tile:hover { border-color: var(--rng-accent); box-shadow: 0 10px 28px rgba(11,26,61,0.10); transform: translateY(-3px); }
+    a.rng-tile:hover .rng-tile__media img { transform: scale(1.05); }
+    a.rng-tile:hover .rng-tile__name { color: var(--rng-accent); }
+    a.rng-tile:focus-visible { outline: 2px solid var(--rng-accent); outline-offset: 3px; }
+    .rng-tile--soon .rng-tile__media img { opacity: 0.55; }
+    .rng-tile__soon {
+      position: absolute; left: 8px; top: 8px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: #9A4D00; background: rgba(242, 140, 40,0.16); border-radius: 999px; padding: 3px 8px;
+    }
 
     @media (max-width: 760px) {
-      .obz__grid { grid-template-columns: 1fr; grid-auto-rows: clamp(140px, 34vw, 190px); }
-      .obz-tile--lead { grid-row: auto; }
-      .obz-tile--wide { grid-column: auto; }
+      .rng__title, .rng__intro { padding-right: 0; }
+      .rng-row { grid-template-columns: 1fr; gap: 16px; }
+      .rng-row__grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
     }
-    /* ── Tile reveal ──────────────────────────────────────────────────────
-       The tiles rise in one after another as the mosaic scrolls into view.
-       Armed only by #obz-reveal adding .obz-anim-on, and that script bails
-       out under prefers-reduced-motion or without IntersectionObserver — so
-       with no JS the mosaic is simply visible rather than stuck invisible. */
-    body.obz-anim-on .obz-tile {
-      opacity: 0;
-      transform: translateY(26px) scale(0.985);
-      transition: opacity 640ms cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 640ms cubic-bezier(0.22, 1, 0.36, 1);
-      transition-delay: calc(var(--i, 0) * 90ms);
-    }
-    body.obz-anim-on .obz__grid.is-in .obz-tile {
-      opacity: 1;
-      transform: none;
-    }
-    /* the head lifts in just ahead of the tiles */
-    body.obz-anim-on .obz__head {
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 560ms ease, transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    body.obz-anim-on .obz__head.is-in { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      body.obz-anim-on .obz-tile,
-      body.obz-anim-on .obz__head { opacity: 1; transform: none; transition: none; }
+    @media (max-width: 400px) {
+      .rng-row__grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .obz-tile__img, .obz-tile__scrim, .obz-tile__label::after { transition: none; }
-      .obz-tile:hover .obz-tile__img { transform: none; }
+      .rng-tile, .rng-tile__media img, .rng-tab::after { transition: none; }
+      a.rng-tile:hover, a.rng-tile:hover .rng-tile__media img { transform: none; }
     }
 
     .biz-section { padding: clamp(48px, 5vw, 72px) clamp(24px, 5vw, 96px); position: relative; }
@@ -237,8 +212,8 @@
     .biz-ph {
       display: inline-block; vertical-align: middle;
       font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #8A6A00; background: rgba(244,180,0,0.18);
-      border: 1px dashed rgba(244,180,0,0.75); border-radius: 999px;
+      color: #9A4D00; background: rgba(242, 140, 40,0.18);
+      border: 1px dashed rgba(242, 140, 40,0.75); border-radius: 999px;
       padding: 3px 10px; margin-left: 6px;
     }
   </style>
@@ -347,82 +322,93 @@
     <button class="isler-nav__search-toggle" type="button" aria-label="Search" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button><button class="isler-nav__burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </nav>
 
-<header class="biz-hero">
-  <div class="biz-hero__inner">
-    <nav class="biz-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Our Business</nav>
-    <span class="biz-hero__eyebrow">Our Business</span>
-    <h1 class="biz-hero__title">Built to Manufacture at Your Brand's Standard</h1>
-    <!-- Client 2026-08-13, verbatim — the small line under the headline. It
-         replaces the OEM/ODM/MOQ pitch that used to sit here. Note this is the
-         "Discover Isler's wide range…" sentence that was taken OUT of the
-         mosaic head on 2026-08-12: they want it under the headline, not under
-         "Our Business". Do not put a second copy back into the mosaic. -->
-    <p class="biz-hero__intro">Discover Isler&rsquo;s wide range of innovative products designed to shape modern living. From Built in Appliances and Countertop cooking to small domestic appliances and other home appliances, Isler offers superior quality and technology to meet your every need.</p>
-  </div>
-</header>
-
 <!-- ═══════════════════════════════════════════════════════════════════
-     OUR BUSINESS — category mosaic.
+     OUR RANGE — category rows (client layout, 2026-10-22).
 
-     Client doc (WEBSITE (1) doc, "OUR BUSINESS PAGE", 2026-08-12):
-       "This is not the layout we finalized. Our layout will look like shown
-        below. Take reference from this website —
-        https://vestelinternational.com/our-business"
-       "this left right scrolling has to be removed along with section"
-       "Categories will be – Built-in appliances, Counter-top cooking,
-        Small domestic appliances & Other home appliances"
+     Replaces the four-tile .obz mosaic. Grey header with the range headline,
+     a tab strip that sticks under the fixed nav and jumps to each row, then
+     four numbered rows of product-type tiles. Headline, intro, tab labels,
+     row titles and tile names are verbatim from the client's screenshot.
 
-     So the .pcx-* carousel (six cards, prev/next arrows, horizontal scroll)
-     is GONE and replaced by a static mosaic of the four categories, in the
-     Vestel style: large image tiles, name overlaid, no scrolling.
-
-     Photos: the doc says "Photos to be provided yet (for now use that
-     previous imgs)" — every tile therefore reuses a catalogue shot that was
-     already on this page. Swap the four src values when Isler supplies the
-     real category photography; nothing else needs to change.
+     Mixer grinder, Hand blender and Humidifier have no page on the site yet,
+     so they render as un-linked "Coming soon" tiles. Dishwasher links to its
+     existing coming-soon page. Electric cooktop links to cooktops.html (the
+     site files induction / infrared / hybrid separately).
 ═══════════════════════════════════════════════════════════════════ -->
-<section class="obz" aria-labelledby="obz-h">
-  <div class="obz__head">
-    <h2 class="obz__title" id="obz-h">Our Business</h2>
-    <!-- Client 2026-08-12: this paragraph belongs under the "Our Business"
-         heading, not in the hero. Verbatim from the doc. The doc also carries
-         a "Discover Isler's wide range of innovative products…" line for this
-         page, which used to sit here — it is out at the client's request. -->
-    <p class="obz__intro">Isler is a global company that stands out with its capabilities in production, research &amp; development, innovation, design, and brand management in the fields of electrical &amp; electronic appliances.</p>
+<section class="rng" aria-labelledby="rng-h">
+  <div class="rng__head">
+    <nav class="biz-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Our Business</nav>
+    <span class="rng__eyebrow">Our Range</span>
+    <h1 class="rng__title" id="rng-h"><em class="rng__accent">22 Categories. 183 SKUs.</em> One Manufacturing Partner.</h1>
+    <p class="rng__intro">Kitchen and small domestic appliances, designed and manufactured in Greater Noida for brands across India and export markets.</p>
   </div>
 
-  <div class="obz__grid">
-    <a style="--i:0" class="obz-tile obz-tile--lead" href="built-in-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-new.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Built-in Appliances</span>
-    </a>
+  <nav class="rng__tabs" aria-label="Product categories">
+    <div class="rng__tabs-inner">
+      <a class="rng-tab" href="#rng-built-in" aria-current="true">Built-in</a>
+      <a class="rng-tab" href="#rng-cooktops">Cooktops</a>
+      <a class="rng-tab" href="#rng-small-domestic">Small Domestic Appliances</a>
+      <a class="rng-tab" href="#rng-home-care">Home Care</a>
+    </div>
+  </nav>
 
-    <a style="--i:1" class="obz-tile" href="cooktops.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/keyproduct-hobtops.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Counter-top Cooking</span>
-    </a>
-
-    <a style="--i:2" class="obz-tile" href="small-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/images/small-appliances-1.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Small Domestic Appliances</span>
-    </a>
-
-    <a style="--i:3" class="obz-tile obz-tile--wide" href="other-home-appliances.html">
-      <img class="obz-tile__img" fetchpriority="low" src="assets/catalog/air-purifiers/jh22.webp" alt="" decoding="async">
-      <span class="obz-tile__scrim" aria-hidden="true"></span>
-      <span class="obz-tile__label">Other Home Appliances</span>
-    </a>
+  <div class="rng__body">
+  <div class="rng-row" id="rng-built-in">
+    <div class="rng-row__head">
+      <span class="rng-row__no">01</span>
+      <h3 class="rng-row__title">Built-in Appliances</h3>
+      <span class="rng-row__count">4 Products</span>
+    </div>
+    <ul class="rng-row__grid">
+        <li><a class="rng-tile" href="kitchen-chimneys.html"><span class="rng-tile__media"><img src="assets/catalog/chimneys/good-t-ac-1.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Chimney</span></a></li>
+        <li><a class="rng-tile" href="built-in-hobs.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/fw/neo-cook.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Hobs</span></a></li>
+        <li><a class="rng-tile" href="built-in-microwaves.html"><span class="rng-tile__media"><img src="assets/catalog/microwaves/silver-stream.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Microwave</span></a></li>
+        <li><a class="rng-tile" href="built-in-ovens.html"><span class="rng-tile__media"><img src="assets/catalog/built-in-ovens/is-ch-1004.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Oven</span></a></li>
+    </ul>
+  </div>
+  <div class="rng-row" id="rng-cooktops">
+    <div class="rng-row__head">
+      <span class="rng-row__no">02</span>
+      <h3 class="rng-row__title">Counter-top Cooking</h3>
+      <span class="rng-row__count">3 Products</span>
+    </div>
+    <ul class="rng-row__grid">
+        <li><a class="rng-tile" href="tablet-hobs.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/fw/ignis-pro.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Tablet hobs</span></a></li>
+        <li><a class="rng-tile" href="gas-cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/gas-cooktops/gas-cooktop-Domestic-3B.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Gas cooktop</span></a></li>
+        <li><a class="rng-tile" href="cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/non-gas-cooktops/induction/IS-AM-EID001.png" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Electric cooktop</span></a></li>
+    </ul>
+  </div>
+  <div class="rng-row" id="rng-small-domestic">
+    <div class="rng-row__head">
+      <span class="rng-row__no">03</span>
+      <h3 class="rng-row__title">Small Domestic Appliances</h3>
+      <span class="rng-row__count">7 Products</span>
+    </div>
+    <ul class="rng-row__grid">
+        <li><a class="rng-tile" href="air-fryers.html"><span class="rng-tile__media"><img src="assets/catalog/air-fryers/ist1001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Air fryer</span></a></li>
+        <li><span class="rng-tile rng-tile--soon"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__name">Mixer grinder</span></span></li>
+        <li><span class="rng-tile rng-tile--soon"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__name">Hand blender</span></span></li>
+        <li><a class="rng-tile" href="stand-mixers.html"><span class="rng-tile__media"><img src="assets/catalog/stand-mixers/is-s1-1001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Stand mixer</span></a></li>
+        <li><a class="rng-tile" href="dough-makers.html"><span class="rng-tile__media"><img src="assets/catalog/dough-makers/is-s2-1001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Dough maker</span></a></li>
+        <li><a class="rng-tile" href="kettles.html"><span class="rng-tile__media"><img src="assets/catalog/kettles/is-fd-k001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Kettle</span></a></li>
+        <li><a class="rng-tile" href="toasters.html"><span class="rng-tile__media"><img src="assets/catalog/toasters/is-fd-t001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Toaster</span></a></li>
+    </ul>
+  </div>
+  <div class="rng-row" id="rng-home-care">
+    <div class="rng-row__head">
+      <span class="rng-row__no">04</span>
+      <h3 class="rng-row__title">Other Home Appliances</h3>
+      <span class="rng-row__count">4 Products</span>
+    </div>
+    <ul class="rng-row__grid">
+        <li><a class="rng-tile" href="air-purifiers.html"><span class="rng-tile__media"><img src="assets/catalog/air-purifiers/zm06.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Air purifier</span></a></li>
+        <li><a class="rng-tile" href="vacuum-cleaners.html"><span class="rng-tile__media"><img src="assets/catalog/vacuum-cleaners/m1.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__name">Vacuum cleaner</span></a></li>
+        <li><a class="rng-tile rng-tile--soon" href="dishwashers.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__name">Dishwasher</span></a></li>
+        <li><span class="rng-tile rng-tile--soon"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__name">Humidifier</span></span></li>
+    </ul>
+  </div>
   </div>
 </section>
-
-<!-- The .pcx-* carousel that used to sit here (six category cards on a
-     horizontal track with prev/next arrows) was removed on 2026-08-12 per the
-     doc. It still exists on the six category pages, so assets/css/
-     category-carousel.css and assets/js/category-carousel.js stay in the
-     project — they are simply no longer needed by THIS page. -->
 
 <!-- Client 2026-08-06: this page is the category picker plus the RFQ close,
      nothing else. Three Ways to Build, Production Quantities, the NPD flow,
@@ -437,8 +423,7 @@
     <p class="biz-lead">Send a brief — category, volume, launch window. Feasibility, MOQ and timeline within two business days.</p>
     <div class="biz-cta__actions">
       <a class="biz-btn biz-btn--primary" href="contact.html">Start an RFQ</a>
-      <!-- was #pcx-h, which went with the carousel — now the mosaic heading -->
-      <a class="biz-btn biz-btn--ghost" href="#obz-h">See Our Catalogue</a>
+      <a class="biz-btn biz-btn--ghost" href="#rng-h">See Our Catalogue</a>
       <!-- "Download Products PDF" removed 2026-08-12. Client doc: "Keep this
            below as it is (except the dow pdf part) — business PAGE mein bhi
            uske niche bhi pdf wala". The file was never supplied and 404'd. -->
@@ -566,30 +551,41 @@
     </div>
 
   </footer>
-<!-- Mosaic reveal. Mirrors the pattern used on our-story.html: the class is
-     only added when the browser can actually animate, so the no-JS and
-     reduced-motion states render the tiles normally. -->
-<script id="obz-reveal">
+<!-- Our Range tabs: keep the strip under the fixed nav, and mark the tab
+     for whichever row is in view. Clicks are plain anchor jumps. -->
+<script id="rng-tabs-js">
 (function () {
-  var grid = document.querySelector('.obz__grid');
-  var head = document.querySelector('.obz__head');
-  if (!grid) return;
+  var sec = document.querySelector('.rng');
+  if (!sec) return;
+  var nav = document.querySelector('.isler-nav');
+  function setTop() { if (nav) sec.style.setProperty('--rng-top', nav.getBoundingClientRect().height + 'px'); }
+  setTop();
+  window.addEventListener('resize', setTop);
 
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) return;
-
-  document.body.classList.add('obz-anim-on');
-
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      e.target.classList.add('is-in');
-      io.unobserve(e.target);
+  var tabs = Array.prototype.slice.call(sec.querySelectorAll('.rng-tab'));
+  var rows = tabs.map(function (t) { return document.querySelector(t.getAttribute('href')); });
+  var strip = sec.querySelector('.rng__tabs-inner');
+  function mark(i) {
+    tabs.forEach(function (t, j) {
+      if (j === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-
-  if (head) io.observe(head);
-  io.observe(grid);
+    var t = tabs[i];
+    if (strip && t) strip.scrollLeft = t.offsetLeft - 24;
+  }
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var line = (nav ? nav.getBoundingClientRect().height : 0) + 140;
+      var cur = 0;
+      rows.forEach(function (r, i) { if (r && r.getBoundingClientRect().top <= line) cur = i; });
+      mark(cur);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }());
 </script>
   <script src="assets/js/nav.js" defer></script>

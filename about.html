@@ -90,7 +90,7 @@
     .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
     .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
     .demo-mm__cell { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; text-decoration: none; transition: background-color 150ms ease; }
-    .demo-mm__cell:hover { background-color: rgba(244, 180, 0, 0.08); }
+    .demo-mm__cell:hover { background-color: rgba(242, 140, 40, 0.08); }
     .demo-mm__thumb { flex-shrink: 0; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
     .demo-mm__thumb img { width: 100%; height: 100%; object-fit: cover; }
     .demo-mm__cell:nth-child(1) .demo-mm__thumb img { object-fit: contain; padding: 6px; background: #fff; }
@@ -119,8 +119,8 @@
     .page-section { position: relative; padding: clamp(56px, 8vw, 110px) 0; overflow: clip; }
     .bg-white { background: var(--white); }
     .bg-offwhite { background: var(--off-white); }
-    /* Navy treatment matching the homepage USP / vendors sections (#475A82). */
-    .bg-navy { background: #475A82; }
+    /* Navy treatment matching the homepage USP / vendors sections (#14275A). */
+    .bg-navy { background: #14275A; }
     .bg-navy .body-copy { color: rgba(255,255,255,0.82); }
     .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
     .h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
@@ -151,8 +151,8 @@
     .about-bullet::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); flex-shrink: 0; }
     .vm-card { background: var(--off-white); border-radius: 20px; padding: clamp(28px, 3vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; margin-top: clamp(36px, 5vw, 56px); }
     .vm-item { border-left: 3px solid var(--yellow); padding-left: 20px; }
-    .vm-item--mission { border-left-color: #2BB3A3; }
-    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2BB3A3; margin-bottom: 8px; }
+    .vm-item--mission { border-left-color: #0B1A3D; }
+    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0B1A3D; margin-bottom: 8px; }
     .vm-item__text { font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.45; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .stat { background: var(--off-white); border-radius: 18px; padding: 36px 28px; text-align: center; }
@@ -269,7 +269,7 @@
 
     .cta-box__btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
+      box-shadow: 0 10px 28px rgba(242, 140, 40, 0.38);
     }
 
     .cta-box__btn--secondary {
@@ -302,11 +302,196 @@
       .about-bullets { grid-template-columns: 1fr; }
       .page-hero { min-height: 54vh; padding-top: 130px; }
     }
+
+    /* ── About page rebuild (2026-10-23, orange + navy) ─────────────────── */
+    .ab-h2 { margin-top: 4px; max-width: 18ch; }
+    .ab-h2--light { color: #fff; }
+    .ab-quatro { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .ab-quatro li {
+      font-size: 13px; font-weight: 700; color: var(--navy); letter-spacing: 0.02em;
+      padding: 8px 14px; border-radius: 999px; background: rgba(var(--orange-rgb), 0.14);
+      border: 1px solid rgba(var(--orange-rgb), 0.35);
+    }
+    .ab-figure { position: relative; }
+    .ab-figure .about-img { position: relative; }
+    .ab-figure::before {
+      content: ''; position: absolute; inset: 18px -18px -18px 18px; border-radius: 24px;
+      background: linear-gradient(135deg, var(--orange), var(--navy)); opacity: 0.9; z-index: 0;
+    }
+    .ab-figure .about-img { z-index: 1; }
+    .ab-badge {
+      position: absolute; left: -18px; bottom: 28px; z-index: 2;
+      background: var(--navy); color: #fff; border-radius: 16px; padding: 14px 18px;
+      box-shadow: 0 16px 36px rgba(11,26,61,0.3); border-left: 4px solid var(--orange);
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .ab-badge__num { font-size: 22px; font-weight: 800; color: var(--orange); letter-spacing: -0.01em; }
+    .ab-badge__lbl { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+
+    .ab-stats { background: var(--navy); padding: clamp(36px, 4vw, 56px) 0; position: relative; overflow: hidden;
+      border-top: 4px solid var(--orange); }
+    .ab-stats::before { content: ''; position: absolute; inset: 0; background: radial-gradient(700px 300px at 0% 100%, rgba(var(--orange-rgb), 0.18), transparent 60%); }
+    .ab-stats__grid { list-style: none; margin: 0; padding: 0; position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .ab-stat { text-align: center; padding: 18px 8px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+    .ab-stat__num { display: block; font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(24px, 2.3vw, 34px); font-variant-numeric: tabular-nums; font-weight: 800; color: var(--orange); letter-spacing: -0.02em; line-height: 1; }
+    .ab-stat__lbl { display: block; margin-top: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.72); }
+
+    .ab-vm-section { padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(48px, 6vw, 80px); }
+    .ab-vm { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ab-vm__card { position: relative; overflow: hidden; border-radius: 22px; padding: clamp(28px, 3vw, 44px); min-height: 260px; display: flex; flex-direction: column; justify-content: flex-start; }
+    .ab-vm__card--vision { background: var(--navy); color: #fff; }
+    .ab-vm__card--mission { background: var(--orange); color: var(--navy); }
+    .ab-vm__label { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .ab-vm__label::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: currentColor; }
+    .ab-vm__card--vision .ab-vm__label { color: var(--orange); }
+    .ab-vm__text { font-size: clamp(17px, 1.5vw, 21px); font-weight: 600; line-height: 1.45; max-width: 36ch; position: relative; z-index: 1; margin: 0; }
+    .ab-vm__card--vision .ab-vm__text { color: #fff; }
+    .ab-vm__figure { position: absolute; right: -8px; bottom: -22px; font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(90px, 10vw, 150px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; pointer-events: none; }
+    .ab-vm__card--vision .ab-vm__figure { color: #fff; opacity: 0.06; }
+    .ab-vm__card--mission .ab-vm__figure { color: var(--navy); opacity: 0.07; }
+
+    .ab-how { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 5vw, 72px); align-items: start; }
+    .ab-pillars { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+    .ab-pillar { display: grid; grid-template-columns: 52px 1fr; column-gap: 16px; align-items: start; padding: 18px 20px; border-radius: 16px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: transform 220ms var(--ease-out), border-color 220ms ease, background 220ms ease; }
+    .ab-pillar:hover { transform: translateX(6px); border-color: rgba(var(--orange-rgb), 0.6); background: rgba(var(--orange-rgb), 0.08); }
+    .ab-ico { grid-row: span 2; width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: rgba(var(--orange-rgb), 0.16); color: var(--orange); }
+    .ab-ico svg { width: 26px; height: 26px; }
+    .ab-pillar__t { font-weight: 700; color: #fff; font-size: 16px; }
+    .ab-pillar__d { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.55; margin-top: 4px; }
+
+    .wbc-grid { list-style: none; margin: clamp(28px, 3vw, 40px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: none; }
+    .wbc-card { background: #fff; border-radius: 18px; padding: 26px 24px 28px; border: 1px solid rgba(11,26,61,0.08); position: relative; overflow: hidden;
+      transition: transform 220ms var(--ease-out), box-shadow 220ms ease; }
+    .wbc-card::before { content: ''; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--orange), var(--navy)); }
+    .wbc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(11,26,61,0.14); }
+    .wbc-card__no { font-family: 'Sora', 'Inter', sans-serif; font-size: 34px; font-weight: 800; color: var(--orange); letter-spacing: -0.03em; line-height: 1; }
+    .wbc-card__t { font-size: 17px; font-weight: 700; color: var(--navy); margin: 14px 0 8px; line-height: 1.3; }
+    .wbc-card__d { font-size: 14.5px; color: #55606E; line-height: 1.6; margin: 0; }
+    .ab-motto { margin: clamp(32px, 4vw, 48px) 0 0; font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(24px, 3.2vw, 40px); font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+    .ab-motto span { color: var(--orange); }
+
+    .ab-certs { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+    .ab-certs__row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .ab-certs__logos { list-style: none; margin: 0; padding: 0; display: flex; gap: 16px; justify-content: flex-end; flex-wrap: wrap; }
+    .ab-certs__logos li { width: 150px; height: 110px; display: grid; place-items: center; padding: 16px; border-radius: 16px; background: var(--off-white); border: 1px solid rgba(11,26,61,0.08);
+      transition: transform 220ms var(--ease-out), border-color 220ms ease; }
+    .ab-certs__logos li:hover { transform: translateY(-4px); border-color: var(--orange); }
+    .ab-certs__logos img { max-width: 100%; max-height: 78px; width: auto; height: auto; object-fit: contain; }
+    .ab-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-weight: 700; color: var(--navy); font-size: 15px; border-bottom: 2px solid var(--orange); padding-bottom: 2px; transition: color 160ms ease, gap 160ms ease; }
+    .ab-link:hover { color: var(--orange-deep); gap: 12px; }
+
+    .ab-people__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .ab-people__head .ab-link { margin-top: 0; margin-bottom: 8px; }
+    .ab-leaders { list-style: none; margin: clamp(24px, 3vw, 36px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .ab-leader a { display: block; background: #fff; border-radius: 18px; overflow: hidden; border: 1px solid rgba(11,26,61,0.08); transition: transform 220ms var(--ease-out), box-shadow 220ms ease; }
+    .ab-leader a:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(11,26,61,0.14); }
+    .ab-leader img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: top; display: block; border-bottom: 4px solid var(--orange); }
+    .ab-leader__n { display: block; padding: 14px 16px 2px; font-weight: 700; color: var(--navy); font-size: 15.5px; }
+    .ab-leader__r { display: block; padding: 0 16px 16px; font-size: 12.5px; color: #55606E; line-height: 1.4; }
+    .ab-story { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; margin-top: 22px; padding: 22px 28px; border-radius: 18px;
+      background: var(--navy); color: #fff; border-left: 5px solid var(--orange); transition: transform 220ms var(--ease-out), box-shadow 220ms ease; }
+    .ab-story:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(11,26,61,0.25); }
+    .ab-story__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); }
+    .ab-story__t { font-size: 16px; font-weight: 600; line-height: 1.45; color: rgba(255,255,255,0.9); }
+    .ab-story__cta { font-weight: 700; color: var(--orange); white-space: nowrap; }
+
+    @media (max-width: 1100px) {
+      .ab-stats__grid { grid-template-columns: repeat(3, 1fr); }
+      .wbc-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .ab-how, .ab-vm, .ab-certs__row { grid-template-columns: 1fr; }
+      .ab-certs__logos { justify-content: flex-start; }
+      .ab-leaders { grid-template-columns: repeat(2, 1fr); }
+      .ab-story { grid-template-columns: 1fr; gap: 10px; }
+      .ab-badge { left: 12px; bottom: 12px; }
+      .ab-figure::before { inset: 14px -10px -10px 14px; }
+    }
+    @media (max-width: 560px) {
+      .ab-stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .wbc-grid, .ab-leaders { grid-template-columns: 1fr; }
+    }
+
+    /* ── About page, theme layer 2 (shapes, patterns, motion) ─────────────── */
+    .ab-accent { color: var(--orange); }
+    .ab-slant { height: 72px; position: relative; z-index: 2; margin-top: -1px; }
+    /* overlaps the hero's last 72px: the upper half is transparent so the
+       diagonal cuts the photo itself instead of sitting under a hard edge */
+    .ab-slant--navy-white { margin-top: -72px; z-index: 3; background: linear-gradient(-2.4deg, var(--white) 49.6%, var(--orange) 49.6%, var(--orange) 51.4%, transparent 51.4%); }
+    .ab-slant--white-navy { background: linear-gradient(2.4deg, var(--navy) 49.6%, var(--orange) 49.6%, var(--orange) 51.4%, #fff 51.4%); margin-bottom: -1px; }
+    .ab-slant--navy-off { background: linear-gradient(-2.4deg, var(--off-white) 49.6%, var(--orange) 49.6%, var(--orange) 51.4%, #14275A 51.4%); }
+    .ab-watermark {
+      position: absolute; right: -0.12em; bottom: -0.1em; font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(110px, 17vw, 250px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: transparent;
+      -webkit-text-stroke: 2px rgba(11, 26, 61, 0.07); pointer-events: none; user-select: none; z-index: 0;
+    }
+    .ab-page .bg-navy {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        radial-gradient(640px 320px at 100% 0%, rgba(242, 140, 40, 0.16), transparent 62%);
+      background-size: 44px 44px, 44px 44px, auto;
+    }
+    .ab-page .bg-offwhite {
+      background-image: radial-gradient(rgba(11, 26, 61, 0.09) 1px, transparent 1.2px);
+      background-size: 22px 22px;
+    }
+    /* stats: orange bar grows under each number once revealed */
+    .ab-stat { position: relative; overflow: hidden; }
+    .ab-stat::after { content: ''; position: absolute; left: 18px; right: 18px; bottom: 0; height: 3px; border-radius: 3px 3px 0 0;
+      background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 900ms var(--ease-out) 200ms; }
+    .ab-stat.tz-in::after { transform: scaleX(1); }
+    .ab-stat:hover { background: rgba(242, 140, 40, 0.1); border-color: rgba(242, 140, 40, 0.5); }
+    /* vision / mission icons + stripe pattern */
+    .ab-vm__ico { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 18px; }
+    .ab-vm__ico svg { width: 24px; height: 24px; }
+    .ab-vm__card--vision .ab-vm__ico { background: rgba(242, 140, 40, 0.18); color: var(--orange); }
+    .ab-vm__card--mission .ab-vm__ico { background: rgba(11, 26, 61, 0.14); color: var(--navy); }
+    .ab-vm__card::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255, 255, 255, 0.035) 14px 15px); }
+    .ab-vm__card { transition: transform 240ms var(--ease-out), box-shadow 240ms ease; }
+    .ab-vm__card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(11, 26, 61, 0.22); }
+    /* pillars: orange connector line behind the icons */
+    .ab-pillars { position: relative; }
+    .ab-pillars::before { content: ''; position: absolute; left: 46px; top: 44px; bottom: 44px; width: 2px;
+      background: linear-gradient(var(--orange), rgba(242, 140, 40, 0.15)); z-index: 0; }
+    .ab-pillar { position: relative; z-index: 1; }
+    .ab-ico { box-shadow: 0 0 0 4px #14275A; }
+    /* reason cards flip to navy on hover */
+    .wbc-card { transition: transform 220ms var(--ease-out), box-shadow 220ms ease, background 220ms ease; }
+    .wbc-card:hover { background: var(--navy); }
+    .wbc-card:hover .wbc-card__t { color: #fff; }
+    .wbc-card:hover .wbc-card__d { color: rgba(255, 255, 255, 0.78); }
+    .wbc-card__t, .wbc-card__d { transition: color 220ms ease; }
+    .ab-motto { position: relative; padding-left: 26px; }
+    .ab-motto::before { content: ''; position: absolute; left: 0; top: 0.18em; bottom: 0.18em; width: 6px; border-radius: 6px;
+      background: linear-gradient(var(--orange), var(--navy)); }
+    /* cert tiles + leaders */
+    .ab-certs__logos li { position: relative; }
+    .ab-certs__logos li::before { content: ''; position: absolute; left: 14px; right: 14px; top: 0; height: 3px; border-radius: 0 0 3px 3px; background: var(--orange); }
+    .ab-leader a { transition: transform 220ms var(--ease-out), box-shadow 220ms ease, background 220ms ease; }
+    .ab-leader img { transition: transform 420ms var(--ease-out), border-color 220ms ease; }
+    .ab-leader a:hover { background: var(--navy); }
+    .ab-leader a:hover img { transform: scale(1.03); }
+    .ab-leader a:hover .ab-leader__n { color: var(--orange); }
+    .ab-leader a:hover .ab-leader__r { color: rgba(255, 255, 255, 0.78); }
+    .ab-leader__n, .ab-leader__r { transition: color 220ms ease; }
+    .ab-leader a { overflow: hidden; }
+    @media (max-width: 900px) {
+      .ab-slant { height: 48px; }
+      .ab-watermark { font-size: 36vw; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ab-stat::after { transition: none; transform: scaleX(1); }
+    }
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-dark.css">
   <link rel="stylesheet" href="assets/css/type.css">
 </head>
-<body>
+<body class="ab-page">
 
   <!-- ═══ NAVBAR (identical to index.html) ═══ -->
   <nav class="isler-nav" aria-label="Primary navigation">
@@ -425,63 +610,148 @@
           <span aria-current="page">About Us</span>
         </nav>
         <span class="page-hero__eyebrow">About Us</span>
-        <h1 class="page-hero__title" id="page-title">India’s Design-Led Manufacturing Partner for Global Appliance Brands</h1>
+        <h1 class="page-hero__title" id="page-title">India’s <span class="ab-accent">Design-Led</span> Manufacturing Partner for Global Appliance Brands</h1>
         <p class="page-hero__desc">Empowering Brand Innovation is at the heart of everything we do at Isler. We break the mould in the appliance industry by putting bold design and cutting-edge innovation first — building the products that help leading kitchen appliance brands win in the market.</p>
       </div>
     </section>
 
     <!-- WHO WE ARE -->
     <section class="page-section bg-white" aria-label="Who We Are">
-      <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(244,180,0,0.16);top:-40px;right:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:240px;height:240px;background:rgba(242, 140, 40,0.16);top:-40px;right:-60px;"></div>
+      <span class="ab-watermark" aria-hidden="true">ISLER</span>
       <div class="container">
         <div class="about-split">
           <div>
             <span class="eyebrow">Who We Are</span>
-            <p class="body-copy" style="margin-top:24px;">Isler is India’s pioneering design-focused solutions company for kitchen and home appliances. We design and develop a comprehensive range of large and small domestic appliances in one consistent design language — chimneys, built-in hobs, cooktops, ovens, microwaves, dishwashers, air fryers, coffee machines, toasters, air purifiers, vacuum cleaners and more — tailored for the world’s top brands.</p>
+            <h2 class="h2 ab-h2">Design-led. Built in India. Trusted by global brands.</h2>
+            <p class="body-copy" style="margin-top:20px;">Isler is India’s pioneering design-focused solutions company for kitchen and home appliances. We design and develop a comprehensive range of large and small domestic appliances in one consistent design language — chimneys, built-in hobs, cooktops, ovens, microwaves, dishwashers, air fryers, coffee machines, toasters, air purifiers, vacuum cleaners and more — tailored for the world’s top brands.</p>
             <p class="body-copy">We are also the only manufacturing company in India to offer a Quatro series of kitchen appliances — Chimney, Built-in Hob, Microwave and Oven — each thoughtfully designed and developed to reflect a single, cohesive design language across a brand’s entire kitchen line-up.</p>
+            <ul class="ab-quatro" aria-label="Quatro series">
+              <li>Chimney</li><li>Built-in Hob</li><li>Microwave</li><li>Oven</li>
+            </ul>
           </div>
-          <div class="about-img">
-            <img src="assets/images/about-who-we-are.webp" alt="Isler India team at work" loading="lazy" width="800" height="600">
+          <div class="ab-figure">
+            <div class="about-img">
+              <img src="assets/images/about-who-we-are.webp" alt="Isler India team at work" loading="lazy" width="800" height="600">
+            </div>
+            <div class="ab-badge" aria-hidden="true">
+              <span class="ab-badge__num">Since 2018</span>
+              <span class="ab-badge__lbl">Greater Noida, India</span>
+            </div>
           </div>
         </div>
-        <div class="vm-card">
-          <div class="vm-item">
-            <p class="vm-item__label">Our Vision</p>
-            <p class="vm-item__text">To become India’s best Electronics and Electrical appliances manufacturer, developing products for both the domestic and global market — with an ambition to produce 1 million units per year by 2030.</p>
-          </div>
-          <div class="vm-item vm-item--mission">
-            <p class="vm-item__label">Our Mission</p>
-            <p class="vm-item__text">A design-led, accelerated new product development company with technology-driven operations — innovating for excellence, and delivering elegant, reliable appliances.</p>
-          </div>
+      </div>
+    </section>
+
+    <!-- AT A GLANCE — numbers from the client's Website flow 01 doc -->
+    <section class="ab-stats" aria-label="Isler at a glance">
+      <div class="container">
+        <ul class="ab-stats__grid">
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="40,000">40,000</span><span class="ab-stat__lbl">sq ft factory area</span></li>
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="3">3</span><span class="ab-stat__lbl">Production lines</span></li>
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="3,00,000">3,00,000</span><span class="ab-stat__lbl">Units / year capacity</span></li>
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="100+">100+</span><span class="ab-stat__lbl">Team members</span></li>
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="200+">200+</span><span class="ab-stat__lbl">SKUs</span></li>
+          <li class="ab-stat tz-item"><span class="ab-stat__num" data-count="50+">50+</span><span class="ab-stat__lbl">Partners</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- VISION & MISSION -->
+    <section class="page-section bg-white ab-vm-section" aria-label="Vision and Mission">
+      <div class="container">
+        <div class="ab-vm">
+          <article class="ab-vm__card ab-vm__card--vision tz-item">
+            <span class="ab-vm__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="ab-vm__label">Our Vision</span>
+            <p class="ab-vm__text">To become India’s best Electronics and Electrical appliances manufacturer, developing products for both the domestic and global market — with an ambition to produce 1 million units per year by 2030.</p>
+            <span class="ab-vm__figure" aria-hidden="true">2030</span>
+          </article>
+          <article class="ab-vm__card ab-vm__card--mission tz-item">
+            <span class="ab-vm__ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg></span><span class="ab-vm__label">Our Mission</span>
+            <p class="ab-vm__text">A design-led, accelerated new product development company with technology-driven operations — innovating for excellence, and delivering elegant, reliable appliances.</p>
+            <span class="ab-vm__figure" aria-hidden="true">NPD</span>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- HOW WE WORK -->
     <section class="page-section bg-navy" aria-label="How We Work">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(244,180,0,0.18);top:-80px;left:-80px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(244,180,0,0.12);top:40%;right:6%;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(242, 140, 40,0.18);top:-80px;left:-80px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
       <div class="container" style="position:relative;z-index:1;">
-        <span class="eyebrow">How We Work</span>
-        <p class="body-copy" style="margin-top:24px;max-width:74ch;">Our powerhouse of in-house designers, R&amp;D experts, and a world-class manufacturing facility team up with strong global partners to fast-track every product launch. Through our smart Supply Network Control Tower (SNCT) platform, our partners get complete transparency, reliability, and on-time delivery, every time — from first sketch to final shipment.</p>
-        <p class="body-copy" style="max-width:74ch;">We are also driving the future of Indian manufacturing by localizing key components and mastering forging, casting, machining, rolling, extrusion, and fabrication in-house — reducing cost and strengthening “Make in India” capability that global brands can depend on.</p>
+        <div class="ab-how">
+          <div>
+            <span class="eyebrow">How We Work</span>
+            <h2 class="h2 ab-h2 ab-h2--light">From first sketch<br>to final shipment.</h2>
+            <p class="body-copy" style="margin-top:20px;max-width:60ch;">Our powerhouse of in-house designers, R&amp;D experts, and a world-class manufacturing facility team up with strong global partners to fast-track every product launch. Through our smart Supply Network Control Tower (SNCT) platform, our partners get complete transparency, reliability, and on-time delivery, every time — from first sketch to final shipment.</p>
+            <p class="body-copy" style="max-width:60ch;">We are also driving the future of Indian manufacturing by localizing key components and mastering forging, casting, machining, rolling, extrusion, and fabrication in-house — reducing cost and strengthening “Make in India” capability that global brands can depend on.</p>
+          </div>
+          <ul class="ab-pillars">
+            <li class="ab-pillar tz-item"><span class="ab-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span><span class="ab-pillar__t">In-house design &amp; R&amp;D</span><span class="ab-pillar__d">Designers, R&amp;D experts and a world-class facility, backed by strong global partners.</span></li>
+            <li class="ab-pillar tz-item"><span class="ab-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/></svg></span><span class="ab-pillar__t">Supply Network Control Tower</span><span class="ab-pillar__d">Complete transparency, reliability and on-time delivery, every time.</span></li>
+            <li class="ab-pillar tz-item"><span class="ab-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l4-3v16"/><path d="M9 21V11l5-3v13"/><path d="M14 21V13l5-2v10"/><path d="M7 11h.01M7 15h.01M11.5 14h.01M11.5 17h.01M16.5 16h.01"/></svg></span><span class="ab-pillar__t">Make in India, in-house</span><span class="ab-pillar__d">Forging, casting, machining, rolling, extrusion and fabrication, localised.</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <!-- WHY BRANDS CHOOSE ISLER -->
-    <section class="page-section bg-white" aria-label="Why Brands Choose Isler">
-      <div class="ambient-circle" aria-hidden="true" style="width:260px;height:260px;background:rgba(244,180,0,0.14);top:-70px;left:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(244,180,0,0.10);bottom:-60px;right:-50px;"></div>
-      <div class="container">
+    <section class="page-section bg-offwhite" aria-label="Why Brands Choose Isler">
+      <div class="ambient-circle" aria-hidden="true" style="width:260px;height:260px;background:rgba(242, 140, 40,0.14);top:-70px;left:-70px;"></div>
+      <div class="container" style="position:relative;z-index:1;">
         <span class="eyebrow">Why Brands Choose Isler</span>
-        <ul class="wbc-list" style="margin:24px 0 0;padding-left:22px;display:grid;gap:18px;max-width:900px;">
-          <li class="body-copy" style="margin:0;">Novel Design &amp; Innovation — end-to-end ODM capability, a unified design language across appliance categories, and premium aesthetics aligned with global brand standards.</li>
-          <li class="body-copy" style="margin:0;">Advanced R&amp;D Capabilities — a strong in-house R&amp;D team paired with global partnerships across China and Europe for faster product development and localization.</li>
-          <li class="body-copy" style="margin:0;">Technology-Led Manufacturing — a world-class, process- and data-driven manufacturing setup with ERP-enabled scalability and real-time visibility from purchase order to delivery.</li>
-          <li class="body-copy" style="margin:0;">Quality is Our DNA — a zero-defect philosophy backed by a robust Quality Management System, advanced testing labs, and consistent, reliable product performance.</li>
+        <h2 class="h2 ab-h2">Four reasons brands build with us.</h2>
+        <ol class="wbc-grid">
+          <li class="wbc-card tz-item"><span class="wbc-card__no">01</span><h3 class="wbc-card__t">Novel Design &amp; Innovation</h3><p class="wbc-card__d">End-to-end ODM capability, a unified design language across appliance categories, and premium aesthetics aligned with global brand standards.</p></li>
+          <li class="wbc-card tz-item"><span class="wbc-card__no">02</span><h3 class="wbc-card__t">Advanced R&amp;D Capabilities</h3><p class="wbc-card__d">A strong in-house R&amp;D team paired with global partnerships across China and Europe for faster product development and localization.</p></li>
+          <li class="wbc-card tz-item"><span class="wbc-card__no">03</span><h3 class="wbc-card__t">Technology-Led Manufacturing</h3><p class="wbc-card__d">A world-class, process- and data-driven manufacturing setup with ERP-enabled scalability and real-time visibility from purchase order to delivery.</p></li>
+          <li class="wbc-card tz-item"><span class="wbc-card__no">04</span><h3 class="wbc-card__t">Quality is Our DNA</h3><p class="wbc-card__d">A zero-defect philosophy backed by a robust Quality Management System, advanced testing labs, and consistent, reliable product performance.</p></li>
+        </ol>
+        <p class="ab-motto">Innovation. Speed. Trust. <span>That’s Isler.</span></p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="page-section bg-white ab-certs" aria-label="Certifications">
+      <div class="container">
+        <div class="ab-certs__row">
+          <div>
+            <span class="eyebrow">Quality is our DNA</span>
+            <h2 class="h2 ab-h2">Certified, audited, consistent.</h2>
+            <a class="ab-link" href="certifications-quality.html">See our certifications &amp; quality process <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="ab-certs__logos">
+            <li class="tz-item"><img src="assets/images/certifications/iso-9001.webp" alt="ISO 9001 certified" loading="lazy"></li>
+            <li class="tz-item"><img src="assets/images/certifications/iso-14001.webp" alt="ISO 14001 certified" loading="lazy"></li>
+            <li class="tz-item"><img src="assets/images/certifications/bis.webp" alt="BIS — Bureau of Indian Standards" loading="lazy"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEADERSHIP + STORY -->
+    <section class="page-section bg-offwhite ab-people" aria-label="Leadership and story">
+      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(242, 140, 40,0.12);bottom:-60px;right:-50px;"></div>
+      <div class="container" style="position:relative;z-index:1;">
+        <div class="ab-people__head">
+          <div>
+            <span class="eyebrow">The People</span>
+            <h2 class="h2 ab-h2">Led by builders.</h2>
+          </div>
+          <a class="ab-link" href="team.html">Meet all our leaders <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="ab-leaders">
+          <li class="ab-leader tz-item"><a href="team.html"><img src="assets/images/team/pravesh-kumar.webp" alt="Pravesh Kumar" loading="lazy"><span class="ab-leader__n">Pravesh Kumar</span><span class="ab-leader__r">Founder &amp; CEO</span></a></li>
+          <li class="ab-leader tz-item"><a href="team.html"><img src="assets/images/team/chirag-kakkar.webp" alt="Chirag Kakkar" loading="lazy"><span class="ab-leader__n">Chirag Kakkar</span><span class="ab-leader__r">Co-founder &amp; CBO</span></a></li>
+          <li class="ab-leader tz-item"><a href="team.html"><img src="assets/images/team/mudit-mishra.webp" alt="Mudit Mishra" loading="lazy"><span class="ab-leader__n">Mudit Mishra</span><span class="ab-leader__r">Co-founder &amp; CSCO</span></a></li>
+          <li class="ab-leader tz-item"><a href="team.html"><img src="assets/images/team/varun-krishna.webp" alt="Varun Krishna R" loading="lazy"><span class="ab-leader__n">Varun Krishna R</span><span class="ab-leader__r">Vice President, New Product Development</span></a></li>
         </ul>
-        <p class="body-copy" style="margin-top:28px;font-weight:600;color:var(--navy);">Innovation.  Speed.  Trust.  That’s Isler.</p>
+        <a class="ab-story tz-item" href="our-story.html">
+          <span class="ab-story__eyebrow">Our Story</span>
+          <span class="ab-story__t">Read how Isler got here, the milestones along the way, and where it is going next.</span>
+          <span class="ab-story__cta">Read our story <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </section>
 
@@ -489,8 +759,8 @@
          CTA Box
     ═══════════════════════════════════════════════════════════════════════════ -->
     <section class="cta-box-section">
-      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(244,180,0,0.18);top:-60px;left:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(230,149,0,0.15);bottom:-50px;right:-50px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:220px;height:220px;background:rgba(242, 140, 40,0.18);top:-60px;left:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:180px;height:180px;background:rgba(242, 140, 40,0.15);bottom:-50px;right:-50px;"></div>
       <div class="cta-box">
 
         <div class="cta-box__content">

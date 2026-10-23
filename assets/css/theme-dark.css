@@ -1,0 +1,319 @@
+/* ════════════════════════════════════════════════════════════════════════
+   theme-dark.css — EXPERIMENT (Rajesh, 2026-10-23): "replace the white
+   parts by the navy, let's see if it looks good".
+   Light surfaces become navy, text becomes white; the brand orange stays.
+   Everything lives in this one file. To go back to the white site, remove
+   the <link> to this file from the pages (nothing else was changed).
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --white:      #0B1A3D;   /* page surface is now navy */
+  --off-white:  #10224D;   /* "light" bands: a step up */
+  --gray-light: #16295A;   /* chips / tints */
+  --charcoal:   #F3F5F9;   /* body text */
+  --gray-mid:   #A9B4C8;   /* muted text */
+  --navy-mid:   #14275A;
+  --tz-surface: #10224D;   /* cards */
+  --tz-line:    rgba(255, 255, 255, 0.12);
+  --tz-text:    rgba(255, 255, 255, 0.78);
+}
+
+html { background: var(--white); }
+body { background: var(--white); color: var(--charcoal); }
+
+/* ── Headings that were navy-on-white → white ── */
+h1, h2, h3, h4, .h2,
+.cat-card__name, .cat-card__price, .pd__title, .pd__specs-title, .pd__price, .pd__price--enquire,
+.pd__chip b, .pd__spec-table td, .rng-row__title, .rng-tile__name, .wbc-card__t, .blog-card__title,
+.job-card__title, .member-card__name, .inv-card__name, .stat__label, .cat-tier-head__title,
+.footer__col-heading, .section-heading, .ab-leader__n, .ab-link, .mfg-heading, .mfg-subheading,
+.hp-statbar__label, .cap-cell__label, .story__h, .szz__title, .rfq__heading, .quatro-title,
+.rng-row__no + *, .ab-badge__lbl, .about-bullet, .vm-item__text, .vm-item__label, .motto__heading,
+.pcx-title, .pcx-card__label, .cat-filter__title, .catnav__title, .cat-breadcrumb, .cat-breadcrumb a {
+  color: #FFFFFF;
+}
+.pd .cat-breadcrumb, .pd .cat-breadcrumb a { color: rgba(255, 255, 255, 0.8); }
+
+/* ── Body copy that was grey → soft white ── */
+p, li, td, th, dd, dt, label, .body-copy, .section-head p, .wbc-card__d, .blog-card__excerpt,
+.job-card__desc, .job-card__resp-list, .member-card__role, .member-card__quote, .inv-card__role,
+.contact-form__sub, .career-apply__intro, .office-card__address, .cat-card__spec, .pd__spec-table th,
+.pd__note, .pd__chip span, .rng-row__count, .ab-leader__r, .blog-card__date, .cat-breadcrumb span,
+.page-hero__desc, .cat-hero__desc, .hp-statbar__label {
+  color: var(--tz-text);
+}
+.pd__spec-table th { color: #fff; }
+.pd__chip span { color: var(--orange); }
+strong, b { color: #fff; }
+
+/* ── Cards and panels that were hardcoded white ── */
+.cat-card, .wbc-card, .blog-card, .job-card, .member-card, .inv-card, .rng-tile, .pd__chip, .stat,
+.vm-card, .office-card, .contact-form, .career-form, .cat-filter, .catnav, .cat-nav, .brand-slot--logo,
+.brand-slot--text, .ab-leader a, .ab-certs__logos li, .mfg-card, .cert-card, .isler-search__panel,
+.pcx-card, .rng-tab-strip, .rng__tabs, .cat-card__body, .blog-card__body, .ab-vm__card--vision {
+  background: var(--tz-surface);
+  border-color: var(--tz-line);
+}
+.cat-card, .wbc-card, .blog-card, .job-card, .rng-tile, .pd__chip, .ab-leader a, .ab-certs__logos li, .pcx-card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+.cat-card:hover, .wbc-card:hover, .blog-card:hover, .ab-leader a:hover {
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4), inset 0 3px 0 var(--orange);
+}
+/* hover flips that used navy now use the orange tint */
+.cat-card:hover .cat-card__body, .blog-card:hover .blog-card__body, .wbc-card:hover, .ab-leader a:hover {
+  background: #1A3270;
+}
+
+/* ── Product / photo frames stay LIGHT so the product images read ── */
+.cat-card__media, .pd__gallery, .pd__media, .rng-tile__media, .about-img, .ab-figure .about-img,
+.blog-card__media, .ab-certs__logos li, .brand-slot--logo, .mfg-cert, .pcx-card__media, .member-card__avatar {
+  background: #EEF1F7;
+}
+.ab-certs__logos li { border-color: transparent; }
+.brand-slot--logo, .brand-slot--text { background: #FFFFFF; }
+
+/* ── Rules, dividers, tables ── */
+.pd__spec-table tr { border-bottom-color: var(--tz-line); }
+.pd__spec-table tr:nth-child(even) { background: rgba(255, 255, 255, 0.04); }
+.pd__spec-table tr:hover { background: rgba(var(--orange-rgb), 0.12); }
+.rng-row { border-bottom-color: var(--tz-line); }
+.rng-tile { --rng-line: var(--tz-line); }
+.rng-tile__name { border-top-color: var(--tz-line); }
+hr { border-color: var(--tz-line); }
+
+/* ── Bands that were navy keep contrast: one step deeper ── */
+.cat-hero, .rng__head, .site-footer, .ab-stats, .why-join, .cta-box, .ab-story, .ab-vm__card--vision {
+  background-color: var(--navy-deep);
+}
+.bg-navy, .mfg-certs, .mfg-scale { background-color: var(--navy-mid); }
+.footer__bottom { background: #04091A; }
+.cta-box-section { background: var(--off-white); }
+
+/* ── Business page: tabs strip + tiles ── */
+.rng__tabs, .rng-tabs, .rng__tabbar { background: var(--navy-deep); }
+.rng-tab { color: rgba(255, 255, 255, 0.8); }
+.rng-tab.is-active, .rng-tab:hover { color: var(--orange); }
+
+/* ── Forms ── */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+  border-color: var(--tz-line) !important;
+}
+input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
+.cat-filter__box { background: rgba(255, 255, 255, 0.06); border-color: var(--tz-line); }
+
+/* ── Light textures → faint white dots; navy grid stays ── */
+.bg-offwhite, .biz-section--alt, .pcx-section, .pd__specs, .cta-box-section {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+.ab-watermark { -webkit-text-stroke-color: rgba(255, 255, 255, 0.08); }
+.ambient-circle { opacity: 0.6; }
+
+/* ── Buttons that were navy-on-white ── */
+.cat-card__view, .pd__btn--secondary, .rfq-btn--ghost, .biz-btn--ghost, .hero-cta-btn--ghost,
+.job-card__toggle, .ab-story__cta, .pcx-nav {
+  color: #fff; border-color: rgba(255, 255, 255, 0.5);
+}
+.cat-card__view { background: rgba(255, 255, 255, 0.1); }
+.cat-card:hover .cat-card__view { background: var(--orange); color: var(--navy-deep); }
+.pd__btn--secondary:hover, .rfq-btn--ghost:hover, .biz-btn--ghost:hover { background: var(--orange); color: var(--navy-deep); border-color: var(--orange); }
+.pcx-nav { background: rgba(255, 255, 255, 0.1); }
+.ab-link { border-bottom-color: var(--orange); }
+.ab-link:hover { color: var(--orange); }
+
+/* ── Nav: keep the white pill (logo needs it) but soften its shadow ── */
+.isler-nav { box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45); }
+
+/* ── Scroll-reveal + slants read the computed bg, nothing to do ── */
+
+/* ── "and orange as well": the bands that were off-white become ORANGE with
+   navy text; cards on them stay navy, so the page alternates navy / orange. */
+.bg-offwhite, .biz-section--alt, .pcx-section, .cta-box-section {
+  background-color: var(--orange);
+  background-image: radial-gradient(rgba(11, 26, 61, 0.12) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  color: var(--navy-deep);
+}
+.bg-offwhite h1, .bg-offwhite h2, .bg-offwhite h3, .bg-offwhite .h2, .bg-offwhite p, .bg-offwhite li,
+.biz-section--alt h2, .biz-section--alt p, .pcx-section h2, .pcx-section .pcx-title, .pcx-section p,
+.cta-box-section > :not(.cta-box) {
+  color: var(--navy-deep);
+}
+.bg-offwhite .eyebrow, .pcx-section .pcx-eyebrow, .biz-section--alt .biz-eyebrow { color: var(--navy-deep); }
+.bg-offwhite .eyebrow::before, .pcx-section .pcx-eyebrow::before, .biz-section--alt .biz-eyebrow::before { background: var(--navy-deep); }
+.bg-offwhite .ambient-circle { background: rgba(11, 26, 61, 0.12) !important; }
+/* cards on orange bands: navy surface, white text (already), stronger shadow */
+.bg-offwhite .wbc-card, .bg-offwhite .job-card, .bg-offwhite .ab-leader a, .bg-offwhite .stat, .bg-offwhite .ab-story {
+  background: var(--navy-deep); box-shadow: 0 16px 36px rgba(11, 26, 61, 0.35);
+}
+.bg-offwhite .wbc-card h3, .bg-offwhite .wbc-card p, .bg-offwhite .job-card h3, .bg-offwhite .job-card p, .bg-offwhite .job-card li,
+.bg-offwhite .ab-story__t { color: #fff; }
+.bg-offwhite .wbc-card p, .bg-offwhite .job-card p, .bg-offwhite .job-card li { color: var(--tz-text); }
+.bg-offwhite .wbc-card:hover, .bg-offwhite .job-card:hover { background: #14275A; }
+.bg-offwhite .ab-motto { color: var(--navy-deep); }
+.bg-offwhite .ab-motto span { color: #fff; }
+.bg-offwhite .ab-motto::before { background: linear-gradient(var(--navy-deep), #fff); }
+.bg-offwhite .ab-link { color: var(--navy-deep); border-bottom-color: var(--navy-deep); }
+.pcx-nav { background: var(--navy-deep); color: #fff; }
+.pcx-nav:hover { background: #fff; color: var(--navy-deep); }
+/* slant into an orange band: nav.js reads the computed colour, so it follows */
+/* business tabs: active state uses aria-current */
+.rng-tab[aria-current="true"] { color: var(--orange); }
+/* about-page slant that leads into the orange band */
+
+/* ── Fixes after the first look: some pages put their <style> AFTER this
+   file (business.html), so the key overrides carry !important. ── */
+.rng-row__title, .rng__title, .rng-tile__name, .pd__code b, .pd__code strong, .ab-quatro li,
+.cat-card__name, .cat-card__price, .wbc-card__t, .blog-card__title, .job-card__title, .member-card__name {
+  color: #FFFFFF !important;
+}
+.rng-tile__media, .cat-card__media, .pd__gallery, .blog-card__media, .member-card__avatar, .about-img { background: #EEF1F7 !important; }
+.rng-tile { background: var(--tz-surface) !important; border-color: var(--tz-line) !important; }
+.rng-tile__name { background: var(--tz-surface); }
+.ab-quatro li { background: rgba(var(--orange-rgb), 0.22) !important; border-color: rgba(var(--orange-rgb), 0.5) !important; }
+.ab-page .page-hero { border-bottom: 0; }
+.ab-page .ab-vm-section { background: var(--white); }
+.ab-page .ab-certs { background: var(--navy-deep); }
+
+/* ── Forms + headings on pages whose <style> outranks this file (contact, career) ── */
+h1, h2, h3, h4, .h2 { color: #FFFFFF !important; }
+.bg-offwhite h1, .bg-offwhite h2, .bg-offwhite h3, .bg-offwhite .h2,
+.biz-section--alt h2, .pcx-section h2, .pcx-section .pcx-title, .cta-box-section > :not(.cta-box) h2 { color: var(--navy-deep) !important; }
+.cta-box h2, .cta-box__heading { color: #fff !important; }
+label, .contact-form label, .career-form label, .cat-filter__option, .cat-filter__group-title { color: var(--tz-text) !important; }
+.contact-form__submit, .career-form__submit, .btn-primary, form button[type="submit"]:not(.footer__newsletter-row button) {
+  background: var(--orange) !important; color: var(--navy-deep) !important; border-color: var(--orange) !important;
+}
+.contact-form__submit:hover, .career-form__submit:hover { background: #fff !important; }
+.contact-info, .contact-card { background: var(--navy-deep) !important; }
+.career-form__upload-label { border-color: var(--tz-line); color: var(--tz-text); }
+.career-contact__value, .career-contact__value a, .career-form__upload-text { color: #fff !important; }
+.career-contact__icon { background: var(--orange) !important; color: var(--navy-deep) !important; border-radius: 12px; }
+.career-form__upload-hint { color: var(--tz-text) !important; }
+
+/* ── Homepage: text that used var(--white) (now navy) goes back to white ──
+   hero headlines on all four slides, the icon panel, mfg opener, RFQ, certs. */
+.hero-headline, .hero-subhead, .hero-scene, .hero-range__head, .hero-range__lbl, .hero-cats a,
+.mfg-opener__title, .rfq__heading, .mfg-certs__heading, .mfg-vendors .mfg-heading, .cta-box__heading,
+.rfq-btn--ghost, .blog-view-all:hover, .hero-cta-btn--ghost {
+  color: #FFFFFF !important;
+}
+.hero-headline .hw { color: #FFFFFF !important; }
+.rfq-btn--ghost, .hero-cta-btn--ghost { border-color: rgba(255, 255, 255, 0.6) !important; }
+.hero-cta-btn:not(.hero-cta-btn--ghost), .rfq-btn--primary { color: var(--navy-deep) !important; }
+
+/* ── Homepage boxes and labels that paint text navy (invisible on navy) ── */
+.blog-card__cta, .blog-card__title a, .blog-view-all, .cap-cell__value, .demo-mm__name, .hp-stat__value,
+.infra-box__figure, .mfg-feature, .mfg-heading, .mfg-lab-card__icon, .mfg-lab-card__title, .mfg-stat__num,
+.npd-step__name, .quatro-card__name, .section-heading, .rev2-band__list li, .hp-statbar__label,
+.cap-cell__label, .mfg-stat__label, .infra-box__label, .mfg-lab-card p, .quatro-card p {
+  color: #FFFFFF !important;
+}
+.npd-lead, .mfg-eyebrow, .section-eyebrow { color: var(--orange) !important; }
+.cap-cell, .hp-stat, .infra-box, .npd-step, .quatro-card, .mfg-lab-card, .blog-card {
+  background: var(--tz-surface) !important; border-color: var(--tz-line) !important;
+}
+.npd-step::after { background: rgba(255, 255, 255, 0.28); }
+.brands-section, .proof-section, .mfg-labs, .mfg-production, .hp-statbar, .npd-section { background-color: var(--white); }
+.brand-slot--logo, .brand-slot--text { background: #FFFFFF !important; }
+.brand-slot--text { color: var(--navy-deep) !important; }
+.mfg-cert { background: #FFFFFF !important; }
+/* the flow animation: pulse in orange on the navy boxes */
+@keyframes npdPulse {
+  0%   { border-color: var(--tz-line); background: var(--tz-surface); box-shadow: none; }
+  40%  { border-color: rgba(242, 140, 40, 0.95); background: rgba(242, 140, 40, 0.22); box-shadow: 0 10px 26px rgba(242, 140, 40, 0.3); }
+  100% { border-color: var(--tz-line); background: var(--tz-surface); box-shadow: none; }
+}
+@keyframes npdLine {
+  0%   { width: 0;    background: var(--orange); }
+  55%  { width: 10px; background: var(--orange); }
+  100% { width: 10px; background: rgba(255, 255, 255, 0.28); }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   Contrast audit fixes (2026-10-23, 26 pages measured). Every text element
+   below failed WCAG against its real background in the navy/orange variant.
+   ════════════════════════════════════════════════════════════════════════ */
+/* Catalogue side-nav */
+.catnav__sub, .catnav__group, .catnav__title, .cat-results__count, .cat-filter__title, .cat-filter__label { color: #FFFFFF !important; }
+.catnav__sub[aria-current="page"], .catnav__item--current > .catnav__group, .catnav__sub:hover, .catnav__group:hover { color: var(--orange) !important; }
+.catnav__sub[aria-current="page"] { background: rgba(242, 140, 40, 0.18) !important; }
+/* Long-form copy: blog articles, privacy policy, our story */
+.article p, .article li, .article__lead, .legal p, .legal li, .legal__updated, .legal__contact p,
+.szz__card p, .szz__list li, .szz__standfirst, .szz__pull, .story__pull, .story p, .szz__label,
+.member-card__quote p, .member-card__quote cite, .pd__variants-label, .infra-box__text, .mfg-tagline,
+.office-card__city, .office-card__region, .office-card__address { color: #FFFFFF !important; }
+.article p, .article li, .legal p, .legal li, .legal__updated, .legal__contact p, .szz__card p, .szz__list li,
+.member-card__quote cite, .pd__variants-label, .office-card__region, .office-card__address { color: var(--tz-text) !important; }
+.szz__label, .szz__pull, .story__pull, .szz__standfirst { color: #FFFFFF !important; }
+strong, b, .article strong, .legal strong, .job-card strong, li strong, p strong { color: #FFFFFF !important; }
+.article a, .legal a, .article__back, .legal__contact a { color: var(--orange) !important; }
+.article a:hover, .legal a:hover, .article__back:hover { color: #FFFFFF !important; }
+.roadmap__title em { color: var(--navy-deep) !important; }
+.bg-offwhite .roadmap__title, .bg-offwhite .szz__title { color: var(--navy-deep) !important; }
+/* Reason cards on the orange About band: the band rule made their titles navy */
+.bg-offwhite .wbc-card .wbc-card__t, .bg-offwhite .wbc-card h3 { color: #FFFFFF !important; }
+.bg-offwhite .wbc-card .wbc-card__d { color: var(--tz-text) !important; }
+/* Mission card is orange: its copy goes navy, not white */
+.ab-vm__card--mission .ab-vm__text, .ab-vm__card--mission .ab-vm__label { color: var(--navy-deep) !important; }
+.ab-vm__card--vision .ab-vm__text { color: #FFFFFF !important; }
+.ab-vm__card--vision .ab-vm__label { color: var(--orange) !important; }
+/* Motto on the orange band: all navy, the tail underlined in white */
+.bg-offwhite .ab-motto span { color: var(--navy-deep) !important; text-decoration: underline; text-decoration-color: #FFFFFF; text-decoration-thickness: 4px; text-underline-offset: 8px; }
+/* "to be supplied" chips: solid orange, navy text */
+.hp-ph { background: var(--orange) !important; color: var(--navy-deep) !important; border-color: var(--orange) !important; }
+/* Product variant buttons */
+.pd__variant { background: rgba(255, 255, 255, 0.06) !important; color: #FFFFFF !important; border-color: var(--tz-line) !important; }
+.pd__variant.is-active, .pd__variant[aria-pressed="true"] { background: var(--orange) !important; color: var(--navy-deep) !important; border-color: var(--orange) !important; }
+/* Office cards on the orange contact band */
+.office-card { background: var(--navy-deep) !important; }
+.office-card__city { color: #FFFFFF !important; }
+.mfg-tagline span, .mfg-tagline em { color: var(--orange) !important; }
+
+/* Our Story timeline band had a hard-coded white gradient (missed by the first
+   audit, which only read solid colours). Navy now; the faint 01/02 numerals
+   and the rail stay as soft white. */
+.story-zz { background: var(--white) !important; }
+.szz__no, .szz__index, .szz__num { color: rgba(255, 255, 255, 0.07) !important; }
+
+/* ── Homepage stats bar (Rajesh ss 15:56): navy card was lost on the navy
+   band and the orange bottom border curled at the corners. The band is now
+   orange, the navy card sits on it with a clean 1px edge, no count ticks. ── */
+.hp-statbar {
+  background-color: var(--orange) !important;
+  background-image: radial-gradient(rgba(11, 26, 61, 0.12) 1px, transparent 1.2px) !important;
+  background-size: 22px 22px !important;
+}
+.hp-statbar__inner {
+  background: var(--navy-deep) !important; border-bottom: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 24px 60px rgba(11, 26, 61, 0.45) !important;
+}
+.hp-statbar__value.tz-counted::after { display: none; }
+.hp-statbar__item { border-left-color: rgba(255, 255, 255, 0.14) !important; }
+
+/* ── Stats bar v3: same look as the About page numbers band (approved).
+   Navy band, six separate tiles, orange numbers, uppercase labels. ── */
+.hp-statbar {
+  background-color: var(--navy-deep) !important; background-image: none !important;
+  border-top: 4px solid var(--orange); position: relative; overflow: hidden;
+}
+.hp-statbar::before { content: ''; position: absolute; inset: 0; background: radial-gradient(700px 300px at 0% 100%, rgba(242, 140, 40, 0.18), transparent 60%); pointer-events: none; }
+.hp-statbar__inner {
+  position: relative; background: transparent !important; border: 0 !important; box-shadow: none !important;
+  gap: 12px; padding: 0 !important; max-width: 1400px !important; border-radius: 0 !important;
+}
+.hp-statbar__item {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important; border-radius: 14px; background: rgba(255, 255, 255, 0.04);
+  padding: 22px 10px !important; transition: background 200ms ease, border-color 200ms ease;
+}
+.hp-statbar__item:hover { background: rgba(242, 140, 40, 0.1); border-color: rgba(242, 140, 40, 0.5) !important; }
+.hp-statbar__value { font-family: 'Sora', 'Inter', sans-serif; font-size: clamp(26px, 2.6vw, 38px) !important; }
+.hp-statbar__label { margin-top: 8px !important; font-size: 12px !important; font-weight: 600 !important; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.72) !important; }
+@media (max-width: 900px) { .hp-statbar__inner { row-gap: 12px !important; } }
+/* hero accent words stay orange despite the forced-white headline rule above */
+.hero-headline .hw--accent, .hero-headline .hero-accent { color: var(--orange) !important; }
+.rng__title .rng__accent { color: var(--orange) !important; }

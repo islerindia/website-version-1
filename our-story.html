@@ -90,7 +90,7 @@
     .demo-mm__row--5 { grid-template-columns: repeat(5, 1fr); }
     .demo-mm__row--3 { grid-template-columns: repeat(3, 1fr); }
     .demo-mm__cell { display: flex; align-items: center; gap: 11px; min-width: 0; padding: 10px; border-radius: 10px; text-decoration: none; transition: background-color 150ms ease; }
-    .demo-mm__cell:hover { background-color: rgba(244, 180, 0, 0.08); }
+    .demo-mm__cell:hover { background-color: rgba(242, 140, 40, 0.08); }
     .demo-mm__thumb { flex-shrink: 0; width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
     .demo-mm__thumb img { width: 100%; height: 100%; object-fit: cover; }
     .demo-mm__cell:nth-child(1) .demo-mm__thumb img { object-fit: contain; padding: 6px; background: #fff; }
@@ -119,8 +119,8 @@
     .page-section { position: relative; padding: clamp(56px, 8vw, 110px) 0; overflow: clip; }
     .bg-white { background: var(--white); }
     .bg-offwhite { background: var(--off-white); }
-    /* Navy treatment matching the homepage USP / vendors sections (#475A82). */
-    .bg-navy { background: #475A82; }
+    /* Navy treatment matching the homepage USP / vendors sections (#14275A). */
+    .bg-navy { background: #14275A; }
     .bg-navy .body-copy { color: rgba(255,255,255,0.82); }
     .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 14px; }
     .h2 { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.01em; }
@@ -173,8 +173,8 @@
     .about-bullet::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: var(--yellow); flex-shrink: 0; }
     .vm-card { background: var(--off-white); border-radius: 20px; padding: clamp(28px, 3vw, 40px); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; margin-top: clamp(36px, 5vw, 56px); }
     .vm-item { border-left: 3px solid var(--yellow); padding-left: 20px; }
-    .vm-item--mission { border-left-color: #2BB3A3; }
-    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #2BB3A3; margin-bottom: 8px; }
+    .vm-item--mission { border-left-color: #0B1A3D; }
+    .vm-item__label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #0B1A3D; margin-bottom: 8px; }
     .vm-item__text { font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.45; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .stat { background: var(--off-white); border-radius: 18px; padding: 36px 28px; text-align: center; }
@@ -291,7 +291,7 @@
 
     .cta-box__btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(244, 180, 0, 0.38);
+      box-shadow: 0 10px 28px rgba(242, 140, 40, 0.38);
     }
 
     .cta-box__btn--secondary {
@@ -356,8 +356,8 @@
     .story-zz {
       padding-bottom: clamp(40px, 5vw, 76px);
       background:
-        radial-gradient(58% 34% at 50% 6%, rgba(244,180,0,0.055) 0%, rgba(244,180,0,0) 100%),
-        linear-gradient(180deg, #fff 0%, #FBFAF6 34%, #FBFAF6 72%, #fff 100%);
+        radial-gradient(58% 34% at 50% 6%, rgba(242, 140, 40,0.055) 0%, rgba(242, 140, 40,0) 100%),
+        linear-gradient(180deg, #fff 0%, #F6F8FB 34%, #F6F8FB 72%, #fff 100%);
     }
     .story-zz .container { max-width: 1500px; }
 
@@ -381,7 +381,7 @@
     .szz__standfirst::after {
       content: ''; position: absolute; left: 50%; bottom: 0;
       width: 54px; height: 3px; margin-left: -27px; border-radius: 2px;
-      background: linear-gradient(90deg, rgba(244,180,0,0.25), var(--yellow), rgba(244,180,0,0.25));
+      background: linear-gradient(90deg, rgba(242, 140, 40,0.25), var(--yellow), rgba(242, 140, 40,0.25));
     }
 
     .szz {
@@ -408,8 +408,8 @@
       background: linear-gradient(180deg,
         rgba(11,26,61,0.00) 0%,
         rgba(11,26,61,0.16) 10%,
-        rgba(244,180,0,0.55) 34%,
-        rgba(244,180,0,0.55) 66%,
+        rgba(242, 140, 40,0.55) 34%,
+        rgba(242, 140, 40,0.55) 66%,
         rgba(11,26,61,0.16) 90%,
         rgba(11,26,61,0.00) 100%);
     }
@@ -457,20 +457,20 @@
       width: 13px; height: 13px;
       border-radius: 50%;
       background: var(--yellow);
-      box-shadow: 0 0 0 5px #FBFAF6,
-                  0 0 0 6px rgba(244,180,0,0.30),
-                  0 0 16px 3px rgba(244,180,0,0.30);
+      box-shadow: 0 0 0 5px #F6F8FB,
+                  0 0 0 6px rgba(242, 140, 40,0.30),
+                  0 0 16px 3px rgba(242, 140, 40,0.30);
       z-index: 2;
     }
     .szz__card::after {
       content: "";
       position: absolute; top: 21px;
       height: 1px;
-      background: linear-gradient(90deg, rgba(11,26,61,0.05), rgba(244,180,0,0.55));
+      background: linear-gradient(90deg, rgba(11,26,61,0.05), rgba(242, 140, 40,0.55));
       z-index: 1;
     }
     .szz__item:nth-child(even) .szz__card::after {
-      background: linear-gradient(90deg, rgba(244,180,0,0.55), rgba(11,26,61,0.05));
+      background: linear-gradient(90deg, rgba(242, 140, 40,0.55), rgba(11,26,61,0.05));
     }
     /* left-column beats reach right; right-column beats reach left */
     .szz__item:nth-child(odd) .szz__card::before  { right: calc(-1 * (clamp(70px, 9vw, 170px) / 2) - 5.5px); }
@@ -487,7 +487,7 @@
     }
     .szz__eyebrow::after {
       content: ''; width: 26px; height: 2px; border-radius: 2px;
-      background: rgba(244,180,0,0.45);
+      background: rgba(242, 140, 40,0.45);
     }
     .szz__title {
       margin: 0 0 22px;
@@ -559,7 +559,7 @@
       border-radius: 50%;
       background: var(--yellow);
     }
-    .szz__list li:hover { border-color: rgba(244,180,0,0.85); transform: translateY(-2px); box-shadow: 0 2px 4px rgba(11,26,61,0.05), 0 10px 22px rgba(11,26,61,0.08); }
+    .szz__list li:hover { border-color: rgba(242, 140, 40,0.85); transform: translateY(-2px); box-shadow: 0 2px 4px rgba(11,26,61,0.05), 0 10px 22px rgba(11,26,61,0.08); }
     /* the pills fan in one after another once their beat is revealed */
     body.story-anim-on .szz-reveal .szz__list li {
       opacity: 0;
@@ -597,7 +597,7 @@
       .szz__item:nth-child(even) .szz__card::before { left: -34px; right: auto; }
       .szz__item:nth-child(odd) .szz__card::after,
       .szz__item:nth-child(even) .szz__card::after { left: -22px; right: auto; width: 20px;
-        background: linear-gradient(90deg, rgba(244,180,0,0.55), rgba(11,26,61,0.05)); }
+        background: linear-gradient(90deg, rgba(242, 140, 40,0.55), rgba(11,26,61,0.05)); }
       /* single rail — every numeral goes to the outer (right) edge, and comes
          down in size so it never crowds the text at this width */
       .szz__item { padding-top: clamp(40px, 8vw, 64px); }
@@ -633,7 +633,7 @@
     .story__pull::before {
       content: ''; position: absolute; left: 0; top: 4px; bottom: 4px;
       width: 4px; border-radius: 2px;
-      background: linear-gradient(180deg, var(--yellow), rgba(244,180,0,0.25));
+      background: linear-gradient(180deg, var(--yellow), rgba(242, 140, 40,0.25));
     }
     /* Sized four times. At the full 860px prose measure it still read as a
        banner filling the frame: the source is a 1600x853 wide crop and most of
@@ -654,7 +654,7 @@
     .story__figure::before {
       content: ''; position: absolute; z-index: 0;
       left: -6%; right: -6%; top: 4%; bottom: 4%;
-      background: radial-gradient(52% 48% at 50% 50%, rgba(244,180,0,0.10) 0%, rgba(244,180,0,0) 72%);
+      background: radial-gradient(52% 48% at 50% 50%, rgba(242, 140, 40,0.10) 0%, rgba(242, 140, 40,0) 72%);
       pointer-events: none;
     }
     .story__figure img { position: relative; z-index: 1; }
@@ -703,6 +703,8 @@
 
   </style>
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/theme-dark.css">
   <link rel="stylesheet" href="assets/css/type.css">
 
   <style id="os-insights">
@@ -1143,7 +1145,7 @@
         </div>
         <figure class="roadmap__figure">
           <div class="roadmap__scroll">
-            <svg class="roadmap__svg" viewBox="0 146 1600 706" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rm-t rm-d"><title id="rm-t">Isler growth roadmap, 2024 to 2030</title><desc id="rm-d">A milestone ramp from the first 400k-unit factory in 2024-2025 to 1 million units per year by 2030.</desc><defs><marker id="rm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="rgba(90,98,115,0.85)"/></marker></defs><path d="M 80 780 L 80 168" stroke="#F4B400" stroke-width="3" fill="none" marker-end="url(#rm-axis)"/><path d="M 80 780 L 1548 780" stroke="#F4B400" stroke-width="3" fill="none" marker-end="url(#rm-axis)"/><defs><marker id="rm-axis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#F4B400"/></marker></defs><text x="44" y="470" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="middle" transform="rotate(-90 44 470)">Milestones</text><line x1="348" y1="196" x2="348" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="678" y1="196" x2="678" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="1002" y1="196" x2="1002" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="1328" y1="196" x2="1328" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><text x="1548" y="186" fill="#0B1A3D" font-size="26" font-weight="700" text-anchor="end">1 million Units/Yr</text><path d="M 140 690 C 258 690, 284 585, 402 585" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="271" y="622" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 271 622)">RAMP UP</text><path d="M 440 578 C 557 578, 583 462, 700 462" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="570" y="504" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 570 504)">RAMP UP</text><path d="M 738 452 C 896 452, 930 330, 1088 330" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="913" y="375" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 913 375)">RAMP UP</text><path d="M 1126 320 C 1266 320, 1296 246, 1436 246" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="1281" y="267" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 1281 267)">RAMP UP</text><text x="100" y="345" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="100" dy="0">Set up 1st Factory 400k Units,</tspan><tspan x="100" dy="24">INR 300 Cr</tspan></text><polygon points="117.0,655.0 121.4,665.9 133.2,666.7 124.1,674.3 127.0,685.8 117.0,679.5 107.0,685.8 109.9,674.3 100.8,666.7 112.6,665.9" fill="#F4B400"/><rect x="122" y="690" width="232" height="88" rx="3" fill="#1A2A6C"/><text x="136" y="714" fill="#FFFFFF" font-size="14" font-weight="500" text-anchor="start"><tspan x="136" dy="0">First factory kick off for</tspan><tspan x="136" dy="19">1.  Cooker Hood</tspan><tspan x="136" dy="19">2.  In-built Hob</tspan><tspan x="136" dy="19">3.  Cooktops</tspan></text><text x="398" y="285" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="398" dy="0">2nd Factory - Backwards</tspan><tspan x="398" dy="24">Integration and</tspan><tspan x="398" dy="24">localization</tspan></text><polygon points="420.0,545.0 424.4,555.9 436.2,556.7 427.1,564.3 430.0,575.8 420.0,569.5 410.0,575.8 412.9,564.3 403.8,556.7 415.6,555.9" fill="#F4B400"/><rect x="426" y="578" width="234" height="52" rx="3" fill="#1A2A6C"/><text x="440" y="602" fill="#FFFFFF" font-size="14" font-weight="500" text-anchor="start"><tspan x="440" dy="0">Backward integration &amp;</tspan><tspan x="440" dy="19">localization</tspan></text><rect x="402" y="640" width="268" height="138" rx="12" fill="#FFFFFF" stroke="rgba(11,26,61,0.30)" stroke-width="1.4" stroke-dasharray="6 5"/><text x="416" y="664" fill="#3A4256" font-size="13" font-weight="400" text-anchor="start"><tspan x="416" dy="0">Scale up First factory for Cooker</tspan><tspan x="416" dy="19">Hood, In-built Hob, Cooktops</tspan><tspan x="416" dy="19">Start assembly for</tspan><tspan x="416" dy="19">4.  Microwave</tspan><tspan x="416" dy="19">5.  Oven</tspan><tspan x="416" dy="19">6.  Dishwasher</tspan></text><text x="730" y="258" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="730" dy="0">3rd Factory Capacity of</tspan><tspan x="730" dy="24">600k Units, INR 600 Cr</tspan></text><text x="542" y="352" fill="#0B1A3D" font-size="16" font-weight="700" text-anchor="start"><tspan x="542" dy="0">Partnership/Acquisition in China for</tspan><tspan x="542" dy="23">IP/Technology access</tspan></text><polygon points="715.0,425.0 719.4,435.9 731.2,436.7 722.1,444.3 725.0,455.8 715.0,449.5 705.0,455.8 707.9,444.3 698.8,436.7 710.6,435.9" fill="#F4B400"/><rect x="720" y="458" width="262" height="74" rx="3" fill="#1A2A6C"/><text x="734" y="482" fill="#FFFFFF" font-size="13" font-weight="500" text-anchor="start"><tspan x="734" dy="0">Set up a new facility in Mumbai near</tspan><tspan x="734" dy="19">the sea port to optimize logistics</tspan><tspan x="734" dy="19">costs of import components</tspan></text><text x="1000" y="232" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="1000" dy="0">Expand capacity or set up 4th Factory???</tspan></text><polygon points="1104.0,293.0 1108.4,303.9 1120.2,304.7 1111.1,312.3 1114.0,323.8 1104.0,317.5 1094.0,323.8 1096.9,312.3 1087.8,304.7 1099.6,303.9" fill="#F4B400"/><rect x="1110" y="326" width="288" height="62" rx="3" fill="#1A2A6C"/><text x="1124" y="350" fill="#FFFFFF" font-size="13" font-weight="500" text-anchor="start"><tspan x="1124" dy="0">Expand Capacity to reach 1 mln units</tspan><tspan x="1124" dy="19">per year</tspan></text><rect x="1376" y="240" width="218" height="74" rx="12" fill="#FFFFFF" stroke="rgba(11,26,61,0.30)" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1390" y="264" fill="#3A4256" font-size="12" font-weight="400" text-anchor="start"><tspan x="1390" dy="0">Scaling of the mega factory to</tspan><tspan x="1390" dy="17">offer complete solution for the</tspan><tspan x="1390" dy="17">Built-in Kitchen appliances</tspan></text><g><rect x="139" y="796" width="150" height="30" rx="2" fill="#1A2A6C"/><text x="214" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2024-2025</text></g><g><rect x="472" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="526" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2026</text></g><g><rect x="784" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="838" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2027</text></g><g><rect x="1138" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="1192" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2028</text></g><g><rect x="1371" y="796" width="150" height="30" rx="2" fill="#1A2A6C"/><text x="1446" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2029 - 2030</text></g></svg>
+            <svg class="roadmap__svg" viewBox="0 146 1600 706" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="rm-t rm-d"><title id="rm-t">Isler growth roadmap, 2024 to 2030</title><desc id="rm-d">A milestone ramp from the first 400k-unit factory in 2024-2025 to 1 million units per year by 2030.</desc><defs><marker id="rm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="rgba(90,98,115,0.85)"/></marker></defs><path d="M 80 780 L 80 168" stroke="#F28C28" stroke-width="3" fill="none" marker-end="url(#rm-axis)"/><path d="M 80 780 L 1548 780" stroke="#F28C28" stroke-width="3" fill="none" marker-end="url(#rm-axis)"/><defs><marker id="rm-axis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#F28C28"/></marker></defs><text x="44" y="470" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="middle" transform="rotate(-90 44 470)">Milestones</text><line x1="348" y1="196" x2="348" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="678" y1="196" x2="678" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="1002" y1="196" x2="1002" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><line x1="1328" y1="196" x2="1328" y2="768" stroke="rgba(11,26,61,0.16)" stroke-width="1.4" stroke-dasharray="5 6"/><text x="1548" y="186" fill="#0B1A3D" font-size="26" font-weight="700" text-anchor="end">1 million Units/Yr</text><path d="M 140 690 C 258 690, 284 585, 402 585" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="271" y="622" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 271 622)">RAMP UP</text><path d="M 440 578 C 557 578, 583 462, 700 462" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="570" y="504" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 570 504)">RAMP UP</text><path d="M 738 452 C 896 452, 930 330, 1088 330" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="913" y="375" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 913 375)">RAMP UP</text><path d="M 1126 320 C 1266 320, 1296 246, 1436 246" fill="none" stroke="rgba(90,98,115,0.75)" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#rm-arrow)"/><text x="1281" y="267" fill="#0B1A3D" font-size="14" font-weight="700" letter-spacing="0.5" text-anchor="middle" transform="rotate(-20 1281 267)">RAMP UP</text><text x="100" y="345" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="100" dy="0">Set up 1st Factory 400k Units,</tspan><tspan x="100" dy="24">INR 300 Cr</tspan></text><polygon points="117.0,655.0 121.4,665.9 133.2,666.7 124.1,674.3 127.0,685.8 117.0,679.5 107.0,685.8 109.9,674.3 100.8,666.7 112.6,665.9" fill="#F28C28"/><rect x="122" y="690" width="232" height="88" rx="3" fill="#1A2A6C"/><text x="136" y="714" fill="#FFFFFF" font-size="14" font-weight="500" text-anchor="start"><tspan x="136" dy="0">First factory kick off for</tspan><tspan x="136" dy="19">1.  Cooker Hood</tspan><tspan x="136" dy="19">2.  In-built Hob</tspan><tspan x="136" dy="19">3.  Cooktops</tspan></text><text x="398" y="285" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="398" dy="0">2nd Factory - Backwards</tspan><tspan x="398" dy="24">Integration and</tspan><tspan x="398" dy="24">localization</tspan></text><polygon points="420.0,545.0 424.4,555.9 436.2,556.7 427.1,564.3 430.0,575.8 420.0,569.5 410.0,575.8 412.9,564.3 403.8,556.7 415.6,555.9" fill="#F28C28"/><rect x="426" y="578" width="234" height="52" rx="3" fill="#1A2A6C"/><text x="440" y="602" fill="#FFFFFF" font-size="14" font-weight="500" text-anchor="start"><tspan x="440" dy="0">Backward integration &amp;</tspan><tspan x="440" dy="19">localization</tspan></text><rect x="402" y="640" width="268" height="138" rx="12" fill="#FFFFFF" stroke="rgba(11,26,61,0.30)" stroke-width="1.4" stroke-dasharray="6 5"/><text x="416" y="664" fill="#3A4256" font-size="13" font-weight="400" text-anchor="start"><tspan x="416" dy="0">Scale up First factory for Cooker</tspan><tspan x="416" dy="19">Hood, In-built Hob, Cooktops</tspan><tspan x="416" dy="19">Start assembly for</tspan><tspan x="416" dy="19">4.  Microwave</tspan><tspan x="416" dy="19">5.  Oven</tspan><tspan x="416" dy="19">6.  Dishwasher</tspan></text><text x="730" y="258" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="730" dy="0">3rd Factory Capacity of</tspan><tspan x="730" dy="24">600k Units, INR 600 Cr</tspan></text><text x="542" y="352" fill="#0B1A3D" font-size="16" font-weight="700" text-anchor="start"><tspan x="542" dy="0">Partnership/Acquisition in China for</tspan><tspan x="542" dy="23">IP/Technology access</tspan></text><polygon points="715.0,425.0 719.4,435.9 731.2,436.7 722.1,444.3 725.0,455.8 715.0,449.5 705.0,455.8 707.9,444.3 698.8,436.7 710.6,435.9" fill="#F28C28"/><rect x="720" y="458" width="262" height="74" rx="3" fill="#1A2A6C"/><text x="734" y="482" fill="#FFFFFF" font-size="13" font-weight="500" text-anchor="start"><tspan x="734" dy="0">Set up a new facility in Mumbai near</tspan><tspan x="734" dy="19">the sea port to optimize logistics</tspan><tspan x="734" dy="19">costs of import components</tspan></text><text x="1000" y="232" fill="#0B1A3D" font-size="17" font-weight="700" text-anchor="start"><tspan x="1000" dy="0">Expand capacity or set up 4th Factory???</tspan></text><polygon points="1104.0,293.0 1108.4,303.9 1120.2,304.7 1111.1,312.3 1114.0,323.8 1104.0,317.5 1094.0,323.8 1096.9,312.3 1087.8,304.7 1099.6,303.9" fill="#F28C28"/><rect x="1110" y="326" width="288" height="62" rx="3" fill="#1A2A6C"/><text x="1124" y="350" fill="#FFFFFF" font-size="13" font-weight="500" text-anchor="start"><tspan x="1124" dy="0">Expand Capacity to reach 1 mln units</tspan><tspan x="1124" dy="19">per year</tspan></text><rect x="1376" y="240" width="218" height="74" rx="12" fill="#FFFFFF" stroke="rgba(11,26,61,0.30)" stroke-width="1.4" stroke-dasharray="6 5"/><text x="1390" y="264" fill="#3A4256" font-size="12" font-weight="400" text-anchor="start"><tspan x="1390" dy="0">Scaling of the mega factory to</tspan><tspan x="1390" dy="17">offer complete solution for the</tspan><tspan x="1390" dy="17">Built-in Kitchen appliances</tspan></text><g><rect x="139" y="796" width="150" height="30" rx="2" fill="#1A2A6C"/><text x="214" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2024-2025</text></g><g><rect x="472" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="526" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2026</text></g><g><rect x="784" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="838" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2027</text></g><g><rect x="1138" y="796" width="108" height="30" rx="2" fill="#1A2A6C"/><text x="1192" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2028</text></g><g><rect x="1371" y="796" width="150" height="30" rx="2" fill="#1A2A6C"/><text x="1446" y="816" fill="#FFFFFF" font-size="14" font-weight="600" text-anchor="middle">2029 - 2030</text></g></svg>
           </div>
           <p class="roadmap__hint">Scroll sideways to see the full roadmap →</p>
         </figure>
@@ -1199,8 +1201,8 @@
          Range-style card hover. Post links are # placeholders (post pages not in demo).
     ═══════════════════════════════════════════════════════════════════════════ -->
     <section id="insights" class="blog-section">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(244,180,0,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(230,149,0,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(242, 140, 40,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.13);bottom:-60px;left:-60px;"></div>
       <div class="section-header">
         <span class="section-eyebrow">Insights</span>
         <h2 class="section-heading">From the Isler Blog</h2>

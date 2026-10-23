@@ -24,7 +24,7 @@
   backdrop-filter: blur(20px) saturate(150%);
   -webkit-backdrop-filter: blur(20px) saturate(150%);
   border-radius: 100px;
-  border: 1.5px solid #E69500;
+  border: 1.5px solid #F28C28;
   box-shadow: 0 8px 30px rgba(30, 28, 24, 0.16);
   min-width: min(1160px, calc(100vw - 40px));
   font-family: var(--font);
@@ -190,12 +190,23 @@
   transition: color 150ms ease, background 150ms ease;
 }
 .isler-nav__links > li > a:hover,
-.isler-nav__trigger:hover { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
+.isler-nav__trigger:hover { color: var(--navy); background: rgba(242, 140, 40, 0.14); }
+/* Orange + navy theme (2026-10-23): the current page carries an orange
+   underline; it also slides in under any link on hover. */
+.isler-nav__links > li > a { position: relative; }
+.isler-nav__links > li > a::after {
+  content: ''; position: absolute; left: 22px; right: 22px; bottom: 6px; height: 2px; border-radius: 2px;
+  background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform 220ms ease;
+}
+.isler-nav__links > li > a:hover::after,
+.isler-nav__links > li > a[aria-current="page"]::after { transform: scaleX(1); }
+.isler-nav__links > li > a[aria-current="page"] { color: var(--navy); }
+.isler-nav__search-toggle--inline { color: var(--orange-deep); }
 /* Categories is now a direct link to Key Products Range — no dropdown, so hide the chevron. */
 #isler-products-trigger .isler-nav__chev { display: none; }
 .isler-nav__chev { transition: transform 200ms ease; opacity: 0.7; }
 .isler-nav__item.is-open .isler-nav__chev { transform: rotate(180deg); }
-.isler-nav__item.is-open .isler-nav__trigger { color: var(--navy); background: rgba(11, 26, 61, 0.06); }
+.isler-nav__item.is-open .isler-nav__trigger { color: var(--navy); background: rgba(242, 140, 40, 0.14); }
 
 .isler-nav__burger { display: none; }
 .isler-nav__search-toggle { display: none; }
@@ -325,8 +336,8 @@
   transition: stroke 140ms ease;
 }
 .isler-mega__link:hover .isler-mega__thumb {
-  border-color: rgba(244, 180, 0, 0.6);
-  background: rgba(244, 180, 0, 0.12);
+  border-color: rgba(242, 140, 40, 0.6);
+  background: rgba(242, 140, 40, 0.12);
 }
 .isler-mega__link:hover .isler-mega__thumb svg { stroke: var(--navy); }
 
@@ -435,7 +446,7 @@
   .isler-mega__tab:hover { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
   .isler-mega__tab::after { display: none; }
   /* No underline on the dark panel, so the open header gets a tinted row instead */
-  .isler-mega__tab.is-open { background: rgba(244, 180, 0, 0.14); }
+  .isler-mega__tab.is-open { background: rgba(242, 140, 40, 0.14); }
   .isler-mega__list { grid-template-columns: 1fr; gap: 0; }
   .isler-mega__link { color: #fff; }
   .isler-mega__link:hover, .isler-mega__link:focus-visible { color: var(--yellow); background: rgba(255, 255, 255, 0.08); }
@@ -485,8 +496,8 @@
      reset the style to none and the colour to currentColor, which silently
      beat the orange set on .isler-nav further up and rendered a 0px charcoal
      edge instead. */
-  border-top: 1.5px solid #E69500;
-  border-bottom: 1.5px solid #E69500;
+  border-top: 1.5px solid #F28C28;
+  border-bottom: 1.5px solid #F28C28;
   box-shadow: 0 2px 14px rgba(30, 28, 24, 0.14);
   padding-top: 9px;
   padding-bottom: 9px;
