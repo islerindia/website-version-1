@@ -137,10 +137,7 @@ html { scrollbar-color: var(--orange) var(--navy); }
   background: var(--orange); margin-right: 10px; vertical-align: middle;
 }
 .pd__spec-table tr:hover { background: rgba(var(--orange-rgb), 0.08); }
-.pd__specs-title::after, .section-heading::after {
-  content: ''; display: inline-block; width: 40px; height: 4px; border-radius: 4px; margin-left: 16px;
-  background: var(--orange); vertical-align: middle;
-}
+/* heading dash ornament removed, client PDF 2026-10-27 pt 5 */
 
 /* Rows on the Business page: orange tile edge on hover */
 a.rng-tile:hover { box-shadow: inset 0 3px 0 var(--orange), 0 10px 28px rgba(11, 26, 61, 0.10); }
@@ -205,8 +202,10 @@ body { animation: tzFadeIn 420ms ease-out both; }
 .site-footer.tz-after-slant { border-top: 0; }
 @media (max-width: 760px) { .tz-slant { height: 40px; margin-top: -40px; } }
 
-/* Patterns: grid on navy bands, dots on light bands */
-.cat-hero, .bg-navy, .mfg-certs, .mfg-scale, .why-join, .rng__head {
+/* Patterns: grid on navy bands, dots on light bands.
+   .mfg-certs (homepage Our Certifications) dropped 2026-10-27 — Rajesh: "grids
+   in certification need to be removed"; it keeps only the corner glow above. */
+.cat-hero, .bg-navy, .mfg-scale, .why-join, .rng__head {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),

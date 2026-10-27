@@ -235,7 +235,37 @@
     }, { threshold: 0.4 });
     Array.prototype.forEach.call(els, function (el) { io.observe(el); });
   }
-  function init() { document.querySelectorAll('.isler-nav').forEach(initNav); initReveal(); initChrome(); /* initSlants() retired 2026-10-23: Rajesh did not like the diagonal line */ initCountUp(); }
+  /* ── Ambient orange circles on every page (Rajesh 2026-10-27: "orange bubble
+     har page pe daal de, bas accha lagna chahiye"). index.html and business.html
+     place theirs by hand; every other page gets ONE circle per section here,
+     alternating top-right / bottom-left so two never meet at a seam. Photo
+     heroes (.page-hero) are skipped, so are sections that already have one. ── */
+  function initAmbient() {
+    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (page === '' || page === 'index.html' || page === 'business.html') return;
+    var secs = Array.prototype.slice.call(document.querySelectorAll('header.cat-hero, section'));
+    var i = 0;
+    secs.forEach(function (sec) {
+      if (sec.querySelector('.ambient-circle')) { i++; return; }
+      if (sec.classList.contains('page-hero') || sec.classList.contains('site-footer')) return;
+      if (sec.getBoundingClientRect().height < 220) return;
+      var cs = getComputedStyle(sec);
+      if (cs.position === 'static') sec.style.position = 'relative';
+      if (cs.overflow === 'visible') sec.style.overflow = 'clip';   /* clip, not hidden: sticky children keep working */
+      Array.prototype.forEach.call(sec.children, function (ch) {
+        if (getComputedStyle(ch).position === 'static') { ch.style.position = 'relative'; ch.style.zIndex = '1'; }
+      });
+      var c = document.createElement('div');
+      c.className = 'ambient-circle'; c.setAttribute('aria-hidden', 'true');
+      var big = 250 + ((i * 37) % 70);
+      c.style.cssText = (i % 2 === 0)
+        ? 'width:' + big + 'px;height:' + big + 'px;top:-' + Math.round(big * 0.32) + 'px;right:-' + Math.round(big * 0.3) + 'px;'
+        : 'width:' + (big - 50) + 'px;height:' + (big - 50) + 'px;bottom:-' + Math.round(big * 0.26) + 'px;left:-' + Math.round(big * 0.26) + 'px;';
+      sec.insertBefore(c, sec.firstChild);
+      i++;
+    });
+  }
+  function init() { document.querySelectorAll('.isler-nav').forEach(initNav); initReveal(); initChrome(); /* initSlants() retired 2026-10-23: Rajesh did not like the diagonal line */ initCountUp(); initAmbient(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 }());

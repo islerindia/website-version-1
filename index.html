@@ -769,7 +769,11 @@
 
     /* ── 1. SECTION OPENER — background video ── */
     .mfg-opener {
-      min-height: clamp(460px, 78vh, 760px);
+      /* Rajesh 2026-10-27: the logo-zoom clip was cropped top/bottom (band was
+         ~2:1, clip is 16:9) and the building logo got cut. The band now follows
+         the clip's 16:9 (56.25vw), capped at the viewport, so the whole frame
+         shows — "thoda zoom out". */
+      min-height: clamp(460px, 56.25vw, 100vh);
       display: flex;
       align-items: center;
       background: #0B1A3D;   /* on-brand navy loading state behind the video */
@@ -1437,6 +1441,7 @@
     /* ══════════════════════════════════════════════════════════════
        RFQ — build-to-order call to action
     ══════════════════════════════════════════════════════════════ */
+    .rfq-inner { position: relative; z-index: 1; }
     .rfq-section {
       background: var(--navy);
       padding: var(--space-2xl) clamp(24px, 5vw, 96px);
@@ -1588,6 +1593,7 @@
        BRANDS STRIP — infinite marquee of client logos
        (design reference: vestelinternational.com homepage logo strip)
     ══════════════════════════════════════════════════════════════ */
+    .brands-section > :not(.ambient-circle) { position: relative; z-index: 1; }
     .brands-section {
       background: var(--white);
       padding: var(--space-xl) 0;
@@ -1626,8 +1632,8 @@
        would keep re-aligning into a visible grid as they loop. */
     .brands-rows { display: flex; flex-direction: column; gap: 0; }
     .brands-track--a { animation: brands-scroll     46s linear infinite; }
-    .brands-track--b { animation: brands-scroll-rev 39s linear infinite; }
-    .brands-track--c { animation: brands-scroll     53s linear infinite; }
+    .brands-track--b { animation: brands-scroll-rev 46s linear infinite; }
+    .brands-track--c { animation: brands-scroll     46s linear infinite; }
     .brand-slot {
       flex: 0 0 auto;
       width: 190px;
@@ -1737,7 +1743,7 @@
       overflow: clip;
       scroll-margin-top: 90px;
     }
-    .npd-inner { max-width: 1400px; margin: 0 auto; }
+    .npd-inner { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
     .npd-lead {
       margin: 0 0 26px;
       font-size: 12px;
@@ -1816,15 +1822,17 @@
     }
     body.hp-anim-on .npd-step { opacity: 0; }
     body.hp-anim-on .npd-step::after { width: 0; }
+    /* Rajesh 2026-10-27 "animation thoda slow": stagger 200 -> 380ms per step,
+       each keyframe ~40% longer — the sweep now takes ~4.5s instead of ~2.5s. */
     body.hp-anim-on .npd-flow.is-running .npd-step {
-      animation: npdIn 800ms var(--ease-out) both,
-                 npdPulse 1500ms ease both;
-      animation-delay: calc(var(--i, 0) * 200ms),
-                       calc(var(--i, 0) * 200ms + 400ms);
+      animation: npdIn 1100ms var(--ease-out) both,
+                 npdPulse 2200ms ease both;
+      animation-delay: calc(var(--i, 0) * 380ms),
+                       calc(var(--i, 0) * 380ms + 500ms);
     }
     body.hp-anim-on .npd-flow.is-running .npd-step::after {
-      animation: npdLine 1000ms ease both;
-      animation-delay: calc(var(--i, 0) * 200ms + 500ms);
+      animation: npdLine 1400ms ease both;
+      animation-delay: calc(var(--i, 0) * 380ms + 650ms);
     }
 
     .npd-note { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -2195,8 +2203,12 @@
        margin-inline:auto on the paragraph plus text-align on the wrapper —
        NOT by giving anything a width, which would resize the container and
        drag the band below it (the same trap as the opener's stats row). */
-    .mfg-production .mfg-prod-head { text-align: center; }
-    .mfg-production .mfg-prod-head .mfg-sub {
+    .mfg-prod-head { text-align: center; }
+    /* Section-3 opener heading now lives at the top of #npd */
+    #npd .mfg-prod-head { margin-bottom: clamp(24px, 4vh, 48px); }
+    #npd .mfg-prod-head .mfg-heading { color: var(--tz-text, #fff); }
+    #npd .mfg-prod-head .mfg-sub { color: var(--tz-muted, rgba(255,255,255,0.72)); }
+    .mfg-prod-head .mfg-sub {
       max-width: 68ch;
       margin-left: auto;
       margin-right: auto;
@@ -2213,7 +2225,7 @@
        rule above it, then a heading large enough that nothing below competes.
        Scoped to .mfg-production's head so the other three story blocks — NPD,
        Supply Chain, Quality — keep their existing rank as its siblings. */
-    .mfg-production .mfg-prod-head::before {
+    .mfg-prod-head::before {
       content: '';
       display: block;
       width: clamp(40px, 4vw, 62px); height: 3px;
@@ -2359,7 +2371,7 @@
       /* "Isler at a Glance" only — the heading + intro that sit above its band.
          Sizes left at their base values too, per the same client note; only the
          gap between them is tuned. */
-      .mfg-production #mfg-prod-h + .mfg-sub {
+      #mfg-prod-h + .mfg-sub {
         margin-top: clamp(5px, 1.4vh, 16px) !important;
       }
 
@@ -2521,7 +2533,7 @@
         #proof .rev2-band__media,
         .mfg-production .rev2-band__media,
         .hp-frame--pair .rev2-band__media { height: clamp(150px, 30vh, 540px); }
-        .mfg-production #mfg-prod-h + .mfg-sub { margin-top: clamp(3px, 0.9vh, 16px) !important; }
+        #mfg-prod-h + .mfg-sub { margin-top: clamp(3px, 0.9vh, 16px) !important; }
 
         /* The gap the client arrowed on their screenshot. This is the rule that
            applies on a normal laptop, so it is the one to change — the 9vh
@@ -2638,15 +2650,17 @@
       .hp-frame--pair .mfg-certs__heading { margin-bottom: clamp(12px, 2.4vh, 40px); }
       .hp-frame--pair .mfg-cert-row { gap: clamp(20px, 4vw, 56px); }
 
-      /* ── BAND SIDES — the doc alternates media/copy down the page. Moving
-         Certifications & Quality below Supply Chain left two media-left bands
-         and then two copy-left bands in a row, so NPD and Supply Chain are
-         flipped here to restore the zig-zag. Order only — the DOM, and so the
-         reading order and the mobile stacking, are untouched. */
+      /* ── BAND SIDES — client "Website flow.docx" Section 3 (2026-10-27):
+         R&D text LEFT / image RIGHT; Technology image LEFT / text RIGHT;
+         Supply Chain text LEFT / image RIGHT; Quality image LEFT / text RIGHT.
+         #npd and .mfg-labs are flipped with `order`; #proof and
+         .mfg-production run in DOM order. Mobile stacking is untouched. */
       #npd .rev2-band__media { order: 2; }
       #npd .rev2-band__copy { order: 1; }
-      #proof .rev2-band__copy { order: 2; }
-      #proof .rev2-band__media { order: 1; }
+      @media (min-width: 901px) {   /* .rev2-band stacks at <=900px (copy first) */
+        .mfg-labs .rev2-band__media { order: 1; }
+        .mfg-labs .rev2-band__copy { order: 2; }
+      }
     }
 
     /* ── HERO SCENE 4 — two CTAs side by side.
@@ -2705,12 +2719,12 @@
       transition: background 200ms ease, transform 200ms ease, color 200ms ease;
     }
     .hero-range__ico {
-      width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+      width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;   /* 36 -> 46 -> 52px — Rajesh 2026-10-27 "thoda aur bada" */
       background: rgba(242, 140, 40, 0.14); color: #F28C28;
       transition: background 200ms ease, color 200ms ease;
     }
-    .hero-range__ico svg { width: 20px; height: 20px; }
-    .hero-range__lbl { font-size: 10px; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+    .hero-range__ico svg { width: 30px; height: 30px; }
+    .hero-range__lbl { font-size: 11.5px; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
     a.hero-range__item:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-2px); color: #fff; }
     /* 1360–1499px: the panel is narrowest here, so the name column and
        labels tighten a step to keep long labels (Dishwasher / Humidifier) apart. */
@@ -2737,9 +2751,9 @@
       .hero-range__head { font-size: 11.5px; gap: 2px; }
       .hero-range__no { font-size: 10.5px; }
       .hero-range__item { gap: 4px; padding: 5px 1px 4px; }
-      .hero-range__ico { width: 28px; height: 28px; }
-      .hero-range__ico svg { width: 16px; height: 16px; }
-      .hero-range__lbl { font-size: 8.5px; }
+      .hero-range__ico { width: 38px; height: 38px; }
+      .hero-range__ico svg { width: 22px; height: 22px; }
+      .hero-range__lbl { font-size: 10px; }
     }
     /* 1024–1199px: too narrow for name + 7 icons on one line, so the name
        sits on its own row above the icons (01 and the name inline). */
@@ -2919,12 +2933,12 @@
        first Operations" running to three uppercase lines carried more mass
        than the heading above it. The slope is what needed fixing, not the cap.
        ═══════════════════════════════════════════════════════════════════════ */
-    .mfg-production .mfg-prod-head #mfg-prod-h {
+    .mfg-prod-head #mfg-prod-h {
       font-size: clamp(34px, 4.6vw, 80px) !important;
       letter-spacing: -0.04em;
       line-height: 1.02;
     }
-    .mfg-production .mfg-prod-head .mfg-sub {
+    .mfg-prod-head .mfg-sub {
       font-size: clamp(15px, 1.25vw, 19px) !important;
       max-width: 74ch;
       margin-left: auto;
@@ -2938,6 +2952,42 @@
     
     
     
+</style>
+<style id="hp-npd-mini">
+  /* R&D flow, compact strip (client PDF 2026-10-27 pt 3) */
+  #npd .npd-flow--mini { display: flex; align-items: flex-start; justify-content: space-between; gap: 0; padding: 6px 0 0;
+    max-width: 1000px; margin-left: auto; margin-right: auto; }   /* Rajesh 2026-10-27 "sab aur paas": all 8 steps sit closer (strip was full 1400px width) */
+  #npd .npd-flow--mini .npd-step {
+    flex: 1 1 0; min-height: 0; position: relative;
+    background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center;
+  }
+  #npd .npd-flow--mini .npd-step__no { display: block; font-size: 10px; line-height: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--orange); }
+  #npd .npd-flow--mini .npd-step__icon {
+    width: 56px; height: 56px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.45);   /* was 44px — Rajesh 2026-10-27: "a little larger" */
+    background: var(--tz-surface, #10224D); color: #fff; position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #npd .npd-flow--mini .npd-step__icon svg { width: 26px; height: 26px; }
+  #npd .npd-flow--mini .npd-step__name { font-size: 13px !important; font-weight: 600; line-height: 1.3; margin: 0; }
+  #npd .npd-flow--mini .npd-step::after {
+    content: ''; position: absolute; top: 48px; left: 50%; right: auto; width: 100% !important; height: 1px;   /* icon centre: 12px number + 8px gap + 28px */
+    background: rgba(255, 255, 255, 0.28); animation: none !important;
+  }
+  #npd .npd-flow--mini .npd-step:last-child::after { display: none; }
+  @keyframes npdIconPulse {
+    0%   { border-color: rgba(255, 255, 255, 0.45); background: var(--tz-surface, #10224D); box-shadow: none; }
+    40%  { border-color: var(--orange); background: rgba(242, 140, 40, 0.25); box-shadow: 0 0 0 6px rgba(242, 140, 40, 0.18); }
+    100% { border-color: rgba(255, 255, 255, 0.45); background: var(--tz-surface, #10224D); box-shadow: none; }
+  }
+  body.hp-anim-on #npd .npd-flow--mini.is-running .npd-step__icon {
+    animation: npdIconPulse 2200ms ease both; animation-delay: calc(var(--i, 0) * 380ms + 500ms);
+  }
+  @media (max-width: 760px) {
+    #npd .npd-flow--mini { flex-wrap: wrap; row-gap: 18px; }
+    #npd .npd-flow--mini .npd-step { flex: 0 0 25%; }
+    #npd .npd-flow--mini .npd-step::after { display: none; }
+  }
 </style>
 </head>
 <body class="home-edgenav">
@@ -3033,7 +3083,7 @@
         </div>
       </li>
       <li class="isler-nav__drop">
-        <a href="about.html" aria-haspopup="true">
+        <a href="our-story.html" aria-haspopup="true">
           About Us
           <svg class="isler-nav__chev" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </a>
@@ -3057,27 +3107,27 @@
 
       <!-- ── Cinematic scene layers: 4 layers crossfaded by scroll ─────────── -->
 
-      <!-- Scene 1 — Precisely Built for Your Brand — BG: product-series image (STAND-IN placeholder, Isler to supply final product-series shot) -->
+      <!-- Scene 1 — Precisely Built for Your Brand — BG: Isler experience-centre photo (client "Website flow.docx", 2026-10-27, Section 1 image 1) -->
       <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/scene-05-finale-pullback.webp"
-             alt="Isler kitchen appliances built to a brand's specification">
+        <img src="assets/images/scenes/hero-01-showroom.webp"
+             alt="The Isler experience centre with chimneys, hobs and small appliances on display">
       </div>
 
-      <!-- Scene 2 — Designed to Belong Together — BG: appliance / innovation (the photo the client doc asked to pair with this line) -->
+      <!-- Scene 2 — Designed to Belong Together — BG: matched Isler range render (client "Website flow.docx", 2026-10-27, Section 1 image 2) -->
       <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/scene-04-isler.webp"
+        <img src="assets/images/scenes/hero-02-range.webp"
              alt="Matched Isler chimney, hob, microwave and oven in one kitchen">
       </div>
 
-      <!-- Scene 3 — Built on a Supply Chain You Can Trust — BG: manufacturing / supply chain -->
+      <!-- Scene 3 — Built on a Supply Chain You Can Trust — BG: logistics / port photo (client "Website flow.docx", 2026-10-27, Section 1 image 3) -->
       <div class="hero-scene-img" aria-hidden="true">
-        <img src="assets/images/scenes/factory_floor.webp"
-             alt="Isler manufacturing floor and supply chain">
+        <img src="assets/images/scenes/hero-03-supply.webp"
+             alt="Container port and warehouse loading bays — Isler's global supply chain">
       </div>
 
-      <!-- Scene 4 — Every Home, Every Appliance, Every Need — BG: products-showcase VIDEO (STAND-IN placeholder, Isler to supply final product-range video) -->
+      <!-- Scene 4 — One Partner. Every Appliance — BG: the client's Isler_Factory_Website_8sec.mp4 ("Website flow.docx", 2026-10-27, Section 1 slide 4); replaced the assembly-line stand-in -->
       <div class="hero-scene-img" aria-hidden="true">
-        <video src="assets/videos/assembly-line.mp4" autoplay muted loop playsinline
+        <video src="assets/videos/isler-factory-8sec.mp4" autoplay muted loop playsinline
                aria-label="Isler product range showcase"></video>
       </div>
 
@@ -3120,9 +3170,10 @@
           <p class="hero-headline">One Partner. <em class="hero-accent">Every Appliance</em></p>
           <p class="hero-subhead">From built-in kitchen appliances, small domestic appliances to home appliances, our extensive product portfolio gives brands access to multiple categories through a single manufacturing partner.</p>
           <!-- Desktop (>=1360px): every sub-appliance of the four categories as an
-               icon, 4+3+7+4 = 18. Icons reuse the nav mega-menu set; Mixer
-               grinder, Hand blender, Humidifier and Electric cooktop were drawn
-               to match. Below 1360px the .hero-cats pills show instead. -->
+               icon. Rajesh 2026-10-27: Small Domestic shows only Air fryer,
+               Kettle, Toaster, Dough maker + one "Other" (→ coming-soon.html);
+               Humidifier links to coming-soon.html?cat=Humidifier so it hovers
+               like the rest. Below 1360px the .hero-cats pills show instead. -->
           <div class="hero-range" aria-label="Product categories">
             <div class="hero-range__card">
               <a class="hero-range__head" href="built-in-appliances.html"><span class="hero-range__no">01</span>Built-in Appliances</a>
@@ -3134,11 +3185,11 @@
             </div>
             <div class="hero-range__card">
               <a class="hero-range__head" href="small-appliances.html"><span class="hero-range__no">03</span>Small Domestic Appliances</a>
-              <div class="hero-range__items"><a class="hero-range__item" href="air-fryers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span class="hero-range__lbl">Air fryer</span></a><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l-1.2 9H9.2z"/><path d="M10.5 12v2M13.5 12v2"/><rect x="6" y="14" width="12" height="7" rx="2"/><circle cx="12" cy="17.5" r="1.3"/></svg></span><span class="hero-range__lbl">Mixer grinder</span></span><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="9" rx="2.5"/><path d="M11 11.5h2v6h-2z"/><path d="M8.5 17.5h7l-1.2 3.5H9.7z"/></svg></span><span class="hero-range__lbl">Hand blender</span></span><a class="hero-range__item" href="stand-mixers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h8a4 4 0 0 1 4 4v2h-3"/><path d="M4 5v4"/><path d="M7 13h11l-1.4 5a2 2 0 0 1-1.9 1.5h-4.4a2 2 0 0 1-1.9-1.5z"/></svg></span><span class="hero-range__lbl">Stand mixer</span></a><a class="hero-range__item" href="dough-makers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span class="hero-range__lbl">Dough maker</span></a><a class="hero-range__item" href="kettles.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span class="hero-range__lbl">Kettle</span></a><a class="hero-range__item" href="toasters.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span class="hero-range__lbl">Toaster</span></a></div>
+              <div class="hero-range__items"><a class="hero-range__item" href="air-fryers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span class="hero-range__lbl">Air fryer</span></a><a class="hero-range__item" href="kettles.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span class="hero-range__lbl">Kettle</span></a><a class="hero-range__item" href="toasters.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span class="hero-range__lbl">Toaster</span></a><a class="hero-range__item" href="dough-makers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span class="hero-range__lbl">Dough maker</span></a><a class="hero-range__item" href="coming-soon.html?cat=Small%20Domestic%20Appliances"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></span><span class="hero-range__lbl">Other</span></a></div>
             </div>
             <div class="hero-range__card">
               <a class="hero-range__head" href="other-home-appliances.html"><span class="hero-range__no">04</span>Other Home Appliances</a>
-              <div class="hero-range__items"><a class="hero-range__item" href="air-purifiers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 8c2 1 4 1 6 0"/><path d="M9 11.5c2 1 4 1 6 0"/><path d="M10 16h4"/></svg></span><span class="hero-range__lbl">Air purifier</span></a><a class="hero-range__item" href="vacuum-cleaners.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="15" r="5"/><circle cx="15" cy="15" r="1.5"/><path d="M10.6 11.6 8 6a2 2 0 0 0-2-1.5H4"/><path d="M4 19.5h4.5"/></svg></span><span class="hero-range__lbl">Vacuum cleaner</span></a><a class="hero-range__item" href="dishwashers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M7 5.5h.01"/><path d="M10 5.5h.01"/><circle cx="12" cy="14.5" r="3.4"/></svg></span><span class="hero-range__lbl">Dishwasher</span></a><span class="hero-range__item"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c-2.2 2.6-3.6 4.4-3.6 6.2a3.6 3.6 0 0 0 7.2 0c0-1.8-1.4-3.6-3.6-6.2z"/><rect x="6" y="15" width="12" height="6.5" rx="2"/><path d="M9.5 18.2h5"/></svg></span><span class="hero-range__lbl">Humidifier</span></span></div>
+              <div class="hero-range__items"><a class="hero-range__item" href="air-purifiers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M9 8c2 1 4 1 6 0"/><path d="M9 11.5c2 1 4 1 6 0"/><path d="M10 16h4"/></svg></span><span class="hero-range__lbl">Air purifier</span></a><a class="hero-range__item" href="vacuum-cleaners.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="15" r="5"/><circle cx="15" cy="15" r="1.5"/><path d="M10.6 11.6 8 6a2 2 0 0 0-2-1.5H4"/><path d="M4 19.5h4.5"/></svg></span><span class="hero-range__lbl">Vacuum cleaner</span></a><a class="hero-range__item" href="dishwashers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M7 5.5h.01"/><path d="M10 5.5h.01"/><circle cx="12" cy="14.5" r="3.4"/></svg></span><span class="hero-range__lbl">Dishwasher</span></a><a class="hero-range__item" href="coming-soon.html?cat=Humidifier"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c-2.2 2.6-3.6 4.4-3.6 6.2a3.6 3.6 0 0 0 7.2 0c0-1.8-1.4-3.6-3.6-6.2z"/><rect x="6" y="15" width="12" height="6.5" rx="2"/><path d="M9.5 18.2h5"/></svg></span><span class="hero-range__lbl">Humidifier</span></a></div>
             </div>
           </div>
           <ul class="hero-cats">
@@ -3194,7 +3245,8 @@
       <video class="mfg-opener__video" autoplay muted loop playsinline preload="none"
              aria-hidden="true" tabindex="-1"
              disablepictureinpicture>
-        <source src="assets/videos/factory-exterior.mp4" type="video/mp4">
+        <!-- Client clip Isler_Factory_Logo_Zoom_Website_Clip.mp4 ("Website flow.docx", 2026-10-27, Section 2); replaced factory-exterior.mp4 -->
+        <source src="assets/videos/isler-factory-logo-zoom.mp4" type="video/mp4">
       </video>
       <div class="mfg-opener__scrim" aria-hidden="true"></div>
       <div class="mfg-inner">
@@ -3205,37 +3257,95 @@
       </div>
     </section>
 
+  <!-- ORDER (client "Website flow.docx", Section 3, 2026-10-27): R&D first,
+       then The Power Behind Every Product / Technology-Led Manufacturing,
+       Global Supply Chain, Quality. Sides alternate text/image/text/image. -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2 / 6 — FAST NEW PRODUCT DEVELOPMENT
+       Client wireframe: "From brief to first shipment" — RFQ, Feasibility,
+       Design, Sampling, Tooling, Production, QC, Dispatch (8 steps).
+       Client note on the same page: "ADD VALIDATION IN THIS PROCESS" — added
+       as step 5, between Sampling and Tooling (design validation before tools
+       are cut). Highlighted below; move it after Tooling if Isler means
+       production validation instead.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <section id="npd" class="npd-section hp-frame" aria-labelledby="npd-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;top:-100px;right:-90px;"></div>
+    <div class="npd-inner">
+      <!-- "The Power Behind Every Product" + intro moved here from the
+           Technology block (Rajesh 2026-10-27: "put this as heading before
+           starting the R&D") — it opens the Section-3 run. -->
+      <div class="mfg-prod-head">
+        <h2 class="mfg-heading hp-reveal" id="mfg-prod-h">The Power Behind Every Product</h2>
+        <p class="mfg-sub hp-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof, enabling faster iteration from design to dispatch.</p>
+      </div>
+
+      <!-- Doc format: media LEFT / copy RIGHT, then the flow strip full width
+           underneath. Same band geometry as "Isler at a Glance". -->
+      <div class="rev2-band">
+        <div class="rev2-band__media hp-reveal">
+          <img src="assets/images/manufacturing/rnd-design.webp"
+               alt="An Isler design engineer working on an exploded CAD model of an oven" loading="lazy">
+        </div>
+        <div class="rev2-band__copy">
+          <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
+          <div class="section-header">
+            <h2 class="section-heading" id="npd-h">Advanced R&amp;D Capabilities with Novel Design &amp; Innovation</h2>
+          </div>
+          <ul class="rev2-band__list">
+            <li>Market Research &amp; Competitor Benchmarking to align products with market trends and customer needs.</li>
+            <li>In-House Design &amp; Product Validation for premium aesthetics, unified designs, functionality, and manufacturability.</li>
+            <li>Rapid Prototyping &amp; Iterative Refinement with at least two product iterations to validate and improve designs.</li>
+            <li>Structured 9-Stage Development Process from initial concept to production-ready product.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="npd-lead">From brief to first shipment</p>
+
+      <!-- --i is the step's position in the sweep. The steps deliberately do
+           NOT carry .hp-reveal — the flow runs its own animation off
+           .is-running (added/removed by #hp-rev2-npd), and two systems
+           writing the same opacity/transform would fight. -->
+      <!-- Client PDF 2026-10-27 pt 3: compact strip (number / icon / name),
+           Validation step removed, timeline chips removed. -->
+      <div class="npd-flow npd-flow--mini">
+        <div class="npd-step" style="--i:0"><span class="npd-step__no">01</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg></span><span class="npd-step__name">RFQ</span></div>
+        <div class="npd-step" style="--i:1"><span class="npd-step__no">02</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span><span class="npd-step__name">Feasibility</span></div>
+        <div class="npd-step" style="--i:2"><span class="npd-step__no">03</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><span class="npd-step__name">Design</span></div>
+        <div class="npd-step" style="--i:3"><span class="npd-step__no">04</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg></span><span class="npd-step__name">Sampling</span></div>
+        <div class="npd-step" style="--i:4"><span class="npd-step__no">05</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></span><span class="npd-step__name">Tooling</span></div>
+        <div class="npd-step" style="--i:5"><span class="npd-step__no">06</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6 4V9l6 4V5l6-2v18z"/><path d="M8 17h2M13 17h2"/></svg></span><span class="npd-step__name">Production</span></div>
+        <div class="npd-step" style="--i:6"><span class="npd-step__no">07</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 7.8-8 9-4.6-1.2-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="npd-step__name">QC</span></div>
+        <div class="npd-step" style="--i:7"><span class="npd-step__no">08</span><span class="npd-step__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 7h12v9H1z"/><path d="M13 10h4l3 3v3h-7z"/><circle cx="5" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></span><span class="npd-step__name">Dispatch</span></div>
+      </div>
+
+<!-- .npd-note chips (Validation / timelines) removed, client PDF 2026-10-27 pt 3 -->
+
+    </div>
+  </section>
+
     <!-- ── 2. INFRASTRUCTURE AT A GLANCE ────────────────────────────────── -->
     <!-- One-frame section: heading + band + capacity numbers all on screen at
          once. Padding now comes from the hp-glance-frame stylesheet in head,
          not from an inline style. -->
-    <section class="mfg-section mfg-production mfg-pad hp-frame" aria-labelledby="mfg-prod-h">
+    <section class="mfg-section mfg-production mfg-pad hp-frame" aria-labelledby="mfg-vendor-h">
       <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(242, 140, 40,0.18);top:-80px;left:-80px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:160px;height:160px;background:rgba(242, 140, 40,0.13);bottom:12%;right:4%;"></div>
       <div class="mfg-inner">
-        <!-- Heading + intro — CENTRED (client 2026-08-11): this block opens the
-             run of sections below it, and centring is what reads as "the
-             sections start here". The inline max-width:none is deliberately
-             gone; the measure is set in CSS so the centred intro stays a lead
-             rather than a full-width ragged block. -->
-        <div class="mfg-prod-head">
-          <h2 class="mfg-heading mfg-reveal" id="mfg-prod-h">Isler at a Glance</h2>
-          <p class="mfg-sub mfg-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof, enabling faster iteration from design to dispatch.</p>
-        </div>
         <!-- Doc format: media LEFT / copy RIGHT, copy laid out exactly like
              "Quality Is Our First Priority" — eyebrow, heading, lead, body. -->
-        <div class="rev2-band" style="margin-top:clamp(32px,4vw,48px);">
+        <div class="rev2-band">
+          <!-- Media: the client's assembly-line photo from "Website flow.docx"
+               (Section 3, Technology-Led Manufacturing) — Rajesh 2026-10-27
+               "technology also"; replaced assembly-line.mp4. -->
           <div class="rev2-band__media mfg-reveal">
-            <video autoplay muted loop playsinline preload="metadata"
-                   aria-hidden="true" tabindex="-1"
-                   disablepictureinpicture>
-              <source src="assets/videos/assembly-line.mp4" type="video/mp4">
-            </video>
+            <img src="assets/images/manufacturing/assembly-line.webp"
+                 alt="Isler assembly line with CTQ and CTP inspection stations" loading="lazy">
           </div>
           <div class="rev2-band__copy">
             <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
-            <h3 class="mfg-heading mfg-subheading mfg-reveal" id="mfg-vendor-h" style="margin-bottom:18px;">Technology &ndash; LED Manufacturing</h3>
+            <h2 class="mfg-heading mfg-subheading mfg-reveal" id="mfg-vendor-h" style="margin-bottom:18px;">Technology Led Manufacturing</h2>
             <ul class="rev2-band__list mfg-reveal">
               <li>ERP-Enabled Manufacturing for efficient, data-driven operations and scalability.</li>
               <li>Flexible Production Lines to accommodate diverse product configurations and volumes.</li>
@@ -3260,69 +3370,6 @@
          after #proof; search for "mfg-labs" to find it. -->
 
   <!-- ═══════════════════════════════════════════════════════════════════════
-       REV-2 / 6 — FAST NEW PRODUCT DEVELOPMENT
-       Client wireframe: "From brief to first shipment" — RFQ, Feasibility,
-       Design, Sampling, Tooling, Production, QC, Dispatch (8 steps).
-       Client note on the same page: "ADD VALIDATION IN THIS PROCESS" — added
-       as step 5, between Sampling and Tooling (design validation before tools
-       are cut). Highlighted below; move it after Tooling if Isler means
-       production validation instead.
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <section id="npd" class="npd-section hp-frame" aria-labelledby="npd-h">
-    <div class="npd-inner">
-
-      <!-- Doc format: media LEFT / copy RIGHT, then the flow strip full width
-           underneath. Same band geometry as "Isler at a Glance". -->
-      <div class="rev2-band">
-        <div class="rev2-band__media hp-reveal">
-          <img src="assets/images/manufacturing/production.webp"
-               alt="New product development on the Isler production line" loading="lazy">
-          <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
-        </div>
-        <div class="rev2-band__copy">
-          <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
-          <div class="section-header">
-            <h2 class="section-heading" id="npd-h">Advanced R&amp;D Capabilities with Novel Design &amp; Innovation</h2>
-          </div>
-          <ul class="rev2-band__list">
-            <li>Market Research &amp; Competitor Benchmarking to align products with market trends and customer needs.</li>
-            <li>In-House Design &amp; Product Validation for premium aesthetics, unified designs, functionality, and manufacturability.</li>
-            <li>Rapid Prototyping &amp; Iterative Refinement with at least two product iterations to validate and improve designs.</li>
-            <li>Structured 9-Stage Development Process from initial concept to production-ready product.</li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="npd-lead">From brief to first shipment</p>
-
-      <!-- --i is the step's position in the sweep. The steps deliberately do
-           NOT carry .hp-reveal — the flow runs its own animation off
-           .is-running (added/removed by #hp-rev2-npd), and two systems
-           writing the same opacity/transform would fight. -->
-      <div class="npd-flow">
-        <div class="npd-step" style="--i:0"><span class="npd-step__name">RFQ</span></div>
-        <div class="npd-step" style="--i:1"><span class="npd-step__name">Feasibility</span></div>
-        <div class="npd-step" style="--i:2"><span class="npd-step__name">Design</span></div>
-        <div class="npd-step" style="--i:3"><span class="npd-step__name">Sampling</span></div>
-        <!-- Validation is the step the client asked us to add. It was picked
-             out in yellow while it was new; client 2026-08-06: don't highlight
-             it — it reads as a normal stage now. -->
-        <div class="npd-step" style="--i:4"><span class="npd-step__name">Validation</span></div>
-        <div class="npd-step" style="--i:5"><span class="npd-step__name">Tooling</span></div>
-        <div class="npd-step" style="--i:6"><span class="npd-step__name">Production</span></div>
-        <div class="npd-step" style="--i:7"><span class="npd-step__name">QC</span></div>
-        <div class="npd-step" style="--i:8"><span class="npd-step__name">Dispatch</span></div>
-      </div>
-
-      <p class="npd-note">
-        <span class="hp-ph">Validation step added &mdash; position to be confirmed</span>
-        <span class="hp-ph">Stage timelines to be supplied</span>
-      </p>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 3 — PROOF (supply-chain / audit proof points)
        Client brief: "need few proof supplies chain" — the certification block
        and the process-governance numbers below are REAL; every item carrying a
@@ -3336,6 +3383,7 @@
        work. Trade-off, deliberately accepted: the block below it can share a
        screen with it. -->
   <section id="proof" class="proof-section hp-frame" aria-labelledby="proof-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;top:-80px;left:-80px;"></div>
     <div class="proof-inner">
       <!-- Doc format: copy LEFT / media RIGHT, then the certifications
            and brands strips full width below. -->
@@ -3352,9 +3400,8 @@
           </ul>
         </div>
         <div class="rev2-band__media hp-reveal">
-          <img src="assets/images/manufacturing/factory-floor.webp"
-               alt="The Isler shop floor in Greater Noida" loading="lazy">
-          <span class="hp-ph rev2-band__ph">Photo to be supplied</span>
+          <img src="assets/images/manufacturing/global-network.webp"
+               alt="Isler's global sourcing network mapped from India to China and Europe" loading="lazy">
         </div>
       </div>
 
@@ -3395,12 +3442,12 @@
               <li>Quality &amp; Environmental Management Systems with ISO 9001:2015 and ISO 14001:2015 certifications, alongside BIS-certified products.</li>
             </ul>
           </div>
+          <!-- Media: the client's QA / test-lab collage from "Website flow.docx"
+               (Section 3, Quality) — Rajesh 2026-10-27 "see quality is our DNA";
+               replaced lab-test.mp4. -->
           <div class="rev2-band__media mfg-reveal">
-            <video autoplay muted loop playsinline preload="metadata"
-                   aria-hidden="true" tabindex="-1"
-                   disablepictureinpicture>
-              <source src="assets/videos/lab-test.mp4" type="video/mp4">
-            </video>
+            <img src="assets/images/manufacturing/quality-lab.webp"
+                 alt="Isler quality team testing hobs, a gas flow meter and the in-house test lab" loading="lazy">
           </div>
         </div>
       </div>
@@ -3408,7 +3455,6 @@
 
     <!-- ── 5. CERTIFICATIONS (ISO + BIS) — the strip under the band above ── -->
     <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:280px;height:280px;background:rgba(242, 140, 40,0.18);top:-80px;left:-80px;"></div>
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
       <div class="mfg-inner">
         <h2 class="mfg-certs__heading mfg-reveal" id="mfg-cert-h">Our Certifications</h2>
@@ -3439,12 +3485,13 @@
        The track is duplicated (aria-hidden on copy 2) for a seamless loop.
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section id="brands" class="brands-section" aria-labelledby="brands-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:320px;height:320px;top:30%;right:-130px;"></div>
     <!-- Client doc Rev-2: the yellow "Our Clients" eyebrow is dropped
          ("remove our clients from the beginning"), the heading becomes
          "Partners in Our Journey", and the sub-line is the client's copy. -->
     <div class="brands-head">
       <h2 class="section-heading" id="brands-h">Partners in Our Journey</h2>
-      <p class="section-sub">From the brands that trust us with their products to the partners backing our growth &mdash; we&rsquo;re building Isler alongside people who share our ambition for Indian manufacturing.</p>
+      <p class="section-sub">From the brands that trust us with their products to the partners backing our growth, we&rsquo;re building Isler alongside people who share our ambition for Indian manufacturing.</p>
     </div>
 
     <!-- Client doc "Website flow 01", 2026-10-22: row 1 = clients, row 2 =
@@ -3453,87 +3500,88 @@
          in the doc but have no logo there, so they show as text until supplied.
          Short rows repeat their set so each marquee track is wide enough to loop. -->
     <div class="brands-rows">
-    <p class="brands-row-label">Clients</p>
     <div class="brands-marquee">
       <div class="brands-track brands-track--a">
         <!-- copy 1 -->
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/livspace.webp" alt="Livspace" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hafele.webp" alt="Häfele" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text"><span>Whirlpool</span></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hindware.webp" alt="Hindware" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/beyond.webp" alt="Beyond Appliances" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/blaupunkt.webp" alt="Blaupunkt" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/electrolux.webp" alt="Electrolux" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/curaa.webp" alt="Curaa" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/elica.webp" alt="Elica" loading="lazy" decoding="async"></div>
         <!-- copy 2 — seamless loop -->
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/livspace.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Whirlpool</span></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hindware.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/beyond.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/blaupunkt.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/electrolux.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/curaa.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/elica.webp" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
-    <p class="brands-row-label">Suppliers</p>
     <div class="brands-marquee">
       <div class="brands-track brands-track--b">
-        <!-- copy 1 -->
+        <!-- copy 1 (Horisun + Sabaf added, client PDF 2026-10-27 pt 6E) -->
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/midea.webp" alt="Midea" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/vatti.webp" alt="Chinabest Vatti" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/galanz.webp" alt="Galanz" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/dimple.webp" alt="Dimple" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/imagic.webp" alt="iMagic" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/sanlida.webp" alt="Sanlida" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/horisun.webp" alt="Horisun" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/sabaf.webp" alt="Sabaf" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
-        <!-- copy 2 — seamless loop -->
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/horisun.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sabaf.webp" alt="" loading="lazy" decoding="async"></div>
+        <!-- copy 2, seamless loop -->
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/horisun.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sabaf.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/midea.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/vatti.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/galanz.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/dimple.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/imagic.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sanlida.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/horisun.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/sabaf.webp" alt="" loading="lazy" decoding="async"></div>
       </div>
     </div>
-    <p class="brands-row-label">Investors</p>
+    <!-- Investors row kept (client PDF 2026-10-27 layout p10); label removed per pt 6B; Matrix logo = the DEVC|AIF mark Rajesh captured 2026-10-27 (6G) -->
     <div class="brands-marquee">
       <div class="brands-track brands-track--c">
         <!-- copy 1 -->
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hafele.webp" alt="Häfele" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/singularity.webp" alt="Singularity AMC" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/matrix.webp" alt="Matrix Partners India" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/matrix.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/matrix.webp" alt="" loading="lazy" decoding="async"></div>
         <!-- copy 2 — seamless loop -->
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/matrix.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/matrix.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/singularity.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--text" aria-hidden="true"><span>Matrix Partners India</span></div>
+        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/matrix.webp" alt="" loading="lazy" decoding="async"></div>
       </div>
-    </div>
     </div>
   </section>
 
@@ -3582,6 +3630,7 @@
        2026-08-12; the file was never supplied and the link 404'd.
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section id="rfq" class="rfq-section" aria-labelledby="rfq-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:260px;height:260px;top:-90px;right:-90px;"></div>
     <div class="rfq-inner">
       <span class="rfq__eyebrow">Build to Order</span>
       <h2 class="rfq__heading" id="rfq-h">We Don’t Just Manufacture What We Have —<br>We Build What You Need.</h2>

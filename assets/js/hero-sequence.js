@@ -11,9 +11,9 @@
 
   // Preload the cinematic scene images (scene 3 is a <video>, not preloaded here)
   var SCENE_SRCS = [
-    'assets/images/scenes/scene-05-finale-pullback.webp',
-    'assets/images/scenes/factory_floor.webp',
-    'assets/images/scenes/scene-04-isler.webp'
+    'assets/images/scenes/hero-01-showroom.webp',
+    'assets/images/scenes/hero-02-range.webp',
+    'assets/images/scenes/hero-03-supply.webp'
   ];
 
   SCENE_SRCS.forEach(function (src) { (new Image()).src = src; });

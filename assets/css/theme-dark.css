@@ -110,7 +110,13 @@ input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
   background-size: 22px 22px;
 }
 .ab-watermark { -webkit-text-stroke-color: rgba(255, 255, 255, 0.08); }
-.ambient-circle { opacity: 0.6; }
+/* Ambient orange circles — Rajesh 2026-10-27: "that circle-like thing has to be
+   more in sections" → full opacity, one uniform stronger tint, and the base rule
+   lives here so any page (business.html) can drop a circle in. */
+.ambient-circle {
+  position: absolute; border-radius: 50%; pointer-events: none; z-index: 0;
+  opacity: 1; background: rgba(242, 140, 40, 0.24) !important;
+}
 
 /* ── Buttons that were navy-on-white ── */
 .cat-card__view, .pd__btn--secondary, .rfq-btn--ghost, .biz-btn--ghost, .hero-cta-btn--ghost,
@@ -129,36 +135,36 @@ input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
 
 /* ── Scroll-reveal + slants read the computed bg, nothing to do ── */
 
-/* ── "and orange as well": the bands that were off-white become ORANGE with
-   navy text; cards on them stay navy, so the page alternates navy / orange. */
+/* ── Client PDF 2026-10-27: "uniform blue everywhere, orange only as a
+   separation line". The bands that were orange are deep navy again, with a
+   4px orange rule on top as the separator. ── */
 .bg-offwhite, .biz-section--alt, .pcx-section, .cta-box-section {
-  background-color: var(--orange);
-  background-image: radial-gradient(rgba(11, 26, 61, 0.12) 1px, transparent 1.2px);
+  background-color: var(--navy-deep);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1.2px);
   background-size: 22px 22px;
-  color: var(--navy-deep);
+  border-top: 4px solid var(--orange);
+  color: var(--tz-text);
 }
-.bg-offwhite h1, .bg-offwhite h2, .bg-offwhite h3, .bg-offwhite .h2, .bg-offwhite p, .bg-offwhite li,
-.biz-section--alt h2, .biz-section--alt p, .pcx-section h2, .pcx-section .pcx-title, .pcx-section p,
-.cta-box-section > :not(.cta-box) {
-  color: var(--navy-deep);
-}
-.bg-offwhite .eyebrow, .pcx-section .pcx-eyebrow, .biz-section--alt .biz-eyebrow { color: var(--navy-deep); }
-.bg-offwhite .eyebrow::before, .pcx-section .pcx-eyebrow::before, .biz-section--alt .biz-eyebrow::before { background: var(--navy-deep); }
-.bg-offwhite .ambient-circle { background: rgba(11, 26, 61, 0.12) !important; }
-/* cards on orange bands: navy surface, white text (already), stronger shadow */
+.bg-offwhite h1, .bg-offwhite h2, .bg-offwhite h3, .bg-offwhite .h2,
+.biz-section--alt h2, .pcx-section h2, .pcx-section .pcx-title { color: #FFFFFF; }
+.bg-offwhite p, .bg-offwhite li, .biz-section--alt p, .pcx-section p, .cta-box-section > :not(.cta-box) { color: var(--tz-text); }
+.bg-offwhite .eyebrow, .pcx-section .pcx-eyebrow, .biz-section--alt .biz-eyebrow { color: var(--orange); }
+.bg-offwhite .eyebrow::before, .pcx-section .pcx-eyebrow::before, .biz-section--alt .biz-eyebrow::before { background: var(--orange); }
+.bg-offwhite .ambient-circle { background: rgba(242, 140, 40, 0.20) !important; }
+/* cards on the deep-navy bands: one step lighter so they still read as cards */
 .bg-offwhite .wbc-card, .bg-offwhite .job-card, .bg-offwhite .ab-leader a, .bg-offwhite .stat, .bg-offwhite .ab-story {
-  background: var(--navy-deep); box-shadow: 0 16px 36px rgba(11, 26, 61, 0.35);
+  background: var(--tz-surface); border: 1px solid var(--tz-line); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 .bg-offwhite .wbc-card h3, .bg-offwhite .wbc-card p, .bg-offwhite .job-card h3, .bg-offwhite .job-card p, .bg-offwhite .job-card li,
 .bg-offwhite .ab-story__t { color: #fff; }
 .bg-offwhite .wbc-card p, .bg-offwhite .job-card p, .bg-offwhite .job-card li { color: var(--tz-text); }
 .bg-offwhite .wbc-card:hover, .bg-offwhite .job-card:hover { background: #14275A; }
-.bg-offwhite .ab-motto { color: var(--navy-deep); }
+.bg-offwhite .ab-motto { color: #fff; }
 .bg-offwhite .ab-motto span { color: #fff; }
-.bg-offwhite .ab-motto::before { background: linear-gradient(var(--navy-deep), #fff); }
-.bg-offwhite .ab-link { color: var(--navy-deep); border-bottom-color: var(--navy-deep); }
-.pcx-nav { background: var(--navy-deep); color: #fff; }
-.pcx-nav:hover { background: #fff; color: var(--navy-deep); }
+.bg-offwhite .ab-motto::before { background: linear-gradient(var(--orange), #fff); }
+.bg-offwhite .ab-link { color: #fff; border-bottom-color: var(--orange); }
+.pcx-nav { background: rgba(255, 255, 255, 0.1); color: #fff; }
+.pcx-nav:hover { background: var(--orange); color: var(--navy-deep); }
 /* slant into an orange band: nav.js reads the computed colour, so it follows */
 /* business tabs: active state uses aria-current */
 .rng-tab[aria-current="true"] { color: var(--orange); }
@@ -170,9 +176,11 @@ input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
 .cat-card__name, .cat-card__price, .wbc-card__t, .blog-card__title, .job-card__title, .member-card__name {
   color: #FFFFFF !important;
 }
-.rng-tile__media, .cat-card__media, .pd__gallery, .blog-card__media, .member-card__avatar, .about-img { background: #EEF1F7 !important; }
-.rng-tile { background: var(--tz-surface) !important; border-color: var(--tz-line) !important; }
-.rng-tile__name { background: var(--tz-surface); }
+.cat-card__media, .pd__gallery, .blog-card__media, .member-card__avatar, .about-img { background: #EEF1F7 !important; }
+.rng-tile__media { background: #FFFFFF !important; }
+.rng-tile { background: var(--tz-surface) !important; border-color: rgba(255,255,255,0.10) !important; }
+a.rng-tile:hover { border-color: var(--orange) !important; }
+.rng-tile__name, .rng-tile__foot { background: var(--tz-surface); }
 .ab-quatro li { background: rgba(var(--orange-rgb), 0.22) !important; border-color: rgba(var(--orange-rgb), 0.5) !important; }
 .ab-page .page-hero { border-bottom: 0; }
 .ab-page .ab-vm-section { background: var(--white); }
@@ -181,7 +189,7 @@ input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.45); }
 /* ── Forms + headings on pages whose <style> outranks this file (contact, career) ── */
 h1, h2, h3, h4, .h2 { color: #FFFFFF !important; }
 .bg-offwhite h1, .bg-offwhite h2, .bg-offwhite h3, .bg-offwhite .h2,
-.biz-section--alt h2, .pcx-section h2, .pcx-section .pcx-title, .cta-box-section > :not(.cta-box) h2 { color: var(--navy-deep) !important; }
+.biz-section--alt h2, .pcx-section h2, .pcx-section .pcx-title, .cta-box-section > :not(.cta-box) h2 { color: #FFFFFF !important; }
 .cta-box h2, .cta-box__heading { color: #fff !important; }
 label, .contact-form label, .career-form label, .cat-filter__option, .cat-filter__group-title { color: var(--tz-text) !important; }
 .contact-form__submit, .career-form__submit, .btn-primary, form button[type="submit"]:not(.footer__newsletter-row button) {
@@ -252,8 +260,8 @@ label, .contact-form label, .career-form label, .cat-filter__option, .cat-filter
 strong, b, .article strong, .legal strong, .job-card strong, li strong, p strong { color: #FFFFFF !important; }
 .article a, .legal a, .article__back, .legal__contact a { color: var(--orange) !important; }
 .article a:hover, .legal a:hover, .article__back:hover { color: #FFFFFF !important; }
-.roadmap__title em { color: var(--navy-deep) !important; }
-.bg-offwhite .roadmap__title, .bg-offwhite .szz__title { color: var(--navy-deep) !important; }
+.roadmap__title em { color: var(--orange) !important; }
+.bg-offwhite .roadmap__title, .bg-offwhite .szz__title { color: #FFFFFF !important; }
 /* Reason cards on the orange About band: the band rule made their titles navy */
 .bg-offwhite .wbc-card .wbc-card__t, .bg-offwhite .wbc-card h3 { color: #FFFFFF !important; }
 .bg-offwhite .wbc-card .wbc-card__d { color: var(--tz-text) !important; }
@@ -262,14 +270,14 @@ strong, b, .article strong, .legal strong, .job-card strong, li strong, p strong
 .ab-vm__card--vision .ab-vm__text { color: #FFFFFF !important; }
 .ab-vm__card--vision .ab-vm__label { color: var(--orange) !important; }
 /* Motto on the orange band: all navy, the tail underlined in white */
-.bg-offwhite .ab-motto span { color: var(--navy-deep) !important; text-decoration: underline; text-decoration-color: #FFFFFF; text-decoration-thickness: 4px; text-underline-offset: 8px; }
+.bg-offwhite .ab-motto span { color: var(--orange) !important; }
 /* "to be supplied" chips: solid orange, navy text */
 .hp-ph { background: var(--orange) !important; color: var(--navy-deep) !important; border-color: var(--orange) !important; }
 /* Product variant buttons */
 .pd__variant { background: rgba(255, 255, 255, 0.06) !important; color: #FFFFFF !important; border-color: var(--tz-line) !important; }
 .pd__variant.is-active, .pd__variant[aria-pressed="true"] { background: var(--orange) !important; color: var(--navy-deep) !important; border-color: var(--orange) !important; }
 /* Office cards on the orange contact band */
-.office-card { background: var(--navy-deep) !important; }
+.office-card { background: var(--tz-surface) !important; border: 1px solid var(--tz-line); }
 .office-card__city { color: #FFFFFF !important; }
 .mfg-tagline span, .mfg-tagline em { color: var(--orange) !important; }
 
