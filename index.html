@@ -796,7 +796,11 @@
       width: 100%;
       height: 100%;
     }
-    .mfg-opener__video { object-fit: cover; z-index: 0; background-color: #0B1A3D; }
+    /* Rajesh 2026-10-28: the building logo sits at the very top of the clip and
+       was still clipped when the band is capped at 100vh (cover trims both
+       edges). Anchor the frame to the top so any trim comes off the road at
+       the bottom and the logo is always whole. */
+    .mfg-opener__video { object-fit: cover; object-position: 50% 0%; z-index: 0; background-color: #0B1A3D; }
     .mfg-opener__scrim {
       z-index: 1;
       /* Lighter overlay — gradient concentrated behind the text (left + bottom)
@@ -1918,7 +1922,7 @@
          size increase comes from the shared height clamps instead, which
          every band reads from one selector list. */
       grid-template-columns: 1fr 1fr;
-      gap: clamp(32px, 5vw, 72px);
+      gap: clamp(36px, 6vw, 96px);
       align-items: center;
     }
     .rev2-band__media {
