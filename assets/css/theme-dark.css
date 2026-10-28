@@ -287,6 +287,20 @@ strong, b, .article strong, .legal strong, .job-card strong, li strong, p strong
 .story-zz { background: var(--white) !important; }
 .szz__no, .szz__index, .szz__num { color: rgba(255, 255, 255, 0.07) !important; }
 
+/* Our Story growth roadmap — Rajesh ss 2026-10-28 22:05: "make it as it was
+   before the theme". The slide redraw hard-codes navy labels for a light band,
+   so this one section stays off-white inside the navy site: light surface,
+   navy title, grey sub-line, the SVG untouched. Only the 4px orange rule on
+   top is kept as the separator the client asked for. */
+#roadmap.bg-offwhite {
+  background-color: #F6F8FB !important;
+  background-image: none !important;
+  color: #3A4256 !important;
+}
+#roadmap.bg-offwhite .roadmap__title { color: #0B1A3D !important; }
+#roadmap.bg-offwhite .roadmap__title em { color: var(--orange) !important; }
+#roadmap.bg-offwhite .roadmap__sub, #roadmap.bg-offwhite .roadmap__hint { color: #6B7280 !important; }
+
 /* ── Homepage stats bar (Rajesh ss 15:56): navy card was lost on the navy
    band and the orange bottom border curled at the corners. The band is now
    orange, the navy card sits on it with a clean 1px edge, no count ticks. ── */
