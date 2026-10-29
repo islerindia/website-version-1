@@ -395,7 +395,7 @@
       /* Client 2026-08-13: more separation top-to-bottom. NOTE the column-gap
          above is load-bearing — the marker and connector offsets are computed
          from it — so only the vertical values move. */
-      row-gap: clamp(72px, 8.6vw, 150px);
+      row-gap: clamp(40px, 4.6vw, 84px); /* 2026-10-28: sequential rows need less than the old interleave did */
     }
     /* the hairline the markers sit on — the only structure left.
        Gold through the middle third, fading to navy hairline at both ends, so
@@ -440,10 +440,16 @@
     .szz__item:nth-child(even)::before { right: -0.05em; }
     /* the prose has to sit over the numeral */
     .szz__card > * { position: relative; z-index: 1; }
-    /* the zig: even beats cross to the right column and drop, so the two
-       sides interleave rather than sitting as neat pairs */
-    .szz__item:nth-child(even) { grid-column: 2; margin-top: clamp(112px, 14vw, 262px); }
-    .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: clamp(-262px, -14vw, -112px); }
+    /* the zig: even beats cross to the right column. Rajesh 2026-10-28: the
+       beats no longer interleave — each one gets its own grid row, so a
+       paragraph finishes before the next one starts on the other side. */
+    .szz__item:nth-child(even) { grid-column: 2; }
+    .szz__item:nth-child(1) { grid-row: 1; }
+    .szz__item:nth-child(2) { grid-row: 2; }
+    .szz__item:nth-child(3) { grid-row: 3; }
+    .szz__item:nth-child(4) { grid-row: 4; }
+    .szz__item:nth-child(5) { grid-row: 5; }
+    .szz__item:nth-child(6) { grid-row: 6; }
 
     /* open — no panel, no border, no shadow */
     .szz__card { position: relative; }
@@ -591,7 +597,6 @@
       .szz::before { left: 5px; }
       .szz__item,
       .szz__item:nth-child(even) { grid-column: 1; margin-top: 0; }
-      .szz__item:nth-child(even) ~ .szz__item:nth-child(odd) { margin-top: 0; }
       .szz__item { padding-left: 34px; }
       .szz__item:nth-child(odd) .szz__card::before,
       .szz__item:nth-child(even) .szz__card::before { left: -34px; right: auto; }
@@ -1156,7 +1161,6 @@
           <li>2028 — Expand capacity, or set up a 4th factory, to reach 1 million units per year.</li>
           <li>2029–2030 — 1 million units per year. Scaling of the mega factory to offer a complete solution for built-in kitchen appliances.</li>
         </ul>
-        <p class="roadmap__caption">Roadmap as supplied by Isler. Exact content still to be confirmed.</p>
       </div>
     </section>
     <!-- ROADMAP-SECTION-END -->
