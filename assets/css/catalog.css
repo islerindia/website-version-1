@@ -275,6 +275,12 @@
 }
 .catnav__sub:hover { background: rgba(11, 26, 61, 0.06); }
 .catnav__sub[aria-current="page"] { background: rgba(242, 140, 40, 0.18); font-weight: 700; }
+/* Feedback 3 (2026-11-02): "coming soon" categories in the sidebar */
+.catnav__soon {
+  display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 999px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #F28C28; background: rgba(242, 140, 40, 0.14); vertical-align: 1px;
+}
 
 .cat-filter {
   position: sticky; top: 100px;

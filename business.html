@@ -33,12 +33,35 @@
       position: relative; overflow: clip; }   /* clip (not hidden) so the sticky tabs keep working */
     .rng > :not(.ambient-circle), .biz-inner { position: relative; z-index: 1; }
     .rng__head > :not(.ambient-circle) { position: relative; z-index: 1; }
+    /* Feedback 3 (2026-11-02) "not able to switch between the categories": the
+       generic rule above (specificity 0,2,0) was beating .rng__tabs (0,1,0), so
+       the strip was position:relative / z-index:1 - never sticky, and painted
+       under .rng__body. Re-assert with matching specificity. */
+    .rng > .rng__tabs { position: sticky; z-index: 20; }
     .rng__head {
       position: relative; overflow: clip;
       background: var(--navy);
       padding: clamp(56px, 7vw, 104px) clamp(24px, 5vw, 96px) clamp(40px, 4.5vw, 64px);
+      min-height: clamp(420px, 38vw, 560px);
+      display: flex; flex-direction: column; justify-content: center;
     }
-    .rng__head > * { max-width: 1680px; margin-left: auto; margin-right: auto; }
+    .rng__head > * { max-width: 1680px; margin-left: auto; margin-right: auto; width: 100%; }
+    /* Feedback 3 (2026-11-02): client's core-values wall photo on the right,
+       fading into the navy under the heading (their mockup). */
+    .rng__head > .rng__photo {   /* > child selector: must out-rank the generic .rng__head > :not() rule */
+      position: absolute; top: 0; right: 0; bottom: 0; width: 58%; max-width: none; margin: 0;
+      z-index: 0; pointer-events: none;
+    }
+    .rng__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; display: block; }
+    .rng__photo::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--navy) 0%, rgba(11,26,61,0.72) 22%, rgba(11,26,61,0.18) 48%, rgba(11,26,61,0.08) 100%);
+    }
+    @media (max-width: 900px) {
+      .rng__head { min-height: 0; padding-bottom: 0; }
+      .rng__head > .rng__photo { position: relative; top: auto; right: auto; bottom: auto; width: 100%; aspect-ratio: 16 / 9; margin-top: 32px; pointer-events: auto; }
+      .rng__photo::after { background: linear-gradient(180deg, var(--navy) 0%, rgba(11,26,61,0) 28%); }
+    }
     .rng__eyebrow {
       display: inline-flex; font-size: 12px; font-weight: 700;
       letter-spacing: 0.16em; text-transform: uppercase;
@@ -51,7 +74,8 @@
     }
     .rng__accent { font-style: normal; color: var(--orange, #F28C28);
     }
-    .rng__title, .rng__intro { padding-right: min(40%, 640px); }
+    .rng__title, .rng__intro { padding-right: min(46%, 760px); }
+    @media (max-width: 900px) { .rng__title, .rng__intro { padding-right: 0; } }
     .rng__intro { margin-top: 0; margin-bottom: 0; font-size: clamp(15px, 1.2vw, 17px); line-height: 1.7; color: rgba(255,255,255,0.78); }
 
     .rng__tabs {
@@ -363,6 +387,14 @@
      so they render as un-linked "Coming soon" tiles. Dishwasher links to its
      existing coming-soon page. Electric cooktop links to cooktops.html (the
      site files induction / infrared / hybrid separately).
+     Feedback 3 (2026-11-02): the client's "Other small domestic appliances"
+     composite icon (coffee machine, nutri blender, chopper, kettle) fills the
+     8th slot after Toaster and links to small-appliances.html; Rajesh: no
+     separate Coffee machine / Juicer / Nutri blender tiles, they live inside
+     that parent icon. Product counts and the "Our Range" heading removed. Tile images are the
+     client's category icons (Icons.zip, 2026-11-02, logo-free) in
+     assets/catalog/_icons/; Tablet hobs and Dough maker had no icon supplied,
+     so they keep their product photos.
 ═══════════════════════════════════════════════════════════════════ -->
 <section class="rng" aria-labelledby="rng-h">
   <!-- Ambient orange circles (Rajesh 2026-10-27: "also in business page") -->
@@ -375,8 +407,8 @@
     <span class="rng__eyebrow">Our Business</span>
     <h1 class="rng__title" id="rng-h">India&rsquo;s <em class="rng__accent">Design-Led</em> Manufacturing Partner for Global Appliance Brands</h1>
     <p class="rng__intro">Empowering Brand Innovation is at the heart of everything we do at Isler. We break the mould in the appliance industry by putting bold design and cutting-edge innovation first &mdash; building the products that help leading kitchen appliance brands win in the market.</p>
-    <span class="rng__eyebrow rng__eyebrow--range">Our Range</span>
-    <h2 class="rng__title rng__title--range">One Manufacturing Partner.</h2>
+    <!-- Feedback 3 (2026-11-02): "Our Range / One Manufacturing Partner." removed; core-values wall photo added. -->
+    <figure class="rng__photo" aria-hidden="true"><img src="assets/images/business/core-values-wall.webp" alt="" decoding="async" fetchpriority="high"></figure>
   </div>
 
   <nav class="rng__tabs" aria-label="Product categories">
@@ -393,54 +425,51 @@
     <div class="rng-row__head">
       <span class="rng-row__no">01</span>
       <h3 class="rng-row__title">Built-in Appliances</h3>
-      <span class="rng-row__count">4 Products</span>
     </div>
     <ul class="rng-row__grid">
-        <li><a class="rng-tile" href="kitchen-chimneys.html"><span class="rng-tile__media"><img src="assets/catalog/chimneys/good-t-ac-1.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Chimney</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="built-in-hobs.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/fw/neo-cook.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Hobs</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="built-in-microwaves.html"><span class="rng-tile__media"><img src="assets/catalog/microwaves/silver-stream.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Microwave</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="built-in-ovens.html"><span class="rng-tile__media"><img src="assets/catalog/built-in-ovens/is-ch-1004.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Oven</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="kitchen-chimneys.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/chimney.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Chimney</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="built-in-hobs.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/hobs.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Hobs</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="built-in-microwaves.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/microwave.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Microwave</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="built-in-ovens.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/oven.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Oven</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
     </ul>
   </div>
   <div class="rng-row" id="rng-cooktops">
     <div class="rng-row__head">
       <span class="rng-row__no">02</span>
       <h3 class="rng-row__title">Counter-top Cooking</h3>
-      <span class="rng-row__count">3 Products</span>
     </div>
     <ul class="rng-row__grid">
         <li><a class="rng-tile" href="tablet-hobs.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/fw/ignis-pro.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Tablet hobs</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="gas-cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/gas-cooktop.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Gas cooktop</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/electric-cooktop.png" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Electric cooktop</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="gas-cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/gas-cooktop.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Gas cooktop</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="cooktops.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/electric-cooktop.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Electric cooktop</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
     </ul>
   </div>
   <div class="rng-row" id="rng-small-domestic">
     <div class="rng-row__head">
       <span class="rng-row__no">03</span>
       <h3 class="rng-row__title">Small Domestic Appliances</h3>
-      <span class="rng-row__count">7 Products</span>
     </div>
     <ul class="rng-row__grid">
-        <li><a class="rng-tile" href="air-fryers.html"><span class="rng-tile__media"><img src="assets/catalog/air-fryers/ist1001.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Air fryer</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Mixer%20grinder"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Mixer grinder</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Hand%20blender"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Hand blender</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--photo" href="stand-mixers.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/stand-mixer.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Stand mixer</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="air-fryers.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/air-fryer.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Air fryer</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Mixer%20grinder"><span class="rng-tile__media"><img src="assets/catalog/_icons/mixer-grinder.webp" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Mixer grinder</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Hand%20blender"><span class="rng-tile__media"><img src="assets/catalog/_icons/hand-blender.webp" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Hand blender</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="stand-mixers.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/stand-mixer.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Stand mixer</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
         <li><a class="rng-tile" href="dough-makers.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/dough-maker.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Dough maker</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--photo" href="kettles.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/kettle.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Kettle</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--photo" href="toasters.html"><span class="rng-tile__media"><img src="assets/catalog/_range-tiles/toaster.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Toaster</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="kettles.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/kettle.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Kettle</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="toasters.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/toaster.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Toaster</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile rng-tile--photo" href="small-appliances.html"><span class="rng-tile__media"><img src="assets/images/small-appliances-icons.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Other small appliances</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
     </ul>
   </div>
   <div class="rng-row" id="rng-home-care">
     <div class="rng-row__head">
       <span class="rng-row__no">04</span>
       <h3 class="rng-row__title">Other Home Appliances</h3>
-      <span class="rng-row__count">4 Products</span>
     </div>
     <ul class="rng-row__grid">
-        <li><a class="rng-tile" href="air-purifiers.html"><span class="rng-tile__media"><img src="assets/catalog/air-purifiers/zm06.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Air purifier</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile" href="vacuum-cleaners.html"><span class="rng-tile__media"><img src="assets/catalog/vacuum-cleaners/m1.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Vacuum cleaner</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--soon" href="dishwashers.html"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Dishwasher</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
-        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Humidifier"><span class="rng-tile__media"><img src="assets/catalog/hobs/coming-soon.svg" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Humidifier</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="air-purifiers.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/air-purifier.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Air purifier</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile" href="vacuum-cleaners.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/vacuum-cleaner.webp" alt="" loading="lazy" decoding="async"></span><span class="rng-tile__foot"><span class="rng-tile__name">Vacuum cleaner</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile rng-tile--soon" href="dishwashers.html"><span class="rng-tile__media"><img src="assets/catalog/_icons/dishwasher.webp" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Dishwasher</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
+        <li><a class="rng-tile rng-tile--soon" href="coming-soon.html?cat=Humidifier"><span class="rng-tile__media"><img src="assets/catalog/_icons/humidifier.webp" alt="" loading="lazy" decoding="async"><span class="rng-tile__soon">Coming soon</span></span><span class="rng-tile__foot"><span class="rng-tile__name">Humidifier</span><span class="rng-tile__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></span></span></a></li>
     </ul>
   </div>
   </div>
