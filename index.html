@@ -1666,6 +1666,15 @@
       z-index: 2;
     }
     .brands-marquee { padding: 12px 0 34px; }
+    /* Client Feedback 2 (2026-11-02) "add a scrolling as well to see all the
+       clients, suppliers": every row can be dragged (mouse or finger). The
+       drag freezes that row's marquee, moves it with the pointer, then hands
+       back to the CSS animation from the spot it was left at (negative
+       animation-delay), so nothing jumps. Script: #hp-brands-drag. */
+    .brands-marquee { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .brands-marquee.is-dragging { cursor: grabbing; }
+    .brands-marquee.is-dragging .brand-slot { transition: none; }
+    .brands-marquee.is-dragging .brand-slot:hover { transform: none; box-shadow: none; border-color: rgba(11, 26, 61, 0.10); }
     /* Real logos, once supplied, drop straight in as <img> inside .brand-slot */
     .brand-slot img { max-width: 72%; max-height: 56px; object-fit: contain; }
     /* Real logos (2026-10-22): solid white card so the logos' own white
@@ -1705,7 +1714,7 @@
     .hp-statbar { background: var(--off-white); padding: clamp(40px, 5vw, 80px) clamp(14px, 1.8vw, 32px); }
     .hp-statbar__inner {
       max-width: none; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));   /* was 6: SKUs tile removed, client Feedback 2 2026-11-02 */
       background: var(--navy); border-radius: var(--radius-lg);
       border-bottom: 4px solid #F28C28;
       padding: clamp(30px, 3.4vw, 52px) clamp(12px, 2vw, 32px);
@@ -2208,11 +2217,16 @@
     /* Technology + Supply Chain are natural-height bands now (2026-10-27) */
     .mfg-production { padding-top: clamp(40px, 6vh, 72px) !important; padding-bottom: clamp(40px, 6vh, 72px) !important; }
     #proof.proof-section { padding-top: clamp(40px, 6vh, 72px); padding-bottom: clamp(40px, 6vh, 72px); }
+    /* Supply-chain clip (Feedback 2, 2026-11-02) is 2048x748 — much wider than
+       the panel — so it is contained, not cropped; the panel background matches
+       the clip's own backdrop so the bars above/below read as part of it. */
+    #proof .rev2-band__media { background: #ECF7FD; }   /* sampled from the clip's corners */
+    #proof .rev2-band__media > video { object-fit: contain; }
     .mfg-prod-head { text-align: center; }
-    /* Section-3 opener heading now lives at the top of #npd */
-    #npd .mfg-prod-head { margin-bottom: clamp(24px, 4vh, 48px); }
-    #npd .mfg-prod-head .mfg-heading { color: var(--tz-text, #fff); }
-    #npd .mfg-prod-head .mfg-sub { color: var(--tz-muted, rgba(255,255,255,0.72)); }
+    /* Section-3 opener heading lives at the top of the Quality band (Feedback 2, 2026-11-02; was #npd) */
+    .mfg-labs .mfg-prod-head { margin-bottom: clamp(24px, 4vh, 48px); }
+    .mfg-labs .mfg-prod-head .mfg-heading { color: var(--tz-text, #fff); }
+    .mfg-labs .mfg-prod-head .mfg-sub { color: var(--tz-muted, rgba(255,255,255,0.72)); }
     .mfg-prod-head .mfg-sub {
       max-width: 68ch;
       margin-left: auto;
@@ -2957,6 +2971,11 @@
     
     
     
+    /* Quality stands alone in its frame now (certs strip back after Supply Chain,
+       2026-11-02): natural height like Technology, not a 100vh box. */
+    .hp-frame--pair { min-height: 0; }
+    .hp-frame--pair > .mfg-labs { padding-top: clamp(40px, 6vh, 72px); padding-bottom: clamp(40px, 6vh, 72px); }
+    .mfg-certs:not(.hp-frame--pair *) { padding-top: clamp(40px, 6vh, 72px); padding-bottom: clamp(40px, 6vh, 72px); }
 </style>
 <style id="hp-npd-mini">
   /* R&D flow, compact strip (client PDF 2026-10-27 pt 3) */
@@ -3178,7 +3197,8 @@
           <p class="hero-subhead">From built-in kitchen appliances, small domestic appliances to home appliances, our extensive product portfolio gives brands access to multiple categories through a single manufacturing partner.</p>
           <!-- Desktop (>=1360px): every sub-appliance of the four categories as an
                icon. Rajesh 2026-10-27: Small Domestic shows only Air fryer,
-               Kettle, Toaster, Dough maker + one "Other" (→ coming-soon.html);
+               Kettle, Toaster, Dough maker + one "Other" (→ business.html#rng-small-domestic,
+               client Feedback 2 2026-11-02; was coming-soon.html);
                Humidifier links to coming-soon.html?cat=Humidifier so it hovers
                like the rest. Below 1360px the .hero-cats pills show instead. -->
           <div class="hero-range" aria-label="Product categories">
@@ -3192,7 +3212,7 @@
             </div>
             <div class="hero-range__card">
               <a class="hero-range__head" href="small-appliances.html"><span class="hero-range__no">03</span>Small Domestic Appliances</a>
-              <div class="hero-range__items"><a class="hero-range__item" href="air-fryers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span class="hero-range__lbl">Air fryer</span></a><a class="hero-range__item" href="kettles.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span class="hero-range__lbl">Kettle</span></a><a class="hero-range__item" href="toasters.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span class="hero-range__lbl">Toaster</span></a><a class="hero-range__item" href="dough-makers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span class="hero-range__lbl">Dough maker</span></a><a class="hero-range__item" href="coming-soon.html?cat=Small%20Domestic%20Appliances"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></span><span class="hero-range__lbl">Other</span></a></div>
+              <div class="hero-range__items"><a class="hero-range__item" href="air-fryers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6v3H9z"/><rect x="5" y="6" width="14" height="14" rx="3"/><path d="M9 12.5h6"/></svg></span><span class="hero-range__lbl">Air fryer</span></a><a class="hero-range__item" href="kettles.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9h10l-1 10a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2z"/><path d="M17 11h1.5a2 2 0 0 1 0 4H17"/><path d="M9.5 9V6.5h5V9"/></svg></span><span class="hero-range__lbl">Kettle</span></a><a class="hero-range__item" href="toasters.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="10" rx="2.5"/><path d="M9 9l1-3M13 9l1-3"/><line x1="17.5" y1="12" x2="17.5" y2="15"/></svg></span><span class="hero-range__lbl">Toaster</span></a><a class="hero-range__item" href="dough-makers.html"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16"/><path d="M5 11a7 7 0 0 0 14 0"/><circle cx="9.5" cy="7.6" r="1.2"/><circle cx="14" cy="6.8" r="1.5"/></svg></span><span class="hero-range__lbl">Dough maker</span></a><a class="hero-range__item" href="business.html#rng-small-domestic"><span class="hero-range__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg></span><span class="hero-range__lbl">Other</span></a></div>
             </div>
             <div class="hero-range__card">
               <a class="hero-range__head" href="other-home-appliances.html"><span class="hero-range__no">04</span>Other Home Appliances</a>
@@ -3240,7 +3260,6 @@
       <div class="hp-statbar__item"><span class="hp-statbar__value">3</span><span class="hp-statbar__label">Production Lines</span></div>
       <div class="hp-statbar__item"><span class="hp-statbar__value">3,00,000</span><span class="hp-statbar__label">Units / Year Capacity</span></div>
       <div class="hp-statbar__item"><span class="hp-statbar__value">100+</span><span class="hp-statbar__label">Team Members</span></div>
-      <div class="hp-statbar__item"><span class="hp-statbar__value">200+</span><span class="hp-statbar__label">SKUs</span></div>
       <div class="hp-statbar__item"><span class="hp-statbar__value">50+</span><span class="hp-statbar__label">Partners</span></div>
     </div>
   </section>
@@ -3253,6 +3272,9 @@
              aria-hidden="true" tabindex="-1"
              disablepictureinpicture>
         <!-- Client clip Isler_Factory_Logo_Zoom_Website_Clip.mp4 ("Website flow.docx", 2026-10-27, Section 2); replaced factory-exterior.mp4 -->
+        <!-- Feedback 2 (2026-11-02) "remove the construction site": the clip is re-cut to
+             1700x956 (right 220px + bottom 124px cropped) so the unfinished building at
+             the right edge is out of frame. ffmpeg crop=1700:956:0:0, x264 crf 20. -->
         <source src="assets/videos/isler-factory-logo-zoom.mp4" type="video/mp4">
       </video>
       <div class="mfg-opener__scrim" aria-hidden="true"></div>
@@ -3264,9 +3286,61 @@
       </div>
     </section>
 
-  <!-- ORDER (client "Website flow.docx", Section 3, 2026-10-27): R&D first,
-       then The Power Behind Every Product / Technology-Led Manufacturing,
-       Global Supply Chain, Quality. Sides alternate text/image/text/image. -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       REV-2b / 4 — CERTIFICATIONS & QUALITY  +  OUR CERTIFICATIONS
+       Client 2026-08-06: move "Certifications & Quality" below Supply Chain so
+       that the "Our Certifications" logo strip reads as part of it instead of
+       standing alone. The two are wrapped in ONE .hp-frame so they share a
+       single screen — quality band on top, the ISO/BIS logos as its strip
+       underneath — which is the same band-plus-strip format the client doc
+       uses for every other block. Both sections keep their own backgrounds, so
+       the navy certs band still runs straight into Trusted Partner Network
+       below it and the two navy blocks still read as one.
+  ═══════════════════════════════════════════════════════════════════════════ -->
+  <div class="hp-frame hp-frame--pair">
+
+    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
+    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(242, 140, 40,0.16);top:-90px;right:-70px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.13);bottom:-60px;left:-60px;"></div>
+      <div class="mfg-inner">
+      <!-- "The Power Behind Every Product" + intro: opens the Section-3 run.
+           Lived at the top of #npd until client Feedback 2 (2026-11-02) put
+           Quality first; the super-heading moves with the first block. -->
+      <div class="mfg-prod-head">
+        <h2 class="mfg-heading hp-reveal" id="mfg-prod-h">The Power Behind Every Product</h2>
+        <p class="mfg-sub hp-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof, enabling faster iteration from design to dispatch.</p>
+      </div>
+
+        <!-- Doc format: copy LEFT / media RIGHT, then the certifications strip
+             full width below. -->
+        <div class="rev2-band">
+          <div class="rev2-band__copy">
+            <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
+            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our DNA</h2>
+            <ul class="rev2-band__list mfg-reveal">
+              <li>2&times; More Testing than BIS recommendations to strengthen product reliability and performance.</li>
+              <li>End-to-End Quality Assurance through rigorous IQC, LQC, and OQC checkpoints to maintain consistent quality at every stage and ensure only quality-approved products reach customers.</li>
+              <li>In-House Testing Laboratory to support product validation, performance testing, and quality assurance.</li>
+              <li>Quality &amp; Environmental Management Systems with ISO 9001:2015 and ISO 14001:2015 certifications, alongside BIS-certified products.</li>
+            </ul>
+          </div>
+          <!-- Media: the client's QA / test-lab collage from "Website flow.docx"
+               (Section 3, Quality) — Rajesh 2026-10-27 "see quality is our DNA";
+               replaced lab-test.mp4. -->
+          <div class="rev2-band__media mfg-reveal">
+            <img src="assets/images/manufacturing/quality-lab.webp"
+                 alt="Isler quality team testing hobs, a gas flow meter and the in-house test lab" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ORDER (client "Website flow (1).docx" Feedback 2, 2026-11-02): Quality
+       first, then R&D (NPD), Technology-Led Manufacturing, Global Supply
+       Chain. Was R&D / Technology / Supply / Quality (2026-10-27). -->
   <!-- ═══════════════════════════════════════════════════════════════════════
        REV-2 / 6 — FAST NEW PRODUCT DEVELOPMENT
        Client wireframe: "From brief to first shipment" — RFQ, Feasibility,
@@ -3277,16 +3351,8 @@
        production validation instead.
   ═══════════════════════════════════════════════════════════════════════════ -->
   <section id="npd" class="npd-section hp-frame" aria-labelledby="npd-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;top:-100px;right:-90px;"></div>
+      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;top:-100px;left:-90px;"></div>
     <div class="npd-inner">
-      <!-- "The Power Behind Every Product" + intro moved here from the
-           Technology block (Rajesh 2026-10-27: "put this as heading before
-           starting the R&D") — it opens the Section-3 run. -->
-      <div class="mfg-prod-head">
-        <h2 class="mfg-heading hp-reveal" id="mfg-prod-h">The Power Behind Every Product</h2>
-        <p class="mfg-sub hp-reveal" style="margin-top:14px;">Our integrated facility brings assembly lines, warehousing, advanced quality labs, and new product development (NPD) capabilities under one roof, enabling faster iteration from design to dispatch.</p>
-      </div>
-
       <!-- Doc format: media LEFT / copy RIGHT, then the flow strip full width
            underneath. Same band geometry as "Isler at a Glance". -->
       <div class="rev2-band">
@@ -3376,6 +3442,7 @@
          block rather than as an orphan band. It is now the pair immediately
          after #proof; search for "mfg-labs" to find it. -->
 
+
   <!-- ═══════════════════════════════════════════════════════════════════════
        SECTION 3 — PROOF (supply-chain / audit proof points)
        Client brief: "need few proof supplies chain" — the certification block
@@ -3403,12 +3470,15 @@
           <ul class="rev2-band__list">
             <li>AI-Powered Supply Network Control Tower for real-time exception detection, risk identification, and visibility into production performance and dispatch status.</li>
             <li>Global Sourcing Network backed by 60+ vendor relationships, manufacturing partnerships in China for large and small appliances and a strong domestic supplier ecosystem in India.</li>
-            <li>Scalable Warehousing Infrastructure with <span class="hp-ph">X sq. m. &mdash; to be supplied</span> of capacity to support material availability and efficient inventory management.</li>
+            <li>Scalable Warehousing Infrastructure with 50,000 sq. m. of capacity to support material availability and efficient inventory management.</li>
           </ul>
         </div>
         <div class="rev2-band__media hp-reveal">
-          <img src="assets/images/manufacturing/global-network.webp"
-               alt="Isler's global sourcing network mapped from India to China and Europe" loading="lazy">
+          <!-- Client "Website flow (1).docx" Feedback 2, 2026-11-02: the animated
+               supply-chain network clip (isler_supply_chain_network_animated_v2.mp4)
+               replaces the static map; global-network.webp stays on disk. -->
+          <video src="assets/videos/isler-supply-chain-network.mp4" autoplay muted loop playsinline preload="metadata"
+                 aria-label="Isler's global sourcing network animated from India to China and Europe"></video>
         </div>
       </div>
 
@@ -3418,49 +3488,8 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════════════════════
-       REV-2b / 4 — CERTIFICATIONS & QUALITY  +  OUR CERTIFICATIONS
-       Client 2026-08-06: move "Certifications & Quality" below Supply Chain so
-       that the "Our Certifications" logo strip reads as part of it instead of
-       standing alone. The two are wrapped in ONE .hp-frame so they share a
-       single screen — quality band on top, the ISO/BIS logos as its strip
-       underneath — which is the same band-plus-strip format the client doc
-       uses for every other block. Both sections keep their own backgrounds, so
-       the navy certs band still runs straight into Trusted Partner Network
-       below it and the two navy blocks still read as one.
-  ═══════════════════════════════════════════════════════════════════════════ -->
-  <div class="hp-frame hp-frame--pair">
-
-    <!-- ── 4. CERTIFICATIONS & QUALITY (quality narrative) ──────────────── -->
-    <section class="mfg-section mfg-labs mfg-pad" aria-labelledby="mfg-labs-h">
-      <div class="ambient-circle" aria-hidden="true" style="width:300px;height:300px;background:rgba(242, 140, 40,0.16);top:-90px;right:-70px;"></div>
-      <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.13);bottom:-60px;left:-60px;"></div>
-      <div class="mfg-inner">
-        <!-- Doc format: copy LEFT / media RIGHT, then the certifications strip
-             full width below. -->
-        <div class="rev2-band">
-          <div class="rev2-band__copy">
-            <!-- Copy: client doc "Website flow 01", Section 3, 2026-10-22. Media unchanged. -->
-            <h2 class="mfg-heading mfg-reveal" id="mfg-labs-h" style="margin-bottom:18px;">Quality Is Our DNA</h2>
-            <ul class="rev2-band__list mfg-reveal">
-              <li>2&times; More Testing than BIS recommendations to strengthen product reliability and performance.</li>
-              <li>End-to-End Quality Assurance through rigorous IQC, LQC, and OQC checkpoints to maintain consistent quality at every stage and ensure only quality-approved products reach customers.</li>
-              <li>In-House Testing Laboratory to support product validation, performance testing, and quality assurance.</li>
-              <li>Quality &amp; Environmental Management Systems with ISO 9001:2015 and ISO 14001:2015 certifications, alongside BIS-certified products.</li>
-            </ul>
-          </div>
-          <!-- Media: the client's QA / test-lab collage from "Website flow.docx"
-               (Section 3, Quality) — Rajesh 2026-10-27 "see quality is our DNA";
-               replaced lab-test.mp4. -->
-          <div class="rev2-band__media mfg-reveal">
-            <img src="assets/images/manufacturing/quality-lab.webp"
-                 alt="Isler quality team testing hobs, a gas flow meter and the in-house test lab" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 5. CERTIFICATIONS (ISO + BIS) — the strip under the band above ── -->
+    <!-- ── 5. CERTIFICATIONS (ISO + BIS) — back after Supply Chain (Rajesh 2026-11-02:
+         Feedback 2 moves only Quality to the front; the strip stays where it was). ── -->
     <section class="mfg-section mfg-certs mfg-pad" aria-labelledby="mfg-cert-h">
       <div class="ambient-circle" aria-hidden="true" style="width:200px;height:200px;background:rgba(242, 140, 40,0.15);bottom:-60px;right:-60px;"></div>
       <div class="mfg-inner">
@@ -3472,8 +3501,6 @@
         </div>
       </div>
     </section>
-
-  </div>
 
     <!-- NOTE (Rev-2b, client 2026-08-06): the "Trusted Partner Network"
          section (Supply Chain Strength eyebrow + 6 placeholder partner-logo
@@ -3512,7 +3539,6 @@
         <!-- copy 1 -->
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/livspace.webp" alt="Livspace" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hafele.webp" alt="Häfele" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/hindware.webp" alt="Hindware" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/beyond.webp" alt="Beyond Appliances" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/blaupunkt.webp" alt="Blaupunkt" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo"><img src="assets/images/partners/electrolux.webp" alt="Electrolux" loading="lazy" decoding="async"></div>
@@ -3520,7 +3546,6 @@
         <!-- copy 2 — seamless loop -->
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/livspace.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hafele.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/hindware.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/beyond.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/blaupunkt.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="brand-slot brand-slot--logo" aria-hidden="true"><img src="assets/images/partners/electrolux.webp" alt="" loading="lazy" decoding="async"></div>
@@ -3857,8 +3882,10 @@
 
     function next() {
       if (stopped) return;
-      i++;
-      if (i >= STOPS.length) return;                 // last scene: stop, don't loop
+      // Client Feedback 2 (2026-11-02) "when you scroll back, it doesn't come
+      // back to first page": after the last scene the show returns to scene 1
+      // and keeps cycling until the visitor touches anything (was: stop on 4).
+      i = (i + 1) % STOPS.length;
       var range = hero.offsetHeight - window.innerHeight;
       if (range <= 0) return;
       window.scrollTo({ top: Math.round(range * STOPS[i]), behavior: 'smooth' });
@@ -3881,6 +3908,74 @@
        the GSAP scroll timeline, and the homepage rule is to stay inside
        index.html so a shared file never changes for a homepage-only effect.
   ═══════════════════════════════════════════════════════════════════════════ -->
+  <script id="hp-brands-drag">
+  (function () {
+    'use strict';
+    // Drag-to-scroll for the Partners rows (client Feedback 2, 2026-11-02).
+    // Under reduced motion the tracks are static and natively scrollable, so
+    // there is nothing to do here.
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var tracks = document.querySelectorAll('#brands .brands-track');
+    if (!tracks.length) return;
+
+    Array.prototype.forEach.call(tracks, function (track) {
+      var wrap = track.parentNode;                         // .brands-marquee
+      var rev  = track.classList.contains('brands-track--b');
+      var dragging = false, startX = 0, baseX = 0, moved = 0, pid = null;
+
+      function periodMs() {
+        var d = getComputedStyle(track).animationDuration;  // "46s"
+        var n = parseFloat(d) || 46;
+        return (/ms$/.test(d) ? n : n * 1000);
+      }
+      function loopW() { return track.offsetWidth / 2 + 14; }   // = the keyframes' calc(-50% - 14px)
+      function currentX() {
+        var t = getComputedStyle(track).transform;
+        if (!t || t === 'none') return 0;
+        var m = t.match(/matrix\(([^)]+)\)/);
+        return m ? parseFloat(m[1].split(',')[4]) : 0;
+      }
+
+      wrap.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0) return;
+        dragging = true; moved = 0; pid = e.pointerId;
+        startX = e.clientX; baseX = currentX();
+        track.style.animation = 'none';
+        track.style.transform = 'translateX(' + baseX + 'px)';
+        wrap.classList.add('is-dragging');
+        try { wrap.setPointerCapture(pid); } catch (err) {}
+      });
+      wrap.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > moved) moved = Math.abs(dx);
+        track.style.transform = 'translateX(' + (baseX + dx) + 'px)';
+      });
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        wrap.classList.remove('is-dragging');
+        var W = loopW(), x = currentX();
+        x = ((x % W) + W) % W;              // wrap into [0, W)
+        if (x > 0) x -= W;                  // then into (-W, 0]
+        var progress = -x / W;              // where along the forward sweep we are
+        if (rev) progress = 1 - progress;   // row B plays the sweep backwards
+        track.style.transform = '';
+        track.style.animation = '';         // stylesheet animation back on ...
+        track.style.animationDelay = (-progress * periodMs()) + 'ms';   // ... resumed from here
+      }
+      wrap.addEventListener('pointerup', release);
+      wrap.addEventListener('pointercancel', release);
+      wrap.addEventListener('lostpointercapture', release);
+      // A drag must not count as a click on the logo it ended over.
+      wrap.addEventListener('click', function (e) {
+        if (moved > 6) { e.preventDefault(); e.stopPropagation(); }
+      }, true);
+      wrap.addEventListener('dragstart', function (e) { e.preventDefault(); });   // no ghost-image drag of the <img>
+    });
+  })();
+  </script>
+
   <script id="hp-hero-anim">
   (function () {
     'use strict';
