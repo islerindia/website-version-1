@@ -6,7 +6,7 @@
 
 \- "push it" covers only the change just discussed; anything else stays parked until named.
 
-\- After any push, report the commit hash and a one-line summary of what changed. Don't ask if it's live — check the Actions run yourself and confirm.
+\- After any push, report the commit hash and a one-line summary of what changed. Don't ask if it's live — check the Actions run yourself and confirm. Production deploy is SSH `git pull` via `.github/workflows/deploy.yml` (not GitHub Pages). See DEPLOY.md.
 
 \- Skip clarifying questions for styling/sizing/text/image fixes — pick the sensible fix and report what you did.
 

@@ -1,0 +1,32 @@
+# Deploy static site to cPanel over SSH whenever main is updated.
+# Required GitHub repo secrets: SSH_HOST, SSH_USER, SSH_PASSWORD, DEPLOY_PATH
+name: Deploy to server
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH (git pull)
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.DEPLOY_PATH }}"
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
+            echo "Deployed $(git rev-parse --short HEAD) to ${{ secrets.DEPLOY_PATH }}"
