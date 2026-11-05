@@ -5,10 +5,12 @@
 (function () {
   function initNav(nav) {
     // Theme 2026-10-23: mark the current page so nav.css can underline it.
-    var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    // Clean-URL aware: strip trailing .html and leading / so "/foo", "/foo.html",
+    // "foo", "foo.html" all compare equal; home is the empty string.
+    var here = (location.pathname.split('/').pop() || '').toLowerCase().replace(/\.html$/, '');
     Array.prototype.forEach.call(nav.querySelectorAll('.isler-nav__links > li > a[href]'), function (a) {
-      var h = (a.getAttribute('href') || '').split('#')[0].split('?')[0].toLowerCase();
-      if (h && h === here) a.setAttribute('aria-current', 'page');
+      var h = (a.getAttribute('href') || '').split('#')[0].split('?')[0].toLowerCase().replace(/\.html$/, '').replace(/^\//, '');
+      if (h === here) a.setAttribute('aria-current', 'page');
     });
     var item    = nav.querySelector('.isler-nav__item.has-mega');
     var trigger = nav.querySelector('.isler-nav__trigger');
@@ -241,8 +243,8 @@
      alternating top-right / bottom-left so two never meet at a seam. Photo
      heroes (.page-hero) are skipped, so are sections that already have one. ── */
   function initAmbient() {
-    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-    if (page === '' || page === 'index.html' || page === 'business.html') return;
+    var page = (location.pathname.split('/').pop() || '').toLowerCase().replace(/\.html$/, '');
+    if (page === '' || page === 'index' || page === 'business') return;
     var secs = Array.prototype.slice.call(document.querySelectorAll('header.cat-hero, section'));
     var i = 0;
     secs.forEach(function (sec) {

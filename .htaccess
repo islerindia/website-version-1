@@ -1,0 +1,15 @@
+# Clean URLs — strip .html from the address bar
+RewriteEngine On
+
+# 1. If the request is for /foo.html, 301-redirect to /foo
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+)\.html(\?[^\s]*)?[\s?] [NC]
+RewriteRule ^ /%1%2 [R=301,L,NE]
+
+# 2. Internally serve /foo as /foo.html when the file exists
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# 3. Default directory index (so / still serves index.html)
+DirectoryIndex index.html
